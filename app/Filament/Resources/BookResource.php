@@ -12,10 +12,12 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
 use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Filament\Forms\Components\TextInput;
 
@@ -103,10 +105,22 @@ class BookResource extends Resource
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                Filter::make('featured')
+                    ->query(fn (Builder $query): Builder => $query->where('featured', true)),
+                Filter::make('not published')
+                    ->query(fn (Builder $query): Builder => $query->where('published', false))
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->mutateRecordDataUsing(function (array $data): array {
+                        $file = $data['filepath'];
+                        $data['filepath'] = '/'.$file;
+                        $data['filemime'] = Storage::mimeType('/public/'.$file);
+                        $data['filesize'] = Storage::size('/public/'.$file);
+                        $data['filename'] = Str::replace('files/', '', $file);
+
+                        return $data;
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -116,7 +130,8 @@ class BookResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\FilesRelationManager::class,
+            RelationManagers\DownloadsRelationManager::class,
         ];
     }
 

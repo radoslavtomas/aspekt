@@ -15,31 +15,37 @@ class Book extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'blog_type_id',
         'user_id',
         'title',
         'slug',
         'subtitle',
         'authors',
+        'editors',
+        'translation',
+        'cover',
         'teaser',
         'body',
         'links',
+        'is_product',
+        'common_price',
+        'aspekt_price',
+        'pages',
         'featured',
         'published',
         'language',
     ];
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
 
-    public function files()
+    public function files(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(File::class);
     }
 
-    public function downloads()
+    public function downloads(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Download::class);
     }

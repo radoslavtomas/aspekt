@@ -22,4 +22,9 @@ class File extends Model
     {
         return $this->belongsToMany(Blog::class);
     }
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class);
+    }
 }

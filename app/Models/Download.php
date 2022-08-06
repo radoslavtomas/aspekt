@@ -18,8 +18,13 @@ class Download extends Model
         'filesize',
     ];
 
-    public function blogs()
+    public function blogs(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Blog::class);
+    }
+
+    public function books(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Book::class);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\BlogResource\RelationManagers;
+namespace App\Filament\Resources\BookResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -14,9 +14,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class DownloadsRelationManager extends RelationManager
+class FilesRelationManager extends RelationManager
 {
-    protected static string $relationship = 'downloads';
+    protected static string $relationship = 'files';
 
     protected static ?string $recordTitleAttribute = 'filepath';
 
@@ -26,7 +26,7 @@ class DownloadsRelationManager extends RelationManager
             ->schema([
                 Forms\Components\FileUpload::make('filepath')
                     ->preserveFilenames()
-                    ->directory('downloads'),
+                    ->directory('files'),
             ]);
     }
 
@@ -49,7 +49,7 @@ class DownloadsRelationManager extends RelationManager
                         $data['filepath'] = '/'.$file;
                         $data['filemime'] = Storage::mimeType('/'.$file);
                         $data['filesize'] = Storage::size('/'.$file);
-                        $data['filename'] = Str::replace('downloads/', '', $file);
+                        $data['filename'] = Str::replace('files/', '', $file);
 
                         return $livewire->getRelationship()->create($data);
                     }),
