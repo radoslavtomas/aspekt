@@ -33,7 +33,8 @@ class OrderResource extends Resource
                         Forms\Components\Select::make('order_status_id')
                             ->relationship('status', 'description'),
                         Forms\Components\TextInput::make('order_total')
-                            ->label('Total (€)')
+                            ->label('Total')
+                            ->prefixIcon('heroicon-o-currency-euro')
                             ->disabled(),
                         Forms\Components\TextInput::make('product_count')
                             ->label('Total products')
