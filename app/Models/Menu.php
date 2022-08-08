@@ -15,7 +15,13 @@ class Menu extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
         'name_sk',
         'name_en',
+        'items',
+    ];
+
+    protected $casts = [
+        'items' => 'array'
     ];
 }

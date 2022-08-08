@@ -34,7 +34,7 @@ class MenuResource extends Resource
                     ->label('Menu name (EN)')
                     ->required(),
                 Forms\Components\Grid::make()->schema([
-                    Repeater::make('menu_items')
+                    Repeater::make('items')
                         ->schema([
                             Forms\Components\Grid::make()->schema([
                                 Forms\Components\TextInput::make('name_sk')
@@ -61,8 +61,7 @@ class MenuResource extends Resource
                                 ->label('Static content')
                                 ->reactive()
                                 ->default(true)
-                                ->helperText('Static content requires related page, dynamic content requires category.')
-                                ->required(),
+                                ->helperText('Static content requires related page, dynamic content requires category.'),
                             Forms\Components\Select::make('category_id')
                                 ->label('Category')
                                 ->options(Category::all()->pluck('name', 'id'))
