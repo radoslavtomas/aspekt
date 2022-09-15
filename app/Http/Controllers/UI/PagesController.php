@@ -19,8 +19,28 @@ class PagesController extends Controller
         ]);
     }
 
-    public function edicia()
+    public function about()
     {
-        return Inertia::render('Edicia');
+        return Inertia::render('About');
+    }
+
+    public function books()
+    {
+        return Inertia::render('Books');
+    }
+
+    public function aspektin()
+    {
+        return Inertia::render('AspektIn');
+    }
+
+    public function library()
+    {
+        return Inertia::render('Library');
+    }
+
+    public function contact()
+    {
+        return Inertia::render('Contact');
     }
 }

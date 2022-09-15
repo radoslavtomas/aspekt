@@ -38,17 +38,17 @@
                 <div class="hidden lg:ml-6 lg:block">
                     <div class="flex items-center justify-between space-x-4 h-full">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <Link href="/" class="inline-block bg-red-600 font-semibold text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">DOMOV</Link>
+                        <Link href="/" :class="{ 'border-b-4 border-red-600': $page.component === 'Home' }" class="inline-block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">DOMOV</Link>
 
-                        <Link href="#" class="inline-block bg-red-600 font-semibold text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">O ASPEKTE</Link>
+                        <Link href="/about" :class="{ 'border-b-4 border-red-600': $page.component === 'About' }" class="inline-block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">O ASPEKTE</Link>
 
-                        <Link href="/edicia" class="inline-block text-red-600 font-semibold hover:bg-red-100 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium">KNIZNA EDICIA</Link>
+                        <Link href="/books" :class="{ 'border-b-4 border-red-600': $page.component === 'Books' }" class="inline-block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">KNIZNA EDICIA</Link>
 
-                        <Link href="#" class="inline-block text-red-600 font-semibold hover:bg-red-100 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium">ASPEKTin</Link>
+                        <Link href="/aspektin" :class="{ 'border-b-4 border-red-600': $page.component === 'AspektIn' }" class="inline-block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">ASPEKTin</Link>
 
-                        <Link href="#" class="inline-block text-red-600 font-semibold hover:bg-red-100 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium">KNIZNICA</Link>
+                        <Link href="/library" :class="{ 'border-b-4 border-red-600': $page.component === 'Library' }" class="inline-block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">KNIZNICA</Link>
 
-                        <Link href="#" class="inline-block text-red-600 font-semibold hover:bg-red-100 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium">KONTAKT</Link>
+                        <Link href="/contact" :class="{ 'border-b-4 border-red-600': $page.component === 'Contact' }" class="inline-block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">KONTAKT</Link>
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto lg:ml-6 lg:pr-0">
@@ -85,15 +85,17 @@
         <div v-if="openNav" class="md:hidden" id="mobile-menu">
             <div class="space-y-1 px-2 pt-2 pb-3">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a href="#" class="bg-red-600 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">O ASPEKTE</a>
+                <Link href="/" :class="{ 'border-b-4 border-red-600': $page.component === 'Home' }" class="block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">DOMOV</Link>
 
-                <a href="#" class="block text-gray-700 hover:bg-gray-200 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">KNIZNA EDICIA</a>
+                <Link href="/about" :class="{ 'border-b-4 border-red-600': $page.component === 'About' }" class="block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">O ASPEKTE</Link>
 
-                <a href="#" class="block text-gray-700 hover:bg-gray-200 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">ASPEKTin</a>
+                <Link href="/books" :class="{ 'border-b-4 border-red-600': $page.component === 'Books' }" class="block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">KNIZNA EDICIA</Link>
 
-                <a href="#" class="block text-gray-700 hover:bg-gray-200 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">KNIZNICA</a>
+                <Link href="/aspektin" :class="{ 'border-b-4 border-red-600': $page.component === 'AspektIn' }" class="block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">ASPEKTin</Link>
 
-                <a href="#" class="block text-gray-700 hover:bg-gray-200 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">KONTAKT</a>
+                <Link href="/library" :class="{ 'border-b-4 border-red-600': $page.component === 'Library' }" class="block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">KNIZNICA</Link>
+
+                <Link href="/contact" :class="{ 'border-b-4 border-red-600': $page.component === 'Contact' }" class="block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">KONTAKT</Link>
             </div>
         </div>
     </nav>

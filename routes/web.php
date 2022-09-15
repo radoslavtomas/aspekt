@@ -15,7 +15,11 @@ use Inertia\Inertia;
 */
 
 Route::get('/', ['App\Http\Controllers\UI\PagesController', 'home'])->name('home');
-Route::get('/edicia', ['App\Http\Controllers\UI\PagesController', 'edicia'])->name('edicia');
+Route::get('/about', ['App\Http\Controllers\UI\PagesController', 'about'])->name('about');
+Route::get('/books', ['App\Http\Controllers\UI\PagesController', 'books'])->name('books');
+Route::get('/aspektin', ['App\Http\Controllers\UI\PagesController', 'aspektin'])->name('aspektin');
+Route::get('/library', ['App\Http\Controllers\UI\PagesController', 'library'])->name('library');
+Route::get('/contact', ['App\Http\Controllers\UI\PagesController', 'contact'])->name('contact');
 
 //Route::get('/', function () {
 //    return Inertia::render('Welcome', [
