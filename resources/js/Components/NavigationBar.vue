@@ -38,15 +38,17 @@
                 <div class="hidden lg:ml-6 lg:block">
                     <div class="flex items-center justify-between space-x-4 h-full">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <a href="#" class="inline-block bg-red-600 font-semibold text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">O ASPEKTE</a>
+                        <Link href="/" class="inline-block bg-red-600 font-semibold text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">DOMOV</Link>
 
-                        <a href="#" class="inline-block text-red-600 font-semibold hover:bg-red-100 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium">KNIZNA EDICIA</a>
+                        <Link href="#" class="inline-block bg-red-600 font-semibold text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">O ASPEKTE</Link>
 
-                        <a href="#" class="inline-block text-red-600 font-semibold hover:bg-red-100 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium">ASPEKTin</a>
+                        <Link href="/edicia" class="inline-block text-red-600 font-semibold hover:bg-red-100 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium">KNIZNA EDICIA</Link>
 
-                        <a href="#" class="inline-block text-red-600 font-semibold hover:bg-red-100 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium">KNIZNICA</a>
+                        <Link href="#" class="inline-block text-red-600 font-semibold hover:bg-red-100 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium">ASPEKTin</Link>
 
-                        <a href="#" class="inline-block text-red-600 font-semibold hover:bg-red-100 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium">KONTAKT</a>
+                        <Link href="#" class="inline-block text-red-600 font-semibold hover:bg-red-100 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium">KNIZNICA</Link>
+
+                        <Link href="#" class="inline-block text-red-600 font-semibold hover:bg-red-100 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium">KONTAKT</Link>
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto lg:ml-6 lg:pr-0">
@@ -99,6 +101,7 @@
 
 <script setup>
 import {onMounted, onUnmounted, ref} from 'vue';
+import {Link} from "@inertiajs/inertia-vue3";
 
 const openNav = ref(false);
 const openLang = ref(false);
