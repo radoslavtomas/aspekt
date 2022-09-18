@@ -21,6 +21,12 @@ Route::get('/aspektin', ['App\Http\Controllers\UI\PagesController', 'aspektin'])
 Route::get('/library', ['App\Http\Controllers\UI\PagesController', 'library'])->name('library');
 Route::get('/contact', ['App\Http\Controllers\UI\PagesController', 'contact'])->name('contact');
 
+Route::get('language/{language}', function ($language) {
+    Session()->put('locale', $language);
+
+    return redirect()->back();
+})->name('language');
+
 //Route::get('/', function () {
 //    return Inertia::render('Welcome', [
 //        'canLogin' => Route::has('login'),

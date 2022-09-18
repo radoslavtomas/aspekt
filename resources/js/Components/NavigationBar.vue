@@ -1,5 +1,5 @@
 <template>
-    <nav class="">
+    <nav class="tracking-widest">
         <div class="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
                 <div class="absolute inset-y-0 left-0 flex items-center lg:hidden">
@@ -30,54 +30,29 @@
                 </div>
                 <div class="flex flex-1 items-center justify-center lg:items-stretch lg:justify-start">
                     <div class="flex flex-shrink-0 items-center">
-                        <img class="block h-12 w-auto lg:hidden" src="/assets/img/aspekt_logo.jpg" alt="Aspekt">
-                        <img class="hidden h-12 w-auto lg:block" src="/assets/img/aspekt_logo.jpg" alt="Aspekt">
+                        <Link :href="route('home')">
+                            <img class="h-12 w-auto" src="/assets/img/aspekt_logo.jpg" alt="Aspekt">
+                        </Link>
                     </div>
 
                 </div>
                 <div class="hidden lg:ml-6 lg:block">
-                    <div class="flex items-center justify-between space-x-4 h-full">
+                    <div class="flex items-center justify-between space-x-3.5 h-full">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <Link href="/" :class="{ 'border-b-4 border-red-600': $page.component === 'Home' }" class="inline-block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">DOMOV</Link>
+                        <Link :href="route('home')" :class="{ 'border-b-4 border-red-600': $page.component === 'Home' }" class="inline-block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">{{menuItems[locale].home}}</Link>
 
-                        <Link href="/about" :class="{ 'border-b-4 border-red-600': $page.component === 'About' }" class="inline-block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">O ASPEKTE</Link>
+                        <Link :href="route('about')" :class="{ 'border-b-4 border-red-600': $page.component === 'About' }" class="inline-block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">{{menuItems[locale].about}}</Link>
 
-                        <Link href="/books" :class="{ 'border-b-4 border-red-600': $page.component === 'Books' }" class="inline-block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">KNIZNA EDICIA</Link>
+                        <Link :href="route('books')" :class="{ 'border-b-4 border-red-600': $page.component === 'Books' }" class="inline-block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">{{menuItems[locale].books}}</Link>
 
-                        <Link href="/aspektin" :class="{ 'border-b-4 border-red-600': $page.component === 'AspektIn' }" class="inline-block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">ASPEKTin</Link>
+                        <Link :href="route('aspektin')" :class="{ 'border-b-4 border-red-600': $page.component === 'AspektIn' }" class="inline-block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">{{menuItems[locale].aspektin}}</Link>
 
-                        <Link href="/library" :class="{ 'border-b-4 border-red-600': $page.component === 'Library' }" class="inline-block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">KNIZNICA</Link>
+                        <Link :href="route('library')" :class="{ 'border-b-4 border-red-600': $page.component === 'Library' }" class="inline-block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">{{menuItems[locale].library}}</Link>
 
-                        <Link href="/contact" :class="{ 'border-b-4 border-red-600': $page.component === 'Contact' }" class="inline-block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">KONTAKT</Link>
+                        <Link :href="route('contact')" :class="{ 'border-b-4 border-red-600': $page.component === 'Contact' }" class="inline-block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">{{menuItems[locale].contact}}</Link>
                     </div>
                 </div>
-                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto lg:ml-6 lg:pr-0">
-                    <!-- Profile dropdown -->
-                    <div class="relative ml-3">
-                        <div>
-                            <button @click="toggleLangOptions" ref="langButton" type="button" class="flex p-1.5 rounded-full bg-red-600 text-white hover:bg-red-700 text-xs focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-700" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                <span class="sr-only">Open user menu</span>
-                                SK
-                            </button>
-                        </div>
-
-                        <!--
-                          Dropdown menu, show/hide based on menu state.
-
-                          Entering: "transition ease-out duration-100"
-                            From: "transform opacity-0 scale-95"
-                            To: "transform opacity-100 scale-100"
-                          Leaving: "transition ease-in duration-75"
-                            From: "transform opacity-100 scale-100"
-                            To: "transform opacity-0 scale-95"
-                        -->
-                        <div ref="langDiv" v-if="openLang" class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                            <!-- Active: "bg-gray-100", Not Active: "" -->
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200" role="menuitem" tabindex="-1" id="user-menu-item-0">SK</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200" role="menuitem" tabindex="-1" id="user-menu-item-1">EN</a>
-                        </div>
-                    </div>
-                </div>
+                <LanguageSelector></LanguageSelector>
             </div>
         </div>
 
@@ -85,46 +60,49 @@
         <div v-if="openNav" class="md:hidden" id="mobile-menu">
             <div class="space-y-1 px-2 pt-2 pb-3">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <Link href="/" :class="{ 'border-b-4 border-red-600': $page.component === 'Home' }" class="block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">DOMOV</Link>
+                <Link :href="route('home')" :class="{ 'border-b-4 border-red-600': $page.component === 'Home' }" class="block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">{{menuItems[locale].home}}</Link>
 
-                <Link href="/about" :class="{ 'border-b-4 border-red-600': $page.component === 'About' }" class="block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">O ASPEKTE</Link>
+                <Link :href="route('about')" :class="{ 'border-b-4 border-red-600': $page.component === 'About' }" class="block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">{{menuItems[locale].about}}</Link>
 
-                <Link href="/books" :class="{ 'border-b-4 border-red-600': $page.component === 'Books' }" class="block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">KNIZNA EDICIA</Link>
+                <Link :href="route('books')" :class="{ 'border-b-4 border-red-600': $page.component === 'Books' }" class="block font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">{{menuItems[locale].books}}</Link>
 
-                <Link href="/aspektin" :class="{ 'border-b-4 border-red-600': $page.component === 'AspektIn' }" class="block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">ASPEKTin</Link>
+                <Link :href="route('aspektin')" :class="{ 'border-b-4 border-red-600': $page.component === 'AspektIn' }" class="block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">{{menuItems[locale].aspektin}}</Link>
 
-                <Link href="/library" :class="{ 'border-b-4 border-red-600': $page.component === 'Library' }" class="block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">KNIZNICA</Link>
+                <Link :href="route('library')" :class="{ 'border-b-4 border-red-600': $page.component === 'Library' }" class="block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">{{menuItems[locale].library}}</Link>
 
-                <Link href="/contact" :class="{ 'border-b-4 border-red-600': $page.component === 'Contact' }" class="block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">KONTAKT</Link>
+                <Link :href="route('contact')" :class="{ 'border-b-4 border-red-600': $page.component === 'Contact' }" class="block text-red-600 font-bold hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium">{{menuItems[locale].contact}}</Link>
             </div>
         </div>
     </nav>
 </template>
 
 <script setup>
-import {onMounted, onUnmounted, ref} from 'vue';
-import {Link} from "@inertiajs/inertia-vue3";
+import {computed, ref} from 'vue';
+import {Link, usePage} from "@inertiajs/inertia-vue3";
+import LanguageSelector from '../Components/LanguageSelector.vue'
 
 const openNav = ref(false);
-const openLang = ref(false);
-const langDiv = ref(null);
-const langButton = ref(null);
+const locale = computed(() => usePage().props.value.locale);
 
-const toggleLangOptions = () => {
-    openLang.value = !openLang.value;
-}
-
-const closeOnClickAway = (e) => {
-    if (openLang.value
-        && !langButton.value.contains(e.target)
-        && !langDiv.value.contains(e.target)
-    ) {
-        openLang.value = false;
+const menuItems = ref({
+    sk: {
+        home: 'DOMOV',
+        about: 'O ASPEKTE',
+        books: 'KNIŽNÁ EDÍCIA',
+        aspektin: 'ASPEKTin',
+        library: 'KNIŽNICA',
+        contact: 'KONTAKT',
+    },
+    en: {
+        home: 'HOME',
+        about: 'ABOUT ASPEKT',
+        books: 'BOOKS',
+        aspektin: 'ASPEKTin',
+        library: 'LIBRARY',
+        contact: 'CONTACT',
     }
-};
+})
 
-onMounted(() => document.addEventListener('click', closeOnClickAway));
-onUnmounted(() => document.removeEventListener('click', closeOnClickAway));
 </script>
 
 <style scoped>

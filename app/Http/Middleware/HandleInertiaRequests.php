@@ -14,6 +14,7 @@ class HandleInertiaRequests extends Middleware
      * @var string
      */
     protected $rootView = 'app';
+    private $str;
 
     /**
      * Determine the current asset version.
@@ -34,14 +35,18 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+        $this->str = 'user';
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => $request->user(),
+                '' . $this->str . '' => $request->user(),
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),
                 ]);
+            },
+            'locale' => function () {
+                return app()->getLocale();
             },
         ]);
     }
