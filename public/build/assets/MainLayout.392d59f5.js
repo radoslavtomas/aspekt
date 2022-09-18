@@ -1,1 +1,0 @@
-import{_ as a}from"./NavigationBar.9065490d.js";import{o as s,c as t,a as r,b as o,r as n,F as c}from"./app.de77d8d5.js";const m={class:"relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0"},d={__name:"MainLayout",setup(_){return(e,i)=>(s(),t(c,null,[r(a),o("div",m,[n(e.$slots,"default")])],64))}};export{d as _};
