@@ -1,1 +1,0 @@
-import{_ as s}from"./NavigationBar.a3efe60a.js";import{o as t,c as a,a as r,b as o,r as n,F as c}from"./app.78a37615.js";const m={class:"relative flex items-top justify-center min-h-screen sm:items-center sm:pt-0"},f={__name:"MainLayout",setup(_){return(e,i)=>(t(),a(c,null,[r(s),o("div",m,[n(e.$slots,"default")])],64))}};export{f as _};

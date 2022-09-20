@@ -19,24 +19,36 @@ class PagesController extends Controller
         ]);
     }
 
-    public function about()
+    public function about($category = null, $slug = null)
     {
-        return Inertia::render('About');
+        return Inertia::render('About', [
+            'category' => $category,
+            'slug' => $slug
+        ]);
     }
 
-    public function books()
+    public function books($category = null, $slug = null)
     {
-        return Inertia::render('Books');
+        return Inertia::render('Books', [
+            'category' => $category,
+            'slug' => $slug
+        ]);
     }
 
-    public function aspektin()
+    public function aspektin($category = null, $slug = null)
     {
-        return Inertia::render('AspektIn');
+        return Inertia::render('AspektIn', [
+            'category' => $category,
+            'slug' => $slug
+        ]);
     }
 
-    public function library()
+    public function library($category = null, $slug = null)
     {
-        return Inertia::render('Library');
+        return Inertia::render('Library', [
+            'category' => $category,
+            'slug' => $slug
+        ]);
     }
 
     public function contact()
