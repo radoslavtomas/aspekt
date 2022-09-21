@@ -1,13 +1,15 @@
 <template>
     <navigation-bar />
+    <support-us />
 
-    <div class="relative flex items-top justify-center min-h-screen sm:items-center sm:pt-0">
+    <div class="relative p-4">
         <slot />
     </div>
 </template>
 
 <script setup>
 import NavigationBar from '../Components/NavigationBar.vue';
+import SupportUs from '../Components/SupportUs.vue'
 
 </script>
 
