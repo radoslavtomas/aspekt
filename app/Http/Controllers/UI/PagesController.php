@@ -33,7 +33,7 @@ class PagesController extends Controller
     {
         // dd(BookResource::collection(Book::where('published', 1)->orderBy('created_at', 'desc')->paginate(10)));
         return Inertia::render('Books', [
-            'books' => BookResource::collection(Book::where('published', 1)->orderBy('created_at', 'desc')->paginate(10)),
+            'books' => BookResource::collection(Book::where('published', 1)->orderBy('created_at', 'desc')->paginate(15)),
             'category' => $category,
             'slug' => $slug
         ]);
