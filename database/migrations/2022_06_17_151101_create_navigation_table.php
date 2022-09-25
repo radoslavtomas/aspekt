@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('navigation', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_group_id');
-            $table->foreignId('navigation_id');
-            $table->boolean('is_dynamic');
             $table->string('name_sk');
             $table->string('name_en');
-            $table->string('url');
-            $table->integer('position');
+            $table->string('component');
+            $table->string('route');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('navigation');
     }
 };
