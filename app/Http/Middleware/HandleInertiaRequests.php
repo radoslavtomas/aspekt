@@ -62,6 +62,7 @@ class HandleInertiaRequests extends Middleware
                 'name_sk' => 'Domov',
                 'name_en' => 'Home',
                 'route' => 'home',
+                'url' => route('home'),
                 'component' => 'Home',
                 'items' => null,
             ],
@@ -69,6 +70,7 @@ class HandleInertiaRequests extends Middleware
                 'name_sk' => 'O Aspekte',
                 'name_en' => 'About Aspekt',
                 'route' => 'about',
+                'url' => route('about'),
                 'component' => 'About',
                 'items' => [
                     [
@@ -133,6 +135,7 @@ class HandleInertiaRequests extends Middleware
                 'name_sk' => 'Knižná edícia',
                 'name_en' => 'Books',
                 'route' => 'books',
+                'url' => route('books'),
                 'component' => 'Books',
                 'items' => [
                     [
@@ -245,6 +248,7 @@ class HandleInertiaRequests extends Middleware
                 'name_sk' => 'AspektIn',
                 'name_en' => 'AspektIn',
                 'route' => 'aspektin',
+                'url' => route('aspektin'),
                 'component' => 'AspektIn',
                 'items' => [
                     [
@@ -341,6 +345,7 @@ class HandleInertiaRequests extends Middleware
                 'name_sk' => 'Knižnica',
                 'name_en' => 'Library',
                 'route' => 'library',
+                'url' => route('library'),
                 'component' => 'Library',
                 'items' => [
                     [
@@ -389,6 +394,7 @@ class HandleInertiaRequests extends Middleware
                 'name_sk' => 'Kontakt',
                 'name_en' => 'Contact',
                 'route' => 'contact',
+                'url' => route('contact'),
                 'component' => 'Contact',
                 'items' => null,
             ],

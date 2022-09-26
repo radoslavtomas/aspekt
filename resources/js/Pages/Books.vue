@@ -4,17 +4,16 @@ import MainLayout from '../Layouts/MainLayout.vue'
 import Pagination from '../Components/Pagination.vue'
 import {computed, onMounted} from "vue";
 import MasonryWall from '@yeger/vue-masonry-wall'
+import Breadcrumbs from '../Components/Breadcrumbs.vue'
 
 defineProps({
-    books: Object,
-    category: String,
-    slug: String|null,
+    //
 })
 
 const books = computed(() => usePage().props.value.books);
 const items = computed(() => books.value.data);
 
-onMounted(() => console.log(books.value))
+// onMounted(() => console.log(books.value))
 
 
 </script>
@@ -23,6 +22,8 @@ onMounted(() => console.log(books.value))
     <Head title="Knizna edicia" />
     <main-layout>
         <section class="container mx-auto">
+
+            <Breadcrumbs id="books" article="Jedorozceee"/>
 
             <MasonryWall :items="items" :column-width="220" :gap="16">
                 <template #default="{item}">
