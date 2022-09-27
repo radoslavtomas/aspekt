@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Navigation;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -56,7 +57,10 @@ class HandleInertiaRequests extends Middleware
     }
 
     private function getNavigationItems() {
-        // return Category::all();
+        return Navigation::with('categories')->orderBy('position')->get()->filter(function($value, $key) {
+            return $value['id'] != 10;
+        });
+
         return [
             [
                 'name_sk' => 'Domov',

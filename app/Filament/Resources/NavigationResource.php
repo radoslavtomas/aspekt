@@ -33,6 +33,8 @@ class NavigationResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('route')
                     ->required(),
+                Forms\Components\TextInput::make('position')
+                    ->required(),
             ]);
     }
 
@@ -51,7 +53,10 @@ class NavigationResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->label('Name EN'),
+                Tables\Columns\TextColumn::make('position')
+                    ->sortable()
             ])
+            ->defaultSort('position')
             ->filters([
                 //
             ])

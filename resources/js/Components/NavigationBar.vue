@@ -41,14 +41,14 @@
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
                         <template v-for="menuItem in navigation">
-                            <Link v-if="!menuItem.items" :href="route(menuItem.route)" :class="{ 'border-b-4 border-red-600': $page.component === menuItem.component }" class="inline-block font-bold text-red-600 uppercase hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">{{menuItem[`name_${locale}`]}}</Link>
+                            <Link v-if="!menuItem.categories.length" :href="route(menuItem.route)" :class="{ 'border-b-4 border-red-600': $page.component === menuItem.component }" class="inline-block font-bold text-red-600 uppercase hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">{{menuItem[`name_${locale}`]}}</Link>
 
                             <MenuDropdown v-else align="center" width="52">
                                 <template #trigger>
                                     <button :class="{ 'border-b-4 border-red-600': $page.component === menuItem.component }" class="font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium uppercase">{{menuItem[`name_${locale}`]}}</button>
                                 </template>
                                 <template #content>
-                                    <MenuDropdownLink v-for="item in menuItem.items" :href="route(menuItem.route) + '/' + item.url" as="button">
+                                    <MenuDropdownLink v-for="item in menuItem.categories" :href="route(menuItem.route) + '/' + item.url" as="button">
                                         {{item[`name_${locale}`]}}
                                     </MenuDropdownLink>
                                 </template>
@@ -68,8 +68,8 @@
                 <template v-for="menuItem in navigation">
                     <Link :href="route(menuItem.route)" :class="{ 'border-b-4 border-red-600': $page.component === menuItem.component }" class="block font-bold uppercase text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">{{menuItem[`name_${locale}`]}}</Link>
 
-                    <template v-if="menuItem.items">
-                        <MenuDropdownLink v-for="item in menuItem.items" :href="route(menuItem.route) + '/' + item.url" as="button" :mobile="true">
+                    <template v-if="menuItem.categories.length">
+                        <MenuDropdownLink v-for="item in menuItem.categories" :href="route(menuItem.route) + '/' + item.url" as="button" :mobile="true">
                             {{item[`name_${locale}`]}}
                         </MenuDropdownLink>
                     </template>
@@ -89,6 +89,8 @@ import MenuDropdownLink from '../Components/MenuDropdownLink.vue'
 const openNav = ref(false);
 const locale = computed(() => usePage().props.value.locale);
 const navigation = computed(() => usePage().props.value.navigation);
+
+onMounted(() => console.log(navigation.value))
 
 </script>
 

@@ -19,5 +19,11 @@ class Navigation extends Model
         'name_en',
         'component',
         'route',
+        'position',
     ];
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class)->orderBy('position');
+    }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name_en');
             $table->string('component');
             $table->string('route');
+            $table->integer('position');
             $table->timestamps();
         });
     }
