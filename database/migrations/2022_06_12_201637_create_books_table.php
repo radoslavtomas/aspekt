@@ -31,6 +31,7 @@ return new class extends Migration
             $table->bigInteger('aspekt_price')->nullable();
             $table->bigInteger('common_price')->nullable();
             $table->integer('pages')->nullable();
+            $table->string('isbn')->nullable();
             $table->boolean('featured')->default(false);
             $table->boolean('published')->default(false);
             $table->string('language')->default('sk');

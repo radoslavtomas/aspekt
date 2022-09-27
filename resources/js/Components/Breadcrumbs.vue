@@ -4,10 +4,11 @@
             <Link :href="route('home')" class="text-pink-500 hover:text-pink-600">{{homeString}}</Link>
         </li>
         <li>
-            <Link :href="route(props.id, [category, slug])" class="text-pink-500 hover:text-pink-600 before:content-['>'] before:mr-2 before:text-gray-800">
+            <Link v-if="slug" :href="route(props.id, [category, slug])" class="text-pink-500 hover:text-pink-600 before:content-['>'] before:mr-2 before:text-gray-800">
                 {{ base[`name_${locale}`] }} - {{categoryString}}</Link>
+            <span v-else class="before:content-['>'] before:mr-2 before:text-gray-800">{{ base[`name_${locale}`] }} - {{categoryString}}</span>
         </li>
-        <li class="before:content-['>'] before:mr-2 before:text-gray-800">{{props.article}}</li>
+        <li v-if="slug" class="before:content-['>'] before:mr-2 before:text-gray-800">{{props.article}}</li>
     </ul>
 </template>
 

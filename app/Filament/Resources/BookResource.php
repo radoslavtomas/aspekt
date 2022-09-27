@@ -40,7 +40,7 @@ class BookResource extends Resource
                         Forms\Components\Checkbox::make('featured'),
                         Forms\Components\Checkbox::make('published'),
                     ])
-                    ->columns(1),
+                    ->columns(3),
                 Fieldset::make('Book settings')
                     ->schema([
                         Forms\Components\FileUpload::make('cover')
@@ -83,6 +83,8 @@ class BookResource extends Resource
                         Forms\Components\TextInput::make('aspekt_price')
                             ->label('Aspekt price (€)'),
                         Forms\Components\TextInput::make('pages'),
+                        Forms\Components\TextInput::make('isbn')
+                            ->label('ISBN'),
                     ])
             ]);
     }

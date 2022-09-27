@@ -30,6 +30,7 @@ class Book extends Model
         'common_price',
         'aspekt_price',
         'pages',
+        'isbn',
         'featured',
         'published',
         'language',

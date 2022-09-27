@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_group_id');
+            $table->foreignId('page_id')->nullable();
             $table->foreignId('navigation_id');
             $table->boolean('is_dynamic');
             $table->string('name_sk');

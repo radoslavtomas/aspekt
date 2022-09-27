@@ -29,7 +29,7 @@ class Blog extends Model
 
     public function blog_type()
     {
-        return $this->belongsTo(CategoryGroup::class);
+        return $this->belongsTo(Navigation::class);
     }
 
     public function category()

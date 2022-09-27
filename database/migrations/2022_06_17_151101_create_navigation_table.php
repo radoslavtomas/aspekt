@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('navigation', function (Blueprint $table) {
+        Schema::create('navigations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_group_id');
             $table->string('name_sk');
             $table->string('name_en');
             $table->string('component');

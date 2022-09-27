@@ -6,14 +6,16 @@ import {computed, onMounted} from "vue";
 import MasonryWall from '@yeger/vue-masonry-wall'
 import Breadcrumbs from '../Components/Breadcrumbs.vue'
 
-defineProps({
-    //
-})
+// defineProps({
+//     //
+// })
 
 const books = computed(() => usePage().props.value.books);
 const items = computed(() => books.value.data);
+const category = computed(() => usePage().props.value.category);
+const slug = computed(() => usePage().props.value.slug);
 
-// onMounted(() => console.log(books.value))
+onMounted(() => console.log(books.value))
 
 
 </script>
@@ -23,16 +25,20 @@ const items = computed(() => books.value.data);
     <main-layout>
         <section class="container mx-auto">
 
-            <Breadcrumbs id="books" article="Jedorozceee"/>
+            <Breadcrumbs id="books" article="Jednorozceee"/>
 
             <MasonryWall :items="items" :column-width="220" :gap="16">
                 <template #default="{item}">
                     <article class="border border-gray-300 shadow-md p-4">
                         <header>
-                            <img class="w-52 h-auto mx-auto border border-gray-200 shadow-md mb-2" :src="`/storage/${item.cover}`" alt="book.title">
+                            <Link :href="route('books', [category, item.slug])">
+                                <img class="w-52 h-auto mx-auto border border-gray-200 shadow-md mb-2" :src="`/storage/${item.cover}`" alt="book.title">
+                            </Link>
                         </header>
                         <main>
-                            <h2 class="text-xl text-red-600">{{item.title}}</h2>
+                            <Link :href="route('books', [category, item.slug])">
+                                <h2 class="text-xl text-red-600">{{item.title}}</h2>
+                            </Link>
                             <h3 class="text-sm italic mb-4">{{item.authors}}</h3>
                             <p class="text-xs" v-html="item.teaser"></p>
                         </main>

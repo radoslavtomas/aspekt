@@ -1,6 +1,6 @@
 <template>
-<section class="flex justify-center my-2 px-4">
-        <a class="text-white text-xs text-center px-4 py-2 rounded-full bg-red-700 hover:bg-red-800 shadow-md" href="https://aspekt.darujme.sk/prispevok-k-feministickej-buducnosti-3470e/"
+<section class="flex justify-center my-3 px-4">
+        <a class="text-white text-xs text-center px-4 py-2 rounded-full bg-pink-500 hover:bg-pink-600 shadow-md" href="https://aspekt.darujme.sk/prispevok-k-feministickej-buducnosti-3470e/"
             target="_blank">
                 {{msg[locale]}}.
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline ml-1 mb-0.5">

@@ -312,7 +312,7 @@ class HandleInertiaRequests extends Middleware
                         'page_id' => null,
                         'name_sk' => 'Texty krásne',
                         'name_en' => 'Beautiful texts',
-                        'position' => 7,
+                        'position' => 8,
                         'url' => 'texty-krasne'
                     ],
                     [
@@ -320,7 +320,7 @@ class HandleInertiaRequests extends Middleware
                         'page_id' => null,
                         'name_sk' => 'Texty múdre',
                         'name_en' => 'Wise texts',
-                        'position' => 7,
+                        'position' => 9,
                         'url' => 'texty-mudre'
                     ],
                     [
@@ -328,7 +328,7 @@ class HandleInertiaRequests extends Middleware
                         'page_id' => null,
                         'name_sk' => 'Tiráž ASPEKTin',
                         'name_en' => 'ASPEKTin imprint',
-                        'position' => 7,
+                        'position' => 10,
                         'url' => 'tiraz'
                     ],
                     [
@@ -336,7 +336,7 @@ class HandleInertiaRequests extends Middleware
                         'page_id' => null,
                         'name_sk' => 'Pokyny pre autorky a autorov',
                         'name_en' => 'Rules for contributors',
-                        'position' => 7,
+                        'position' => 11,
                         'url' => 'pokyny'
                     ],
                 ],

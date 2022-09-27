@@ -23,9 +23,10 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\Select::make('category_group_id')
-                    ->relationship('category_group', 'name')
+                Forms\Components\TextInput::make('name_sk')->required(),
+                Forms\Components\TextInput::make('name_en')->required(),
+                Forms\Components\Select::make('navigation_id')
+                    ->relationship('navigation', 'name_sk')
                     ->required(),
             ]);
     }
@@ -34,10 +35,11 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('category_group.name')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('name_sk')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('name_en')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('navigation.name_sk')->sortable()->searchable(),
             ])
-            ->defaultSort('category_group.name', 'asc')
+            ->defaultSort('navigation.name_sk', 'desc')
             ->filters([
                 //
             ])
