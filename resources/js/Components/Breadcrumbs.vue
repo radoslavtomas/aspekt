@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 import {Link} from "@inertiajs/inertia-vue3";
 
@@ -24,11 +24,16 @@ const slug = computed(() => usePage().props.value.slug);
 
 const base = computed(() => navigation.value.find(el => el.route === props.id))
 const homeString = computed(() => navigation.value.find(el => el.route === 'home')[`name_${locale.value}`])
-const categoryString = computed(() => base.value.items.find(el => el.url === category.value)).value[`name_${locale.value}`]
+const categoryString = computed(() => base.value.categories.find(el => el.url === category.value)).value[`name_${locale.value}`]
 
 const props = defineProps({
     id: String,
     article: String
+})
+
+onMounted(() => {
+    console.log(navigation.value)
+    console.log(base.value)
 })
 
 </script>

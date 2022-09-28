@@ -25,7 +25,7 @@ onMounted(() => console.log(books.value))
     <main-layout>
         <section class="container mx-auto">
 
-<!--            <Breadcrumbs id="books" article="Jednorozceee"/>-->
+            <Breadcrumbs id="books" article="Jednorozceee"/>
 
             <MasonryWall :items="items" :column-width="220" :gap="16">
                 <template #default="{item}">
