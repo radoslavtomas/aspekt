@@ -31,10 +31,10 @@ const props = defineProps({
     article: String
 })
 
-onMounted(() => {
-    console.log(navigation.value)
-    console.log(base.value)
-})
+// onMounted(() => {
+//     console.log(navigation.value)
+//     console.log(base.value)
+// })
 
 </script>
 

@@ -26,4 +26,11 @@ class Category extends Model
     {
         return $this->belongsTo(Navigation::class, 'navigation_id', 'id');
     }
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class)
+            ->where('published', 1)
+            ->orderBy('created_at', 'desc');
+    }
 }

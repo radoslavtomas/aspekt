@@ -5,6 +5,7 @@ namespace App\Http\Controllers\UI;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
+use App\Models\Category;
 use App\Models\Navigation;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,9 @@ use Inertia\Inertia;
 
 class PagesController extends Controller
 {
+    private $all = 'vsetko';
+    private $pagination = 15;
+
     public function home()
     {
         return Inertia::render('Home', [
@@ -32,12 +36,20 @@ class PagesController extends Controller
 
     public function books($category = null, $slug = null)
     {
-//        dd(Navigation::with('categories')->orderBy('position')->get()->filter(function($value, $key) {
-//            return $value['id'] != 10;
-//        }));
-        // dd(BookResource::collection(Book::where('published', 1)->orderBy('created_at', 'desc')->paginate(10)));
+        $categoryModel = $this->getCategoryModel($category);
+
+        if(!$slug) {
+            if($category === $this->all) {
+                $books = BookResource::collection(Book::published()->orderBy('created_at', 'desc')->paginate($this->pagination));
+            } else {
+                $books = BookResource::collection($categoryModel->books()->paginate($this->pagination));
+            }
+        } else {
+            $books = $categoryModel->books()->where('slug', $slug)->firstOrFail();
+        }
+
         return Inertia::render('Books', [
-            'books' => BookResource::collection(Book::where('published', 1)->orderBy('created_at', 'desc')->paginate(15)),
+            'books' => $books,
             'category' => $category,
             'slug' => $slug
         ]);
@@ -62,5 +74,10 @@ class PagesController extends Controller
     public function contact()
     {
         return Inertia::render('Contact');
+    }
+
+    private function getCategoryModel($category_url)
+    {
+        return Category::where('url', $category_url)->firstOrFail();
     }
 }
