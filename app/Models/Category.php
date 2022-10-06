@@ -33,4 +33,14 @@ class Category extends Model
             ->where('published', 1)
             ->orderBy('created_at', 'desc');
     }
+
+    public function isDynamic()
+    {
+        return $this->getAttribute('is_dynamic');
+    }
+
+    public function isStatic()
+    {
+        return !$this->getAttribute('is_dynamic');
+    }
 }

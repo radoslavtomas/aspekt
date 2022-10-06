@@ -36,23 +36,40 @@ class PagesController extends Controller
 
     public function books($category = null, $slug = null)
     {
-        $categoryModel = $this->getCategoryModel($category);
+        $category = $this->getCategoryModel($category);
 
-        if(!$slug) {
-            if($category === $this->all) {
-                $books = BookResource::collection(Book::published()->orderBy('created_at', 'desc')->paginate($this->pagination));
-            } else {
-                $books = BookResource::collection($categoryModel->books()->paginate($this->pagination));
-            }
+        $data = $this->prepareBooksData($category, $slug);
+
+        return Inertia::render('Books', $data);
+    }
+
+    protected function prepareBooksData($category, $slug): array
+    {
+        if ($category->isStatic()) {
+            $page = null;
         } else {
-            $books = $categoryModel->books()->where('slug', $slug)->firstOrFail();
+            if($slug) {
+                // single resource
+                $book = Book::where('slug', $slug)->firstOrFail();
+            } else {
+                // list of resources for given category
+                if($category['url'] == $this->all) { // special category "vsetko"
+                    $books = BookResource::collection(Book::published()->orderBy('created_at', 'desc')->paginate($this->pagination));
+                } else { // all other categories
+                    $books = BookResource::collection($category->books()->paginate($this->pagination));
+                }
+            }
         }
 
-        return Inertia::render('Books', [
-            'books' => $books,
+        // dd($book);
+
+        return [
+            'page' => $page ?? null,
+            'book' => $book ?? null,
+            'books' => $books ?? null,
             'category' => $category,
             'slug' => $slug
-        ]);
+        ];
     }
 
     public function aspektin($category = null, $slug = null)

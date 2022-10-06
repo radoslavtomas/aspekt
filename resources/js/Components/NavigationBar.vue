@@ -90,7 +90,7 @@ const openNav = ref(false);
 const locale = computed(() => usePage().props.value.locale);
 const navigation = computed(() => usePage().props.value.navigation);
 
-onMounted(() => console.log(navigation.value))
+// onMounted(() => console.log(navigation.value))
 
 </script>
 

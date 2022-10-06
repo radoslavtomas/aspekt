@@ -1,14 +1,20 @@
 <template>
-    <ul class="flex my-2 py-1 space-x-2 text-xs">
+    <ul class="flex my-2 py-1 space-x-2 text-xs md:text-sm flex-wrap">
         <li>
-            <Link :href="route('home')" class="text-pink-500 hover:text-pink-600">{{homeString}}</Link>
+            <Link :href="route('home')" class="text-red-600 hover:text-red-700">{{homeString}}</Link>
         </li>
         <li>
-            <Link v-if="slug" :href="route(props.id, [category, slug])" class="text-pink-500 hover:text-pink-600 before:content-['>'] before:mr-2 before:text-gray-800">
+            >
+        </li>
+        <li>
+            <Link v-if="slug" :href="route(props.id, [category.url])" class="text-red-600 hover:text-red-700">
                 {{ base[`name_${locale}`] }} - {{categoryString}}</Link>
             <span v-else class="before:content-['>'] before:mr-2 before:text-gray-800">{{ base[`name_${locale}`] }} - {{categoryString}}</span>
         </li>
-        <li v-if="slug" class="before:content-['>'] before:mr-2 before:text-gray-800">{{props.article}}</li>
+        <li v-if="slug">
+            >
+        </li>
+        <li v-if="slug">{{props.article}}</li>
     </ul>
 </template>
 
@@ -22,19 +28,19 @@ const locale = computed(() => usePage().props.value.locale);
 const category = computed(() => usePage().props.value.category);
 const slug = computed(() => usePage().props.value.slug);
 
-const base = computed(() => navigation.value.find(el => el.route === props.id))
-const homeString = computed(() => navigation.value.find(el => el.route === 'home')[`name_${locale.value}`])
-const categoryString = computed(() => base.value.categories.find(el => el.url === category.value)).value[`name_${locale.value}`]
+const base = computed(() => navigation.value.find(el => el.route === props.id));
+const homeString = computed(() => navigation.value.find(el => el.route === 'home')[`name_${locale.value}`]);
+const categoryString = computed(() => category.value[`name_${locale.value}`]);
 
 const props = defineProps({
     id: String,
     article: String
 })
 
-// onMounted(() => {
-//     console.log(navigation.value)
-//     console.log(base.value)
-// })
+onMounted(() => {
+    console.log(category.value)
+    console.log(categoryString.value)
+})
 
 </script>
 
