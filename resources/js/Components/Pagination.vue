@@ -1,7 +1,7 @@
 <template>
-    <div v-if="links.length > 3">
+    <div v-if="props.links.length > 3">
         <div class="hidden md:flex flex-wrap -mb-1 text-xs">
-            <template v-for="(link, p) in links" :key="p">
+            <template v-for="(link, p) in props.links" :key="p">
                 <div v-if="link.url === null" class="mr-1 mb-1 px-2 py-1 text-gray-400 border rounded"
                      v-html="link.label" />
                 <Link v-else
@@ -33,7 +33,6 @@ const props = defineProps({
 });
 const prev = computed(() => props.links[0])
 const next = computed(() => props.links.at(-1))
-
 </script>
 
 <style scoped>

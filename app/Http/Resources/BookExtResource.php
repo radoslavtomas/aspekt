@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BookResource extends JsonResource
+class BookExtResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,12 +17,20 @@ class BookResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'slug' => $this->slug,
+            'subtitle' => $this->subtitle,
             'authors' => $this->authors,
+            'editors' => $this->editors,
+            'translation' => $this->translation,
             'cover' => $this->cover,
             'teaser' => $this->teaser,
+            'body' => $this->body,
+            'sample' => $this->sample,
+            'links' => $this->links,
             'is_product' => $this->is_product,
-            'aspekt_price' => ($this->aspekt_price ? $this->aspekt_price/100 : null) . " €",
+            'aspekt_price' => number_format($this->aspekt_price ? $this->aspekt_price/100 : null, 2) . " €",
+            'common_price' => number_format($this->common_price ? $this->common_price/100 : null, 2) . " €",
+            'pages' => $this->pages,
+            'isbn' => $this->ISBN,
         ];
     }
 }

@@ -1,45 +1,27 @@
 <template>
-    <MasonryWall :items="props.items" :column-width="220" :gap="16">
+    <Breadcrumbs id="books"/>
+
+    <MasonryWall :items="items.data" :column-width="220" :gap="16">
         <template #default="{item}">
-            <article class="border border-gray-300 shadow-md p-4">
-                <header>
-                    <Link :href="route('books', [props.category, item.slug])">
-                        <img v-if="item.cover" class="w-52 h-auto mx-auto border border-gray-200 shadow-md mb-2 rounded-md" :src="`/storage/${item.cover}`" alt="book.title">
-                    </Link>
-                </header>
-                <main>
-                    <Link :href="route('books', [props.category, item.slug])">
-                        <h2 class="text-xl text-red-600">{{item.title}}</h2>
-                    </Link>
-                    <h3 class="text-sm italic mb-4">{{item.authors}}</h3>
-                    <p class="text-xs" v-html="item.teaser"></p>
-                </main>
-                <footer v-if="item.is_product" class="py-2">
-                    <p>{{item.aspekt_price}} EUR</p>
-                </footer>
-            </article>
+            <BookListItem :item="item" />
         </template>
     </MasonryWall>
 
-    <pagination class="mt-4" :links="props.links"></pagination>
+    <pagination class="mt-4" :links="items.meta.links"></pagination>
 </template>
 
 <script setup>
-import {Link} from '@inertiajs/inertia-vue3';
+import {usePage} from '@inertiajs/inertia-vue3';
 import MasonryWall from '@yeger/vue-masonry-wall'
+
+import BookListItem from './BookListItem.vue';
+import Breadcrumbs from '../Components/Breadcrumbs.vue';
 import Pagination from '../Components/Pagination.vue'
+
 import {computed, onMounted} from "vue";
 
-const props = defineProps({
-    items: Object,
-    links: Object,
-    category: String
-})
-
-
-onMounted(() => {
-    console.log(props.items)
-})
+const items = computed(() => usePage().props.value.books);
+onMounted(() => console.log(items.value))
 </script>
 
 <style scoped>

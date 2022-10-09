@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\UI;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookExtResource;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Models\Category;
@@ -50,7 +51,7 @@ class PagesController extends Controller
         } else {
             if($slug) {
                 // single resource
-                $book = Book::where('slug', $slug)->firstOrFail();
+                $book = BookExtResource::make(Book::where('slug', $slug)->firstOrFail());
             } else {
                 // list of resources for given category
                 if($category['url'] == $this->all) { // special category "vsetko"
