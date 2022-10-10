@@ -1,5 +1,5 @@
 <template>
-    <button class="flex items-center text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-2 mt-4 md:mt-8 shadow-xl rounded">
+    <button @click="increment" class="flex items-center text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-2 mt-4 md:mt-8 shadow-xl rounded">
         {{buttonText}}
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 ml-2">
@@ -9,10 +9,14 @@
 </template>
 
 <script setup>
+import { useStore } from 'vuex'
 import {computed, onMounted} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
+const store = useStore();
 const locale = computed(() => usePage().props.value.locale);
+
+const increment = () => store.dispatch('increment');
 
 const buttonText = computed(() => locale.value === 'sk' ? 'Pridaj do tašky' : 'Add to basket')
 </script>
