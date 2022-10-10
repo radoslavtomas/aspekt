@@ -4,7 +4,7 @@ import MainLayout from '../Layouts/MainLayout.vue'
 import {computed, onMounted} from "vue";
 import BookList from '../Components/BookList.vue';
 import BookSingle from '../Components/BookSingle.vue';
-import BasketCtaButton from "../Components/BasketCtaButton.vue";
+import BasketWidget from "../Components/BasketWidget.vue";
 
 const page = computed(() => usePage().props.value.page);
 const slug = computed(() => usePage().props.value.slug);
@@ -31,7 +31,7 @@ onMounted(() => console.log(page.value));
         </section>
     </main-layout>
 
-    <basket-cta-button />
+    <basket-widget />
 </template>
 
 <style scoped>

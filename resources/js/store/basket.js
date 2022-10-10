@@ -5,12 +5,18 @@ const state = {
 const mutations = {
     increment(state) {
         state.counter++;
+    },
+    test(state) {
+        state.counter--;
     }
 };
 
 const actions = {
     increment({ commit }) {
         commit("increment");
+    },
+    test({ commit }) {
+        commit("test");
     }
 };
 

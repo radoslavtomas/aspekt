@@ -2,8 +2,8 @@
     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto lg:ml-6 lg:pr-0">
         <div class="relative ml-3">
             <div>
-                <button @click="toggleLangOptions" ref="langButton" type="button" class="flex py-1.5 px-2 rounded-full bg-red-600 text-white hover:bg-red-700 text-xs focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-700" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                    <span class="sr-only">Open user menu</span>
+                <button @click="toggleLangOptions" ref="langButton" type="button" class="flex justify-center items-center w-6 h-6 rounded-full bg-red-600 text-white hover:bg-red-700 text-xs focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-700" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                    <span class="sr-only">Open language menu</span>
                     {{locale.toUpperCase()}}
                 </button>
             </div>

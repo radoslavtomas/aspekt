@@ -1,6 +1,6 @@
 <template>
 <section class="flex justify-center my-8 px-4">
-        <a class="rounded text-white text-xs text-center px-4 py-2 shadow-md block absolute inset-1 -skew-y-3 bg-pink-500 relative" href="https://aspekt.darujme.sk/prispevok-k-feministickej-buducnosti-3470e/"
+        <a class="rounded text-white text-xs text-center px-4 py-2 shadow-md block absolute inset-1 -skew-y-3 bg-pink-500 hover:bg-pink-600 relative" href="https://aspekt.darujme.sk/prispevok-k-feministickej-buducnosti-3470e/"
             target="_blank">
                 <span class="relative text-white">
                     {{msg[locale]}}.
