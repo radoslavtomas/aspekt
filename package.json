@@ -20,6 +20,7 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
+        "@heroicons/vue": "^2.0.12",
         "@yeger/vue-masonry-wall": "^3.2.3",
         "vuex": "^4.0.2"
     }

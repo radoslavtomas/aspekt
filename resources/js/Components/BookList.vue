@@ -1,13 +1,18 @@
 <template>
-    <Breadcrumbs id="books"/>
+    <section class="container-aspekt">
+        <Breadcrumbs id="books"/>
 
-    <MasonryWall :items="items.data" :column-width="220" :gap="16">
-        <template #default="{item}">
-            <BookListItem :item="item" />
-        </template>
-    </MasonryWall>
+        <div class="bg-books border border-gray-200 p-4 shadow-md bg-gradient-to-b from-white to-gray-100 rounded">
+            <MasonryWall :items="items.data" :column-width="230" :gap="12">
+                <template #default="{item}">
+                    <BookListItem :item="item" />
+                </template>
+            </MasonryWall>
+        </div>
 
-    <pagination class="mt-4" :links="items.meta.links"></pagination>
+
+        <pagination class="mt-4" :links="items.meta.links"></pagination>
+    </section>
 </template>
 
 <script setup>

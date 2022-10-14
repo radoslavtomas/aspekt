@@ -7,3 +7,40 @@
 }
 
 @tailwind utilities;
+
+.container-aspekt {
+    @apply mx-auto px-2 md:px-6 lg:px-8;
+    max-width: 83rem;
+}
+
+.bg-books {
+    background: url("/assets/img/bg.svg") no-repeat bottom;
+}
+
+.content {
+    /*background: #bada55;*/
+}
+
+.content iframe {
+    width: 100%;
+}
+
+@media(max-width: 617px) {
+    .content iframe {
+        height: 300px;
+    }
+}
+
+@media(max-width: 490px) {
+    .content iframe {
+        height: 250px;
+    }
+}
+
+@media(max-width: 400px) {
+    .content iframe {
+        height: 200px;
+    }
+}
+
+

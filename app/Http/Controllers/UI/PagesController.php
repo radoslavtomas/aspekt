@@ -37,6 +37,7 @@ class PagesController extends Controller
 
     public function books($category = null, $slug = null)
     {
+        // dd(Book::with('files', 'downloads')->where('slug', 'jednorozce-e-kniha')->firstOrFail());
         $category = $this->getCategoryModel($category);
 
         $data = $this->prepareBooksData($category, $slug);
@@ -51,7 +52,7 @@ class PagesController extends Controller
         } else {
             if($slug) {
                 // single resource
-                $book = BookExtResource::make(Book::where('slug', $slug)->firstOrFail());
+                $book = BookExtResource::make(Book::with('files', 'downloads')->where('slug', $slug)->firstOrFail());
             } else {
                 // list of resources for given category
                 if($category['url'] == $this->all) { // special category "vsetko"

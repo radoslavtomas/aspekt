@@ -1,6 +1,6 @@
 <template>
     <nav class="tracking-widest">
-        <div class="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
+        <div class="container-aspekt">
             <div class="relative flex h-16 items-center justify-between">
                 <div class="absolute inset-y-0 left-0 flex items-center lg:hidden">
                     <!-- Mobile menu button-->

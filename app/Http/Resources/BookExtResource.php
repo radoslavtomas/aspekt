@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\FileResource;
 
 class BookExtResource extends JsonResource
 {
@@ -31,6 +32,8 @@ class BookExtResource extends JsonResource
             'common_price' => number_format($this->common_price ? $this->common_price/100 : null, 2) . " €",
             'pages' => $this->pages,
             'isbn' => $this->ISBN,
+            'files' => FileResource::collection($this->files),
+            'downloads' => FileResource::collection($this->downloads),
         ];
     }
 }

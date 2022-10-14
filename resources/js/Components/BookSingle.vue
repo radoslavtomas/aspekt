@@ -7,9 +7,9 @@
                 <div class="text-center md:text-left w-full h-full flex-1 flex flex-col justify-items-stretch">
                     <div class="">
                         <h1 class="text-2xl md:text-3xl text-red-600 font-bold">{{book.title}}</h1>
-                        <h4 class="text-sm my-1">{{book.subtitle}}</h4>
+                        <h4 class="text-xl text-red-600 my-1">{{book.subtitle}}</h4>
                         <h3 class="md:my-4 text-xl">{{book.authors}}</h3>
-                        <p v-if="book.editors" class="text-gray-500 text-xs">{{lang[locale].editors}}: {{book.editors}}</p>
+                        <p v-if="book.editors" class="text-sm">{{lang[locale].editors}}: {{book.editors}}</p>
                         <p v-if="book.translation" class="text-gray-500 text-xs">{{lang[locale].translation}}: {{book.translation}}</p>
                     </div>
 
@@ -19,7 +19,7 @@
                         <p>{{lang[locale].pages}}: {{book.pages}}</p>
                         <p class="mb-3">ISBN: {{book.isbn}}</p>
 
-                        <p class="text-lg md:text-xl text-red-600 font-bold">{{lang[locale].aspekt_price}}: {{book.aspekt_price}}</p>
+                        <p class="text-lg text-red-600 font-bold">{{lang[locale].aspekt_price}}: {{book.aspekt_price}}</p>
                         <p>({{lang[locale].common_price}} {{book.common_price}})</p>
                         <BookSingleCtaButton />
                     </div>
@@ -30,7 +30,7 @@
 
             <main class="max-w-2xl mx-auto px-1">
                 <section class="mb-6">
-                    <div v-html="book.body"></div>
+                    <div class="content" v-html="book.body"></div>
                 </section>
 
                 <section v-if="book.sample" class="mb-6">
@@ -49,7 +49,15 @@
                     <div v-html="book.links"></div>
                 </section>
 
-                <section class="flex flex-col items-center justify-center">
+                <section>
+                    <document-pdf-icon class="h-6 w-6 text-red-600" />
+
+                    <photo-icon class="h-5 w-5 text-blue-600" />
+
+                    <paper-clip-icon class="h-5 w-5 text-teal-600" />
+                </section>
+
+                <section v-if="book.is_product" class="mb-6 flex flex-col items-center justify-center">
                     <p class="text-lg md:text-xl text-red-600 font-bold">{{lang[locale].aspekt_price}}: {{book.aspekt_price}}</p>
                     <p class="text-gray-500 text-xs">({{lang[locale].common_price}} {{book.common_price}})</p>
                     <BookSingleCtaButton />
@@ -63,8 +71,12 @@
 import {computed, onMounted} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
-import Breadcrumbs from '../Components/Breadcrumbs.vue';
 import BookSingleCtaButton from './BookSingleCtaButton.vue';
+import Breadcrumbs from '../Components/Breadcrumbs.vue';
+
+import DocumentPdfIcon from '../Icons/DocumentPdfIcon.vue';
+import { PhotoIcon } from '@heroicons/vue/24/outline';
+import { PaperClipIcon } from '@heroicons/vue/24/outline';
 
 const locale = computed(() => usePage().props.value.locale);
 
@@ -74,7 +86,7 @@ const lang = {
         'pages': 'Počet strán',
         'aspekt_price': 'ASPEKT cena',
         'common_price': 'Bežná cena',
-        'editors': 'Editorky & editori',
+        'editors': 'Editorstvo',
         'translation': 'Preklad',
         'sample': 'Ukážka z knihy',
         'links': 'Súvisiace odkazy'
@@ -83,7 +95,7 @@ const lang = {
         'pages': 'Number of pages',
         'aspekt_price': 'ASPEKT price',
         'common_price': 'Common cena',
-        'editors': 'Editorks',
+        'editors': 'Editors',
         'translation': 'Translation',
         'sample': 'Sample',
         'links': 'Related links'

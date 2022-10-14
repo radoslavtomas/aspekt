@@ -9,7 +9,7 @@
         <li>
             <Link v-if="slug" :href="route(props.id, [category.url])" class="text-red-600 hover:text-red-700">
                 {{ base[`name_${locale}`] }} - {{categoryString}}</Link>
-            <span v-else class="before:content-['>'] before:mr-2 before:text-gray-800">{{ base[`name_${locale}`] }} - {{categoryString}}</span>
+            <span v-else>{{ base[`name_${locale}`] }} - {{categoryString}}</span>
         </li>
         <li v-if="slug">
             >
