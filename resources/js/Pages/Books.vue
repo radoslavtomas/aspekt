@@ -20,7 +20,7 @@ onMounted(() => console.log(page.value));
     <Head title="Knizna edicia" />
 
     <main-layout>
-        <section class="container mx-auto">
+        <div class="container-aspekt mx-auto">
             <div v-if="slug">
                 <BookSingle />
             </div>
@@ -28,7 +28,7 @@ onMounted(() => console.log(page.value));
             <template v-else>
                 <BookList />
             </template>
-        </section>
+        </div>
     </main-layout>
 
     <basket-widget />

@@ -2,7 +2,7 @@
     <navigation-bar />
     <support-us />
 
-    <div class="relative p-4">
+    <div class="relative">
         <slot />
     </div>
 </template>

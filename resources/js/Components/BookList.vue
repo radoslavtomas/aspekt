@@ -1,9 +1,9 @@
 <template>
-    <section class="container-aspekt">
+    <section>
         <Breadcrumbs id="books"/>
 
-        <div class="bg-books border border-gray-200 p-4 shadow-md bg-gradient-to-b from-white to-gray-100 rounded">
-            <MasonryWall :items="items.data" :column-width="230" :gap="12">
+        <div class="bg-books sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
+            <MasonryWall :items="items.data" :column-width="230" :gap="16">
                 <template #default="{item}">
                     <BookListItem :item="item" />
                 </template>

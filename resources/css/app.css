@@ -9,12 +9,17 @@
 @tailwind utilities;
 
 .container-aspekt {
-    @apply mx-auto px-2 md:px-6 lg:px-8;
-    max-width: 83rem;
+    @apply max-w-7xl mx-auto px-5 md:px-6 lg:px-8;
 }
 
 .bg-books {
     background: url("/assets/img/bg.svg") no-repeat bottom;
+}
+
+@media(max-width: 640px) {
+    .bg-books {
+        background: none;
+    }
 }
 
 .content {
