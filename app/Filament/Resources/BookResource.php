@@ -43,6 +43,10 @@ class BookResource extends Resource
                     ->columns(3),
                 Fieldset::make('Book settings')
                     ->schema([
+                        Forms\Components\Select::make('name_sk')
+                            ->multiple()
+                            ->relationship('category', 'name_sk', fn (Builder $query) => $query->where('navigation_id', 4))
+                            ->required(),
                         Forms\Components\FileUpload::make('cover')
                             ->preserveFilenames()
                             ->directory('covers'),

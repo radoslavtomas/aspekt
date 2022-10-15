@@ -17,7 +17,7 @@ class Category extends Model
         'navigation_id',
         'is_dynamic',
         'name_sk',
-        'name_sk',
+        'name_en',
         'url',
         'position',
     ];
@@ -25,6 +25,11 @@ class Category extends Model
     public function navigation()
     {
         return $this->belongsTo(Navigation::class, 'navigation_id', 'id');
+    }
+
+    public function page()
+    {
+        return $this->belongsTo(Page::class, 'page_id', 'id');
     }
 
     public function books()
