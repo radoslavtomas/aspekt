@@ -34,27 +34,26 @@
                 </section>
 
                 <section v-if="book.sample" class="mb-6">
-                    <div class="flex w-full items-center mb-3">
-                        <h6 class="text-red-700 pr-3">{{lang[locale].sample}}</h6>
-                        <div class="h-1 bg-red-700 flex-1"></div>
-                    </div>
+                    <book-single-section-heading :heading="lang[locale].sample" />
                     <div v-html="book.sample"></div>
                 </section>
 
                 <section v-if="book.links" class="mb-6">
-                    <div class="flex w-full items-center mb-3">
-                        <h6 class="text-red-700 pr-3">{{lang[locale].links}}</h6>
-                        <div class="h-1 bg-red-700 flex-1"></div>
-                    </div>
+                    <book-single-section-heading :heading="lang[locale].links" />
                     <div v-html="book.links"></div>
                 </section>
 
-                <section>
-                    <document-pdf-icon class="h-6 w-6 text-red-600" />
 
-                    <photo-icon class="h-5 w-5 text-blue-600" />
+                <section v-if="book.files.length" class="mb-6">
+                    <book-single-section-heading :heading="lang[locale].files" />
+                    <file-list :files="book.files" />
+                </section>
 
-                    <paper-clip-icon class="h-5 w-5 text-teal-600" />
+                <section v-if="book.downloads.length" class="mb-6">
+                    <book-single-section-heading :heading="lang[locale].downloads" />
+                    <div>
+
+                    </div>
                 </section>
 
                 <section v-if="book.is_product" class="mb-6 flex flex-col items-center justify-center">
@@ -73,10 +72,10 @@ import {usePage} from "@inertiajs/inertia-vue3";
 
 import BookSingleCtaButton from './BookSingleCtaButton.vue';
 import Breadcrumbs from '../Components/Breadcrumbs.vue';
+import BookSingleSectionHeading from './BookSingleSectionHeading.vue'
+import FileList from './FileList.vue'
 
-import DocumentPdfIcon from '../Icons/DocumentPdfIcon.vue';
-import { PhotoIcon } from '@heroicons/vue/24/outline';
-import { PaperClipIcon } from '@heroicons/vue/24/outline';
+
 
 const locale = computed(() => usePage().props.value.locale);
 
@@ -89,7 +88,9 @@ const lang = {
         'editors': 'Editorstvo',
         'translation': 'Preklad',
         'sample': 'Ukážka z knihy',
-        'links': 'Súvisiace odkazy'
+        'links': 'Súvisiace odkazy',
+        'files': 'Súbory na stiahnutie',
+        'downloads': 'Knihy na stiahnutie',
     },
     en: {
         'pages': 'Number of pages',
@@ -98,7 +99,9 @@ const lang = {
         'editors': 'Editors',
         'translation': 'Translation',
         'sample': 'Sample',
-        'links': 'Related links'
+        'links': 'Related links',
+        'files': 'Files to download',
+        'downloads': 'Books to download',
     }
 }
 
