@@ -36,7 +36,7 @@ class FilesRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('filename'),
                 Tables\Columns\TextColumn::make('filesize')
-                    ->formatStateUsing(fn (string $state): string => (number_format($state / 1000000, 2)) . ' MB'),
+                    ->formatStateUsing(fn (string $state): string => (formatFileSizeUnits($state))),
             ])
             ->filters([
                 //

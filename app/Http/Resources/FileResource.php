@@ -19,7 +19,7 @@ class FileResource extends JsonResource
             'filename' => $this->filename,
             'filepath' => $this->filepath,
             'filemime' => $this->filemime,
-            'filesize' => number_format($this->filesize / 1000000, 2) . ' MB'
+            'filesize' => formatFileSizeUnits($this->filesize)
         ];
     }
 }

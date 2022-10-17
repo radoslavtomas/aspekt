@@ -36,6 +36,8 @@ class FilesRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('filename'),
+                Tables\Columns\TextColumn::make('filesize')
+                    ->formatStateUsing(fn (string $state): string => (formatFileSizeUnits($state))),
                 Tables\Columns\ImageColumn::make('filepath')
                     ->extraImgAttributes([
                         "alt" => "&nbsp;No preview"

@@ -12,8 +12,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+
 
 
 class FileResource extends Resource
@@ -46,7 +45,8 @@ class FileResource extends Resource
                     ]),
                 Tables\Columns\TextColumn::make('filemime')
                     ->limit(20),
-                Tables\Columns\TextColumn::make('filesize'),
+                Tables\Columns\TextColumn::make('filesize')
+                    ->formatStateUsing(fn (string $state): string => (formatFileSizeUnits($state))),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
