@@ -8,8 +8,8 @@
         </li>
         <li>
             <Link v-if="slug" :href="route(props.id, [category.url])" class="text-red-600 hover:text-red-700">
-                {{ base[`name_${locale}`] }} - {{categoryString}}</Link>
-            <span v-else>{{ base[`name_${locale}`] }} - {{categoryString}}</span>
+                {{ navigationString[`name_${locale}`] }} - {{categoryString}}</Link>
+            <span v-else>{{ navigationString[`name_${locale}`] }} - {{categoryString}}</span>
         </li>
         <li v-if="slug">
             >
@@ -28,7 +28,7 @@ const locale = computed(() => usePage().props.value.locale);
 const category = computed(() => usePage().props.value.category);
 const slug = computed(() => usePage().props.value.slug);
 
-const base = computed(() => navigation.value.find(el => el.route === props.id));
+const navigationString = computed(() => navigation.value.find(el => el.route === props.id));
 const homeString = computed(() => navigation.value.find(el => el.route === 'home')[`name_${locale.value}`]);
 const categoryString = computed(() => category.value[`name_${locale.value}`]);
 

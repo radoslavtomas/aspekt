@@ -14,7 +14,7 @@ use Inertia\Inertia;
 
 class PagesController extends Controller
 {
-    private $all = 'vsetko';
+    private string $all = 'vsetko';
     private $pagination = 15;
 
     public function home()

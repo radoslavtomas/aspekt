@@ -1,6 +1,6 @@
 <template>
     <div class="max-w-3xl mx-auto">
-        <Breadcrumbs id="books" :article="book ? book.title : ''"/>
+        <Breadcrumbs id="books" :article="book.title"/>
 
         <article class="mt-10">
             <header class="relative flex flex-col md:flex-row justify-between items-center md:items-start mb-6 md:mb-12">

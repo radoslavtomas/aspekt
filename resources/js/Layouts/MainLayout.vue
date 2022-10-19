@@ -2,7 +2,7 @@
     <navigation-bar />
     <support-us />
 
-    <div class="relative">
+    <div class="relative container-aspekt mx-auto">
         <slot />
     </div>
 </template>

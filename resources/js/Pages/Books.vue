@@ -3,32 +3,26 @@ import {Head, usePage} from '@inertiajs/inertia-vue3';
 import MainLayout from '../Layouts/MainLayout.vue'
 import {computed, onMounted} from "vue";
 import BookList from '../Components/BookList.vue';
-import BookSingle from '../Components/BookSingle.vue';
+
 import BasketWidget from "../Components/BasketWidget.vue";
 
-const page = computed(() => usePage().props.value.page);
-const slug = computed(() => usePage().props.value.slug);
-
-// const items = computed(() => books.value.data);
-
-onMounted(() => console.log(page.value));
+const navigation = computed(() => usePage().props.value.navigation);
+const navigationString = computed(() => navigation.value.find(el => el.route === 'books'));
+const locale = computed(() => usePage().props.value.locale);
+const category = computed(() => usePage().props.value.category);
+// const categoryString = category.value[`name_${locale}`]
+// onMounted(() => console.log(categoryString));
 
 
 </script>
 
 <template>
-    <Head title="Knizna edicia" />
+<!--    <Head :title="`${navigationString['name_sk']} | ${categoryString}`" />-->
 
     <main-layout>
-        <div class="container-aspekt mx-auto">
-            <div v-if="slug">
-                <BookSingle />
-            </div>
 
-            <template v-else>
-                <BookList />
-            </template>
-        </div>
+        <BookList />
+
     </main-layout>
 
     <basket-widget />
