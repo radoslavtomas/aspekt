@@ -87,13 +87,13 @@ class BlogResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')
                     ->sortable()
                     ->date('d.m.Y H:i:s'),
-                Tables\Columns\TextColumn::make('blog_type.name'),
+                Tables\Columns\TextColumn::make('blog_type.name_sk'),
                 Tables\Columns\TextColumn::make('title')
                     ->limit(50)
                     ->searchable(),
-                Tables\Columns\BooleanColumn::make('featured')
+                Tables\Columns\CheckboxColumn::make('featured')
                     ->sortable(),
-                Tables\Columns\BooleanColumn::make('published')
+                Tables\Columns\CheckboxColumn::make('published')
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')

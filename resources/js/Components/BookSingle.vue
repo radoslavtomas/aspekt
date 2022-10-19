@@ -51,9 +51,7 @@
 
                 <section v-if="book.downloads.length" class="mb-6">
                     <book-single-section-heading :heading="lang[locale].downloads" />
-                    <div>
-
-                    </div>
+                    <file-list :files="book.downloads" />
                 </section>
 
                 <section v-if="book.is_product" class="mb-6 flex flex-col items-center justify-center">
