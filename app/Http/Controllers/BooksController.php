@@ -38,7 +38,15 @@ class BooksController extends Controller
 
     private function handleStaticResource()
     {
-        return 'handle me later';
+        $page = $this->category->page;
+
+        if (!$page) {
+            abort(404);
+        }
+
+        return Inertia::render('Page', [
+            'page' => $page
+        ]);
     }
 
     private function handleSingleResource(string $slug): Response

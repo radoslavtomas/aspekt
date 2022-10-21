@@ -1,5 +1,7 @@
 <template>
     <div class="max-w-3xl mx-auto">
+        <Head :title="title" />
+
         <Breadcrumbs id="books" :article="book.title"/>
 
         <article class="mt-10">
@@ -65,19 +67,27 @@
 </template>
 
 <script setup>
-import {computed, onMounted} from "vue";
-import {usePage} from "@inertiajs/inertia-vue3";
+import {computed} from "vue";
+import {Head, usePage} from "@inertiajs/inertia-vue3";
 
-import BookSingleCtaButton from './BookSingleCtaButton.vue';
-import Breadcrumbs from '../Components/Breadcrumbs.vue';
-import BookSingleSectionHeading from './BookSingleSectionHeading.vue'
+// components
 import FileList from './FileList.vue'
+import BookSingleCtaButton from './BookSingleCtaButton.vue';
+import BookSingleSectionHeading from './BookSingleSectionHeading.vue'
+import Breadcrumbs from '../Components/Breadcrumbs.vue';
 
-
-
-const locale = computed(() => usePage().props.value.locale);
-
+// computed
 const book = computed(() => usePage().props.value.book.data);
+const locale = computed(() => usePage().props.value.locale);
+const navigation = computed(() => usePage().props.value.navigation);
+
+const title = computed(() => {
+    const navigationString = computed(() => navigation.value.find(el => el.route === 'books')[`name_${locale.value}`]);
+    const articleString = book.value.title
+    return `${navigationString.value} | ${articleString}`
+})
+
+// data
 const lang = {
     sk: {
         'pages': 'Počet strán',
@@ -102,11 +112,4 @@ const lang = {
         'downloads': 'Books to download',
     }
 }
-
-onMounted(() => console.log(book.value))
-
 </script>
-
-<style scoped>
-
-</style>
