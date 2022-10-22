@@ -15,8 +15,8 @@ onMounted(() => console.log(page.value))
 
 <template>
     <main-layout>
-        <h1 class="text-3xl md:text-4xl text-red-600 font-bold my-8 text-center">
-            <span class="border-b-2 pb-2 px-4 border-red-600">{{title}}</span>
+        <h1 class="border-b-2 border-gray-200 pb-8 text-3xl md:text-4xl text-red-600 font-bold my-8 text-center">
+            <span class=" pb-2 px-4">{{title}}</span>
         </h1>
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8">
@@ -26,11 +26,11 @@ onMounted(() => console.log(page.value))
 
             <div class="col-span-12 md:col-span-4 lg:col-span-3">
                 <div class="sticky top-6">
-                    <article class="p-3 rounded-md shadow-xl border-2 border-pink-600 mt-4">
+                    <article class="p-3 shadow-md border border-gray-300 mt-4 flex flex-col justify-center items-center">
                         <h4 class="text-xl text-pink-600 text-center">
                             Aspektovské knihy pár klikov od vás
                         </h4>
-                        <button class="w-full bg-pink-600 hover:bg-pink-700 text-white my-3 py-3 rounded">
+                        <button class="bg-pink-500 hover:bg-pink-600 text-xs text-white my-3 py-1 px-5 rounded shadow-md">
                             <a href="#">E-knihy</a>
                         </button>
                         <p class="text-sm">
@@ -38,20 +38,20 @@ onMounted(() => console.log(page.value))
                         </p>
                     </article>
 
-                    <article class="p-3 rounded-md shadow-xl border-2 border-pink-600 mt-4">
-                        <a href="http://glosar.aspekt.sk/">
+                    <article class="p-3 shadow-md border border-gray-300 mt-4">
+                        <a href="http://glosar.aspekt.sk/" target="_blank">
                             <img class="w-48 mx-auto" src="/assets/img/glosar.png" alt="glosar rodovej terminologie">
                         </a>
                     </article>
 
-                    <article class="p-3 rounded-md shadow-xl border-2 border-pink-600 mt-4">
-                        <a href="http://www.ruzovyamodrysvet.sk/">
+                    <article class="p-3 shadow-md border border-gray-300 mt-4">
+                        <a href="http://www.ruzovyamodrysvet.sk/" target="_blank">
                             <img class="w-48 mx-auto" src="/assets/img/ruzovysvet.png" alt="ruzovy a modry svet">
                         </a>
                     </article>
 
-                    <article class="text-center p-3 rounded-md shadow-xl border-2 border-pink-600 mt-4">
-                        <a href="http://www.ruzovyamodrysvet.sk/">
+                    <article class="text-center p-3 shadow-md border border-gray-300 mt-4">
+                        <a href="#">
                             <h5 class="uppercase font-bold text-pink-600 text-gradient">
                                 Archív ňjuvinky
                             </h5>
