@@ -15,6 +15,9 @@ module.exports = {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
                 treb: ['Trebuchet MS', ...defaultTheme.fontFamily.sans]
             },
+            listStyleType: {
+                square: 'square'
+            }
         },
     },
 

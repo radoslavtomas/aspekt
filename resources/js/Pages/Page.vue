@@ -15,18 +15,50 @@ onMounted(() => console.log(page.value))
 
 <template>
     <main-layout>
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mt-8">
-            <div class="col-span-9 ">
-                <h1 class="text-3xl text-red-600 font-bold mb-4 text-center">{{title}}</h1>
-                <div v-html="body"></div>
+        <h1 class="text-3xl md:text-4xl text-red-600 font-bold my-8 text-center">
+            <span class="border-b-2 pb-2 px-4 border-red-600">{{title}}</span>
+        </h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8">
+            <div class="col-span-12 md:col-span-8 lg:col-span-9">
+                <div class="content" v-html="body"></div>
             </div>
 
-            <div class="col-span-3">
-                Prvá feministická organizácia na Slovensku ASPEKT sa oficiálne zaregistrovala v roku 1993 ako Záujmové združenie žien Aspekt. V tomto roku vyšlo aj prvé číslo feministického kultúrneho časopisu Aspekt, ktorý bol ako slovensko-české médium prvým feministickým časopisom v bývalom Československu a dnes pokračuje ako webzin ASPEKTin. Naša organizácia sa ako nositeľka množstva vzdelávacích a publikačných projektov od svojich začiatkov zameriava na rodovú senzibilizáciu spoločnosti. V roku 1996 sme založili knižnú edíciu, v ktorej dodnes vyšlo viac ako 110 titulov. Už 20 rokov ASPEKT usporadúva vzdelávacie podujatia, spravuje knižnicu, poskytuje odborné konzultácie, realizuje výskumné projekty, prevádzkuje materiálovo bohaté webové stránky, podieľa sa na formovaní rodovo citlivého jazyka, spolu pracuje s inými médiami a domácimi i zahraničnými organizáciami. Je jednou zo zakladajúcich organizácií iniciatív
+            <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                <div class="sticky top-6">
+                    <article class="p-3 rounded-md shadow-xl border-2 border-pink-600 mt-4">
+                        <h4 class="text-xl text-pink-600 text-center">
+                            Aspektovské knihy pár klikov od vás
+                        </h4>
+                        <button class="w-full bg-pink-600 hover:bg-pink-700 text-white my-3 py-3 rounded">
+                            <a href="#">E-knihy</a>
+                        </button>
+                        <p class="text-sm">
+                            Takmer dve desiatky aspektovských kníh si môžete objedať aj v elektronickej podobe. Vo forme e-kníh nájdete rozhovor Jany Juráňovej s Agnešou Kalinovou, preklad knihy bell hooks, analýzu účasti žien v Nežnej revolúcii, feministický pohľad na literatúru, ale aj beletristické knihy Jany Juráňovej, Ireny Brežnej, Slavenky Drakulić, Jany Bodnárovej, Barbory Hrínovej, Etely Farkašovej, Jaroslavy Blažkovej či Diany Athill.
+                        </p>
+                    </article>
 
-                Možnosť voľby (za dodržiavanie ľudských práv žien a detí)
+                    <article class="p-3 rounded-md shadow-xl border-2 border-pink-600 mt-4">
+                        <a href="http://glosar.aspekt.sk/">
+                            <img class="w-48 mx-auto" src="/assets/img/glosar.png" alt="glosar rodovej terminologie">
+                        </a>
+                    </article>
 
-                Piata žena (proti násiliu páchanému na ženách)
+                    <article class="p-3 rounded-md shadow-xl border-2 border-pink-600 mt-4">
+                        <a href="http://www.ruzovyamodrysvet.sk/">
+                            <img class="w-48 mx-auto" src="/assets/img/ruzovysvet.png" alt="ruzovy a modry svet">
+                        </a>
+                    </article>
+
+                    <article class="text-center p-3 rounded-md shadow-xl border-2 border-pink-600 mt-4">
+                        <a href="http://www.ruzovyamodrysvet.sk/">
+                            <h5 class="uppercase font-bold text-pink-600 text-gradient">
+                                Archív ňjuvinky
+                            </h5>
+                            <p class="text-xs">Aspektovský newsletter</p>
+                        </a>
+                    </article>
+                </div>
             </div>
         </div>
 
