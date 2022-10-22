@@ -46,4 +46,9 @@ class Blog extends Model
     {
         return $this->belongsToMany(Download::class);
     }
+
+    public function scopePublished($query)
+    {
+        return $query->where('published', 1);
+    }
 }

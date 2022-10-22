@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\BookExtResource;
-use App\Http\Resources\BookResource;
-use App\Models\Book;
+use App\Http\Resources\BlogExtResource;
+use App\Http\Resources\BlogResource;
+use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class BooksController extends Controller
+class AspektinController extends Controller
 {
     public null|object $category = null;
     private string $all = 'vsetko';
@@ -47,16 +47,17 @@ class BooksController extends Controller
         return Inertia::render('Page', [
             'page' => $page,
             'category' => $this->category,
-            'breadcrumbs_id' => 'books'
+            'breadcrumbs_id' => 'aspektin'
         ]);
     }
 
     private function handleSingleResource(string $slug): Response
     {
-        $book = BookExtResource::make(Book::with('files', 'downloads')->where('slug', $slug)->firstOrFail());
+        $blog = BlogExtResource::make(Blog::with('files', 'downloads')->where('slug', $slug)->firstOrFail());
+        // dd($blog);
 
-        return Inertia::render('Book', [
-            'book' => $book,
+        return Inertia::render('Blog', [
+            'blog' => $blog,
             'category' => $this->category,
             'slug' => $slug
         ]);
@@ -65,13 +66,13 @@ class BooksController extends Controller
     private function handleListResource(): Response
     {
         if($this->category['url'] == $this->all) { // special category "vsetko"
-            $books = BookResource::collection(Book::published()->orderBy('created_at', 'desc')->paginate($this->pagination));
+            $blogs = BlogResource::collection(Blog::published()->orderBy('created_at', 'desc')->paginate($this->pagination));
         } else { // all other categories
-            $books = BookResource::collection($this->category->books()->paginate($this->pagination));
+            $blogs = BlogResource::collection($this->category->blogs()->paginate($this->pagination));
         }
 
-        return Inertia::render('Books', [
-            'books' => $books,
+        return Inertia::render('Blogs', [
+            'blogs' => $blogs,
             'category' => $this->category
         ]);
     }

@@ -39,6 +39,13 @@ class Category extends Model
             ->orderBy('created_at', 'desc');
     }
 
+    public function blogs()
+    {
+        return $this->belongsToMany(Blog::class)
+            ->where('published', 1)
+            ->orderBy('created_at', 'desc');
+    }
+
     public function isDynamic()
     {
         return $this->getAttribute('is_dynamic');

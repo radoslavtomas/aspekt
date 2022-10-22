@@ -1,11 +1,14 @@
 <script setup>
-import BasketWidget from "../Components/BasketWidget.vue";
-import MainLayout from '../Layouts/MainLayout.vue'
 import {computed, onMounted} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
+import BasketWidget from "../Components/BasketWidget.vue";
+import MainLayout from '../Layouts/MainLayout.vue'
+import Breadcrumbs from '../Components/Breadcrumbs.vue';
+
 const locale = computed(() => usePage().props.value.locale)
 const page = computed(() => usePage().props.value.page)
+const breadcrumbsId = computed(() => usePage().props.value.breadcrumbs_id)
 
 const title = computed(() => page.value[`name_${locale.value}`])
 const body = computed(() => page.value[`body_${locale.value}`])
@@ -15,7 +18,9 @@ onMounted(() => console.log(page.value))
 
 <template>
     <main-layout>
-        <h1 class="border-b-2 border-gray-200 pb-8 text-3xl md:text-4xl text-red-600 font-bold my-8 text-center">
+        <Breadcrumbs :id="breadcrumbsId" />
+
+        <h1 class="border-b border-gray-300 pb-8 text-3xl md:text-4xl text-red-600 font-bold my-8 text-center">
             <span class=" pb-2 px-4">{{title}}</span>
         </h1>
 
@@ -26,6 +31,15 @@ onMounted(() => console.log(page.value))
 
             <div class="col-span-12 md:col-span-4 lg:col-span-3">
                 <div class="sticky top-6">
+                    <article class="text-center p-3 shadow-md border border-gray-300 mt-4">
+                        <a href="#">
+                            <h5 class="uppercase font-bold text-pink-600 text-gradient">
+                                Archív ňjuvinky
+                            </h5>
+                            <p class="text-xs">Aspektovský newsletter</p>
+                        </a>
+                    </article>
+
                     <article class="p-3 shadow-md border border-gray-300 mt-4 flex flex-col justify-center items-center">
                         <h4 class="text-xl text-pink-600 text-center">
                             Aspektovské knihy pár klikov od vás
@@ -47,15 +61,6 @@ onMounted(() => console.log(page.value))
                     <article class="p-3 shadow-md border border-gray-300 mt-4">
                         <a href="http://www.ruzovyamodrysvet.sk/" target="_blank">
                             <img class="w-48 mx-auto" src="/assets/img/ruzovysvet.png" alt="ruzovy a modry svet">
-                        </a>
-                    </article>
-
-                    <article class="text-center p-3 shadow-md border border-gray-300 mt-4">
-                        <a href="#">
-                            <h5 class="uppercase font-bold text-pink-600 text-gradient">
-                                Archív ňjuvinky
-                            </h5>
-                            <p class="text-xs">Aspektovský newsletter</p>
                         </a>
                     </article>
                 </div>
