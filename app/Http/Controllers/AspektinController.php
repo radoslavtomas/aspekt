@@ -65,8 +65,13 @@ class AspektinController extends Controller
 
     private function handleListResource(): Response
     {
+        $featured = BlogResource::make(Blog::where('featured', 1)->orderBy('created_at', 'desc')->first());
+//        dd($featured->id);
+
         if($this->category['url'] == $this->all) { // special category "vsetko"
-            $blogs = BlogResource::collection(Blog::published()->orderBy('created_at', 'desc')->paginate($this->pagination));
+            $blogs = Blog::published()->orderBy('created_at', 'desc')->paginate($this->pagination);
+            $filtered = $blogs->filter(fn ($blog) => $featured->id !== $blog->id);
+            dd($filtered);
         } else { // all other categories
             $blogs = BlogResource::collection($this->category->blogs()->paginate($this->pagination));
         }

@@ -20,6 +20,7 @@ class BlogResource extends JsonResource
             'slug' => $this->slug,
             'authors' => $this->authors,
             'teaser' => $this->teaser,
+            'featured' => $this->featured,
         ];
     }
 }

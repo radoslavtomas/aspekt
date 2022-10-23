@@ -1,13 +1,13 @@
 <script setup>
 import BasketWidget from "../Components/BasketWidget.vue";
 import BlogSingle from '../Components/BlogSingle.vue';
-import MainLayout from '../Layouts/MainLayout.vue'
+import Aspektin from '../Layouts/Aspektin.vue'
 </script>
 
 <template>
-    <main-layout>
+    <aspektin>
         <BlogSingle />
-    </main-layout>
+    </aspektin>
 
     <basket-widget />
 </template>

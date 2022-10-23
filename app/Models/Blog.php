@@ -51,4 +51,9 @@ class Blog extends Model
     {
         return $query->where('published', 1);
     }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('featured', 1);
+    }
 }
