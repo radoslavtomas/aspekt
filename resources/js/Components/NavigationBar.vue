@@ -14,7 +14,7 @@
             <div class="flex flex-1 items-center justify-center lg:items-stretch lg:justify-start">
                 <div class="flex flex-shrink-0 items-center">
                     <Link :href="route('home')">
-                        <img class="h-12 w-auto" src="/assets/img/aspekt_logo.jpg" alt="Aspekt">
+                        <img class="h-12 w-auto" src="/assets/img/aspekt_logo.png" alt="Aspekt">
                     </Link>
                 </div>
 

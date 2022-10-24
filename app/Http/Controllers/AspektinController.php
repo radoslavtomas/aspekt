@@ -65,20 +65,37 @@ class AspektinController extends Controller
 
     private function handleListResource(): Response
     {
-        $featured = BlogResource::make(Blog::where('featured', 1)->orderBy('created_at', 'desc')->first());
-//        dd($featured->id);
+        // @TODO: handle no featured
+        $featured = Blog::where('featured', 1)->orderBy('created_at', 'desc')->first();
 
         if($this->category['url'] == $this->all) { // special category "vsetko"
             $blogs = Blog::published()->orderBy('created_at', 'desc')->paginate($this->pagination);
-            $filtered = $blogs->filter(fn ($blog) => $featured->id !== $blog->id);
-            dd($filtered);
+
+            if ($featured) {
+                $filtered = $blogs->filter(fn ($blog) => $featured->id !== $blog->id);
+                $blogs->setCollection(collect($filtered));
+            } else {
+                $featured = $blogs->shift();
+            }
         } else { // all other categories
-            $blogs = BlogResource::collection($this->category->blogs()->paginate($this->pagination));
+            $blogs = $this->category->blogs()->paginate($this->pagination);
+
+            if ($featured) {
+                $filtered = $blogs->filter(fn ($blog) => $featured->id !== $blog->id);
+                $blogs->setCollection(collect($filtered));
+            } else {
+                $featured = $blogs->shift();
+            }
         }
 
+        // dd($blogs);
+
+        // dd(BlogResource::collection($blogs));
+
         return Inertia::render('Blogs', [
-            'blogs' => $blogs,
-            'category' => $this->category
+            'blogs' => BlogResource::collection($blogs),
+            'category' => $this->category,
+            'featured' => BlogResource::make($featured),
         ]);
     }
 }
