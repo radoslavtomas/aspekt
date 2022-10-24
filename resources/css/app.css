@@ -55,6 +55,10 @@
     @apply pb-1;
 }
 
+.content p:empty {
+    @apply h-10;
+}
+
 .content ul {
     @apply list-disc ml-5;
 }

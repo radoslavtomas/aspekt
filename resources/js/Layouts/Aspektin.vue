@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gray-200">
+    <div class="bg-gradient-to-br from-gray-100 to-white">
         <navigation-bar />
         <support-us />
 

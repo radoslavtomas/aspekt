@@ -1,11 +1,11 @@
 <template>
-    <article class="border border-gray-300 shadow-md p-4" :class="featured ? 'bg-pink-200' : 'bg-white'">
+    <article class="border border-gray-300 p-4 bg-white" :class="featured ? 'mb-4 shadow' : 'shadow-md'">
         <main :class="featured ? 'grid grid-cols-5 gap-4' : ''">
             <div class="col-span-5 sm:col-span-3 lg:col-span-4 order-2 sm:order-1">
                 <Link :href="route('aspektin', [categoryUrl, props.item.slug])">
-                    <h2 class="text-xl text-red-600">{{props.item.title}}</h2>
+                    <h2 :class="featured ? 'text-2xl' : 'text-lg'" class="text-red-600">{{props.item.title}}</h2>
                 </Link>
-                <h3 class="text-sm italic mb-4">{{props.item.authors ?? 'No authors'}}</h3>
+                <h3 class="text-sm italic mb-4">{{props.item.authors ?? 'red.'}}</h3>
                 <p class="text-xs" v-html="props.item.teaser"></p>
             </div>
             <div v-if="featured" class="col-span-5 sm:col-span-2 lg:col-span-1 order-1 sm:order-2 min-h-[13rem] bg-green-500 featured">

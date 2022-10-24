@@ -4,17 +4,23 @@
 
         <Breadcrumbs id="aspektin"/>
 
-        <div class="bg-books sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
+        <div class="bg-books">
 
-            <div class="mb-4">
-                <BlogListItem :item="featured.data" :featured="true"/>
+            <div class="mb-4 text-white bg-gradient-to-r from-pink-500 to-fuchsia-400 text-center p-4">
+                <h1 class="text-xl font-bold tracking-widest">ASPEKTin</h1>
+
+                <h5 class="text-sm">feministicky webzin</h5>
             </div>
 
-            <MasonryWall :items="items.data" :column-width="230" :gap="16">
-                <template #default="{item}">
-                    <BlogListItem :item="item" />
-                </template>
-            </MasonryWall>
+            <div class="mb-4 border border-fuchsia-400 p-4">
+                <BlogListItem :item="featured.data" :featured="true"/>
+
+                <MasonryWall :items="items.data" :column-width="230" :gap="16">
+                    <template #default="{item}">
+                        <BlogListItem :item="item" />
+                    </template>
+                </MasonryWall>
+            </div>
         </div>
 
         <pagination class="mt-4" :links="items.meta.links"></pagination>
