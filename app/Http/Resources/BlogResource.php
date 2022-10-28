@@ -21,6 +21,7 @@ class BlogResource extends JsonResource
             'authors' => $this->authors,
             'teaser' => $this->teaser,
             'featured' => $this->featured,
+            'feature_img' => $this->feature_img ? '/storage' . $this->feature_img : null,
         ];
     }
 }

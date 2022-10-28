@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('blog_type_id');
             $table->integer('user_id');
+            $table->string('feature_img')->nullable();
             $table->string('title');
             $table->string('slug')->nullable();
             $table->string('subtitle')->nullable();

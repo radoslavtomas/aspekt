@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 import {Head, usePage} from "@inertiajs/inertia-vue3";
 
 // components
@@ -85,5 +85,7 @@ const lang = {
         'downloads': 'Books to download',
     }
 }
+
+onMounted(() => console.log(blog.value))
 </script>
 

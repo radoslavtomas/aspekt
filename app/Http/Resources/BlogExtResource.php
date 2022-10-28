@@ -24,6 +24,7 @@ class BlogExtResource extends JsonResource
             'links' => $this->links,
             'files' => FileResource::collection($this->files),
             'downloads' => FileResource::collection($this->downloads),
+            'feature_img' => $this->feature_img ? '/storage' . $this->feature_img : null,
         ];
     }
 }

@@ -35,7 +35,7 @@ class BlogResource extends Resource
                 Fieldset::make('Blog settings')
                     ->schema([
                         Forms\Components\Select::make('blog_type_id')
-                            ->relationship('blog_type', 'name_sk', fn (Builder $query) => $query->whereIn('id', [5, 6, 10]))
+                            ->relationship('blog_type', 'name_sk', fn (Builder $query) => $query->whereIn('id', [5, 6, 43]))
                             ->required(),
                         Forms\Components\Select::make('language')
                             ->options([
@@ -75,6 +75,11 @@ class BlogResource extends Resource
                                 ->required(),
                             TiptapEditor::make('links')
                                 ->profile('custom'),
+                            Forms\Components\FileUpload::make('feature_img')
+                                ->image()
+                                ->preserveFilenames()
+                                ->directory('featured_images')
+                                ->label('Featured image')
                         ]),
                     ]
             );

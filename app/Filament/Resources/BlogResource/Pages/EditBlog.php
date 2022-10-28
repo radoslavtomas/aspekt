@@ -16,4 +16,15 @@ class EditBlog extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        // dd($data);
+        $data['feature_img'] = $data['feature_img'] ? '/' . $data['feature_img'] : null;
+
+        // @TODO: implement everywhere or better
+        $data['links'] = $data['links'] === '<p></p>' ? '' : $data['links'];
+
+        return $data;
+    }
 }

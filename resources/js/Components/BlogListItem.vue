@@ -8,8 +8,10 @@
                 <h3 class="text-sm italic mb-4">{{props.item.authors ?? 'red.'}}</h3>
                 <p class="text-xs" v-html="props.item.teaser"></p>
             </div>
-            <div v-if="featured" class="col-span-5 sm:col-span-2 lg:col-span-1 order-1 sm:order-2 min-h-[13rem] bg-green-500 featured">
-
+            <div
+                v-if="featured"
+                class="col-span-5 sm:col-span-2 lg:col-span-1 order-1 sm:order-2 min-h-[13rem]"
+                :style="`background: url(${featureImage}) center center no-repeat;background-size: cover;`">
             </div>
         </main>
     </article>
@@ -25,13 +27,10 @@ const props = defineProps({
     item: Object,
     featured: Boolean
 })
+
+// get default feature image if there's none
+const featureImage = computed(() => props.item.feature_img ? props.item.feature_img : '/assets/img/default_feature_image.jpg')
 </script>
 
-<style scoped>
-.featured {
-    background: url('/assets/img/cat.png') center center no-repeat;
-    background-size: cover;
-}
-</style>
 
 
