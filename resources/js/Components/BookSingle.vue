@@ -15,7 +15,7 @@
                         <p v-if="book.translation" class="text-gray-500 text-xs">{{lang[locale].translation}}: {{book.translation}}</p>
                     </div>
 
-                    <img v-if="book.cover" class="md:hidden w-64 h-auto mt-4 md:mt-0 md:ml-4 shadow-2xl border border-gray-200 mx-auto md:mx-0 rounded-2xl" :src="`/storage/${book.cover}`" alt="book.title">
+                    <img v-if="book.cover" class="md:hidden w-64 h-auto mt-4 md:mt-0 md:ml-4 shadow-2xl border border-gray-200 mx-auto md:mx-0 rounded-2xl" :src="`/storage/${book.cover}`" :alt="book.title">
 
                     <div class="text-xs mt-6 md:mt-12 text-gray-500 flex flex-col items-center md:items-start" v-if="book.is_product">
                         <p>{{lang[locale].pages}}: {{book.pages}}</p>
