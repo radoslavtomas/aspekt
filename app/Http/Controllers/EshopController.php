@@ -11,4 +11,9 @@ class EshopController extends Controller
     {
         return Inertia::render('Basket');
     }
+
+    public function shipping()
+    {
+        return Inertia::render('Shipping');
+    }
 }

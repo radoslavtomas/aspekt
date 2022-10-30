@@ -20,7 +20,8 @@ Route::get('/books/{category?}/{slug?}', ['App\Http\Controllers\BooksController'
 Route::get('/aspektin/{category?}/{slug?}', ['App\Http\Controllers\AspektinController', 'index'])->name('aspektin');
 Route::get('/library/{category?}/{slug?}', ['App\Http\Controllers\UI\PagesController', 'library'])->name('library');
 Route::get('/contact', ['App\Http\Controllers\UI\PagesController', 'contact'])->name('contact');
-Route::get('/basket', ['App\Http\Controllers\EshopController', 'basket'])->name('basket');
+Route::get('/eshop/basket', ['App\Http\Controllers\EshopController', 'basket'])->name('basket');
+Route::get('/eshop/shipping', ['App\Http\Controllers\EshopController', 'shipping'])->name('shipping');
 
 Route::get('language/{language}', function ($language) {
     Session()->put('locale', $language);

@@ -1,8 +1,7 @@
 <template>
-    <label class="block">
-        <span v-if="props.title" class="text-xs text-gray-700 pl-1">{{props.title}}</span>
-        <input :type="props.type" class="
-
+    <label class="block mb-2.5">
+        <span v-if="props.title" class="text-sm text-gray-700 pl-1">{{props.title}}</span>
+        <input :type="props.type" :name="props.name" class="
                     text-sm
                     py-1.5
                     block
@@ -22,6 +21,7 @@ const props = defineProps({
         type: String,
         default: 'text'
     },
+    name: String,
     placeholder: String
 })
 </script>
