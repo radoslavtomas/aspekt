@@ -1,10 +1,10 @@
 <template>
-    <article class="broder border-gray-300 bg-white shadow-md mb-4">
-        <header class="py-3 px-2 bg-gradient-to-r from-pink-500 to-fuchsia-400 text-white text-center">
-            <p>{{props.title}}</p>
+    <article class="border border-pink-500 bg-white shadow-md mb-4">
+        <header class="py-3 px-2 text-pink-600 font-bold text-center">
+            <span class="border-b-2 border-pink-600 p-1">{{props.title}}</span>
         </header>
 
-        <main class="p-4 border-x border-b border-fuchsia-500">
+        <main class="p-4">
             <slot></slot>
         </main>
     </article>

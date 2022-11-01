@@ -1,7 +1,11 @@
 <template>
     <label class="block mb-2.5">
         <span v-if="props.title" class="text-sm text-gray-700 pl-1">{{props.title}}</span>
-        <input :type="props.type" :name="props.name" class="
+        <input :type="props.type"
+               :name="props.name"
+               :value="modelValue"
+               @input="updateValue"
+               class="
                     text-sm
                     py-1.5
                     block
@@ -9,12 +13,24 @@
                     rounded-md
                     border-gray-300
                     shadow-sm
+                    placeholder:italic placeholder:text-slate-400
                     focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                :placeholder="props.placeholder">
+        <span v-if="props.errors">
+            <span class="text-xs text-red-600" v-if="props.errors.$uid === 'email-required'">Localize required message</span>
+        </span>
     </label>
 </template>
 
 <script setup>
+import {onMounted} from "vue";
+
+const emit = defineEmits(['update:modelValue'])
+
+const updateValue = (event) => {
+    emit('update:modelValue', event.target.value)
+}
+
 const props = defineProps({
     title: String,
     type: {
@@ -22,7 +38,10 @@ const props = defineProps({
         default: 'text'
     },
     name: String,
-    placeholder: String
+    errors: Object|null,
+    placeholder: String,
+    modelValue: String
 })
+onMounted(() => console.log(props.errors))
 </script>
 
