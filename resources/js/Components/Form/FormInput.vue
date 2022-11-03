@@ -17,7 +17,9 @@
                     focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                :placeholder="props.placeholder">
         <span v-if="props.errors">
-            <span class="text-xs text-red-600" v-if="props.errors.$uid === 'email-required'">Localize required message</span>
+            <span class="text-xs text-red-600" v-if="props.errors.$uid === 'email-required'">Email je povinny</span>
+            <span class="text-xs text-red-600" v-if="props.errors.$uid === 'phone-required'">Cislo je povinne</span>
+            <span class="text-xs text-red-600" v-if="props.errors.$uid === 'email-email'">Neplatny email</span>
         </span>
     </label>
 </template>

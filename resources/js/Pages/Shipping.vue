@@ -6,7 +6,7 @@ import {ArrowRightCircleIcon} from '@heroicons/vue/24/outline';
 import { useForm } from '@inertiajs/inertia-vue3'
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
-import {reactive, computed} from "vue";
+import {reactive, ref, computed} from "vue";
 
 import FormInput from '../Components/Form/FormInput.vue';
 import FormSelect from '../Components/Form/FormSelect.vue';
@@ -28,8 +28,11 @@ const options = [
 
 const form = reactive({
     email: '',
-    phone: ''
+    phone: '',
+    state: 'SK'
 })
+
+const showBillingPanel = ref(false);
 
 const rules = computed(() => {
     return {
@@ -39,13 +42,17 @@ const rules = computed(() => {
         phone: {
             required
         },
+        state: {
+            required
+        }
     }
 })
 
 const v$ = useVuelidate(rules, form);
 
 const handleForm = async () => {
-    console.log(v$.email)
+    console.log('new')
+    console.log(v$.value.$email)
     const result = await v$.value.$validate();
 
     console.log(result)
@@ -83,13 +90,23 @@ defineProps({
                 </table>
             </div>
 
+            {{ v$.email.$errors }}
+            <br>
+            {{ v$.phone.$errors }}
             <form @submit.prevent="handleForm">
                 <Card title="Informácie o zákazníkovi/zákazníčke">
-                    <FormInput v-model.trim="form.email" title="Email *" type="text" placeholder="Tu Vám zašleme potvrdenie o objednávke" :errors="v$.email.$errors.length ? v$.email.$errors[0] : null" />
+                    <FormInput
+                        v-model.trim="form.email"
+                        title="Email *" type="text"
+                        placeholder="Tu Vám zašleme potvrdenie o objednávke"
+                        :errors="v$.email.$errors.length ? v$.email.$errors[0] : null" />
 
-                    <FormInput v-model.trim="form.phone" title="Telefónne číslo" />
+                    <FormInput
+                        v-model.trim="form.phone"
+                        title="Telefónne číslo"
+                        :errors="v$.phone.$errors.length ? v$.phone.$errors[0] : null"
+                    />
                 </Card>
-
 
                 <Card title="Adresa doručenia">
                     <FormInput title="Meno *" />
@@ -98,12 +115,12 @@ defineProps({
                     <FormInput title="Ulica *" />
                     <FormInput title="Mesto *" />
                     <FormInput title="PSČ *" />
-                    <FormSelect title="Štát" :options="options" />
+                    <FormSelect v-model="form.state" title="Štát" :options="options" />
                     <br>
-                    <FormCheckbox title="Moja fakturačná adresa je iná ako dodacia adresa." />
+                    <FormCheckbox v-model="showBillingPanel" title="Moja fakturačná adresa je iná ako dodacia adresa." />
                 </Card>
 
-                <Card title="Fakturačné údaje">
+                <Card v-if="showBillingPanel" title="Fakturačné údaje">
                     <FormInput title="Meno *" />
                     <FormInput title="Priezvisko *" />
                     <FormInput title="Spoločnosť" />
