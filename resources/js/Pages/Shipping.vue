@@ -55,6 +55,13 @@ const handleForm = async () => {
     console.log(v$.value.$email)
     const result = await v$.value.$validate();
 
+    if(!result) {
+        const el = document.getElementsByClassName('focus:border-red-300')[0]
+        setTimeout(() => {
+            el.scrollIntoView({behavior: "smooth"})
+        }, 100)
+    }
+
     console.log(result)
     console.log(form)
 }
@@ -90,9 +97,6 @@ defineProps({
                 </table>
             </div>
 
-            {{ v$.email.$errors }}
-            <br>
-            {{ v$.phone.$errors }}
             <form @submit.prevent="handleForm">
                 <Card title="Informácie o zákazníkovi/zákazníčke">
                     <FormInput
