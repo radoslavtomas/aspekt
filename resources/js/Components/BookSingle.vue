@@ -23,7 +23,9 @@
 
                         <p class="text-lg text-red-600 font-bold">{{lang[locale].aspekt_price}}: {{book.aspekt_price}}</p>
                         <p>({{lang[locale].common_price}} {{book.common_price}})</p>
-                        <BookSingleCtaButton />
+                        <div class="mt-4 md:mt-8">
+                            <BookSingleCtaButton />
+                        </div>
                     </div>
 
                 </div>
@@ -59,7 +61,9 @@
                 <section v-if="book.is_product" class="mb-6 flex flex-col items-center justify-center">
                     <p class="text-lg md:text-xl text-red-600 font-bold">{{lang[locale].aspekt_price}}: {{book.aspekt_price}}</p>
                     <p class="text-gray-500 text-xs">({{lang[locale].common_price}} {{book.common_price}})</p>
-                    <BookSingleCtaButton />
+                    <div class="mt-4 md:mt-8">
+                        <BookSingleCtaButton />
+                    </div>
                 </section>
             </main>
         </article>
@@ -68,6 +72,7 @@
 
 <script setup>
 import {computed} from "vue";
+import { useStore } from 'vuex';
 import {Head, usePage} from "@inertiajs/inertia-vue3";
 
 // components
@@ -80,36 +85,12 @@ import Breadcrumbs from '../Components/Breadcrumbs.vue';
 const book = computed(() => usePage().props.value.book.data);
 const locale = computed(() => usePage().props.value.locale);
 const navigation = computed(() => usePage().props.value.navigation);
+const store = useStore()
+const lang = computed(() => store.getters.lang);
 
 const title = computed(() => {
     const navigationString = computed(() => navigation.value.find(el => el.route === 'books')[`name_${locale.value}`]);
     const articleString = book.value.title
     return `${navigationString.value} | ${articleString}`
 })
-
-// data
-const lang = {
-    sk: {
-        'pages': 'Počet strán',
-        'aspekt_price': 'ASPEKT cena',
-        'common_price': 'Bežná cena',
-        'editors': 'Editorstvo',
-        'translation': 'Preklad',
-        'sample': 'Ukážka z knihy',
-        'links': 'Súvisiace odkazy',
-        'files': 'Súbory na stiahnutie',
-        'downloads': 'Knihy na stiahnutie',
-    },
-    en: {
-        'pages': 'Number of pages',
-        'aspekt_price': 'ASPEKT price',
-        'common_price': 'Common cena',
-        'editors': 'Editors',
-        'translation': 'Translation',
-        'sample': 'Sample',
-        'links': 'Related links',
-        'files': 'Files to download',
-        'downloads': 'Books to download',
-    }
-}
 </script>

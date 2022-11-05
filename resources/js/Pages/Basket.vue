@@ -1,15 +1,20 @@
 <script setup>
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import {Head, Link, usePage} from '@inertiajs/inertia-vue3';
 import MainLayout from '../Layouts/MainLayout.vue'
 import BasketProductCount from '../Components/Form/BasketProductCount.vue'
 
-import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline';
+import { ArrowRightCircleIcon, ShoppingBagIcon } from '@heroicons/vue/24/outline';
+import {computed} from "vue";
+import {useStore} from "vuex";
+
+const store = useStore()
+const lang = computed(() => store.getters.lang);
+const locale = computed(() => usePage().props.value.locale);
 
 defineProps({
     category: String,
     slug: String|null,
 })
-
 
 </script>
 
@@ -78,16 +83,19 @@ defineProps({
 
             <section class="mt-4">
                 <p class="font-bold text-right">
-                    <span class="">Medzisúčet:</span>
+                    <span class="">{{lang[locale].subtotal}}:</span>
                     17,11€
                 </p>
             </section>
 
-            <section class="my-6">
-                <Link class="block rounded text-white text-center px-4 py-3 shadow-md bg-pink-500 hover:bg-pink-600" :href="route('shipping')"
+            <section class="my-6 flex flex-col sm:flex-row flex-col-reverse justify-between items-center text-sm sm:text-base">
+                <Link :href="route('books', ['vsetko'])" class="rounded text-gray-500 text-center px-4 py-3 bg-gray-200 hover:bg-gray-300">
+                    <ShoppingBagIcon class="mb-1 w-5 h-5 inline" /> {{lang[locale].backButtonBasket}}
+                </Link>
+                <Link class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600" :href="route('shipping')"
                    target="_blank">
                     <span class="text-white">
-                        Dodacie udaje <ArrowRightCircleIcon class="w-5 h-5 inline" />
+                        {{lang[locale].forwardButtonBasket}} <ArrowRightCircleIcon class="w-5 h-5 inline" />
                     </span>
 
                 </Link>

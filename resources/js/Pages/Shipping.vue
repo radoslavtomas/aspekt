@@ -1,18 +1,23 @@
 <script setup>
-import {Head} from '@inertiajs/inertia-vue3';
+import {Head, usePage} from '@inertiajs/inertia-vue3';
 import MainLayout from '../Layouts/MainLayout.vue'
 import {Link} from "@inertiajs/inertia-vue3";
-import {ArrowRightCircleIcon} from '@heroicons/vue/24/outline';
+import {ArrowRightCircleIcon, ArrowLeftCircleIcon} from '@heroicons/vue/24/outline';
 import { useForm } from '@inertiajs/inertia-vue3'
 import useVuelidate from '@vuelidate/core'
-import { required, email, requiredIf } from '@vuelidate/validators'
+import { required, email, maxLength, requiredIf } from '@vuelidate/validators'
 import {reactive, ref, computed} from "vue";
+import { useStore } from 'vuex';
 
 import FormInput from '../Components/Form/FormInput.vue';
 import FormSelect from '../Components/Form/FormSelect.vue';
 import FormCheckbox from '../Components/Form/FormCheckbox.vue';
 import FormTextarea from '../Components/Form/FormTextarea.vue';
 import Card from '../Components/Card.vue';
+
+const store = useStore()
+const lang = computed(() => store.getters.lang);
+const locale = computed(() => usePage().props.value.locale);
 
 const options = [
     {value: '703', description: 'Slovensko'},
@@ -44,28 +49,30 @@ const form = reactive({
     billing_city: '',
     billing_postal_code: '',
     billing_country: '703',
+    comment: ''
 })
 
 const showBillingPanel = ref(false);
 
 const rules = computed(() => {
     return {
-        primary_email: { required, email },
-        delivery_phone: { required },
-        delivery_first_name: { required },
-        delivery_last_name: { required },
-        delivery_company: { required },
-        delivery_street1: { required },
-        delivery_city: { required },
-        delivery_postal_code: { required },
-        delivery_country: { required },
-        billing_first_name: { requiredIf: requiredIf(showBillingPanel) },
+        primary_email: { required, email, maxLength: maxLength(100) },
+        delivery_phone: { required, maxLength: maxLength(100) },
+        delivery_first_name: { required, maxLength: maxLength(100) },
+        delivery_last_name: { required, maxLength: maxLength(100) },
+        delivery_company: { maxLength: maxLength(100) },
+        delivery_street1: { required, maxLength: maxLength(100) },
+        delivery_city: { required, maxLength: maxLength(100) },
+        delivery_postal_code: { required, maxLength: maxLength(100) },
+        delivery_country: { required, maxLength: maxLength(100) },
+        billing_first_name: { requiredIf: requiredIf(showBillingPanel), maxLength: maxLength(5) },
         billing_last_name: { requiredIf: requiredIf(showBillingPanel) },
         billing_company: { requiredIf: requiredIf(showBillingPanel) },
         billing_street1: { requiredIf: requiredIf(showBillingPanel) },
         billing_city: { requiredIf: requiredIf(showBillingPanel) },
         billing_postal_code: { requiredIf: requiredIf(showBillingPanel) },
         billing_country: { requiredIf: requiredIf(showBillingPanel) },
+        comment: { maxLength: maxLength(1800) }
     }
 })
 
@@ -89,7 +96,6 @@ defineProps({
     category: String,
     slug: String|null,
 })
-
 
 </script>
 
@@ -117,108 +123,113 @@ defineProps({
             </div>
 
             <form @submit.prevent="handleForm">
-                <Card title="Informácie o zákazníkovi/zákazníčke">
+                <Card :title="lang[locale].infoPanel">
                     <FormInput
                         v-model.trim="form.primary_email"
-                        title="Email *" type="text"
-                        placeholder="Tu Vám zašleme potvrdenie o objednávke"
+                        title="Email *" type="email"
+                        :placeholder="lang[locale].orderConfirmation"
                         :errors="v$.primary_email.$errors.length ? v$.primary_email.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.delivery_phone"
-                        title="Telefónne číslo"
+                        :title="lang[locale].phone"
                         :errors="v$.delivery_phone.$errors.length ? v$.delivery_phone.$errors[0] : null"
                     />
                 </Card>
 
-                <Card title="Adresa doručenia">
+                <Card :title="lang[locale].deliveryPanel">
                     <FormInput
                         v-model.trim="form.delivery_first_name"
-                        title="Meno *" type="text"
+                        :title="lang[locale].name" type="text"
                         :errors="v$.delivery_first_name.$errors.length ? v$.delivery_first_name.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.delivery_last_name"
-                        title="Priezvisko *" type="text"
+                        :title="lang[locale].surname" type="text"
                         :errors="v$.delivery_last_name.$errors.length ? v$.delivery_last_name.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.delivery_company"
-                        title="Spoločnosť *" type="text"
+                        :title="lang[locale].company" type="text"
                         :errors="v$.delivery_company.$errors.length ? v$.delivery_company.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.delivery_street1"
-                        title="Ulica *" type="text"
+                        :title="lang[locale].street" type="text"
                         :errors="v$.delivery_street1.$errors.length ? v$.delivery_street1.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.delivery_city"
-                        title="Mesto *" type="text"
+                        :title="lang[locale].city" type="text"
                         :errors="v$.delivery_city.$errors.length ? v$.delivery_city.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.delivery_postal_code"
-                        title="PSČ *" type="text"
+                        :title="lang[locale].postcode" type="text"
                         :errors="v$.delivery_postal_code.$errors.length ? v$.delivery_postal_code.$errors[0] : null" />
 
                     <FormSelect
                         v-model="form.delivery_country"
-                        title="Štát"
+                        :title="lang[locale].country"
                         :errors="v$.delivery_country.$errors.length ? v$.delivery_country.$errors[0] : null"
                         :options="options" />
 
                     <br>
 
-                    <FormCheckbox v-model="showBillingPanel" title="Moja fakturačná adresa je iná ako dodacia adresa." />
+                    <FormCheckbox v-model="showBillingPanel" :title="lang[locale].billingCheckbox" />
                 </Card>
 
-                <Card v-if="showBillingPanel" title="Fakturačné údaje">
+                <Card v-if="showBillingPanel" :title="lang[locale].billingPanel">
                     <FormInput
                         v-model.trim="form.billing_first_name"
-                        title="Meno *" type="text"
+                        :title="lang[locale].name" type="text"
                         :errors="v$.billing_first_name.$errors.length ? v$.billing_first_name.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.billing_last_name"
-                        title="Priezvisko *" type="text"
+                        :title="lang[locale].surname" type="text"
                         :errors="v$.billing_last_name.$errors.length ? v$.billing_last_name.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.billing_company"
-                        title="Spoločnosť *" type="text"
+                        :title="lang[locale].company" type="text"
                         :errors="v$.billing_company.$errors.length ? v$.billing_company.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.billing_street1"
-                        title="Ulica *" type="text"
+                        :title="lang[locale].street" type="text"
                         :errors="v$.billing_street1.$errors.length ? v$.billing_street1.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.billing_city"
-                        title="Mesto *" type="text"
+                        :title="lang[locale].city" type="text"
                         :errors="v$.billing_city.$errors.length ? v$.billing_city.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.billing_postal_code"
-                        title="PSČ *" type="text"
+                        :title="lang[locale].postcode" type="text"
                         :errors="v$.billing_postal_code.$errors.length ? v$.billing_postal_code.$errors[0] : null" />
 
                     <FormSelect
                         v-model="form.billing_country"
-                        title="Štát"
+                        :title="lang[locale].country"
                         :errors="v$.billing_country.$errors.length ? v$.billing_country.$errors[0] : null"
                         :options="options" />
                     <br>
                 </Card>
 
-                <Card title="Komentár k objednávke">
-                    <FormTextarea />
+                <Card :title="lang[locale].notePanel">
+                    <FormTextarea
+                        v-model="form.comment"
+                        :errors="v$.comment.$errors.length ? v$.comment.$errors[0] : null"/>
                 </Card>
 
-                <section class="my-8">
-                    <button type="submit" class="block rounded text-white text-center px-4 py-3 w-full shadow-md bg-pink-500 hover:bg-pink-600">
-                        Skontrolovať objednávku <ArrowRightCircleIcon class="w-5 h-5 inline" />
+                <section class="my-8 flex flex-col sm:flex-row flex-col-reverse justify-between items-center text-sm sm:text-base">
+                    <Link :href="route('basket')" class="rounded text-gray-500 text-center px-4 py-3 bg-gray-200 hover:bg-gray-300">
+                        <ArrowLeftCircleIcon class="w-5 h-5 inline" /> {{lang[locale].backButtonShipping}}
+                    </Link>
+                    <button type="submit" class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600">
+                        {{lang[locale].forwardButtonShipping}} <ArrowRightCircleIcon class="w-5 h-5 inline" />
                     </button>
                 </section>
             </form>

@@ -30,7 +30,3 @@ const updateValue = (event) => {
     emit('update:modelValue', event.target.checked)
 }
 </script>
-
-<style scoped>
-
-</style>

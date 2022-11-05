@@ -12,8 +12,9 @@
             <h3 class="text-sm italic mb-4">{{props.item.authors}}</h3>
             <p class="text-xs" v-html="props.item.teaser"></p>
         </main>
-        <footer v-if="props.item.is_product" class="py-2">
-            <p>{{props.item.aspekt_price}}</p>
+        <footer v-if="props.item.is_product" class="py-2 my-2 flex justify-between items-center">
+            <p class="font-bold">{{props.item.aspekt_price}}</p>
+            <BookSingleCtaButton />
         </footer>
     </article>
 </template>
@@ -22,6 +23,8 @@
 import {computed} from "vue";
 import {Link, usePage} from "@inertiajs/inertia-vue3";
 
+import BookSingleCtaButton from './BookSingleCtaButton.vue';
+
 const categoryUrl = computed(() => usePage().props.value.category.url);
 
 const props = defineProps({
@@ -29,6 +32,3 @@ const props = defineProps({
 })
 </script>
 
-<style scoped>
-
-</style>

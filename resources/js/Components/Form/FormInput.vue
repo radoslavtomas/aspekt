@@ -18,14 +18,23 @@
                'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'"
                :placeholder="props.placeholder">
         <span v-if="props.errors">
-            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-required')">Udaj je povinny</span>
-            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-email')">Neplatny email</span>
+            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-required')">{{lang[locale].required}}</span>
+            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-email')">{{lang[locale].email}}</span>
+            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-maxLength')">{{lang[locale].maxLength}}</span>
         </span>
     </label>
 </template>
 
 <script setup>
+import {computed} from "vue";
+import {usePage} from "@inertiajs/inertia-vue3";
+import {useStore} from "vuex";
+
 const emit = defineEmits(['update:modelValue'])
+
+const store = useStore()
+const lang = computed(() => store.getters.lang);
+const locale = computed(() => usePage().props.value.locale);
 
 const updateValue = (event) => {
     emit('update:modelValue', event.target.value)
@@ -44,4 +53,3 @@ const props = defineProps({
 })
 
 </script>
-
