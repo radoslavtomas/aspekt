@@ -14,7 +14,7 @@
         </main>
         <footer v-if="props.item.is_product" class="py-2 my-2 flex justify-between items-center">
             <p class="font-bold">{{props.item.aspekt_price}}</p>
-            <BookSingleCtaButton />
+            <BookSingleCtaButton :book="props.item" />
         </footer>
     </article>
 </template>

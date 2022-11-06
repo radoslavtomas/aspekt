@@ -22,6 +22,7 @@ class BookResource extends JsonResource
             'cover' => $this->cover,
             'teaser' => $this->teaser,
             'is_product' => $this->is_product,
+            'aspekt_price_raw' => $this->aspekt_price,
             'aspekt_price' => ($this->aspekt_price ? $this->aspekt_price/100 : null) . " €",
         ];
     }

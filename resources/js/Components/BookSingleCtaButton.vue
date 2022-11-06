@@ -1,5 +1,5 @@
 <template>
-    <button @click="increment" class="flex items-center text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-2 shadow-xl rounded">
+    <button @click="addToBasket" class="flex items-center text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-2 shadow-xl rounded">
         {{lang[locale].addToBasket}}
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 ml-2">
@@ -10,12 +10,26 @@
 
 <script setup>
 import { useStore } from 'vuex'
-import {computed, onMounted} from "vue";
+import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
 const store = useStore();
 const lang = computed(() => store.getters.lang);
 const locale = computed(() => usePage().props.value.locale);
+const categoryUrl = computed(() => usePage().props.value.category.url);
 
-const increment = () => store.dispatch('increment');
+const props = defineProps({
+    book: Object
+})
+
+const addToBasket = () => store.dispatch('addToBasket', {
+    'aspekt_price': props.book.aspekt_price,
+    'authors': props.book.authors,
+    'book_id': props.book.id,
+    'category': categoryUrl.value,
+    'cover': props.book.cover,
+    'price': props.book.aspekt_price_raw,
+    'slug': props.book.slug,
+    'title': props.book.title,
+});
 </script>

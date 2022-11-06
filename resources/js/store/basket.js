@@ -1,23 +1,22 @@
 const state = {
+    basket: [],
     counter: 0
 };
 
 const mutations = {
-    increment(state) {
-        state.counter++;
-    },
-    test(state) {
-        state.counter--;
+    addToBasket(state, payload) {
+        if(isInBasket(state.basket, payload.book_id)) {
+            incrementBookCount(state.basket, payload.book_id)
+        } else {
+            addNewBookToBasket(state.basket, payload)
+        }
     }
 };
 
 const actions = {
-    increment({ commit }) {
-        commit("increment");
+    addToBasket({ commit }, payload) {
+        commit('addToBasket', payload)
     },
-    test({ commit }) {
-        commit("test");
-    }
 };
 
 const getters = {
@@ -25,6 +24,21 @@ const getters = {
         return state.counter;
     },
 };
+
+const isInBasket = (basket, book_id) => basket.some(book => book.book_id === book_id);
+const addNewBookToBasket = (basket, book) => {
+    book['qty'] = 1;
+    basket.push(book);
+}
+const incrementBookCount = (basket, book_id) => {
+    for (const book of basket) {
+        if (book.book_id === book_id) {
+            book.qty++;
+            break;
+        }
+    }
+}
+
 
 export default {
     state,

@@ -18,6 +18,7 @@ class BookExtResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'slug' => $this->slug,
             'subtitle' => $this->subtitle,
             'authors' => $this->authors,
             'editors' => $this->editors,
@@ -28,6 +29,7 @@ class BookExtResource extends JsonResource
             'sample' => $this->sample,
             'links' => $this->links,
             'is_product' => $this->is_product,
+            'aspekt_price_raw' => $this->aspekt_price,
             'aspekt_price' => number_format($this->aspekt_price ? $this->aspekt_price/100 : null, 2) . " €",
             'common_price' => number_format($this->common_price ? $this->common_price/100 : null, 2) . " €",
             'pages' => $this->pages,

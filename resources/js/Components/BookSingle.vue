@@ -24,7 +24,7 @@
                         <p class="text-lg text-red-600 font-bold">{{lang[locale].aspekt_price}}: {{book.aspekt_price}}</p>
                         <p>({{lang[locale].common_price}} {{book.common_price}})</p>
                         <div class="mt-4 md:mt-8">
-                            <BookSingleCtaButton />
+                            <BookSingleCtaButton :book="book" />
                         </div>
                     </div>
 
@@ -62,7 +62,7 @@
                     <p class="text-lg md:text-xl text-red-600 font-bold">{{lang[locale].aspekt_price}}: {{book.aspekt_price}}</p>
                     <p class="text-gray-500 text-xs">({{lang[locale].common_price}} {{book.common_price}})</p>
                     <div class="mt-4 md:mt-8">
-                        <BookSingleCtaButton />
+                        <BookSingleCtaButton :book="book" />
                     </div>
                 </section>
             </main>
