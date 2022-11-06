@@ -29,11 +29,13 @@ import BookListItem from './BookListItem.vue';
 import Breadcrumbs from '../Components/Breadcrumbs.vue';
 import Pagination from '../Components/Pagination.vue'
 
+
 // computed
 const category = computed(() => usePage().props.value.category);
 const items = computed(() => usePage().props.value.books);
 const locale = computed(() => usePage().props.value.locale);
 const navigation = computed(() => usePage().props.value.navigation);
+
 
 const title = computed(() => {
     const navigationString = computed(() => navigation.value.find(el => el.route === 'books')[`name_${locale.value}`]);

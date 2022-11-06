@@ -11,6 +11,9 @@ const store = useStore()
 const lang = computed(() => store.getters.lang);
 const locale = computed(() => usePage().props.value.locale);
 
+const subtotal = computed(() => store.getters.subtotal);
+const basket = computed(() => store.getters.basket);
+
 defineProps({
     category: String,
     slug: String|null,
@@ -22,73 +25,47 @@ defineProps({
     <Head title="Basket" />
     <main-layout>
         <div class="my-4 max-w-xl mx-auto">
-            <section>
-                <div class="grid grid-cols-12 gap-4 py-4 border-b border-gray-300">
+            <h1 class="text-2xl text-center text-red-500 mb-4">{{lang[locale].basketTitle}}</h1>
+
+            <section v-if="!basket.length" class="">
+                <p class="mb-2 font-bold">{{lang[locale].basketEmpty}}</p>
+
+                <p class="mb-4 text-sm">{{lang[locale].booksTeaser}}</p>
+
+                <Link :href="route('books', ['vsetko'])" class="block rounded text-gray-500 text-center text-white px-4 py-3 my-4 shadow-md bg-pink-500 hover:bg-pink-600">
+                    <ShoppingBagIcon class="mb-1 w-5 h-5 inline" /> {{lang[locale].basketEmptyButton}}
+                </Link>
+            </section>
+
+            <section v-if="basket.length">
+                <div v-for="book in basket" :key="book.id" class="grid grid-cols-12 gap-4 py-4 border-b border-gray-300">
                     <div class="col-span-4 sm:col-span-2">
-                        <img class="w-32 sm:w-20 h-auto shadow border border-gray-200 rounded" src="/storage/sites/default/files/Nanichodnica_1.png" alt="book.title">
+                        <img class="w-32 sm:w-20 h-auto shadow border border-gray-200 rounded" :src="`/storage/${book.cover}`" :alt="book.title">
                     </div>
 
                     <div class="col-span-8 flex flex-col justify-between items-stretch">
                         <div class="mb-2">
-                            <h4 class="text-sm sm:text-base uppercase font-bold">Nanichodnica</h4>
-                            <h6 class="text-sm italic mb-1">Jana Juranova</h6>
-                            <h3 class="sm:hidden font-bold">8,93€</h3>
+                            <h4 class="text-sm sm:text-base uppercase font-bold">{{book.title}}</h4>
+                            <h6 class="text-sm italic mb-1">{{book.authors}}</h6>
+                            <h3 class="sm:hidden font-bold">{{book.aspekt_price}}</h3>
                         </div>
-                        <BasketProductCount />
+                        <BasketProductCount :book_id="book.book_id" :qty="book.qty" />
                     </div>
 
                     <div class="hidden sm:block col-span-2 text-right font-bold">
-                        8,93€
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-12 gap-4 py-4 border-b border-gray-300">
-                    <div class="col-span-4 sm:col-span-2">
-                        <img class="w-32 sm:w-20 h-auto shadow border border-gray-200 rounded" src="/storage/sites/default/files/JEDNOROZCE VACSIE.jpg" alt="book.title">
-                    </div>
-
-                    <div class="col-span-8 flex flex-col justify-between items-stretch">
-                        <div class="mb-2">
-                            <h4 class="text-sm sm:text-base uppercase font-bold">Jednorozce</h4>
-                            <h6 class="text-sm italic mb-1">Jana Juranova</h6>
-                            <h3 class="sm:hidden font-bold">8,93€</h3>
-                        </div>
-                        <BasketProductCount />
-                    </div>
-
-                    <div class="hidden sm:block col-span-2 text-right font-bold">
-                        8,93€
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-12 gap-4 py-4 border-b border-gray-300">
-                    <div class="col-span-4 sm:col-span-2">
-                        <img class="w-32 sm:w-20 h-auto shadow border border-gray-200 rounded" src="/storage/sites/default/files/Ako odvravat novembru 1989_0.png" alt="book.title">
-                    </div>
-
-                    <div class="col-span-8 flex flex-col justify-between items-stretch">
-                        <div class="mb-2">
-                            <h4 class="text-sm sm:text-base uppercase font-bold">Ako odvravat Novembru a mozno este dlhsi nazov, nez by sme cakali</h4>
-                            <h6 class="text-sm italic mb-1">Jana Juranova</h6>
-                            <h3 class="sm:hidden font-bold">8,93€</h3>
-                        </div>
-                        <BasketProductCount />
-                    </div>
-
-                    <div class="hidden sm:block col-span-2 text-right font-bold">
-                        8,93€
+                        {{book.aspekt_price}}
                     </div>
                 </div>
             </section>
 
-            <section class="mt-4">
+            <section v-if="basket.length" class="mt-4">
                 <p class="font-bold text-right">
                     <span class="">{{lang[locale].subtotal}}:</span>
-                    17,11€
+                    {{subtotal}}
                 </p>
             </section>
 
-            <section class="my-6 flex flex-col sm:flex-row flex-col-reverse justify-between items-center text-sm sm:text-base">
+            <section v-if="basket.length" class="my-6 flex flex-col sm:flex-row flex-col-reverse justify-between items-center text-sm sm:text-base">
                 <Link :href="route('books', ['vsetko'])" class="rounded text-gray-500 text-center px-4 py-3 bg-gray-200 hover:bg-gray-300">
                     <ShoppingBagIcon class="mb-1 w-5 h-5 inline" /> {{lang[locale].backButtonBasket}}
                 </Link>

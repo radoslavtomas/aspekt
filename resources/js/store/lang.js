@@ -33,7 +33,11 @@ const state = {
             'files': 'Súbory na stiahnutie',
             'downloads': 'Knihy na stiahnutie',
             'addToBasket': 'Pridaj do tašky',
-            'supportUs': 'Páči sa vám naša práca? Tu ju môžete podporiť.'
+            'supportUs': 'Páči sa vám naša práca? Tu ju môžete podporiť.',
+            'basketTitle': 'Nákupná taška',
+            'basketEmpty': 'Nákupná taška je zatiaľ prázdna.',
+            'basketEmptyButton': 'Knižná edícia',
+            'booksTeaser': 'ASPEKT slovenskej literárnej verejnosti prinavrátil jej „stratené“ emigrované spisovateľky, objavil pre ňu nové postavy a ich autorky. Vydáva nielen kanonizované texty nositeliek Nobelovej ceny, ale aj provokujúce prózy žien, ktoré máju nálepky radšej na chladničke, než na obálkach kníh. Stačí si vybrať ヽ(•‿•)ノ'
         },
         en: {
             'infoPanel': 'Customer information',
@@ -68,7 +72,11 @@ const state = {
             'files': 'Files to download',
             'downloads': 'Books to download',
             'addToBasket': 'Add to basket',
-            'supportUs': 'Do you like what we do? Support us here.'
+            'supportUs': 'Do you like what we do? Support us here.',
+            'basketTitle': 'Shopping basket',
+            'basketEmpty': 'Shopping basket is empty.',
+            'basketEmptyButton': 'Our books',
+            'booksTeaser': 'ASPEKT brought back to slovak literature scene "lost" female writers, their novels, short stories and characters in them. It publishes not only established texts written by female Nobel prize winners but also provoking texts by women who prefer their "labels" be printed on the fridge magnets rather than on book covers. You only need to choose ヽ(•‿•)ノ'
         }
     }
 };
