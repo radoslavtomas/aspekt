@@ -2,8 +2,10 @@
     <Head title="Summary" />
     <main-layout>
         <div class="max-w-xl mx-auto pt-8">
+            <h1 class="text-2xl text-center text-pink-600 font-semibold mb-4">{{lang[locale].summaryTitle}}</h1>
+
             <div class="mb-4">
-                <table class="border-collapse border border-slate-400 w-full text-sm">
+                <table class="border-collapse border border-slate-400 shadow-md w-full text-sm">
                     <thead class="bg-gray-200">
                     <tr>
                         <th colspan="2" class="border border-slate-400 p-2">{{lang[locale].basketPanel}}</th>
@@ -27,7 +29,7 @@
             </div>
 
             <div class="mb-4">
-                <table class="border-collapse border border-slate-400 w-full text-sm">
+                <table class="border-collapse border border-slate-400 shadow-md w-full text-sm">
                     <thead class="bg-gray-200">
                     <tr>
                         <th colspan="2" class="border border-slate-400 p-2">{{ lang[locale].infoPanel }}</th>
@@ -36,20 +38,20 @@
                     <tbody>
                     <tr>
                         <td class="border border-slate-400 w-1/3 p-2">Email</td>
-                        <td class="border border-slate-400 w-2/3 p-2">radoslav.tomas@gmail.com</td>
+                        <td class="border border-slate-400 w-2/3 p-2">{{ customer.primary_email}}</td>
                     </tr>
                     <tr>
                         <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].phoneAlt}}</td>
-                        <td class="border border-slate-400 w-2/3 p-2">07514443025</td>
+                        <td class="border border-slate-400 w-2/3 p-2">{{ customer.delivery_phone }}</td>
                     </tr>
                     <tr>
                         <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].deliveryPanel}}</td>
                         <td class="border border-slate-400 w-2/3 p-2">
-                            <p>Radoslav Tomas</p>
-                            <p>7 Callander road</p>
-                            <p>Liverpool</p>
-                            <p>L6 8NT</p>
-                            <p>United Kingdom</p>
+                            <p>{{ customer.delivery_first_name}} {{ customer.delivery_last_name }}</p>
+                            <p>{{ customer.delivery_street1 }}</p>
+                            <p>{{ customer.delivery_city }}</p>
+                            <p>{{ customer.delivery_postal_code }}</p>
+                            <p>{{deliveryCountry}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -98,7 +100,7 @@
 
 <script setup>
 import {Head, usePage} from '@inertiajs/inertia-vue3';
-import MainLayout from '../Layouts/MainLayout.vue'
+import MainLayout from '../../Layouts/MainLayout.vue'
 import {useStore} from "vuex";
 import {computed} from "vue";
 
@@ -107,9 +109,26 @@ import {ArrowRightCircleIcon, ArrowLeftCircleIcon} from '@heroicons/vue/24/outli
 
 const store = useStore();
 const lang = computed(() => store.getters.lang);
+const customer = computed(() => store.getters.customer);
 const locale = computed(() => usePage().props.value.locale);
+
+const options = [
+    {value: '703', description: 'Slovensko'},
+    {value: '203', description: 'Česká republika'},
+    {value: '276', description: 'Nemecko'},
+    {value: '616', description: 'Poľsko'},
+    {value: '826', description: 'Veľká Británia'},
+    {value: '40', description: 'Rakúsko'},
+    {value: '840', description: 'Spojené štáty'},
+    {value: '124', description: 'Kanada'},
+]
+
+const deliveryCountry = computed(() => {
+    if(!customer.value.delivery_country) {
+        return 'JAajajajaja'
+    }
+    const country = options.filter(item => item.value === customer.value.delivery_country)[0];
+    console.log(country)
+    return country.description;
+})
 </script>
-
-<style scoped>
-
-</style>

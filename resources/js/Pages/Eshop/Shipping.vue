@@ -1,20 +1,19 @@
 <script setup>
 import {Head, usePage} from '@inertiajs/inertia-vue3';
 import {Inertia} from '@inertiajs/inertia';
-import MainLayout from '../Layouts/MainLayout.vue'
+import MainLayout from '../../Layouts/MainLayout.vue'
 import {Link} from "@inertiajs/inertia-vue3";
 import {ArrowRightCircleIcon, ArrowLeftCircleIcon} from '@heroicons/vue/24/outline';
-import { useForm } from '@inertiajs/inertia-vue3'
 import useVuelidate from '@vuelidate/core'
 import { required, email, maxLength, requiredIf } from '@vuelidate/validators'
-import {reactive, ref, computed} from "vue";
+import {reactive, computed} from "vue";
 import { useStore } from 'vuex';
 
-import FormInput from '../Components/Form/FormInput.vue';
-import FormSelect from '../Components/Form/FormSelect.vue';
-import FormCheckbox from '../Components/Form/FormCheckbox.vue';
-import FormTextarea from '../Components/Form/FormTextarea.vue';
-import Card from '../Components/Card.vue';
+import FormInput from '../../Components/Form/FormInput.vue';
+import FormSelect from '../../Components/Form/FormSelect.vue';
+import FormCheckbox from '../../Components/Form/FormCheckbox.vue';
+import FormTextarea from '../../Components/Form/FormTextarea.vue';
+import Card from '../../Components/Card.vue';
 
 const store = useStore();
 const lang = computed(() => store.getters.lang);
@@ -50,10 +49,9 @@ const form = reactive({
     billing_city: '',
     billing_postal_code: '',
     billing_country: '703',
-    comment: ''
+    comment: '',
+    show_billing_panel: false,
 })
-
-const showBillingPanel = ref(false);
 
 const rules = computed(() => {
     return {
@@ -66,14 +64,15 @@ const rules = computed(() => {
         delivery_city: { required, maxLength: maxLength(100) },
         delivery_postal_code: { required, maxLength: maxLength(100) },
         delivery_country: { required, maxLength: maxLength(100) },
-        billing_first_name: { requiredIf: requiredIf(showBillingPanel), maxLength: maxLength(5) },
-        billing_last_name: { requiredIf: requiredIf(showBillingPanel) },
-        billing_company: { requiredIf: requiredIf(showBillingPanel) },
-        billing_street1: { requiredIf: requiredIf(showBillingPanel) },
-        billing_city: { requiredIf: requiredIf(showBillingPanel) },
-        billing_postal_code: { requiredIf: requiredIf(showBillingPanel) },
-        billing_country: { requiredIf: requiredIf(showBillingPanel) },
-        comment: { maxLength: maxLength(1800) }
+        billing_first_name: { requiredIf: requiredIf(form.show_billing_panel), maxLength: maxLength(5) },
+        billing_last_name: { requiredIf: requiredIf(form.show_billing_panel) },
+        billing_company: { requiredIf: requiredIf(form.show_billing_panel) },
+        billing_street1: { requiredIf: requiredIf(form.show_billing_panel) },
+        billing_city: { requiredIf: requiredIf(form.show_billing_panel) },
+        billing_postal_code: { requiredIf: requiredIf(form.show_billing_panel) },
+        billing_country: { requiredIf: requiredIf(form.show_billing_panel) },
+        comment: { maxLength: maxLength(1800) },
+        show_billing_panel: {}
     }
 })
 
@@ -93,6 +92,8 @@ const handleForm = async () => {
         return;
     }
 
+    await store.dispatch('setCustomer', form);
+
     Inertia.visit('/eshop/summary', {
         method: 'get'
     })
@@ -110,6 +111,8 @@ defineProps({
     <Head title="Shipping" />
     <main-layout>
         <div class="max-w-xl mx-auto pt-8">
+            <h1 class="text-2xl text-center text-pink-600 font-semibold mb-4">{{lang[locale].shippingTitle}}</h1>
+
             <form @submit.prevent="handleForm">
                 <Card :title="lang[locale].infoPanel">
                     <FormInput
@@ -164,10 +167,10 @@ defineProps({
 
                     <br>
 
-                    <FormCheckbox v-model="showBillingPanel" :title="lang[locale].billingCheckbox" />
+                    <FormCheckbox v-model="form.show_billing_panel" :title="lang[locale].billingCheckbox" />
                 </Card>
 
-                <Card v-if="showBillingPanel" :title="lang[locale].billingPanel">
+                <Card v-if="form.show_billing_panel" :title="lang[locale].billingPanel">
                     <FormInput
                         v-model.trim="form.billing_first_name"
                         :title="lang[locale].name" type="text"
@@ -224,7 +227,7 @@ defineProps({
 
 
             <section class="">
-                <p class="text-xs">Objednané publikácie vám zašleme na dobierku. K cene objednaných kníh je potrebné pripočítať cenu poštovného, ktorá sa pohybuje v rozmedzí 1,65 € – 3,31 € v závislosti od hmotnosti posielaného balíka. (Za samotné knihy však platíte len 75 percent ich predajnej ceny.)</p>
+                <p class="text-xs">{{lang[locale].postageNote}}</p>
             </section>
         </div>
     </main-layout>

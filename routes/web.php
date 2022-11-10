@@ -23,6 +23,7 @@ Route::get('/contact', ['App\Http\Controllers\UI\PagesController', 'contact'])->
 Route::get('/eshop/basket', ['App\Http\Controllers\EshopController', 'basket'])->name('basket');
 Route::get('/eshop/shipping', ['App\Http\Controllers\EshopController', 'shipping'])->name('shipping');
 Route::get('/eshop/summary', ['App\Http\Controllers\EshopController', 'summary'])->name('summary');
+Route::get('/eshop/thank-you', ['App\Http\Controllers\EshopController', 'thankYou'])->name('thankYou');
 
 Route::get('language/{language}', function ($language) {
     Session()->put('locale', $language);

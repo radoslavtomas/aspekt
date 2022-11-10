@@ -1,7 +1,7 @@
 <script setup>
 import {Head, Link, usePage} from '@inertiajs/inertia-vue3';
-import MainLayout from '../Layouts/MainLayout.vue'
-import BasketProductCount from '../Components/Form/BasketProductCount.vue'
+import MainLayout from '../../Layouts/MainLayout.vue'
+import BasketProductCount from '../../Components/Form/BasketProductCount.vue'
 
 import { ArrowRightCircleIcon, ShoppingBagIcon } from '@heroicons/vue/24/outline';
 import {computed} from "vue";
@@ -25,7 +25,7 @@ defineProps({
     <Head title="Basket" />
     <main-layout>
         <div class="my-4 max-w-xl mx-auto">
-            <h1 class="text-2xl text-center text-red-500 mb-4">{{lang[locale].basketTitle}}</h1>
+            <h1 class="text-2xl text-center text-pink-600 font-bold mb-4">{{lang[locale].basketTitle}}</h1>
 
             <section v-if="!basket.length" class="">
                 <p class="mb-2 font-bold">{{lang[locale].basketEmpty}}</p>
@@ -79,7 +79,7 @@ defineProps({
             </section>
 
             <section class="">
-                <p class="text-xs">Objednané publikácie vám zašleme na dobierku. K cene objednaných kníh je potrebné pripočítať cenu poštovného, ktorá sa pohybuje v rozmedzí 1,65 € – 3,31 € v závislosti od hmotnosti posielaného balíka. (Za samotné knihy však platíte len 75 percent ich predajnej ceny.)</p>
+                <p class="text-xs">{{lang[locale].postageNote}}</p>
             </section>
         </div>
     </main-layout>

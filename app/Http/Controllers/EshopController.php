@@ -9,16 +9,21 @@ class EshopController extends Controller
 {
     public function basket()
     {
-        return Inertia::render('Basket');
+        return Inertia::render('Eshop/Basket');
     }
 
     public function shipping()
     {
-        return Inertia::render('Shipping');
+        return Inertia::render('Eshop/Shipping');
     }
 
     public function summary()
     {
-        return Inertia::render('Summary');
+        return Inertia::render('Eshop/Summary');
+    }
+
+    public function thankYou()
+    {
+        return Inertia::render('Eshop/ThankYou');
     }
 }
