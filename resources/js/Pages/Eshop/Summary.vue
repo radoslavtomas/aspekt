@@ -54,7 +54,7 @@
                     </tr>
                     <tr>
                         <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].billingPanel}}</td>
-                        <td class="border border-slate-400 w-2/3 p-2">rovnaka ako adresa dorucenia</td>
+                        <td class="border border-slate-400 w-2/3 p-2">{{lang[locale].billingPanelNote}}</td>
 <!--                        <td class="border border-slate-400 w-2/3 p-2">-->
 <!--                            <p>Radoslav Tomas</p>-->
 <!--                            <p>My Fancy company</p>-->
@@ -85,12 +85,12 @@
                     <ArrowLeftCircleIcon class="w-5 h-5 inline" /> {{lang[locale].backButtonShipping}}
                 </Link>
                 <button type="submit" class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600">
-                    {{lang[locale].forwardButtonShipping}} <ArrowRightCircleIcon class="w-5 h-5 inline" />
+                    {{lang[locale].orderConfirmationButton}} <ArrowRightCircleIcon class="w-5 h-5 inline" />
                 </button>
             </section>
 
             <section class="mb-4">
-                <p class="text-sm">Objednané publikácie vám zašleme na dobierku. K cene objednaných kníh je potrebné pripočítať cenu poštovného, ktorá sa pohybuje v rozmedzí 1,65 € – 3,31 € v závislosti od hmotnosti posielaného balíka. (Za samotné knihy však platíte len 75 percent ich predajnej ceny.)</p>
+                <p class="text-sm">{{lang[locale].postageNote}}</p>
             </section>
         </div>
     </main-layout>
