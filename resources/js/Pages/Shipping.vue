@@ -1,5 +1,6 @@
 <script setup>
 import {Head, usePage} from '@inertiajs/inertia-vue3';
+import {Inertia} from '@inertiajs/inertia';
 import MainLayout from '../Layouts/MainLayout.vue'
 import {Link} from "@inertiajs/inertia-vue3";
 import {ArrowRightCircleIcon, ArrowLeftCircleIcon} from '@heroicons/vue/24/outline';
@@ -15,7 +16,7 @@ import FormCheckbox from '../Components/Form/FormCheckbox.vue';
 import FormTextarea from '../Components/Form/FormTextarea.vue';
 import Card from '../Components/Card.vue';
 
-const store = useStore()
+const store = useStore();
 const lang = computed(() => store.getters.lang);
 const locale = computed(() => usePage().props.value.locale);
 
@@ -81,15 +82,20 @@ const v$ = useVuelidate(rules, form);
 const handleForm = async () => {
     const result = await v$.value.$validate();
 
+    console.log(result)
+    console.log(form)
+
     if(!result) {
         const el = document.getElementsByClassName('focus:border-red-300')[0]
         setTimeout(() => {
             el.scrollIntoView({behavior: "smooth"})
         }, 100)
+        return;
     }
 
-    console.log(result)
-    console.log(form)
+    Inertia.visit('/eshop/summary', {
+        method: 'get'
+    })
 }
 
 defineProps({
@@ -100,28 +106,10 @@ defineProps({
 </script>
 
 <template>
+<!--    @TODO: titles to lang-->
     <Head title="Shipping" />
     <main-layout>
         <div class="max-w-xl mx-auto pt-8">
-            <div class="mb-4">
-                <table class="border-collapse border border-slate-400 w-full text-sm">
-                    <tbody>
-                    <tr>
-                        <td class="border border-slate-400 p-3">1 x Nanichodnica</td>
-                        <td class="border border-slate-400 p-3">8,11€</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-slate-400 p-3">2 x Ako odvravat Novembru alebo starsne dlhy nazov, ktory sa isto nezmesti, lebo je naozaj dlhy</td>
-                        <td class="border border-slate-400 p-3">8,11€</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-slate-400 p-3 text-right font-bold">Medzisúčet</td>
-                        <td class="border border-slate-400 p-3 font-bold">17,11€</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
             <form @submit.prevent="handleForm">
                 <Card :title="lang[locale].infoPanel">
                     <FormInput

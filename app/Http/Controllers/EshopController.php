@@ -16,4 +16,9 @@ class EshopController extends Controller
     {
         return Inertia::render('Shipping');
     }
+
+    public function summary()
+    {
+        return Inertia::render('Summary');
+    }
 }

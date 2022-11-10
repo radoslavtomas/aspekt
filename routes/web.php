@@ -22,6 +22,7 @@ Route::get('/library/{category?}/{slug?}', ['App\Http\Controllers\UI\PagesContro
 Route::get('/contact', ['App\Http\Controllers\UI\PagesController', 'contact'])->name('contact');
 Route::get('/eshop/basket', ['App\Http\Controllers\EshopController', 'basket'])->name('basket');
 Route::get('/eshop/shipping', ['App\Http\Controllers\EshopController', 'shipping'])->name('shipping');
+Route::get('/eshop/summary', ['App\Http\Controllers\EshopController', 'summary'])->name('summary');
 
 Route::get('language/{language}', function ($language) {
     Session()->put('locale', $language);
