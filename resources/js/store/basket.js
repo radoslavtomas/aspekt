@@ -12,7 +12,6 @@ const mutations = {
         }
     },
     incrementBookCount(state, payload) {
-        console.log(payload)
         incrementBookCount(state.basket, payload.book_id);
     },
     incrementBookCountBy(state, payload) {
@@ -23,6 +22,9 @@ const mutations = {
     },
     removeBookFromBasket(state, payload) {
         state.basket = removeBookFromBasket(state.basket, payload.book_id);
+    },
+    resetBasket(state) {
+        state.basket = [];
     }
 };
 
@@ -41,6 +43,9 @@ const actions = {
     },
     removeBookFromBasket({ commit}, payload) {
         commit('removeBookFromBasket', payload);
+    },
+    resetBasket({ commit }) {
+        commit('resetBasket')
     }
 };
 
@@ -98,7 +103,7 @@ const getCounter = (basket) => basket.reduce((previousValue, currentValue) => pr
 
 const getSubtotal = (basket) => {
     if(basket.length === 0) {
-        return 0;
+        return '-';
     }
 
     const subtotalRaw = basket.reduce((previousValue, currentValue) => {

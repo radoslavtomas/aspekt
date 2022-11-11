@@ -6,12 +6,18 @@ const mutations = {
     setCustomer(state, payload) {
         state.customer = payload
     },
+    resetCustomer(state) {
+        state.customer = {}
+    }
 
 };
 
 const actions = {
     setCustomer({ commit }, payload) {
         commit('setCustomer', payload);
+    },
+    resetCustomer({ commit }) {
+        commit('resetCustomer')
     }
 };
 

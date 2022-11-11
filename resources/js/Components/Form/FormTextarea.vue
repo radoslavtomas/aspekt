@@ -3,6 +3,7 @@
         <span class="text-gray-700 text-sm">{{props.title}}</span>
         <textarea
             @input="updateValue"
+            :value="modelValue"
             class="
                 mt-1
                 text-sm

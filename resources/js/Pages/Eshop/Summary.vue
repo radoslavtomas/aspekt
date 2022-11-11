@@ -4,7 +4,7 @@
         <div class="max-w-xl mx-auto pt-8">
             <h1 class="text-2xl text-center text-pink-600 font-semibold mb-4">{{lang[locale].summaryTitle}}</h1>
 
-            <div class="mb-4">
+            <div class="mb-4" v-if="basket.length">
                 <table class="border-collapse border border-slate-400 shadow-md w-full text-sm">
                     <thead class="bg-gray-200">
                     <tr>
@@ -12,17 +12,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="p-2">1 x Nanichodnica</td>
-                        <td class="p-2">8,11€</td>
-                    </tr>
-                    <tr>
-                        <td class="p-2">2 x Ako odvravat Novembru</td>
-                        <td class="p-2">8,11€</td>
+                    <tr v-for="book in basket" :key="book.id">
+                        <td class="p-2">{{book.qty}} x {{book.title}}</td>
+                        <td class="p-2">{{book.aspekt_price}}</td>
                     </tr>
                     <tr class="border border-slate-400">
                         <td class="p-2">{{lang[locale].subtotal}}</td>
-                        <td class="p-2 font-bold">17,11€</td>
+                        <td class="p-2 font-bold">{{subtotal}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -56,19 +52,18 @@
                     </tr>
                     <tr>
                         <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].billingPanel}}</td>
-                        <td class="border border-slate-400 w-2/3 p-2">{{lang[locale].billingPanelNote}}</td>
-<!--                        <td class="border border-slate-400 w-2/3 p-2">-->
-<!--                            <p>Radoslav Tomas</p>-->
-<!--                            <p>My Fancy company</p>-->
-<!--                            <p>7 Callander road</p>-->
-<!--                            <p>Liverpool</p>-->
-<!--                            <p>L6 8NT</p>-->
-<!--                            <p>United Kingdom</p>-->
-<!--                        </td>-->
+                        <td v-if="!customer.show_billing_panel" class="border border-slate-400 w-2/3 p-2">{{lang[locale].billingPanelNote}}</td>
+                        <td v-else class="border border-slate-400 w-2/3 p-2">
+                            <p>{{ customer.billing_first_name}} {{ customer.billing_last_name }}</p>
+                            <p>{{ customer.billing_street1 }}</p>
+                            <p>{{ customer.billing_city }}</p>
+                            <p>{{ customer.billing_postal_code }}</p>
+                            <p>{{billingCountry}}</p>
+                        </td>
                     </tr>
                     <tr>
                         <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].notePanel}}</td>
-                        <td class="border border-slate-400 w-2/3 p-2"></td>
+                        <td class="border border-slate-400 w-2/3 p-2">{{customer.comment}}</td>
                     </tr>
                     <tr>
                         <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].paymentMethod}}</td>
@@ -76,14 +71,14 @@
                     </tr>
                     <tr>
                         <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].subtotal}}</td>
-                        <td class="border border-slate-400 w-2/3 p-2">17,11€</td>
+                        <td class="border border-slate-400 w-2/3 p-2">{{subtotal}}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
 
             <section class="my-6 flex flex-col sm:flex-row flex-col-reverse justify-between items-center text-sm sm:text-base">
-                <Link :href="route('basket')" class="rounded text-gray-500 text-center px-4 py-3 bg-gray-200 hover:bg-gray-300">
+                <Link :href="route('shipping')" class="rounded text-gray-500 text-center px-4 py-3 bg-gray-200 hover:bg-gray-300">
                     <ArrowLeftCircleIcon class="w-5 h-5 inline" /> {{lang[locale].backButtonShipping}}
                 </Link>
                 <Link :href="route('thankYou')" class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600">
@@ -108,9 +103,12 @@ import {Link} from "@inertiajs/inertia-vue3";
 import {ArrowRightCircleIcon, ArrowLeftCircleIcon} from '@heroicons/vue/24/outline';
 
 const store = useStore();
-const lang = computed(() => store.getters.lang);
+
+const basket = computed(() => store.getters.basket);
 const customer = computed(() => store.getters.customer);
+const lang = computed(() => store.getters.lang);
 const locale = computed(() => usePage().props.value.locale);
+const subtotal = computed(() => store.getters.subtotal);
 
 const options = [
     {value: '703', description: 'Slovensko'},
@@ -125,10 +123,19 @@ const options = [
 
 const deliveryCountry = computed(() => {
     if(!customer.value.delivery_country) {
-        return 'JAajajajaja'
+        return '';
     }
+
     const country = options.filter(item => item.value === customer.value.delivery_country)[0];
-    console.log(country)
+    return country.description;
+})
+
+const billingCountry = computed(() => {
+    if(!customer.value.billing_country) {
+        return '';
+    }
+
+    const country = options.filter(item => item.value === customer.value.billing_country)[0];
     return country.description;
 })
 </script>
