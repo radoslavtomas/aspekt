@@ -22,14 +22,19 @@ const props = defineProps({
     book: Object
 })
 
-const addToBasket = () => store.dispatch('addToBasket', {
-    'aspekt_price': props.book.aspekt_price,
-    'authors': props.book.authors,
-    'book_id': props.book.id,
-    'category': categoryUrl.value,
-    'cover': props.book.cover,
-    'price': props.book.aspekt_price_raw,
-    'slug': props.book.slug,
-    'title': props.book.title,
-});
+const addToBasket = () => {
+    store.dispatch('addToBasket', {
+        'aspekt_price': props.book.aspekt_price,
+        'authors': props.book.authors,
+        'book_id': props.book.id,
+        'category': categoryUrl.value,
+        'cover': props.book.cover,
+        'price': props.book.aspekt_price_raw,
+        'slug': props.book.slug,
+        'title': props.book.title,
+    });
+
+    const bookAddedEvent = new CustomEvent('bookAdded');
+    document.dispatchEvent(bookAddedEvent);
+};
 </script>

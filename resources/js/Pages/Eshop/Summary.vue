@@ -86,9 +86,9 @@
                 <Link :href="route('basket')" class="rounded text-gray-500 text-center px-4 py-3 bg-gray-200 hover:bg-gray-300">
                     <ArrowLeftCircleIcon class="w-5 h-5 inline" /> {{lang[locale].backButtonShipping}}
                 </Link>
-                <button type="submit" class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600">
+                <Link :href="route('thankYou')" class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600">
                     {{lang[locale].orderConfirmationButton}} <ArrowRightCircleIcon class="w-5 h-5 inline" />
-                </button>
+                </Link>
             </section>
 
             <section class="mb-4">

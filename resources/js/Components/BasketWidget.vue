@@ -13,14 +13,13 @@
 
 <script setup>
 import { useStore } from 'vuex'
-import {computed, ref} from "vue";
+import {computed, onBeforeUnmount, onMounted, ref} from "vue";
 
 import {Link} from "@inertiajs/inertia-vue3";
 
 const store = useStore()
 const animated = ref(false);
 const counter = computed(() => {
-    animate();
     return store.getters.counter
 });
 
@@ -30,6 +29,10 @@ const animate = () => {
         animated.value = false;
     }, 2000)
 }
+
+onMounted(() => document.addEventListener('bookAdded', animate));
+onBeforeUnmount(() => document.removeEventListener('bookAdded', animate));
+
 </script>
 
 <style scoped>
