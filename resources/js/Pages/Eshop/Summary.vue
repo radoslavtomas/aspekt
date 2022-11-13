@@ -81,9 +81,9 @@
                 <Link :href="route('shipping')" class="rounded text-gray-500 text-center px-4 py-3 bg-gray-200 hover:bg-gray-300">
                     <ArrowLeftCircleIcon class="w-5 h-5 inline" /> {{lang[locale].backButtonShipping}}
                 </Link>
-                <Link :href="route('thankYou')" class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600">
+                <button @click="handleOrder" class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600">
                     {{lang[locale].orderConfirmationButton}} <ArrowRightCircleIcon class="w-5 h-5 inline" />
-                </Link>
+                </button>
             </section>
 
             <section class="mb-4">
@@ -98,6 +98,7 @@ import {Head, usePage} from '@inertiajs/inertia-vue3';
 import MainLayout from '../../Layouts/MainLayout.vue'
 import {useStore} from "vuex";
 import {computed} from "vue";
+import { useForm } from '@inertiajs/inertia-vue3'
 
 import {Link} from "@inertiajs/inertia-vue3";
 import {ArrowRightCircleIcon, ArrowLeftCircleIcon} from '@heroicons/vue/24/outline';
@@ -128,7 +129,7 @@ const deliveryCountry = computed(() => {
 
     const country = options.filter(item => item.value === customer.value.delivery_country)[0];
     return country.description;
-})
+});
 
 const billingCountry = computed(() => {
     if(!customer.value.billing_country) {
@@ -137,5 +138,22 @@ const billingCountry = computed(() => {
 
     const country = options.filter(item => item.value === customer.value.billing_country)[0];
     return country.description;
-})
+});
+
+const formData = computed(() => {
+    return {
+        'basket': basket.value,
+        'customer': customer.value,
+    }
+});
+
+const form = useForm(formData.value);
+
+const handleOrder = () => {
+    console.log('just before POST')
+    console.log(formData.value)
+    form.post('/eshop/create-order', {
+        onSuccess: () => console.log('hey'),
+    })
+}
 </script>

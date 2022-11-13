@@ -1,0 +1,1 @@
+import{_ as s}from"./NavigationBar.db9d8181.js";import{_ as t}from"./SupportUs.6e6d6060.js";import{o,c as r,a,b as n,r as _,F as c}from"./app.6b52608d.js";const m={class:"relative container-aspekt mx-auto"},d={__name:"MainLayout",setup(i){return(e,l)=>(o(),r(c,null,[a(s),a(t),n("div",m,[_(e.$slots,"default")])],64))}};export{d as _};

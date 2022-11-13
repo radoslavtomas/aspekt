@@ -52,6 +52,7 @@ let form = reactive({
     billing_country: '703',
     comment: '',
     show_billing_panel: false,
+    am_i_joke_to_you: ''
 })
 
 const rules = computed(() => {
@@ -65,7 +66,7 @@ const rules = computed(() => {
         delivery_city: { required, maxLength: maxLength(100) },
         delivery_postal_code: { required, maxLength: maxLength(100) },
         delivery_country: { required, maxLength: maxLength(100) },
-        billing_first_name: { requiredIf: requiredIf(form.show_billing_panel), maxLength: maxLength(5) },
+        billing_first_name: { requiredIf: requiredIf(form.show_billing_panel), maxLength: maxLength(100) },
         billing_last_name: { requiredIf: requiredIf(form.show_billing_panel) },
         billing_company: { requiredIf: requiredIf(form.show_billing_panel) },
         billing_street1: { requiredIf: requiredIf(form.show_billing_panel) },
@@ -239,6 +240,7 @@ defineProps({
                         v-model="form.comment"
                         name="comment"
                         :errors="v$.comment.$errors.length ? v$.comment.$errors[0] : null"/>
+                    <input type="hidden" v-model="am_i_joke_to_you" name="am_i_joke_to_you">
                 </Card>
 
                 <section class="my-8 flex flex-col sm:flex-row flex-col-reverse justify-between items-center text-sm sm:text-base">

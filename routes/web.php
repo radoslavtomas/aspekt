@@ -24,6 +24,7 @@ Route::get('/eshop/basket', ['App\Http\Controllers\EshopController', 'basket'])-
 Route::get('/eshop/shipping', ['App\Http\Controllers\EshopController', 'shipping'])->name('shipping');
 Route::get('/eshop/summary', ['App\Http\Controllers\EshopController', 'summary'])->name('summary');
 Route::get('/eshop/thank-you', ['App\Http\Controllers\EshopController', 'thankYou'])->name('thankYou');
+Route::post('/eshop/create-order', ['App\Http\Controllers\EshopController', 'createOrder'])->name('createOrder');
 
 Route::get('language/{language}', function ($language) {
     Session()->put('locale', $language);
