@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -60,22 +61,55 @@ class EshopController extends Controller
 
     public function createOrder(Request $request)
     {
-        $customer = $request->get('customer');
-        if($customer['am_i_joke_to_you']) {
-            return response()->json([
-                'nice_try' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-            ]);
+        $customer = $this->prepareCustomerOrderData($request);
+        $order = Order::create($customer);
+
+        $basket = $request->get('basket');
+        $formattedBasket = $this->getFormattedBasket($basket, $order->id);
+
+        foreach ($formattedBasket as $item)
+        {
+            $order->items()->create($item);
         }
 
-        // dd($customer);
-        $customer = $this->sanitization->sanitize($request->get('customer'), $this->fields);
+        return Inertia::render('Eshop/ThankYou');
+    }
+
+    private function prepareCustomerOrderData($request)
+    {
+        $customer = $request->get('customer');
+        $basket = $request->get('basket');
+
+        $customer = $this->sanitization->sanitize($customer, $this->fields);
         $customer['order_status_id'] = 'processing';
-        $customer['order_total'] = 5;
-        $customer['product_count'] = 2;
+        $customer['order_total'] = $this->getOrderTotal($basket);
+        $customer['product_count'] = count($basket);
         $customer['payment_method'] = '';
         $customer['currency'] = 'EUR';
         $customer['host'] = $request->ip();
-        dd($customer);
-        return Inertia::render('Eshop/ThankYou');
+
+        return $customer;
+    }
+
+    private function getOrderTotal($basket)
+    {
+        $total = 0;
+
+        foreach ($basket as $item) {
+            $total += $item['price'] * $item['qty'];
+        }
+
+        return $total;
+    }
+
+    private function getFormattedBasket($basket, $orderId)
+    {
+        return array_map(fn($item) => [
+            'order_id' => $orderId,
+            'book_id' => $item['book_id'],
+            'price' => $item['price'],
+            'title' => $item['title'],
+            'qty' => $item['qty'],
+        ], $basket);
     }
 }

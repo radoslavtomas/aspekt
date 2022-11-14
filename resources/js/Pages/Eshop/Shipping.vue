@@ -52,7 +52,6 @@ let form = reactive({
     billing_country: '703',
     comment: '',
     show_billing_panel: false,
-    am_i_joke_to_you: ''
 })
 
 const rules = computed(() => {
@@ -240,7 +239,6 @@ defineProps({
                         v-model="form.comment"
                         name="comment"
                         :errors="v$.comment.$errors.length ? v$.comment.$errors[0] : null"/>
-                    <input type="hidden" v-model="am_i_joke_to_you" name="am_i_joke_to_you">
                 </Card>
 
                 <section class="my-8 flex flex-col sm:flex-row flex-col-reverse justify-between items-center text-sm sm:text-base">

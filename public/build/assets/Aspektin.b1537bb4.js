@@ -1,0 +1,1 @@
+import{_ as a}from"./NavigationBar.f85b48d3.js";import{_ as s}from"./SupportUs.db4ab932.js";import{o,c as r,a as e,b as _,r as c}from"./app.a8831b72.js";const n={class:"bg-gradient-to-br from-gray-100 to-white"},i={class:"relative container-aspekt mx-auto"},u={__name:"Aspektin",setup(m){return(t,p)=>(o(),r("div",n,[e(a),e(s),_("div",i,[c(t.$slots,"default")])]))}};export{u as _};
