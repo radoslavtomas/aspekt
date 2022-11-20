@@ -1,5 +1,5 @@
 <template>
-    <article class="border border-gray-300 p-4 bg-white" :class="featured ? 'mb-4 shadow' : 'shadow-md'">
+    <article class="border p-4" :class="featured ? 'border-2 mb-4 border-purple-100 bg-purple-50 shadow-sm' : 'bg-white shadow-md border-gray-300'">
         <main :class="featured ? 'grid grid-cols-5 gap-4' : ''">
             <div class="col-span-5 sm:col-span-3 lg:col-span-4 order-2 sm:order-1">
                 <Link :href="route('aspektin', [categoryUrl, props.item.slug])">
