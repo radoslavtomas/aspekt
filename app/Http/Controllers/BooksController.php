@@ -31,6 +31,11 @@ class BooksController extends Controller
         return $this->handleListResource();
     }
 
+    public function authors()
+    {
+        dd('handle autors');
+    }
+
     private function getCategoryModel($category_url)
     {
         $this->category = Category::where('url', $category_url)->firstOrFail();

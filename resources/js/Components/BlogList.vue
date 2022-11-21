@@ -9,7 +9,11 @@
             <div class="mb-4 text-gray-700 aspektin text-center p-4">
                 <h1 class="text-3xl font-bold tracking-widest">A S P E K T i n</h1>
 
-                <h5 class="text-sm tracking-wider font-bold">f e m i n i s t i c k y&nbsp;&nbsp;&nbsp;&nbsp;w e b z i n</h5>
+                <h5 class="text-sm tracking-wider font-bold">f e m i n i s t i c k y&nbsp;&nbsp;&nbsp;w e b z i n</h5>
+
+                <h5 class="my-2 text-lg">🐈‍⬛</h5>
+
+                <h6 class="tracking-widest">{{categoryString}}</h6>
             </div>
 
             <BlogListItem :item="featured.data" :featured="true"/>
@@ -41,6 +45,7 @@ import Pagination from '../Components/Pagination.vue'
 
 // computed
 const category = computed(() => usePage().props.value.category);
+const categoryString = computed(() => category.value[`name_${locale.value}`]);
 const items = computed(() => usePage().props.value.blogs);
 const featured = computed(() => usePage().props.value.featured);
 const locale = computed(() => usePage().props.value.locale);
@@ -48,8 +53,8 @@ const navigation = computed(() => usePage().props.value.navigation);
 
 const title = computed(() => {
     const navigationString = computed(() => navigation.value.find(el => el.route === 'aspektin')[`name_${locale.value}`]);
-    const categoryString = category.value[`name_${locale.value}`]
-    return `${navigationString.value} | ${categoryString}`
+
+    return `${navigationString.value} | ${categoryString.value}`
 })
 
 onMounted(() => {

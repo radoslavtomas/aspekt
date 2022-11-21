@@ -4,6 +4,10 @@
 
         <Breadcrumbs id="books"/>
 
+        <h1 class="text-3xl md:text-2xl text-red-600 font-bold my-8 text-center">
+            <span class="px-4">{{categoryString}}</span>
+        </h1>
+
         <div class="bg-books sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
             <MasonryWall :items="items.data" :column-width="230" :gap="16">
                 <template #default="{item}">
@@ -32,6 +36,7 @@ import Pagination from '../Components/Pagination.vue'
 
 // computed
 const category = computed(() => usePage().props.value.category);
+const categoryString = computed(() => category.value[`name_${locale.value}`]);
 const items = computed(() => usePage().props.value.books);
 const locale = computed(() => usePage().props.value.locale);
 const navigation = computed(() => usePage().props.value.navigation);
@@ -39,8 +44,8 @@ const navigation = computed(() => usePage().props.value.navigation);
 
 const title = computed(() => {
     const navigationString = computed(() => navigation.value.find(el => el.route === 'books')[`name_${locale.value}`]);
-    const categoryString = category.value[`name_${locale.value}`]
-    return `${navigationString.value} | ${categoryString}`
+
+    return `${navigationString.value} | ${categoryString.value}`
 })
 </script>
 
