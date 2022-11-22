@@ -9,7 +9,7 @@
         </h1>
 
         <div class="bg-books sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
-            <MasonryWall :items="people" :column-width="330" :gap="16">
+            <MasonryWall :items="people.data" :column-width="330" :gap="16">
                 <template #default="{item}">
                     <PeopleListItem :item="item" />
                 </template>
@@ -17,13 +17,13 @@
         </div>
 
 
-<!--        <pagination class="mt-4" :links="items.meta.links"></pagination>-->
+        <pagination class="mt-4" :links="people.meta.links"></pagination>
     </section>
 </template>
 
 <script setup>
 import {Head, usePage} from '@inertiajs/inertia-vue3';
-import {computed, onMounted} from "vue";
+import {computed} from "vue";
 
 // 3rd party
 import MasonryWall from '@yeger/vue-masonry-wall'
@@ -48,8 +48,6 @@ const title = computed(() => {
 
     return `${navigationString.value} | ${categoryString.value}`
 })
-
-onMounted(() => console.log(people.value))
 </script>
 
 

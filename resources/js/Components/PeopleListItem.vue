@@ -14,7 +14,7 @@
                 </div>
             </Link>
 
-            <p class="text-xs" v-html="props.item.teaser"></p>
+            <p class="text-sm px-6 mt-6 mb-4" v-html="props.item.teaser"></p>
 
     </article>
 </template>
@@ -36,7 +36,7 @@ const surnames = computed(() => props.item.title.split(' ').slice(1))
 
 <style>
 .text-shadow {
-    text-shadow: 0 1px white;
+    text-shadow: 1px 1px #f3f4f6;
 }
 
 .empty-avatar {

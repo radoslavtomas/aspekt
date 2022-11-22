@@ -16,7 +16,7 @@ use Inertia\Inertia;
 
 Route::get('/', ['App\Http\Controllers\UI\PagesController', 'home'])->name('home');
 Route::get('/about/{category?}/{slug?}', ['App\Http\Controllers\UI\PagesController', 'about'])->name('about');
-Route::get('/books/autorky-redaktorky-prekladatelky/{slug?}', ['App\Http\Controllers\BooksController', 'authors'])->name('authors');
+Route::get('/books/autorky-redaktorky-prekladatelky/{slug?}', ['App\Http\Controllers\PeopleController', 'authors'])->name('authors');
 Route::get('/books/{category?}/{slug?}', ['App\Http\Controllers\BooksController', 'index'])->name('books');
 Route::get('/aspektin/{category?}/{slug?}', ['App\Http\Controllers\AspektinController', 'index'])->name('aspektin');
 Route::get('/library/{category?}/{slug?}', ['App\Http\Controllers\UI\PagesController', 'library'])->name('library');

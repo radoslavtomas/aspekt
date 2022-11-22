@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BookExtResource;
 use App\Http\Resources\BookResource;
+use App\Http\Resources\PeopleResource;
+use App\Http\Resources\PersonResource;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\People;
@@ -30,20 +32,6 @@ class BooksController extends Controller
         }
 
         return $this->handleListResource();
-    }
-
-    public function authors($slug = null)
-    {
-        $this->getCategoryModel('autorky-redaktorky-prekladatelky');
-
-        $people = People::where(['published' => 1, 'type_id' => 0])->get();
-
-        // $books = BookResource::collection($this->category->books()->paginate($this->pagination));
-
-        return Inertia::render('People', [
-            'people' => $people,
-            'category' => $this->category
-        ]);
     }
 
     private function getCategoryModel($category_url)
