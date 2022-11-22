@@ -6,6 +6,7 @@ use App\Http\Resources\BookExtResource;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\People;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -31,9 +32,18 @@ class BooksController extends Controller
         return $this->handleListResource();
     }
 
-    public function authors()
+    public function authors($slug = null)
     {
-        dd('handle autors');
+        $this->getCategoryModel('autorky-redaktorky-prekladatelky');
+
+        $people = People::where(['published' => 1, 'type_id' => 0])->get();
+
+        // $books = BookResource::collection($this->category->books()->paginate($this->pagination));
+
+        return Inertia::render('People', [
+            'people' => $people,
+            'category' => $this->category
+        ]);
     }
 
     private function getCategoryModel($category_url)

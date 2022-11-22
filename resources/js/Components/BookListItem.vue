@@ -2,7 +2,7 @@
     <article class="bg-white border border-gray-300 shadow-md p-4">
         <header>
             <Link :href="route('books', [categoryUrl, props.item.slug])">
-                <img v-if="props.item.cover" class="w-48 h-auto mx-auto border border-gray-200 shadow-md mb-2 rounded-md hover:-translate-y-1 transition-transform duration-75 ease-out" :src="`/storage/${props.item.cover}`" alt="book.title">
+                <img v-if="props.item.cover" class="w-48 h-auto mx-auto border border-gray-200 shadow-md mb-2 rounded-md hover:-translate-y-1 transition-transform duration-75 ease-out" :src="`/storage/${props.item.cover}`" :alt="item.title">
             </Link>
         </header>
         <main>
