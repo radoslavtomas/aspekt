@@ -1,7 +1,7 @@
 <template>
     <article class="bg-white border border-gray-300 shadow-md p-4">
 
-            <Link :href="route('books', [categoryUrl, props.item.slug])">
+            <Link :href="route(routeName, [categoryUrl, props.item.slug])">
                 <div class="relative">
                     <div class="absolute top-4 left-3 z-20 text-shadow">
                         <h2 class="text-xl text-red-600 font-bold mb-1 tracking-widest">{{ firstName }}</h2>
@@ -24,6 +24,7 @@ import {computed, onMounted} from "vue";
 import {Link, usePage} from "@inertiajs/inertia-vue3";
 
 const categoryUrl = computed(() => usePage().props.value.category.url);
+const routeName = computed(() => usePage().props.value.route_name);
 
 const props = defineProps({
     item: Object

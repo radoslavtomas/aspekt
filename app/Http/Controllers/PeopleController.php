@@ -23,7 +23,18 @@ class PeopleController extends Controller
             return $this->handleSinglePersonResource($slug);
         }
 
-        return $this->handlePeopleResource();
+        return $this->handlePeopleResource(0);
+    }
+
+    public function people($slug = null)
+    {
+        $this->getCategoryModel('kto-je-kto');
+
+        if($slug) {
+            return $this->handleSinglePersonResource($slug);
+        }
+
+        return $this->handlePeopleResource(1);
     }
 
     private function getCategoryModel($category_url)
@@ -42,14 +53,15 @@ class PeopleController extends Controller
         ]);
     }
 
-    private function handlePeopleResource(): Response
+    private function handlePeopleResource($type_id): Response
     {
-        $people = PeopleResource::collection(People::where(['published' => 1, 'type_id' => 0])->orderBy('created_at', 'desc')->paginate($this->pagination));
+        $people = PeopleResource::collection(People::where(['published' => 1, 'type_id' => $type_id])->orderBy('created_at', 'desc')->paginate($this->pagination));
 
 
         return Inertia::render('People', [
             'people' => $people,
-            'category' => $this->category
+            'category' => $this->category,
+            'route_name' => $type_id ? 'about' : 'books'
         ]);
     }
 }
