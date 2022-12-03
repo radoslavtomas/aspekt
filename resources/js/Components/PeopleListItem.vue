@@ -14,8 +14,8 @@
                 </div>
             </Link>
 
-            <p class="text-sm px-6 mt-6 mb-4" v-html="props.item.teaser"></p>
-
+            <p class="text-sm px-6 mt-6 mb-2 font-bold">{{props.item.title}}</p>
+            <p class="text-sm px-6 mb-4" v-html="props.item.teaser"></p>
     </article>
 </template>
 

@@ -65,32 +65,25 @@ class AspektinController extends Controller
 
     private function handleListResource(): Response
     {
-        // @TODO: handle no featured
-        $featured = Blog::where('featured', 1)->orderBy('created_at', 'desc')->first();
+        if($this->category['url'] == $this->all)
+        { // special category "vsetko"
+            $featured = Blog::where('featured', 1)->orderBy('created_at', 'desc')->first();
+            $blogs = Blog::published()->language('sk')->orderBy('created_at', 'desc')->paginate($this->pagination);
 
-        if($this->category['url'] == $this->all) { // special category "vsetko"
-            $blogs = Blog::published()->orderBy('created_at', 'desc')->paginate($this->pagination);
-
-            if ($featured) {
-                $filtered = $blogs->filter(fn ($blog) => $featured->id !== $blog->id);
-                $blogs->setCollection(collect($filtered));
-            } else {
-                $featured = $blogs->shift();
-            }
-        } else { // all other categories
-            $blogs = $this->category->blogs()->paginate($this->pagination);
-
-            if ($featured) {
-                $filtered = $blogs->filter(fn ($blog) => $featured->id !== $blog->id);
-                $blogs->setCollection(collect($filtered));
-            } else {
-                $featured = $blogs->shift();
-            }
+        } else
+        { // all other categories
+            $featured = $this->category->blogs->sortByDesc('created_at')->where('featured', 1)->first();
+            $blogs = $this->category->blogs()->whereIn('language', ['sk', ''])->paginate($this->pagination);
         }
 
-        // dd($blogs);
-
-        // dd(BlogResource::collection($blogs));
+        if ($featured)
+        { // filter out $featured
+            $filtered = $blogs->filter(fn ($blog) => $featured->id !== $blog->id);
+            $blogs->setCollection(collect($filtered));
+        } else
+        { // if $featured is not set, make first blog $featured
+            $featured = $blogs->shift();
+        }
 
         return Inertia::render('Blogs', [
             'blogs' => BlogResource::collection($blogs),
