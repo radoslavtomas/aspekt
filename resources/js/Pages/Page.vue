@@ -34,9 +34,21 @@ onMounted(() => console.log(page.value))
                     <article class="text-center p-3 shadow-md border border-gray-300 mt-4">
                         <a href="#">
                             <h5 class="uppercase font-bold text-pink-600 text-gradient">
-                                Archív ňjuvinky
+                                Ňjuvinky
                             </h5>
                             <p class="text-xs">Aspektovský newsletter</p>
+                        </a>
+                    </article>
+
+                    <article class="p-3 shadow-md border border-gray-300 mt-4">
+                        <a href="http://glosar.aspekt.sk/" target="_blank">
+                            <img class="w-48 mx-auto" src="/assets/img/glosar.png" alt="glosar rodovej terminologie">
+                        </a>
+                    </article>
+
+                    <article class="p-3 shadow-md border border-gray-300 mt-4">
+                        <a href="http://www.ruzovyamodrysvet.sk/" target="_blank">
+                            <img class="w-48 mx-auto" src="/assets/img/ruzovysvet.png" alt="ruzovy a modry svet">
                         </a>
                     </article>
 
@@ -50,18 +62,6 @@ onMounted(() => console.log(page.value))
                         <p class="text-sm">
                             Takmer dve desiatky aspektovských kníh si môžete objedať aj v elektronickej podobe. Vo forme e-kníh nájdete rozhovor Jany Juráňovej s Agnešou Kalinovou, preklad knihy bell hooks, analýzu účasti žien v Nežnej revolúcii, feministický pohľad na literatúru, ale aj beletristické knihy Jany Juráňovej, Ireny Brežnej, Slavenky Drakulić, Jany Bodnárovej, Barbory Hrínovej, Etely Farkašovej, Jaroslavy Blažkovej či Diany Athill.
                         </p>
-                    </article>
-
-                    <article class="p-3 shadow-md border border-gray-300 mt-4">
-                        <a href="http://glosar.aspekt.sk/" target="_blank">
-                            <img class="w-48 mx-auto" src="/assets/img/glosar.png" alt="glosar rodovej terminologie">
-                        </a>
-                    </article>
-
-                    <article class="p-3 shadow-md border border-gray-300 mt-4">
-                        <a href="http://www.ruzovyamodrysvet.sk/" target="_blank">
-                            <img class="w-48 mx-auto" src="/assets/img/ruzovysvet.png" alt="ruzovy a modry svet">
-                        </a>
                     </article>
                 </div>
             </div>

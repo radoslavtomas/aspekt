@@ -1,13 +1,11 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import BlogListItem from '../Components/BlogListItem.vue';
 
 import MainLayout from '../Layouts/MainLayout.vue'
 
 defineProps({
-    canLogin: Boolean,
-    canRegister: Boolean,
-    laravelVersion: String,
-    phpVersion: String,
+    blogs: Array,
 })
 
 </script>
@@ -20,7 +18,13 @@ defineProps({
                     <img src="/assets/img/aspekt_logo.png" alt="Aspekt Logo">
                 </div>
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div v-for="blog in blogs" :key="blog.id">
+                        <BlogListItem :item="blog" />
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
                         <div class="p-6">
                             <div class="flex items-center">
@@ -97,9 +101,6 @@ defineProps({
                         </div>
                     </div>
 
-                    <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
-                    </div>
                 </div>
             </div>
     </MainLayout>

@@ -17,15 +17,7 @@ class PagesController extends Controller
     private string $all = 'vsetko';
     private $pagination = 15;
 
-    public function home()
-    {
-        return Inertia::render('Home', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-            'laravelVersion' => Application::VERSION,
-            'phpVersion' => PHP_VERSION,
-        ]);
-    }
+
 
     public function about($category = null, $slug = null)
     {

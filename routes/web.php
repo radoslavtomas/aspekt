@@ -14,7 +14,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', ['App\Http\Controllers\UI\PagesController', 'home'])->name('home');
+Route::get('/', ['App\Http\Controllers\HomeController', 'home'])->name('home');
 
 Route::get('/about/kto-je-kto/{slug?}', ['App\Http\Controllers\PeopleController', 'people'])->name('people');
 Route::get('/books/autorky-redaktorky-prekladatelky/{slug?}', ['App\Http\Controllers\PeopleController', 'authors'])->name('authors');
