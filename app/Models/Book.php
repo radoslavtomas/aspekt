@@ -55,4 +55,9 @@ class Book extends Model
     {
         return $query->where('published', 1);
     }
+
+    public function scopeLanguage($query, $lang)
+    {
+        return $query->where('language', $lang);
+    }
 }

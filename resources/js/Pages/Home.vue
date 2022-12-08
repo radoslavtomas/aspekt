@@ -1,11 +1,13 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import BlogListItem from '../Components/BlogListItem.vue';
+import BookListItem from '../Components/BookListItem.vue';
 
 import MainLayout from '../Layouts/MainLayout.vue'
 
 defineProps({
     blogs: Array,
+    books: Array,
 })
 
 </script>
@@ -13,12 +15,29 @@ defineProps({
 <template>
     <MainLayout>
         <Head title="Home" />
+
+
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <img src="/assets/img/aspekt_logo.png" alt="Aspekt Logo">
+
+<!--                <div class="flex justify-center items-center flex-col py-12 my-8 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-200">-->
+<!--                    <img class="w-56 h-auto" src="/assets/img/logo_clean.png" alt="Aspekt Logo">-->
+<!--                    <p class="mt-2 text-xs sm:text-base tracking-wider">Prvá feministická organizácia na Slovensku </p>-->
+<!--                </div>-->
+
+                <div class="flex justify-center items-center flex-col py-12 my-8 border-y border-gray-500">
+                    <img class="w-56 h-auto" src="/assets/img/logo_clean.png" alt="Aspekt Logo">
+                    <p class="mt-2 text-xs sm:text-base tracking-wider">Prvá feministická organizácia na Slovensku </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <h1 class="text-xl text-red-600 font-bold mb-2">&lt; Novinky v kniznej edicii &gt;</h1>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
+                    <div v-for="book in books" :key="book.id">
+                        <BookListItem :item="book" />
+                    </div>
+                </div>
+
+                <h1 class="text-xl text-red-600 font-bold mb-2">&lt; Dolezite v ASPEKTin &gt;</h1>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
                     <div v-for="blog in blogs" :key="blog.id">
                         <BlogListItem :item="blog" />
                     </div>

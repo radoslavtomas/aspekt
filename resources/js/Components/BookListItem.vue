@@ -25,7 +25,10 @@ import {Link, usePage} from "@inertiajs/inertia-vue3";
 
 import BookSingleCtaButton from './BookSingleCtaButton.vue';
 
-const categoryUrl = computed(() => usePage().props.value.category.url);
+const categoryUrl = computed(() => {
+    const url = usePage().props.value.category?.url;
+    return url ? url : 'vsetko';
+});
 
 const props = defineProps({
     item: Object
