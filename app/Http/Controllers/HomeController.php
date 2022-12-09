@@ -11,22 +11,24 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
+    public $amountToTake = 4;
+
     public function home()
     {
         // blogs
-        $featured_blogs = Blog::where('featured', 1)->orderBy('created_at', 'desc')->get()->take(3);
+        $featured_blogs = Blog::where('featured', 1)->orderBy('created_at', 'desc')->get()->take($this->amountToTake);
 
-        if(count($featured_blogs) < 3)
+        if(count($featured_blogs) < $this->amountToTake)
         {
-            $featured_blogs = Blog::published()->language('sk')->orderBy('created_at', 'desc')->get()->take(3);
+            $featured_blogs = Blog::published()->language('sk')->orderBy('created_at', 'desc')->get()->take($this->amountToTake);
         }
 
         // books
-        $featured_books = Book::where('featured', 1)->orderBy('created_at', 'desc')->get()->take(3);
+        $featured_books = Book::where('featured', 1)->orderBy('created_at', 'desc')->get()->take($this->amountToTake);
 
-        if(count($featured_books) < 3)
+        if(count($featured_books) < $this->amountToTake)
         {
-            $featured_books = Book::published()->language('sk')->orderBy('created_at', 'desc')->get()->take(3);
+            $featured_books = Book::published()->language('sk')->orderBy('created_at', 'desc')->get()->take($this->amountToTake);
         }
 
         // dd($featured_books);

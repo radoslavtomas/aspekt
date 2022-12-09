@@ -26,7 +26,7 @@ import {Head, usePage} from '@inertiajs/inertia-vue3';
 import {computed} from "vue";
 
 // 3rd party
-import MasonryWall from '@yeger/vue-masonry-wall'
+import MasonryWall from '@yeger/vue-masonry-wall';
 
 // components
 import BookListItem from './BookListItem.vue';

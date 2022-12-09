@@ -2,8 +2,10 @@
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import BlogListItem from '../Components/BlogListItem.vue';
 import BookListItem from '../Components/BookListItem.vue';
+import BookSingleSectionHeading from '../Components/BookSingleSectionHeading.vue';
 
-import MainLayout from '../Layouts/MainLayout.vue'
+import MainLayout from '../Layouts/MainLayout.vue';
+import MasonryWall from '@yeger/vue-masonry-wall';
 
 defineProps({
     blogs: Array,
@@ -17,31 +19,57 @@ defineProps({
         <Head title="Home" />
 
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <div class="">
 
-<!--                <div class="flex justify-center items-center flex-col py-12 my-8 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-200">-->
-<!--                    <img class="w-56 h-auto" src="/assets/img/logo_clean.png" alt="Aspekt Logo">-->
-<!--                    <p class="mt-2 text-xs sm:text-base tracking-wider">Prvá feministická organizácia na Slovensku </p>-->
+<!--                <div class="flex justify-center items-center flex-col px-2 py-6 sm:py-8 mt-4 sm:mt-8 mb-6 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-100">-->
+<!--                    <img class="w-36 h-auto" src="/assets/img/logo_clean.png" alt="Aspekt Logo">-->
+<!--                    <p class="mt-4 text-xs sm:text-sm text-center">Prvá feministická organizácia na Slovensku </p>-->
 <!--                </div>-->
 
-                <div class="flex justify-center items-center flex-col py-12 my-8 border-y border-gray-500">
-                    <img class="w-56 h-auto" src="/assets/img/logo_clean.png" alt="Aspekt Logo">
-                    <p class="mt-2 text-xs sm:text-base tracking-wider">Prvá feministická organizácia na Slovensku </p>
-                </div>
-
-                <h1 class="text-xl text-red-600 font-bold mb-2">&lt; Novinky v kniznej edicii &gt;</h1>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
-                    <div v-for="book in books" :key="book.id">
-                        <BookListItem :item="book" />
+                <div class="shippo flex justify-center items-center flex-col px-2 py-6 sm:py-8 mt-4 sm:mt-8 mb-6 border border-gray-100">
+                    <img class="w-36 h-auto" src="/assets/img/logo_clean.png" alt="Aspekt Logo">
+                    <div class="relative flex justify-center items-center mt-4 px-2 py-0.5 rounded-lg">
+                        <div class="bg-gray-100 opacity-70 z-0 absolute top-0 right-0 w-full h-full"></div>
+                        <p class="text-sm sm:text-sm text-center text-gray-700 z-10">Prvá feministická organizácia na Slovensku </p>
                     </div>
                 </div>
 
-                <h1 class="text-xl text-red-600 font-bold mb-2">&lt; Dolezite v ASPEKTin &gt;</h1>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
-                    <div v-for="blog in blogs" :key="blog.id">
-                        <BlogListItem :item="blog" />
-                    </div>
+<!--                <h1 class="text-red-600 font-bold text-center sm:text-left mb-2">&lt; Novinky v kniznej edicii &gt;</h1>-->
+                <div class="relative flex w-full justify-center items-center mb-3">
+                    <h6 class="text-pink-600 px-1 bg-white z-10">&lt; Novinky v kniznej edicii &gt;</h6>
+                    <div class="absolute top-3 right-0 w-full h-0.5 bg-pink-500 flex-1 z-0"></div>
                 </div>
+                <div class="bg-books sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded mb-8">
+                    <MasonryWall :items="books" :column-width="250" :gap="16">
+                        <template #default="{item}">
+                            <BookListItem :item="item" />
+                        </template>
+                    </MasonryWall>
+                </div>
+<!--                <div class="flex justify-between items-start flex-wrap gap-4 mb-8">-->
+<!--                    <div class="flex-1 min-w-[16rem]" v-for="book in books" :key="book.id">-->
+<!--                        <BookListItem :item="book" />-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <h1 class="text-red-600 font-bold text-center sm:text-left mb-2">&lt; Dolezite v ASPEKTin &gt;</h1>-->
+
+                <div class="relative flex w-full justify-center items-center mb-3">
+                    <h6 class="text-pink-600 px-1 bg-white z-10">&lt; Dolezite v ASPEKTin &gt;</h6>
+                    <div class="absolute top-3 right-0 w-full h-0.5 bg-pink-500 flex-1 z-0"></div>
+                </div>
+                <div class="bg-books sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded mb-8">
+                    <MasonryWall :items="blogs" :column-width="250" :gap="16">
+                        <template #default="{item}">
+                            <BlogListItem :item="item" />
+                        </template>
+                    </MasonryWall>
+                </div>
+<!--                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">-->
+<!--                    <div v-for="blog in blogs" :key="blog.id">-->
+<!--                        <BlogListItem :item="blog" />-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
@@ -126,5 +154,15 @@ defineProps({
 </template>
 
 <style scoped>
+.shippo {
+    /*background:*/
+    /*    linear-gradient(135deg, #efe2ff 21px, #f5faff 22px, #f5faff 24px, transparent 24px, transparent 67px, #f5faff 67px, #f5faff 69px, transparent 69px),*/
+    /*    linear-gradient(225deg, #efe2ff 21px, #f5faff 22px, #f5faff 24px, transparent 24px, transparent 67px, #f5faff 67px, #f5faff 69px, transparent 69px)0 64px;*/
+    /*background-color:#efe2ff;*/
+    /*background-size: 64px 128px;*/
+    text-shadow: 2px 1px white;
+    background: url('/assets/img/geo.webp') center 61% no-repeat;
+    background-size: cover;
 
+}
 </style>
