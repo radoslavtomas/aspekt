@@ -17,7 +17,7 @@ const locale = computed(() => usePage().props.value.locale);
         <div class="max-w-5xl mx-auto">
 
             <div class="mb-12 flex flex-col lg:flex-row">
-                <div class="mr-12 w-full lg:w-5/12 text-center lg:text-left mb-8 lg:mb-0">
+                <div class="mr-12 w-full lg:w-3/12 text-center lg:text-left mb-8 lg:mb-0">
                     <section class="mb-12 text-2xl">
                         <p class="mb-2 font-bold text-3xl">ASPEKT</p>
                         <p class="mb-2">Mýtna 38</p>
@@ -40,7 +40,7 @@ const locale = computed(() => usePage().props.value.locale);
                         <a href="mailto:kniznica@aspekt.sk" class="block text-gray-700 hover:text-gray-800">kniznica@aspekt.sk</a>
                     </section>
                 </div>
-                <div class="w-full lg:w-7/12">
+                <div class="w-full lg:w-9/12">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2661.650064372208!2d17.115207815828487!3d48.15555125788759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c894ddaf80adb%3A0x49cb2dcfc9e8f145!2sAspekt!5e0!3m2!1sen!2suk!4v1670441863757!5m2!1sen!2suk" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
