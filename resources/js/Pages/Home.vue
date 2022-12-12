@@ -1,16 +1,20 @@
 <script setup>
+import {ref} from 'vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import BlogListItem from '../Components/BlogListItem.vue';
 import BookListItem from '../Components/BookListItem.vue';
-import {BookOpenIcon, BuildingLibraryIcon, NewspaperIcon} from '@heroicons/vue/24/outline';
+import {BookOpenIcon, BuildingLibraryIcon, NewspaperIcon, HandThumbUpIcon, CheckIcon} from '@heroicons/vue/24/outline';
 
 import MainLayout from '../Layouts/MainLayout.vue';
 import MasonryWall from '@yeger/vue-masonry-wall';
+import FormInput from '../Components/Form/FormInput.vue';
 
 defineProps({
     blogs: Array,
     books: Array,
 })
+
+const subscribe_email = ref('');
 
 </script>
 
@@ -88,10 +92,62 @@ defineProps({
                     </div>
                 </div>
 
-                <section class="bg-gray-700 my-8 p-4 rounded shadow-lg">
+                <section class="bg-gray-200 my-8 px-4 py-8 rounded shadow-lg">
+                    <div class="">
+
+                      <div class="text-center">
+                          <h5 class="uppercase font-bold text-pink-600 text-gradient">
+                              Ňjuvinky
+                          </h5>
+                          <p class="text-xs">Aspektovský newsletter</p>
+
+                          <p class="text-xs italic mt-4 w-full sm:w-2/3 mx-auto">
+                              Ňjuvinky prinášajú informácie o zaujímavých článkoch vo webzine ASPEKTin, o nových knihách v knižnici ASPEKTu a o ďalších aktualitách z našich webových rubrík aj ASPEKTovských priestorov priamo do emailovej schránky.</p>
+                      </div>
+
+
+
+<!--                        <article class="p-3 shadow-md border border-gray-300 bg-white">-->
+<!--                            <a href="http://glosar.aspekt.sk/" target="_blank">-->
+<!--                                <img class="w-48 mx-auto" src="/assets/img/glosar.png" alt="glosar rodovej terminologie">-->
+<!--                            </a>-->
+<!--                        </article>-->
+
+<!--                        <article class="p-3 shadow-md border border-gray-300 bg-white">-->
+<!--                            <a href="http://www.ruzovyamodrysvet.sk/" target="_blank">-->
+<!--                                <img class="w-48 mx-auto" src="/assets/img/ruzovysvet.png" alt="ruzovy a modry svet">-->
+<!--                            </a>-->
+<!--                        </article>-->
+                    </div>
+
+                    <div class="flex justify-center items-center flex-col sm:flex-row max-w-screen-sm mx-auto mt-8">
+                        <label class="block w-full sm:w-auto flex-1 mb-4 sm:mb-0">
+                            <input type="email"
+                                   name="subscribe_email"
+                                   placeholder="Email"
+                                   v-model="subscribe_email"
+                                   class="
+                                        text-sm
+                                        py-2.5
+                                        block
+                                        w-full
+                                        shadow-sm">
+
+                        </label>
+
+                        <button type="submit" class="text-sm text-white text-center px-4 py-2.5 shadow-sm border border-pink-500 bg-pink-500 hover:bg-pink-600">
+                            Prihlás sa <HandThumbUpIcon class="w-4 h-4 ml-1 inline" />
+                        </button>
+                    </div>
+
+                    <div class="flex items-center justify-center mt-2 text-green-700 max-w-screen-sm mx-auto text-sm text-center">Skvelé! Úspešne ste sa zaregistrovali. <CheckIcon class="w-4 h-4 ml-1 inline" /></div>
+                    <div class="flex items-center justify-center mt-2 text-red-700 max-w-screen-sm mx-auto text-sm text-center">Niekde sa stala chyba, nepodarilo sa nám zaregistrovať vás. Prosím, skúste to neskôr.</div>
+                </section>
+
+                <section class="bg-cyan-800 my-8 p-4 rounded shadow-lg">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-white">
                         <div class="p-6">
-                            <a href="https://laracasts.com" class="flex  items-center ml-2 text-lg leading-7 hover:text-red-600">
+                            <a href="https://laracasts.com" class="flex  items-center ml-2 text-lg leading-7 hover:text-yellow-300">
                                 <BookOpenIcon class="h-5 w-5 mr-2" />
                                 Knizna edicia
                             </a>
@@ -104,7 +160,7 @@ defineProps({
                         </div>
 
                         <div class="p-6">
-                            <a href="https://laracasts.com" class="flex  items-center ml-2 text-lg leading-7 hover:text-red-600">
+                            <a href="https://laracasts.com" class="flex  items-center ml-2 text-lg leading-7 hover:text-yellow-300">
                                 <BuildingLibraryIcon class="h-5 w-5 mr-2" />
                                 Knižnica ASPEKTU
                             </a>
@@ -117,7 +173,7 @@ defineProps({
                         </div>
 
                         <div class="p-6">
-                            <a href="https://laracasts.com" class="flex  items-center ml-2 text-lg leading-7 hover:text-red-600">
+                            <a href="https://laracasts.com" class="flex items-center ml-2 text-lg leading-7 hover:text-yellow-300">
                                 <NewspaperIcon class="h-5 w-5 mr-2" />
                                 ASPEKTin
                             </a>
