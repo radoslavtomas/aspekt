@@ -2,9 +2,17 @@
     <div class="max-w-3xl mx-auto">
         <Head :title="title" />
 
-        <Breadcrumbs id="aspektin" :article="blog.title"/>
+        <div class="mb-6">
+            <Breadcrumbs id="aspektin" :article="blog.title"/>
+        </div>
 
-        <article class="mt-10">
+        <div class="mb-6 text-gray-700 aspektin text-center p-4">
+            <h1 class="text-3xl font-bold tracking-widest">A S P E K T i n</h1>
+
+            <h5 class="text-sm tracking-wider font-bold">f e m i n i s t i c k y&nbsp;&nbsp;&nbsp;w e b z i n</h5>
+        </div>
+
+        <article class="">
             <header class="relative flex flex-col md:flex-row justify-between items-center md:items-start mb-6 md:mb-12">
                 <div class="text-center md:text-left w-full h-full flex-1 flex flex-col justify-items-stretch">
                     <div class="">

@@ -11,11 +11,10 @@ const locale = computed(() => usePage().props.value.locale);
 <template>
     <Head title="Kontakt" />
     <main-layout>
-        <h1 class="border-b border-gray-300 pb-8 text-3xl md:text-4xl text-red-600 font-bold my-8 text-center">
-            <span class=" pb-2 px-4">Kontakt</span>
-        </h1>
         <div class="max-w-5xl mx-auto">
-
+            <h1 class="border-b border-gray-300 pb-8 text-3xl text-red-600 font-bold my-8 text-center">
+                <span class=" pb-2 px-4">Kontakt</span>
+            </h1>
             <div class="mb-12 flex flex-col lg:flex-row">
                 <div class="mr-12 w-full lg:w-3/12 text-center lg:text-left mb-8 lg:mb-0">
                     <section class="mb-12 text-2xl">
