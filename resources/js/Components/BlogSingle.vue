@@ -21,18 +21,18 @@
                 </section>
 
                 <section v-if="blog.links" class="mb-6">
-                    <book-single-section-heading :heading="lang[locale].links" />
+                    <Separator :title="lang[locale].links" margin />
                     <div v-html="blog.links"></div>
                 </section>
 
 
                 <section v-if="blog.files.length" class="mb-6">
-                    <book-single-section-heading :heading="lang[locale].files" />
+                    <Separator :title="lang[locale].files" margin />
                     <file-list :files="blog.files" />
                 </section>
 
                 <section v-if="blog.downloads.length" class="mb-6">
-                    <book-single-section-heading :heading="lang[locale].downloads" />
+                    <Separator :title="lang[locale].downloads" margin />
                     <file-list :files="blog.downloads" />
                 </section>
             </main>
@@ -46,8 +46,8 @@ import {Head, usePage} from "@inertiajs/inertia-vue3";
 
 // components
 import FileList from './FileList.vue'
-import BookSingleSectionHeading from './BookSingleSectionHeading.vue';
 import Breadcrumbs from '../Components/Breadcrumbs.vue';
+import Separator from "@/Components/Separator.vue";
 
 // computed
 const blog = computed(() => usePage().props.value.blog.data);

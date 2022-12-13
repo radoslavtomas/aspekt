@@ -38,23 +38,23 @@
                 </section>
 
                 <section v-if="book.sample" class="mb-6">
-                    <book-single-section-heading :heading="lang[locale].sample" />
+                    <Separator :title="lang[locale].sample" margin />
                     <div v-html="book.sample"></div>
                 </section>
 
                 <section v-if="book.links" class="mb-6">
-                    <book-single-section-heading :heading="lang[locale].links" />
+                    <Separator :title="lang[locale].links" margin />
                     <div v-html="book.links"></div>
                 </section>
 
 
                 <section v-if="book.files.length" class="mb-6">
-                    <book-single-section-heading :heading="lang[locale].files" />
+                    <Separator :title="lang[locale].files" margin />
                     <file-list :files="book.files" />
                 </section>
 
                 <section v-if="book.downloads.length" class="mb-6">
-                    <book-single-section-heading :heading="lang[locale].downloads" />
+                    <Separator :title="lang[locale].downloads" margin />
                     <file-list :files="book.downloads" />
                 </section>
 
@@ -78,8 +78,8 @@ import {Head, usePage} from "@inertiajs/inertia-vue3";
 // components
 import FileList from './FileList.vue'
 import BookSingleCtaButton from './BookSingleCtaButton.vue';
-import BookSingleSectionHeading from './BookSingleSectionHeading.vue'
 import Breadcrumbs from '../Components/Breadcrumbs.vue';
+import Separator from "@/Components/Separator.vue";
 
 // computed
 const book = computed(() => usePage().props.value.book.data);

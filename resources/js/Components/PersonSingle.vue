@@ -22,7 +22,7 @@
                 </section>
 
                 <section v-if="person.links" class="mb-6">
-                    <book-single-section-heading :heading="lang[locale].links" />
+                    <Separator :title="lang[locale].links" margin />
                     <div v-html="person.links"></div>
                 </section>
             </main>
@@ -36,10 +36,8 @@ import { useStore } from 'vuex';
 import {Head, usePage} from "@inertiajs/inertia-vue3";
 
 // components
-import FileList from './FileList.vue'
-import BookSingleCtaButton from './BookSingleCtaButton.vue';
-import BookSingleSectionHeading from './BookSingleSectionHeading.vue'
 import Breadcrumbs from '../Components/Breadcrumbs.vue';
+import Separator from "@/Components/Separator.vue";
 
 // computed
 const person = computed(() => usePage().props.value.person.data);
