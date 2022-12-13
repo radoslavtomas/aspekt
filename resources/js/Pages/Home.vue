@@ -92,7 +92,7 @@ const subscribe_email = ref('');
                     </div>
                 </div>
 
-                <section class="bg-gray-200 my-8 px-4 py-8 rounded shadow-lg">
+                <section class="bg-gray-200 my-8 px-4 pt-8 pb-10 rounded shadow-lg">
                     <div class="">
 
                       <div class="text-center">
@@ -105,19 +105,6 @@ const subscribe_email = ref('');
                               Ňjuvinky prinášajú informácie o zaujímavých článkoch vo webzine ASPEKTin, o nových knihách v knižnici ASPEKTu a o ďalších aktualitách z našich webových rubrík aj ASPEKTovských priestorov priamo do emailovej schránky.</p>
                       </div>
 
-
-
-<!--                        <article class="p-3 shadow-md border border-gray-300 bg-white">-->
-<!--                            <a href="http://glosar.aspekt.sk/" target="_blank">-->
-<!--                                <img class="w-48 mx-auto" src="/assets/img/glosar.png" alt="glosar rodovej terminologie">-->
-<!--                            </a>-->
-<!--                        </article>-->
-
-<!--                        <article class="p-3 shadow-md border border-gray-300 bg-white">-->
-<!--                            <a href="http://www.ruzovyamodrysvet.sk/" target="_blank">-->
-<!--                                <img class="w-48 mx-auto" src="/assets/img/ruzovysvet.png" alt="ruzovy a modry svet">-->
-<!--                            </a>-->
-<!--                        </article>-->
                     </div>
 
                     <div class="flex justify-center items-center flex-col sm:flex-row max-w-screen-sm mx-auto mt-8">
@@ -140,14 +127,14 @@ const subscribe_email = ref('');
                         </button>
                     </div>
 
-                    <div class="flex items-center justify-center mt-2 text-green-700 max-w-screen-sm mx-auto text-sm text-center">Skvelé! Úspešne ste sa zaregistrovali. <CheckIcon class="w-4 h-4 ml-1 inline" /></div>
-                    <div class="flex items-center justify-center mt-2 text-red-700 max-w-screen-sm mx-auto text-sm text-center">Niekde sa stala chyba, nepodarilo sa nám zaregistrovať vás. Prosím, skúste to neskôr.</div>
+<!--                    <div class="flex items-center justify-center mt-2 text-green-700 max-w-screen-sm mx-auto text-sm text-center">Skvelé! Úspešne ste sa zaregistrovali. <CheckIcon class="w-4 h-4 ml-1 inline" /></div>-->
+<!--                    <div class="flex items-center justify-center mt-2 text-red-700 max-w-screen-sm mx-auto text-sm text-center">Niekde sa stala chyba, nepodarilo sa nám zaregistrovať vás. Prosím, skúste to neskôr.</div>-->
                 </section>
 
-                <section class="bg-cyan-800 my-8 p-4 rounded shadow-lg">
+                <section class="bg-zinc-600 my-8 p-4 rounded shadow-lg">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-white">
                         <div class="p-6">
-                            <a href="https://laracasts.com" class="flex  items-center ml-2 text-lg leading-7 hover:text-yellow-300">
+                            <a href="https://laracasts.com" class="flex  items-center ml-2 text-lg leading-7 hover:text-red-400">
                                 <BookOpenIcon class="h-5 w-5 mr-2" />
                                 Knizna edicia
                             </a>
@@ -160,7 +147,7 @@ const subscribe_email = ref('');
                         </div>
 
                         <div class="p-6">
-                            <a href="https://laracasts.com" class="flex  items-center ml-2 text-lg leading-7 hover:text-yellow-300">
+                            <a href="https://laracasts.com" class="flex  items-center ml-2 text-lg leading-7 hover:text-red-400">
                                 <BuildingLibraryIcon class="h-5 w-5 mr-2" />
                                 Knižnica ASPEKTU
                             </a>
@@ -173,7 +160,7 @@ const subscribe_email = ref('');
                         </div>
 
                         <div class="p-6">
-                            <a href="https://laracasts.com" class="flex items-center ml-2 text-lg leading-7 hover:text-yellow-300">
+                            <a href="https://laracasts.com" class="flex items-center ml-2 text-lg leading-7 hover:text-red-400">
                                 <NewspaperIcon class="h-5 w-5 mr-2" />
                                 ASPEKTin
                             </a>
