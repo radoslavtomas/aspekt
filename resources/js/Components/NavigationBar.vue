@@ -48,7 +48,7 @@
 
 
         <!-- Mobile menu -->
-        <div v-if="openNav" class="lg:hidden absolute w-full z-10 h-full" id="mobile-menu">
+        <div v-if="openNav" class="lg:hidden absolute w-full z-20 h-full" id="mobile-menu">
             <div class="relative bg-gradient-to-b from-purple-50 to-fuchsia-50 shadow-xl border-y border-purple-300 opacity-95 space-y-1 px-2 pt-2 pb-3 z-50">
                 <template v-for="menuItem in navigation">
                     <Link :href="route(menuItem.route)" :class="{ 'border-b-4 border-red-600': $page.component === menuItem.component }" class="block font-bold uppercase text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">{{menuItem[`name_${locale}`]}}</Link>

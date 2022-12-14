@@ -6,8 +6,8 @@ import TheFeaturedBooks from "@/Components/TheFeaturedBooks.vue";
 import TheFeaturedBlogs from "@/Components/TheFeaturedBlogs.vue";
 
 defineProps({
-    blogs: Array,
-    books: Array,
+    blogs: Object,
+    books: Object,
 })
 
 </script>
@@ -18,9 +18,9 @@ defineProps({
 
         <AspektHero />
 
-        <TheFeaturedBooks :books="books" />
+        <TheFeaturedBooks :books="books.data" />
 
-        <TheFeaturedBlogs :blogs="blogs" />
+        <TheFeaturedBlogs :blogs="blogs.data" />
     </MainLayout>
 </template>
 

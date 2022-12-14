@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-gray-200 mt-8 px-4 pt-8 pb-10 rounded shadow-lg">
+    <section class="bg-gray-200 mt-8 px-4 pt-8 pb-10 sm:rounded shadow-lg">
         <div class="text-center">
             <h5 class="uppercase font-bold text-pink-600 text-gradient">
                 Ňjuvinky
