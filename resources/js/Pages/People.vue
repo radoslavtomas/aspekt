@@ -1,5 +1,4 @@
 <script setup>
-import BasketWidget from "../Components/BasketWidget.vue";
 import PeopleList from '../Components/PeopleList.vue';
 import MainLayout from '../Layouts/MainLayout.vue'
 </script>
@@ -8,6 +7,4 @@ import MainLayout from '../Layouts/MainLayout.vue'
     <main-layout>
         <PeopleList />
     </main-layout>
-
-    <basket-widget />
 </template>

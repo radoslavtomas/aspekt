@@ -1,5 +1,4 @@
 <script setup>
-import BasketWidget from "../Components/BasketWidget.vue";
 import BookList from '../Components/BookList.vue';
 import MainLayout from '../Layouts/MainLayout.vue'
 </script>
@@ -8,7 +7,5 @@ import MainLayout from '../Layouts/MainLayout.vue'
     <main-layout>
         <BookList />
     </main-layout>
-
-    <basket-widget />
 </template>
 

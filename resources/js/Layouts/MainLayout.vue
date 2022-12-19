@@ -15,7 +15,7 @@
     </main>
 
     <TheFooter />
-
+    <BasketWidget />
 
 </template>
 
@@ -25,6 +25,7 @@ import SupportUs from '../Components/SupportUs.vue'
 import AspektInfo from "@/Components/AspektInfo.vue";
 import NewsletterForm from "@/Components/Form/NewsletterForm.vue";
 import TheFooter from "@/Components/TheFooter.vue";
+import BasketWidget from "../Components/BasketWidget.vue";
 
 </script>
 

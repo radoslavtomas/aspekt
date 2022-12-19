@@ -2,7 +2,6 @@
 import {computed, onMounted} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
-import BasketWidget from "../Components/BasketWidget.vue";
 import MainLayout from '../Layouts/MainLayout.vue'
 import Breadcrumbs from '../Components/Breadcrumbs.vue';
 
@@ -38,6 +37,4 @@ onMounted(() => console.log(page.value))
         </div>
 
     </main-layout>
-
-    <basket-widget />
 </template>

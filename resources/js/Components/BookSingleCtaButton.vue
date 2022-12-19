@@ -10,13 +10,16 @@
 
 <script setup>
 import { useStore } from 'vuex'
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
 const store = useStore();
 const lang = computed(() => store.getters.lang);
 const locale = computed(() => usePage().props.value.locale);
-const categoryUrl = computed(() => usePage().props.value.category.url);
+const categoryUrl = computed(() => {
+    const url = usePage().props.value.category?.url;
+    return url ? url : 'vsetko';
+});
 
 const props = defineProps({
     book: Object

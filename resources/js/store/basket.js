@@ -99,7 +99,11 @@ const removeBookFromBasket = (basket, book_id) => {
     return basket.filter(book => book.book_id !== book_id);
 }
 
-const getCounter = (basket) => basket.reduce((previousValue, currentValue) => previousValue + currentValue.qty, 0);
+const getCounter = (basket) => {
+    if (!basket.length) return 0;
+
+    return basket.reduce((previousValue, currentValue) => previousValue + currentValue.qty, 0)
+};
 
 const getSubtotal = (basket) => {
     if(basket.length === 0) {
