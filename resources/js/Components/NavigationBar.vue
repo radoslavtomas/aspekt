@@ -76,9 +76,9 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 
 const openNav = ref(false);
 const locale = computed(() => usePage().props.value.locale);
-const navigation = computed(() => usePage().props.value.navigation);
+const navigation = computed(() => usePage().props.value.navigation.filter(item => item.id !== 43));
 
-// onMounted(() => console.log(navigation.value))
+// onMounted(() => console.log(navigation))
 
 </script>
 

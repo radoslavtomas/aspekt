@@ -57,6 +57,7 @@ class HandleInertiaRequests extends Middleware
     }
 
     private function getNavigationItems() {
+        return Navigation::with('categories')->orderBy('position')->get();
         return Navigation::with('categories')->orderBy('position')->get()->filter(function($value, $key) {
             return $value['id'] != 43;
         });

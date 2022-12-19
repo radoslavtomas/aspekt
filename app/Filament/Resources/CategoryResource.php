@@ -37,7 +37,7 @@ class CategoryResource extends Resource
                     ])
                     ->columns(1),
                 Forms\Components\Select::make('navigation_id')
-                    ->relationship('navigation', 'name_sk', fn (Builder $query) => $query->whereIn('id', [4, 5, 6, 8, 10]))
+                    ->relationship('navigation', 'name_sk', fn (Builder $query) => $query->whereIn('id', [4, 5, 6, 8, 43]))
                     ->required(),
                 Forms\Components\Select::make('page_id')
                     ->relationship('page', 'name_sk')
@@ -62,7 +62,7 @@ class CategoryResource extends Resource
                 Filter::make('Knižnica')
                     ->query(fn (Builder $query): Builder => $query->where('navigation_id', 6)),
                 Filter::make('Ňjúvinky')
-                    ->query(fn (Builder $query): Builder => $query->where('navigation_id', 10)),
+                    ->query(fn (Builder $query): Builder => $query->where('navigation_id', 43)),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

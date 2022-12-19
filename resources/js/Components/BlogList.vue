@@ -10,10 +10,6 @@
                 <h1 class="text-3xl font-bold tracking-widest">A S P E K T i n</h1>
 
                 <h5 class="text-sm tracking-wider font-bold">f e m i n i s t i c k y&nbsp;&nbsp;&nbsp;w e b z i n</h5>
-
-<!--                <h5 class="my-2 text-lg">🐈‍⬛</h5>-->
-
-<!--                <h6 class="tracking-widest text-lg">{{categoryString}}</h6>-->
             </div>
 
             <h1 class="text-3xl md:text-2xl text-red-600 font-bold my-8 text-center">
@@ -59,10 +55,6 @@ const title = computed(() => {
     const navigationString = computed(() => navigation.value.find(el => el.route === 'aspektin')[`name_${locale.value}`]);
 
     return `${navigationString.value} | ${categoryString.value}`
-})
-
-onMounted(() => {
-    console.log(items.value, featured.value)
 })
 </script>
 
