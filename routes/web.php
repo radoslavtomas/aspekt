@@ -23,7 +23,7 @@ Route::get('/about/njuvinky/', ['App\Http\Controllers\NjuvinkyController', 'redi
 Route::get('/about/{category?}/{slug?}', ['App\Http\Controllers\AboutController', 'index'])->name('about');
 Route::get('/books/{category?}/{slug?}', ['App\Http\Controllers\BooksController', 'index'])->name('books');
 Route::get('/aspektin/{category?}/{slug?}', ['App\Http\Controllers\AspektinController', 'index'])->name('aspektin');
-Route::get('/library/{category?}/{slug?}', ['App\Http\Controllers\UI\PagesController', 'library'])->name('library');
+Route::get('/library/{category?}/{slug?}', ['App\Http\Controllers\LibraryController', 'index'])->name('library');
 Route::get('/contact', ['App\Http\Controllers\UI\PagesController', 'contact'])->name('contact');
 Route::get('/njuvinky/{category?}/{slug?}', ['App\Http\Controllers\NjuvinkyController', 'index'])->name('njuvinky');
 Route::get('/eshop/basket', ['App\Http\Controllers\EshopController', 'basket'])->name('basket');

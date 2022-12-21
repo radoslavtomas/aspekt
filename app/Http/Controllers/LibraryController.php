@@ -10,27 +10,20 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class NjuvinkyController extends Controller
+class LibraryController extends Controller
 {
     public null|object $category = null;
     private int $pagination = 15;
-
-    public function redirect()
-    {
-        $latestCategory = $this->getNjuvinkyCategories()->first();
-        return redirect()->route('njuvinky', $latestCategory->url);
-    }
-
-    private function getNjuvinkyCategories()
-    {
-        return Category::where('navigation_id', 43)->orderBy('id', 'desc');
-    }
 
     public function index($category = null, $slug = null)
     {
         $this->getCategoryModel($category);
 
-        if ($slug) {
+        if ($this->category->isStatic()) {
+            return $this->handleStaticResource();
+        }
+
+        if($slug) {
             return $this->handleSingleResource($slug);
         }
 
@@ -39,7 +32,22 @@ class NjuvinkyController extends Controller
 
     private function getCategoryModel($category_url)
     {
-        $this->category = Category::where(['url' => $category_url, 'navigation_id' => 43])->firstOrFail();
+        $this->category = Category::where('url', $category_url)->firstOrFail();
+    }
+
+    private function handleStaticResource()
+    {
+        $page = $this->category->page;
+
+        if (!$page) {
+            abort(404);
+        }
+
+        return Inertia::render('Page', [
+            'page' => $page,
+            'category' => $this->category,
+            'breadcrumbs_id' => 'library'
+        ]);
     }
 
     private function handleSingleResource(string $slug): Response
@@ -47,7 +55,7 @@ class NjuvinkyController extends Controller
         $blog = BlogExtResource::make(Blog::with('files', 'downloads')->where('slug', $slug)->firstOrFail());
         // dd($blog);
 
-        return Inertia::render('Njuvinka', [
+        return Inertia::render('LibraryNews', [
             'blog' => $blog,
             'category' => $this->category,
             'slug' => $slug
@@ -56,19 +64,11 @@ class NjuvinkyController extends Controller
 
     private function handleListResource(): Response
     {
-        if ($this->category['url'] == 'vsetko') {
-            $blogs = Blog::published()->where('blog_type_id', 43)->orderBy('created_at', 'desc')->paginate($this->pagination);
-        } else { // all other categories
-            $blogs = $this->category->blogs()->paginate($this->pagination);
-        }
+        $blogs = Blog::published()->where('blog_type_id', 6)->orderBy('created_at', 'desc')->paginate($this->pagination);
 
-        $njuvinkyCategories = $this->getNjuvinkyCategories();
-
-        return Inertia::render('Njuvinky', [
+        return Inertia::render('Library', [
             'blogs' => BlogResource::collection($blogs),
             'category' => $this->category,
-            'njuvinkyCategories' => $njuvinkyCategories,
         ]);
     }
-
 }

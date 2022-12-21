@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 import {Link} from "@inertiajs/inertia-vue3";
 import {usePage} from "@inertiajs/inertia-vue3";
 
@@ -36,6 +36,7 @@ const props = defineProps({
     id: String,
     article: String
 })
+onMounted(() => console.log(category.value))
 </script>
 
 <style scoped>

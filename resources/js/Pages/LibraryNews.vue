@@ -1,10 +1,10 @@
 <script setup>
-import LibraryList from '../Components/LibraryList.vue';
+import LibraryNewsSingle from '../Components/LibraryNewsSingle.vue';
 import MainLayout from "@/Layouts/MainLayout.vue";
 </script>
 
 <template>
     <MainLayout>
-        <LibraryList />
+        <LibraryNewsSingle />
     </MainLayout>
 </template>
