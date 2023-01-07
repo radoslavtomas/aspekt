@@ -30,6 +30,17 @@ const state = {
             'required': 'Údaj je povinný',
             'email': 'Neplatný email',
             'maxLength': 'Obsah poľa prekročil maximálnu povolenú veľkosť',
+            'basketTitle': 'Nákupná taška',
+            'shippingTitle': 'Dodacie údaje',
+            'summaryTitle': 'Kontrola objednávky',
+            'thankYouTitle': 'Objednávka ukončená',
+            'thankYouNote': 'Ďakujeme za nákup.',
+            'thankYouStatusNote': 'O stave objednávky Vás budeme informovať na Váš email',
+            'basketEmpty': 'Nákupná taška je zatiaľ prázdna.',
+            'basketEmptyButton': 'Knižná edícia',
+            'booksTeaser': 'ASPEKT slovenskej literárnej verejnosti prinavrátil jej „stratené“ emigrované spisovateľky, objavil pre ňu nové postavy a ich autorky. Vydáva nielen kanonizované texty nositeliek Nobelovej ceny, ale aj provokujúce prózy žien, ktoré máju nálepky radšej na chladničke, než na obálkach kníh. Stačí si vybrať ヽ(•‿•)ノ',
+            'postageNote': 'Objednané publikácie vám zašleme na dobierku. K cene objednaných kníh je potrebné pripočítať cenu poštovného, ktorá sa pohybuje v rozmedzí 1,65 € – 3,31 € v závislosti od hmotnosti posielaného balíka. (Za samotné knihy však platíte len 75 percent ich predajnej ceny.)',
+
             'pages': 'Počet strán',
             'aspekt_price': 'ASPEKT cena',
             'common_price': 'Bežná cena',
@@ -41,16 +52,8 @@ const state = {
             'downloads': 'Knihy na stiahnutie',
             'addToBasket': 'Pridaj do tašky',
             'supportUs': 'Páči sa vám naša práca? Tu ju môžete podporiť.',
-            'basketTitle': 'Nákupná taška',
-            'shippingTitle': 'Dodacie údaje',
-            'summaryTitle': 'Kontrola objednávky',
-            'thankYouTitle': 'Objednávka ukončená',
-            'thankYouNote': 'Ďakujeme za nákup.',
-            'thankYouStatusNote': 'O stave objednávky Vás budeme informovať na Váš email',
-            'basketEmpty': 'Nákupná taška je zatiaľ prázdna.',
-            'basketEmptyButton': 'Knižná edícia',
-            'booksTeaser': 'ASPEKT slovenskej literárnej verejnosti prinavrátil jej „stratené“ emigrované spisovateľky, objavil pre ňu nové postavy a ich autorky. Vydáva nielen kanonizované texty nositeliek Nobelovej ceny, ale aj provokujúce prózy žien, ktoré máju nálepky radšej na chladničke, než na obálkach kníh. Stačí si vybrať ヽ(•‿•)ノ',
-            'postageNote': 'Objednané publikácie vám zašleme na dobierku. K cene objednaných kníh je potrebné pripočítať cenu poštovného, ktorá sa pohybuje v rozmedzí 1,65 € – 3,31 € v závislosti od hmotnosti posielaného balíka. (Za samotné knihy však platíte len 75 percent ich predajnej ceny.)'
+
+
         },
         en: {
             'infoPanel': 'Customer information',
@@ -82,15 +85,6 @@ const state = {
             'required': 'The value is required',
             'email': 'The value is not a valid email',
             'maxLength': 'The value exceeded maximum length allowed',
-            'pages': 'Number of pages',
-            'aspekt_price': 'ASPEKT price',
-            'common_price': 'Common cena',
-            'editors': 'Editors',
-            'translation': 'Translation',
-            'sample': 'Sample',
-            'links': 'Related links',
-            'files': 'Files to download',
-            'downloads': 'Books to download',
             'addToBasket': 'Add to basket',
             'supportUs': 'Do you like what we do? Support us here.',
             'basketTitle': 'Shopping basket',
@@ -102,10 +96,42 @@ const state = {
             'basketEmpty': 'Shopping basket is empty.',
             'basketEmptyButton': 'Our books',
             'booksTeaser': 'ASPEKT brought back to slovak literature scene "lost" female writers, their novels, short stories and characters in them. It publishes not only established texts written by female Nobel prize winners but also provoking texts by women who prefer their "labels" be printed on the fridge magnets rather than on book covers. You only need to choose ヽ(•‿•)ノ',
-            'postageNote': 'Ordered books will be sent to you by post. Please, be aware there will be additional postage cost added to the price of your book(s). This might be between 1.65€ and 3.31€ depending on the weight of your parcel. (Don\'t forget, by buying books with us you only pay 75% of their normal price elsewhere.)'
+            'postageNote': 'Ordered books will be sent to you by post. Please, be aware there will be additional postage cost added to the price of your book(s). This might be between 1.65€ and 3.31€ depending on the weight of your parcel. (Don\'t forget, by buying books with us you only pay 75% of their normal price elsewhere.)',
+
+            'pages': 'Number of pages',
+            'aspekt_price': 'ASPEKT price',
+            'common_price': 'Common cena',
+            'editors': 'Editors',
+            'translation': 'Translation',
+            'sample': 'Sample',
+            'links': 'Related links',
+            'files': 'Files to download',
+            'downloads': 'Books to download',
+
         }
     }
 };
+
+const mutations = {
+    setTranslations(state, payload) {
+        state.lang = payload
+    },
+
+};
+
+const actions = {
+    setTranslations({ commit }, payload) {
+        console.log('from lang store', payload)
+        console.log(getTranslationsAccordingLanguage('sk', payload))
+        // commit('setTranslations', payload);
+    },
+};
+
+function getTranslationsAccordingLanguage(lang, payload) {
+    let data = {};
+    payload.forEach(item => data[item['key']] = item[lang]);
+    return data;
+}
 
 const getters = {
     lang(state) {
@@ -115,5 +141,7 @@ const getters = {
 
 export default {
     state,
+    actions,
+    mutations,
     getters
 };

@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\TranslationResource;
 use App\Models\Navigation;
+use App\Models\Translation;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -39,9 +41,9 @@ class HandleInertiaRequests extends Middleware
     {
         $this->str = 'user';
         return array_merge(parent::share($request), [
-            'auth' => [
-                '' . $this->str . '' => $request->user(),
-            ],
+            'translations' => function () {
+                return TranslationResource::collection(Translation::all());
+            },
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),
@@ -58,8 +60,8 @@ class HandleInertiaRequests extends Middleware
 
     private function getNavigationItems() {
         return Navigation::with('categories')->orderBy('position')->get();
-        return Navigation::with('categories')->orderBy('position')->get()->filter(function($value, $key) {
-            return $value['id'] != 43;
-        });
+//        return Navigation::with('categories')->orderBy('position')->get()->filter(function($value, $key) {
+//            return $value['id'] != 43;
+//        });
     }
 }

@@ -3,7 +3,7 @@
         <img class="w-36 h-auto" src="/assets/img/logo_clean.png" alt="Aspekt Logo">
         <div class="relative flex justify-center items-center mt-4 px-2 py-0.5 rounded-lg">
             <div class="bg-gray-100 opacity-70 z-0 absolute top-0 right-0 w-full h-full"></div>
-            <p class="text-sm sm:text-sm text-center text-gray-700 z-10">Prvá feministická organizácia na Slovensku </p>
+            <p class="text-sm sm:text-sm text-center text-gray-700 z-10">Prvá feministická organizácia na Slovensku</p>
         </div>
     </section>
 </template>
