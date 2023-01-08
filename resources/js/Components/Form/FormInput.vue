@@ -18,9 +18,9 @@
                'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'"
                :placeholder="props.placeholder">
         <span v-if="props.errors">
-            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-required')">{{lang[locale].required}}</span>
-            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-email')">{{lang[locale].email}}</span>
-            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-maxLength')">{{lang[locale].maxLength}}</span>
+            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-required')">{{lang[locale].eshopValidationRequired}}</span>
+            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-email')">{{lang[locale].eshopValidationEmail}}</span>
+            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-maxLength')">{{lang[locale].eshopValidationMaxLength}}</span>
         </span>
     </label>
 </template>

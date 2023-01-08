@@ -11,18 +11,18 @@
                         <h1 class="text-2xl md:text-3xl text-red-600 font-bold">{{book.title}}</h1>
                         <h4 class="text-xl text-red-600 my-1">{{book.subtitle}}</h4>
                         <h3 class="md:my-4 text-xl">{{book.authors}}</h3>
-                        <p v-if="book.editors" class="text-sm">{{lang[locale].editors}}: {{book.editors}}</p>
-                        <p v-if="book.translation" class="text-gray-500 text-xs">{{lang[locale].translation}}: {{book.translation}}</p>
+                        <p v-if="book.editors" class="text-sm">{{lang[locale].booksEditors}}: {{book.editors}}</p>
+                        <p v-if="book.translation" class="text-gray-500 text-xs">{{lang[locale].booksTranslation}}: {{book.translation}}</p>
                     </div>
 
                     <img v-if="book.cover" class="md:hidden w-64 h-auto mt-4 md:mt-0 md:ml-4 shadow-2xl border border-gray-200 mx-auto md:mx-0 rounded-2xl" :src="`/storage/${book.cover}`" :alt="book.title">
 
                     <div class="text-xs mt-6 md:mt-12 text-gray-500 flex flex-col items-center md:items-start" v-if="book.is_product">
-                        <p>{{lang[locale].pages}}: {{book.pages}}</p>
+                        <p>{{lang[locale].booksPages}}: {{book.pages}}</p>
                         <p class="mb-3">ISBN: {{book.isbn}}</p>
 
-                        <p class="text-lg text-red-600 font-bold">{{lang[locale].aspekt_price}}: {{book.aspekt_price}}</p>
-                        <p>({{lang[locale].common_price}} {{book.common_price}})</p>
+                        <p class="text-lg text-red-600 font-bold">{{lang[locale].booksAspektPrice}}: {{book.aspekt_price}}</p>
+                        <p>({{lang[locale].booksCommonPrice}} {{book.common_price}})</p>
                         <div class="mt-4 md:mt-8">
                             <BookSingleCtaButton :book="book" />
                         </div>
@@ -38,29 +38,29 @@
                 </section>
 
                 <section v-if="book.sample" class="mb-6">
-                    <Separator :title="lang[locale].sample" margin />
+                    <Separator :title="lang[locale].booksSample" margin />
                     <div v-html="book.sample"></div>
                 </section>
 
                 <section v-if="book.links" class="mb-6">
-                    <Separator :title="lang[locale].links" margin />
+                    <Separator :title="lang[locale].articleLinks" margin />
                     <div v-html="book.links"></div>
                 </section>
 
 
                 <section v-if="book.files.length" class="mb-6">
-                    <Separator :title="lang[locale].files" margin />
+                    <Separator :title="lang[locale].articleFiles" margin />
                     <file-list :files="book.files" />
                 </section>
 
                 <section v-if="book.downloads.length" class="mb-6">
-                    <Separator :title="lang[locale].downloads" margin />
+                    <Separator :title="lang[locale].articleDownloads" margin />
                     <file-list :files="book.downloads" />
                 </section>
 
                 <section v-if="book.is_product" class="mb-6 flex flex-col items-center justify-center">
-                    <p class="text-lg md:text-xl text-red-600 font-bold">{{lang[locale].aspekt_price}}: {{book.aspekt_price}}</p>
-                    <p class="text-gray-500 text-xs">({{lang[locale].common_price}} {{book.common_price}})</p>
+                    <p class="text-lg md:text-xl text-red-600 font-bold">{{lang[locale].booksAspektPrice}}: {{book.aspekt_price}}</p>
+                    <p class="text-gray-500 text-xs">({{lang[locale].booksCommonPrice}} {{book.common_price}})</p>
                     <div class="mt-4 md:mt-8">
                         <BookSingleCtaButton :book="book" />
                     </div>

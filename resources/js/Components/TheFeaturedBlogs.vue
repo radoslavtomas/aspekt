@@ -1,6 +1,6 @@
 <template>
     <section class="my-4">
-        <Separator title="Dolezite v ASPEKTin" margin />
+        <Separator :title="lang[locale].homePageFeaturedBlogsTitle" margin />
 
         <div class="mt-8 bg-white overflow-hidden border border-gray-200 sm:rounded shadow-lg">
             <div class="grid grid-cols-1 md:grid-cols-2">
@@ -17,7 +17,7 @@
 
                     <div class="flex w-full justify-end">
                         <Link :href="route('aspektin', {category: 'vsetko', slug: blogs[0].slug})" class="rounded text-zinc-600 text-sm text-center px-3 py-2 w-full sm:w-auto shadow-md bg-gray-200 hover:bg-gray-300">
-                            Citaj viac <ArrowRightCircleIcon class="w-5 h-5 ml-1 inline" />
+                            {{lang[locale].homePageReadMoreButton}} <ArrowRightCircleIcon class="w-5 h-5 ml-1 inline" />
                         </Link>
                     </div>
 
@@ -36,7 +36,7 @@
 
                     <div class="flex w-full justify-end">
                         <Link :href="route('aspektin', {category: 'vsetko', slug: blogs[1].slug})" class="rounded text-zinc-600 text-sm text-center px-3 py-2 w-full sm:w-auto shadow-md bg-gray-200 hover:bg-gray-300">
-                            Citaj viac <ArrowRightCircleIcon class="w-5 h-5 ml-1 inline" />
+                            {{lang[locale].homePageReadMoreButton}} <ArrowRightCircleIcon class="w-5 h-5 ml-1 inline" />
                         </Link>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
 
                     <div class="flex w-full justify-end">
                         <Link :href="route('aspektin', {category: 'vsetko', slug: blogs[2].slug})" class="rounded text-zinc-600 text-sm text-center px-3 py-2 w-full sm:w-auto shadow-md bg-gray-200 hover:bg-gray-300">
-                            Citaj viac <ArrowRightCircleIcon class="w-5 h-5 ml-1 inline" />
+                            {{lang[locale].homePageReadMoreButton}} <ArrowRightCircleIcon class="w-5 h-5 ml-1 inline" />
                         </Link>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
 
                     <div class="flex w-full justify-end">
                         <Link :href="route('aspektin', {category: 'vsetko', slug: blogs[3].slug})" class="rounded text-zinc-600 text-sm text-center px-3 py-2 w-full sm:w-auto shadow-md bg-gray-200 hover:bg-gray-300">
-                            Citaj viac <ArrowRightCircleIcon class="w-5 h-5 ml-1 inline" />
+                            {{lang[locale].homePageReadMoreButton}} <ArrowRightCircleIcon class="w-5 h-5 ml-1 inline" />
                         </Link>
                     </div>
                 </div>
@@ -85,6 +85,14 @@
 import {Link} from "@inertiajs/inertia-vue3";
 import {ArrowRightCircleIcon} from '@heroicons/vue/24/outline';
 import Separator from "@/Components/Separator.vue";
+import {usePage} from "@inertiajs/inertia-vue3";
+import {useStore} from "vuex";
+import {computed} from "vue";
+
+const store = useStore();
+
+const lang = computed(() => store.getters.lang);
+const locale = computed(() => usePage().props.value.locale);
 defineProps({
     blogs: Array
 })

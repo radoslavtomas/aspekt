@@ -34,7 +34,7 @@ const store = useStore();
 const translations = computed(() => usePage().props.value.translations);
 
 onMounted(() => {
-    store.dispatch('setTranslations', translations.value.data)
+    store.dispatch('setTranslations', translations.value)
 })
 
 </script>

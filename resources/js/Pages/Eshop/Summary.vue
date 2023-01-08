@@ -2,13 +2,13 @@
     <Head title="Summary" />
     <main-layout>
         <div class="max-w-xl mx-auto pt-8">
-            <h1 class="text-2xl text-center text-pink-600 font-semibold mb-4">{{lang[locale].summaryTitle}}</h1>
+            <h1 class="text-2xl text-center text-pink-600 font-semibold mb-4">{{lang[locale].eshopSummaryTitle}}</h1>
 
             <div class="mb-4" v-if="basket.length">
                 <table class="border-collapse border border-slate-400 shadow-md w-full text-sm">
                     <thead class="bg-gray-200">
                     <tr>
-                        <th colspan="2" class="border border-slate-400 p-2">{{lang[locale].basketPanel}}</th>
+                        <th colspan="2" class="border border-slate-400 p-2">{{lang[locale].eshopBasketPanel}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -28,7 +28,7 @@
                 <table class="border-collapse border border-slate-400 shadow-md w-full text-sm">
                     <thead class="bg-gray-200">
                     <tr>
-                        <th colspan="2" class="border border-slate-400 p-2">{{ lang[locale].infoPanel }}</th>
+                        <th colspan="2" class="border border-slate-400 p-2">{{ lang[locale].eshopInfoPanel }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,11 +37,11 @@
                         <td class="border border-slate-400 w-2/3 p-2">{{ customer.primary_email}}</td>
                     </tr>
                     <tr>
-                        <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].phoneAlt}}</td>
+                        <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].eshopPhoneAlt}}</td>
                         <td class="border border-slate-400 w-2/3 p-2">{{ customer.delivery_phone }}</td>
                     </tr>
                     <tr>
-                        <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].deliveryPanel}}</td>
+                        <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].eshopDeliveryPanel}}</td>
                         <td class="border border-slate-400 w-2/3 p-2">
                             <p>{{ customer.delivery_first_name}} {{ customer.delivery_last_name }}</p>
                             <p>{{ customer.delivery_street1 }}</p>
@@ -51,8 +51,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].billingPanel}}</td>
-                        <td v-if="!customer.show_billing_panel" class="border border-slate-400 w-2/3 p-2">{{lang[locale].billingPanelNote}}</td>
+                        <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].eshopBillingPanel}}</td>
+                        <td v-if="!customer.show_billing_panel" class="border border-slate-400 w-2/3 p-2">{{lang[locale].eshopBillingPanelNote}}</td>
                         <td v-else class="border border-slate-400 w-2/3 p-2">
                             <p>{{ customer.billing_first_name}} {{ customer.billing_last_name }}</p>
                             <p>{{ customer.billing_street1 }}</p>
@@ -62,15 +62,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].notePanel}}</td>
+                        <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].eshopNotePanel}}</td>
                         <td class="border border-slate-400 w-2/3 p-2">{{customer.comment}}</td>
                     </tr>
                     <tr>
-                        <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].paymentMethod}}</td>
-                        <td class="border border-slate-400 w-2/3 p-2">{{lang[locale].paymentMethodDelivery}}</td>
+                        <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].eshopPaymentMethod}}</td>
+                        <td class="border border-slate-400 w-2/3 p-2">{{lang[locale].eshopPaymentMethodDelivery}}</td>
                     </tr>
                     <tr>
-                        <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].subtotal}}</td>
+                        <td class="border border-slate-400 w-1/3 p-2">{{lang[locale].eshopSubtotal}}</td>
                         <td class="border border-slate-400 w-2/3 p-2">{{subtotal}}</td>
                     </tr>
                     </tbody>
@@ -79,10 +79,10 @@
 
             <section class="my-6 flex flex-col sm:flex-row flex-col-reverse justify-between items-center text-sm sm:text-base">
                 <Link :href="route('shipping')" class="rounded text-gray-500 text-center px-4 py-3 bg-gray-200 hover:bg-gray-300">
-                    <ArrowLeftCircleIcon class="w-5 h-5 inline" /> {{lang[locale].backButtonShipping}}
+                    <ArrowLeftCircleIcon class="w-5 h-5 inline" /> {{lang[locale].eshopBackButtonShipping}}
                 </Link>
                 <button @click="handleOrder" class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600">
-                    {{lang[locale].orderConfirmationButton}} <ArrowRightCircleIcon class="w-5 h-5 inline" />
+                    {{lang[locale].eshopOrderConfirmationButton}} <ArrowRightCircleIcon class="w-5 h-5 inline" />
                 </button>
             </section>
 

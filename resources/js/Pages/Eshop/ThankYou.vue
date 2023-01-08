@@ -2,14 +2,14 @@
     <Head title="Thank you" />
     <main-layout>
         <div class="max-w-xl mx-auto pt-8">
-            <h1 class="text-2xl text-center text-pink-600 font-semibold mb-4">{{lang[locale].thankYouTitle}}</h1>
+            <h1 class="text-2xl text-center text-pink-600 font-semibold mb-4">{{lang[locale].eshopThankYouTitle}}</h1>
 
             <div class="mb-4 text-center">
-                <p class="mb-2">{{lang[locale].thankYouNote}}</p>
-                <p class="mb-2 text-sm">{{lang[locale].thankYouStatusNote}}</p>
+                <p class="mb-2">{{lang[locale].eshopThankYouNote}}</p>
+                <p class="mb-2 text-sm">{{lang[locale].eshopThankYouStatusNote}}</p>
                 <p class="mb-10 text-sm font-bold">{{customerEmail}}</p>
                 <Link :href="route('home')" class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600">
-                    {{lang[locale].goHomeButton}} <HomeIcon class=" mb-0.5 w-5 h-5 ml-1 inline" />
+                    {{lang[locale].eshopGoHomeButton}} <HomeIcon class=" mb-0.5 w-5 h-5 ml-1 inline" />
                 </Link>
             </div>
 

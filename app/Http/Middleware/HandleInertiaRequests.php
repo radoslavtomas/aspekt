@@ -42,7 +42,7 @@ class HandleInertiaRequests extends Middleware
         $this->str = 'user';
         return array_merge(parent::share($request), [
             'translations' => function () {
-                return TranslationResource::collection(Translation::all());
+                return $this->getTranslations();
             },
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
@@ -63,5 +63,26 @@ class HandleInertiaRequests extends Middleware
 //        return Navigation::with('categories')->orderBy('position')->get()->filter(function($value, $key) {
 //            return $value['id'] != 43;
 //        });
+    }
+
+    private function getTranslations(): array
+    {
+        $lang = Translation::all();
+        return [
+            'sk' => $this->getTranslationsByLang('sk', $lang),
+            'en' => $this->getTranslationsByLang('en', $lang),
+        ];
+
+    }
+
+    private function getTranslationsByLang($lang, $translations): array
+    {
+        $data = [];
+
+        foreach ($translations as $value) {
+            $data[$value['key']] = $value[$lang];
+        }
+
+        return $data;
     }
 }

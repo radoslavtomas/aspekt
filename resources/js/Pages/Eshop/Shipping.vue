@@ -120,121 +120,121 @@ defineProps({
     <Head title="Shipping" />
     <main-layout>
         <div class="max-w-xl mx-auto pt-8">
-            <h1 class="text-2xl text-center text-pink-600 font-semibold mb-4">{{lang[locale].shippingTitle}}</h1>
+            <h1 class="text-2xl text-center text-pink-600 font-semibold mb-4">{{lang[locale].eshopShippingTitle}}</h1>
 
             <form @submit.prevent="handleForm">
-                <Card :title="lang[locale].infoPanel">
+                <Card :title="lang[locale].eshopInfoPanel">
                     <FormInput
                         v-model.trim="form.primary_email"
                         name="primary_email"
                         title="Email *" type="email"
-                        :placeholder="lang[locale].orderConfirmation"
+                        :placeholder="lang[locale].eshopOrderConfirmation"
                         :errors="v$.primary_email.$errors.length ? v$.primary_email.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.delivery_phone"
                         name="delivery_phone"
-                        :title="lang[locale].phone"
+                        :title="lang[locale].eshopPhone"
                         :errors="v$.delivery_phone.$errors.length ? v$.delivery_phone.$errors[0] : null"
                     />
                 </Card>
 
-                <Card :title="lang[locale].deliveryPanel">
+                <Card :title="lang[locale].eshopDeliveryPanel">
                     <FormInput
                         v-model.trim="form.delivery_first_name"
                         name="delivery_first_name"
-                        :title="lang[locale].name" type="text"
+                        :title="lang[locale].eshopName" type="text"
                         :errors="v$.delivery_first_name.$errors.length ? v$.delivery_first_name.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.delivery_last_name"
                         name="delivery_last_name"
-                        :title="lang[locale].surname" type="text"
+                        :title="lang[locale].eshopSurname" type="text"
                         :errors="v$.delivery_last_name.$errors.length ? v$.delivery_last_name.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.delivery_company"
                         name="delivery_company"
-                        :title="lang[locale].company" type="text"
+                        :title="lang[locale].eshopCompany" type="text"
                         :errors="v$.delivery_company.$errors.length ? v$.delivery_company.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.delivery_street1"
                         name="delivery_street1"
-                        :title="lang[locale].street" type="text"
+                        :title="lang[locale].eshopStreet" type="text"
                         :errors="v$.delivery_street1.$errors.length ? v$.delivery_street1.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.delivery_city"
                         name="delivery_city"
-                        :title="lang[locale].city" type="text"
+                        :title="lang[locale].eshopCity" type="text"
                         :errors="v$.delivery_city.$errors.length ? v$.delivery_city.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.delivery_postal_code"
                         name="delivery_postal_code"
-                        :title="lang[locale].postcode" type="text"
+                        :title="lang[locale].eshopPostcode" type="text"
                         :errors="v$.delivery_postal_code.$errors.length ? v$.delivery_postal_code.$errors[0] : null" />
 
                     <FormSelect
                         v-model="form.delivery_country"
                         name="delivery_country"
-                        :title="lang[locale].country"
+                        :title="lang[locale].eshopCountry"
                         :errors="v$.delivery_country.$errors.length ? v$.delivery_country.$errors[0] : null"
                         :options="options" />
 
                     <br>
 
-                    <FormCheckbox v-model="form.show_billing_panel" name="delivery_company" :title="lang[locale].billingCheckbox" />
+                    <FormCheckbox v-model="form.show_billing_panel" name="delivery_company" :title="lang[locale].eshopBillingCheckbox" />
                 </Card>
 
-                <Card v-if="form.show_billing_panel" :title="lang[locale].billingPanel">
+                <Card v-if="form.show_billing_panel" :title="lang[locale].eshopBillingPanel">
                     <FormInput
                         v-model.trim="form.billing_first_name"
                         name="billing_first_name"
-                        :title="lang[locale].name" type="text"
+                        :title="lang[locale].eshopName" type="text"
                         :errors="v$.billing_first_name.$errors.length ? v$.billing_first_name.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.billing_last_name"
                         name="billing_last_name"
-                        :title="lang[locale].surname" type="text"
+                        :title="lang[locale].eshopSurname" type="text"
                         :errors="v$.billing_last_name.$errors.length ? v$.billing_last_name.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.billing_company"
                         name="billing_company"
-                        :title="lang[locale].company" type="text"
+                        :title="lang[locale].eshopCompany" type="text"
                         :errors="v$.billing_company.$errors.length ? v$.billing_company.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.billing_street1"
                         name="billing_street1"
-                        :title="lang[locale].street" type="text"
+                        :title="lang[locale].eshopStreet" type="text"
                         :errors="v$.billing_street1.$errors.length ? v$.billing_street1.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.billing_city"
                         name="billing_city"
-                        :title="lang[locale].city" type="text"
+                        :title="lang[locale].eshopCity" type="text"
                         :errors="v$.billing_city.$errors.length ? v$.billing_city.$errors[0] : null" />
 
                     <FormInput
                         v-model.trim="form.billing_postal_code"
                         name="billing_postal_code"
-                        :title="lang[locale].postcode" type="text"
+                        :title="lang[locale].eshopPostcode" type="text"
                         :errors="v$.billing_postal_code.$errors.length ? v$.billing_postal_code.$errors[0] : null" />
 
                     <FormSelect
                         v-model="form.billing_country"
                         name="billing_country"
-                        :title="lang[locale].country"
+                        :title="lang[locale].eshopCountry"
                         :errors="v$.billing_country.$errors.length ? v$.billing_country.$errors[0] : null"
                         :options="options" />
                     <br>
                 </Card>
 
-                <Card :title="lang[locale].notePanel">
+                <Card :title="lang[locale].eshopNotePanel">
                     <FormTextarea
                         v-model="form.comment"
                         name="comment"
@@ -243,10 +243,10 @@ defineProps({
 
                 <section class="my-8 flex flex-col sm:flex-row flex-col-reverse justify-between items-center text-sm sm:text-base">
                     <Link :href="route('basket')" class="rounded text-gray-500 text-center px-4 py-3 bg-gray-200 hover:bg-gray-300">
-                        <ArrowLeftCircleIcon class="w-5 h-5 inline" /> {{lang[locale].backButtonShipping}}
+                        <ArrowLeftCircleIcon class="w-5 h-5 inline" /> {{lang[locale].eshopBackButtonShipping}}
                     </Link>
                     <button type="submit" class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600">
-                        {{lang[locale].forwardButtonShipping}} <ArrowRightCircleIcon class="w-5 h-5 inline" />
+                        {{lang[locale].eshopForwardButtonShipping}} <ArrowRightCircleIcon class="w-5 h-5 inline" />
                     </button>
                 </section>
             </form>

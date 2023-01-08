@@ -121,17 +121,9 @@ const mutations = {
 
 const actions = {
     setTranslations({ commit }, payload) {
-        console.log('from lang store', payload)
-        console.log(getTranslationsAccordingLanguage('sk', payload))
-        // commit('setTranslations', payload);
+        commit('setTranslations', payload);
     },
 };
-
-function getTranslationsAccordingLanguage(lang, payload) {
-    let data = {};
-    payload.forEach(item => data[item['key']] = item[lang]);
-    return data;
-}
 
 const getters = {
     lang(state) {

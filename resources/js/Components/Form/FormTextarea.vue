@@ -18,7 +18,7 @@
             rows="3"></textarea>
     </label>
     <span v-if="props.errors">
-            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-maxLength')">{{lang[locale].maxLength}}</span>
+            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-maxLength')">{{lang[locale].eshopValidationMaxLength}}</span>
         </span>
 </template>
 
