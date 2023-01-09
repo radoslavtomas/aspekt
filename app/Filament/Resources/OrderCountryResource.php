@@ -18,6 +18,7 @@ class OrderCountryResource extends Resource
     protected static ?string $model = OrderCountry::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-translate';
+    protected static ?string $navigationGroup = 'Eshop';
 
     public static function form(Form $form): Form
     {

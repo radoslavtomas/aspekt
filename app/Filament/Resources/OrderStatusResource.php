@@ -19,6 +19,8 @@ class OrderStatusResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-lightning-bolt';
 
+    protected static ?string $navigationGroup = 'Eshop';
+
     public static function form(Form $form): Form
     {
         return $form

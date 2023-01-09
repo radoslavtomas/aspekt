@@ -21,6 +21,13 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-euro';
 
+    protected static ?string $navigationGroup = 'Eshop';
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::where('order_status_id', 'processing')->count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form
