@@ -60,7 +60,7 @@ defineProps({
 
             <section v-if="basket.length" class="mt-4">
                 <p class="font-bold text-right">
-                    <span class="">{{lang[locale].eshopBSbtotal}}:</span>
+                    <span class="">{{lang[locale].eshopSubtotal}}:</span>
                     {{subtotal}}
                 </p>
             </section>

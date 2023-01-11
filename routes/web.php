@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\OrderCreatedCustomer;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -37,6 +39,11 @@ Route::get('language/{language}', function ($language) {
 
     return redirect()->back();
 })->name('language');
+
+Route::get('/mailables', function () {
+    Mail::to('radoslav.tomas@gmail.com')->send(new OrderCreatedCustomer());
+    return 'done';
+});
 
 //Route::get('/', function () {
 //    return Inertia::render('Welcome', [
