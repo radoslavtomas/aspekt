@@ -64,17 +64,6 @@
             -webkit-text-size-adjust: 100%;
         }
 
-        table {
-            border-collapse: separate;
-            mso-table-lspace: 0pt;
-            mso-table-rspace: 0pt;
-            width: 100%; }
-        table td {
-            font-family: sans-serif;
-            font-size: 14px;
-            vertical-align: top;
-        }
-
         /* -------------------------------------
             BODY & CONTAINER
         ------------------------------------- */
@@ -99,6 +88,7 @@
             box-sizing: border-box;
             display: block;
             margin: 0 auto;
+            min-width: 200px;
             max-width: 580px;
             padding: 10px;
         }
@@ -106,6 +96,54 @@
         /* -------------------------------------
             HEADER, FOOTER, MAIN
         ------------------------------------- */
+        .header {
+            box-sizing: border-box;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px 10px;
+            background-color: #f6f6f6;
+        }
+
+        .header .logo {
+            height: 3rem;
+            width: auto;
+        }
+
+        .footer {
+            box-sizing: border-box;
+            width: 100% !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 32px 10px !important;
+            color: white;
+            font-size: 10px;
+            background-color: #282a36;
+        }
+
+        .footer .description {
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer .address {
+            font-size: 12px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer .contact p {
+            font-size: 12px;
+            text-align: center;
+            margin: 0;
+            color: white;
+        }
+
         .main {
             background: #ffffff;
             border-radius: 3px;
@@ -120,21 +158,6 @@
         .content-block {
             padding-bottom: 10px;
             padding-top: 10px;
-        }
-
-        .footer {
-            clear: both;
-            margin-top: 10px;
-            text-align: center;
-            width: 100%;
-        }
-        .footer td,
-        .footer p,
-        .footer span,
-        .footer a {
-            color: #999999;
-            font-size: 12px;
-            text-align: center;
         }
 
         /* -------------------------------------
@@ -159,282 +182,138 @@
             text-transform: capitalize;
         }
 
-        p,
-        ul,
-        ol {
-            font-family: sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            margin: 0;
-            margin-bottom: 15px;
-        }
-        p li,
-        ul li,
-        ol li {
-            list-style-position: inside;
-            margin-left: 5px;
-        }
-
         a {
             color: #3498db;
             text-decoration: underline;
         }
 
-        /* -------------------------------------
-            BUTTONS
-        ------------------------------------- */
-        .btn {
-            box-sizing: border-box;
-            width: 100%; }
-        .btn > tbody > tr > td {
-            padding-bottom: 15px; }
-        .btn table {
-            width: auto;
-        }
-        .btn table td {
-            background-color: #ffffff;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .btn a {
-            background-color: #ffffff;
-            border: solid 1px #3498db;
-            border-radius: 5px;
-            box-sizing: border-box;
-            color: #3498db;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: bold;
+        p {
             margin: 0;
-            padding: 12px 25px;
-            text-decoration: none;
-            text-transform: capitalize;
-        }
-
-        .btn-primary table td {
-            background-color: #3498db;
-        }
-
-        .btn-primary a {
-            background-color: #3498db;
-            border-color: #3498db;
-            color: #ffffff;
+            padding: 0;
         }
 
         /* -------------------------------------
             OTHER STYLES THAT MIGHT BE USEFUL
         ------------------------------------- */
-        .last {
-            margin-bottom: 0;
-        }
-
-        .first {
-            margin-top: 0;
-        }
-
-        .align-center {
-            text-align: center;
-        }
-
-        .align-right {
-            text-align: right;
-        }
-
-        .align-left {
-            text-align: left;
-        }
-
-        .clear {
-            clear: both;
-        }
-
-        .mt0 {
-            margin-top: 0;
-        }
-
-        .mb0 {
-            margin-bottom: 0;
-        }
-
-        .preheader {
-            color: transparent;
-            display: none;
-            height: 0;
-            max-height: 0;
-            max-width: 0;
-            opacity: 0;
-            overflow: hidden;
-            mso-hide: all;
-            visibility: hidden;
-            width: 0;
-        }
-
-        .powered-by a {
-            text-decoration: none;
-        }
 
         hr {
             border: 0;
-            border-bottom: 1px solid #f6f6f6;
+            border-bottom: 1px solid #d4d4d4;
             margin: 20px 0;
         }
 
-        /* -------------------------------------
-            RESPONSIVE AND MOBILE FRIENDLY STYLES
-        ------------------------------------- */
-        @media only screen and (max-width: 620px) {
-            table.body h1 {
-                font-size: 28px !important;
-                margin-bottom: 10px !important;
-            }
-            table.body p,
-            table.body ul,
-            table.body ol,
-            table.body td,
-            table.body span,
-            table.body a {
-                font-size: 16px !important;
-            }
-            table.body .wrapper,
-            table.body .article {
-                padding: 10px !important;
-            }
-            table.body .content {
-                padding: 0 !important;
-            }
-            table.body .container {
-                padding: 0 !important;
-                width: 100% !important;
-            }
-            table.body .main {
-                border-left-width: 0 !important;
-                border-radius: 0 !important;
-                border-right-width: 0 !important;
-            }
-            table.body .btn table {
-                width: 100% !important;
-            }
-            table.body .btn a {
-                width: 100% !important;
-            }
-            table.body .img-responsive {
-                height: auto !important;
-                max-width: 100% !important;
-                width: auto !important;
-            }
+        .order-note {
+            text-align: center;
+            padding: 1rem 0;
         }
 
-        /* -------------------------------------
-            PRESERVE THESE STYLES IN THE HEAD
-        ------------------------------------- */
-        @media all {
-            .ExternalClass {
-                width: 100%;
-            }
-            .ExternalClass,
-            .ExternalClass p,
-            .ExternalClass span,
-            .ExternalClass font,
-            .ExternalClass td,
-            .ExternalClass div {
-                line-height: 100%;
-            }
-            .apple-link a {
-                color: inherit !important;
-                font-family: inherit !important;
-                font-size: inherit !important;
-                font-weight: inherit !important;
-                line-height: inherit !important;
-                text-decoration: none !important;
-            }
-            #MessageViewBody a {
-                color: inherit;
-                text-decoration: none;
-                font-size: inherit;
-                font-family: inherit;
-                font-weight: inherit;
-                line-height: inherit;
-            }
-            .btn-primary table td:hover {
-                background-color: #34495e !important;
-            }
-            .btn-primary a:hover {
-                background-color: #34495e !important;
-                border-color: #34495e !important;
-            }
+        .order-note p {
+            margin: 0;
+        }
+
+        .order-item {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+            border-color: rgb(209 213 219);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        .order-item:last-child {
+            border-bottom: 0;
+        }
+
+        .order-item .image-preview {
+            grid-column: span 4 / span 4;
+            text-align: right;
+        }
+
+        .order-item .books-meta-preview {
+            grid-column: span 8 / span 8;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+
+        .image-preview img {
+            width: 8rem;
+            height: auto;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            border-color: rgb(229 231 235);
+            border-radius: 0.25rem;
+        }
+
+        .books-meta-preview .meta {
+            margin-bottom: 0.5rem;
+        }
+
+        .books-meta-preview .qty {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            padding-bottom: 4px;
+        }
+
+        .meta h4 {
+            font-size: 1rem;
+            line-height: 1.5rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .meta h6 {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-style: italic;
+            margin: 0 0 0.25rem 0;
+            font-weight: 400;
+        }
+
+        .subtotal {
+            width: 100%;
+            margin: 20px 0;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .subtotal .content {
+            border: 0;
+            border-top: 1px solid #d4d4d4;
+        }
+
+        .subtotal .content p {
+            text-align: right;
+            padding: 10px 20px;
+        }
+
+        .content-center {
+            display: flex;
+            flex-direction: column;
+            justify-items: start;
+            align-items: center;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .text-center {
+            text-align: center;
         }
 
     </style>
 </head>
 <body>
-<span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
-<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
-    <tr>
-        <td>&nbsp;</td>
-        <td class="container">
-            <div class="content">
+<x-email-header />
 
-                <!-- START CENTERED WHITE CONTAINER -->
-                <table role="presentation" class="main">
+<x-email-main-order-created
+    :basket="$basket"
+    :orderTotal="$orderTotal"
+/>
 
-                    <!-- START MAIN CONTENT AREA -->
-                    <tr>
-                        <td class="wrapper">
-                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td>
-                                        <p>Hi there,</p>
-                                        <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
-                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                                            <tbody>
-                                            <tr>
-                                                <td align="left">
-                                                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td> <a href="http://htmlemail.io" target="_blank">Call To Action</a> </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <p>This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
-                                        <p>Good luck! Hope it works.</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <!-- END MAIN CONTENT AREA -->
-                </table>
-                <!-- END CENTERED WHITE CONTAINER -->
-
-                <!-- START FOOTER -->
-                <div class="footer">
-                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td class="content-block">
-                                <span class="apple-link">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
-                                <br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="content-block powered-by">
-                                Powered by <a href="http://htmlemail.io">HTMLemail</a>.
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <!-- END FOOTER -->
-
-            </div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-</table>
+<x-email-footer />
 </body>
 </html>

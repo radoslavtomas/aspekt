@@ -14,14 +14,18 @@ class OrderCreatedCustomer extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $basket;
+    public $orderTotal;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($basket, $orderTotal)
     {
-        //
+        $this->basket = $basket;
+        $this->orderTotal = $orderTotal / 100 . '€';
     }
 
     /**
@@ -45,7 +49,7 @@ class OrderCreatedCustomer extends Mailable
     public function content()
     {
         return new Content(
-            markdown: 'emails.orders.CreatedCustomer',
+            view: 'emails.orders.CreatedCustomer',
         );
     }
 

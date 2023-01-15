@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderCreatedCustomer;
 use App\Models\Order;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use App\Helpers\Sanitize;
 
@@ -71,6 +73,8 @@ class EshopController extends Controller
         {
             $order->items()->create($item);
         }
+
+        Mail::to($customer['primary_email'])->send(new OrderCreatedCustomer($basket, $customer['order_total']));
 
         return Inertia::render('Eshop/ThankYou');
     }

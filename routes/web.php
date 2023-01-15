@@ -45,6 +45,10 @@ Route::get('/mailables', function () {
     return 'done';
 });
 
+Route::get('/mailables/test', function () {
+    return view('emails.orders.CreatedCustomer');
+});
+
 //Route::get('/', function () {
 //    return Inertia::render('Welcome', [
 //        'canLogin' => Route::has('login'),
