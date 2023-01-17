@@ -65,7 +65,7 @@ class OrderResource extends Resource
                             ->label('Postal code'),
                         Forms\Components\Select::make('delivery_country')
                             ->label('Country')
-                            ->relationship('country', 'country_name_sk'),
+                            ->relationship('deliveryCountry', 'country_name_sk'),
                         Forms\Components\TextInput::make('delivery_company')
                             ->label('Company'),
                     ]),
@@ -87,7 +87,7 @@ class OrderResource extends Resource
                             ->label('Postal code'),
                         Forms\Components\Select::make('billing_country')
                             ->label('Country')
-                            ->relationship('country', 'country_name_sk'),
+                            ->relationship('billingCountry', 'country_name_sk'),
                         Forms\Components\TextInput::make('billing_company')
                             ->label('Company'),
                     ]),

@@ -29,18 +29,18 @@
                 </section>
 
                 <section v-if="blog.links" class="mb-6">
-                    <Separator :title="lang[locale].links" margin />
+                    <Separator :title="lang[locale].articleLinks" margin />
                     <div v-html="blog.links"></div>
                 </section>
 
 
                 <section v-if="blog.files.length" class="mb-6">
-                    <Separator :title="lang[locale].files" margin />
+                    <Separator :title="lang[locale].aricleFiles" margin />
                     <file-list :files="blog.files" />
                 </section>
 
                 <section v-if="blog.downloads.length" class="mb-6">
-                    <Separator :title="lang[locale].downloads" margin />
+                    <Separator :title="lang[locale].articleDownloads" margin />
                     <file-list :files="blog.downloads" />
                 </section>
             </main>

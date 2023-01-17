@@ -22,7 +22,7 @@
                 </section>
 
                 <section v-if="person.links" class="mb-6">
-                    <Separator :title="lang[locale].links" margin />
+                    <Separator :title="lang[locale].articleLinks" margin />
                     <div v-html="person.links"></div>
                 </section>
             </main>

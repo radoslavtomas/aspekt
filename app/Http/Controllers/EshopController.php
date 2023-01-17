@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderCreatedAdmin;
 use App\Mail\OrderCreatedCustomer;
 use App\Models\Order;
 use http\Env\Response;
@@ -74,7 +75,10 @@ class EshopController extends Controller
             $order->items()->create($item);
         }
 
+        $customerName = $customer['delivery_first_name'] . ' ' . $customer['delivery_last_name'];
+
         Mail::to($customer['primary_email'])->send(new OrderCreatedCustomer($basket, $customer['order_total']));
+        Mail::to('katka.z.eshopu@aspket.sk')->send(new OrderCreatedAdmin($customer['primary_email'], $customerName, $order['id']));
 
         return Inertia::render('Eshop/ThankYou');
     }

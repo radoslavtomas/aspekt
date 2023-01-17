@@ -47,9 +47,14 @@ class Order extends Model
         return $this->belongsTo(OrderStatus::class, 'order_status_id', 'status');
     }
 
-    public function country()
+    public function deliveryCountry()
     {
-        return $this->belongsTo(OrderCountry::class);
+        return $this->belongsTo(OrderCountry::class, 'delivery_country', 'id');
+    }
+
+    public function billingCountry()
+    {
+        return $this->belongsTo(OrderCountry::class, 'billing_country', 'id');
     }
 
     public function items()
