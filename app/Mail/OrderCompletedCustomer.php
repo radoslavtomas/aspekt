@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -13,14 +14,18 @@ class OrderCompletedCustomer extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public array $basket;
+    public string $orderTotal;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($basket, $orderTotal)
     {
-        //
+        $this->basket = $basket;
+        $this->orderTotal = number_format($orderTotal / 100, 2) . ' €';
     }
 
     /**

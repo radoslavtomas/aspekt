@@ -21,4 +21,9 @@ class OrderItem extends Model
         'title',
         'qty',
     ];
+
+    public function book()
+    {
+        return $this->hasOne(Book::class, 'id', 'book_id');
+    }
 }

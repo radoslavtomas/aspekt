@@ -16,7 +16,6 @@ class EditOrder extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        // dd($data);
         $data['order_total']= $data['order_total'] * 100;
         return $data;
     }
@@ -29,8 +28,30 @@ class EditOrder extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
-        if($data['order_status_id'] == 'completed') {
-            Mail::to($data['primary_email'])->send(new OrderCompletedCustomer());
+        if (
+            // only send email when order_status_id has changed to completed
+            // ignore updates on other fields
+            isset($record->getChanges()['order_status_id']) &&
+            $record->getChanges()['order_status_id'] == 'completed'
+        ) {
+            // get formatted basket
+            $basket = $record->items()->with('book')->get()->map(function($item) {
+                return [
+                    'cover' => $item['book']['cover'],
+                    'authors' => $item['book']['authors'],
+                    'aspekt_price' => number_format($item['price'] / 100, 2) . ' €',
+                    'title' => $item['title'],
+                    'qty' => $item['qty']
+                ];
+            })->toArray();
+
+            // send email
+            Mail::to($data['primary_email'])->send(
+                new OrderCompletedCustomer(
+                    $basket,
+                    $record['order_total']
+                )
+            );
         }
 
         $record->update($data);

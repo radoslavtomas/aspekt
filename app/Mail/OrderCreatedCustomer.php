@@ -14,8 +14,8 @@ class OrderCreatedCustomer extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $basket;
-    public $orderTotal;
+    public array $basket;
+    public string $orderTotal;
 
     /**
      * Create a new message instance.
@@ -25,7 +25,7 @@ class OrderCreatedCustomer extends Mailable
     public function __construct($basket, $orderTotal)
     {
         $this->basket = $basket;
-        $this->orderTotal = $orderTotal / 100 . '€';
+        $this->orderTotal = number_format($orderTotal / 100, 2) . ' €';
     }
 
     /**

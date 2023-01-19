@@ -5,14 +5,14 @@
 
         <section class="content order-note">
             <h4 class="font-bold">Vaša objednávka bola odoslaná.</h4>
-            <p class="">Prajeme pekné čítanie.</p>
+            <p class="">Prajeme príjemné čítanie.</p>
             <hr>
         </section>
 
-{{--        <x-email-order-summary--}}
-{{--            :basket="$basket"--}}
-{{--            :orderTotal="$orderTotal"--}}
-{{--        />--}}
+        <x-email-order-summary
+            :basket="$basket"
+            :orderTotal="$orderTotal"
+        />
 
     </main>
 
