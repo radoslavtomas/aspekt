@@ -10,6 +10,13 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import MasonryWall from '@yeger/vue-masonry-wall'
 import store from "./store/index.js";
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faLink } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faFacebook, faInstagram, faLink)
+
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
 createInertiaApp({
@@ -20,6 +27,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy, MasonryWall)
             .use(store)
+            .component('font-awesome-icon', FontAwesomeIcon)
             .mount(el);
     },
 });

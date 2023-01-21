@@ -3,6 +3,9 @@ import {Head, Link, usePage} from '@inertiajs/inertia-vue3';
 import MainLayout from '../Layouts/MainLayout.vue'
 import {computed} from "vue";
 
+import {PhoneIcon, EnvelopeIcon} from '@heroicons/vue/24/outline';
+import SocialLinks from "@/Components/SocialLinks.vue";
+
 const lang = computed(() => store.getters.lang);
 const locale = computed(() => usePage().props.value.locale);
 
@@ -12,31 +15,52 @@ const locale = computed(() => usePage().props.value.locale);
     <Head title="Kontakt" />
     <main-layout>
         <div class="max-w-5xl mx-auto">
-            <h1 class="border-b border-gray-300 pb-8 text-3xl text-red-600 font-bold my-8 text-center">
-                <span class=" pb-2 px-4">Kontakt</span>
-            </h1>
-            <div class="mb-12 flex flex-col lg:flex-row">
+<!--            <h1 class="border-b border-gray-300 pb-8 text-3xl text-red-600 font-bold my-8 text-center">-->
+<!--                <span class=" pb-2 px-4">Kontakt</span>-->
+<!--            </h1>-->
+            <div class="my-6 sm:my-4 flex flex-col lg:flex-row">
                 <div class="mr-12 w-full lg:w-3/12 text-center lg:text-left mb-8 lg:mb-0">
-                    <section class="mb-12 text-2xl">
-                        <p class="mb-2 font-bold text-3xl">ASPEKT</p>
-                        <p class="mb-2">Mýtna 38</p>
-                        <p class="mb-2">Bratislava</p>
-                        <p class="mb-2">811 07</p>
+                    <section class="mb-4 text-xl">
+                        <h1 class="font-bold mb-1 text-sm text-red-500 uppercase">Príďte</h1>
+                        <p>ASPEKT</p>
+                        <p>Mýtna 38</p>
+                        <p>Bratislava</p>
+                        <p>811 07</p>
                     </section>
 
-                    <section class="mb-4">
-                        <h1 class="font-bold text-sm mb-2 text-red-500">Koordinácia</h1>
-                        <a href="tel:+421252491639" class="block underline">+ 421 2 5249 1639</a>
-                        <a href="tel:+421918479677" class="block underline">+ 421 918 479 677</a>
-                        <a href="mailto:aspekt@aspekt.sk" class="block mt-1 text-gray-700 hover:text-gray-800">aspekt@aspekt.sk</a>
+                    <section class="mb-4 text-sm">
+                        <h1 class="font-bold mb-1 text-red-500 uppercase">Volajte</h1>
+                        <a href="tel:+421252491639" class="hover:underline flex items-center">
+                            <phone-icon class="mr-1 w-4 h-4" />
+                            + 421 2 5249 1639
+                        </a>
+                        <a href="tel:+421918479677" class="hover:underline flex items-center">
+                            <phone-icon class="mr-1 w-4 h-4" />
+                            + 421 918 479 677
+                        </a>
                     </section>
-                    <section class="mb-4">
-                        <h1 class="font-bold text-sm mb-2 text-red-500">Administratíva</h1>
-                        <a href="mailto:administrativa@aspekt.sk" class="block text-gray-700 hover:text-gray-800">administrativa@aspekt.sk</a>
+                    <section class="mb-4 text-sm">
+                        <h1 class="font-bold mb-1 text-red-500 uppercase">Píšte</h1>
+                        <p class="font-bold">Koordinácia</p>
+                        <a href="mailto:administrativa@aspekt.sk" class="flex items-center text-gray-700 hover:text-gray-800">
+                            <envelope-icon class="mr-1 w-4 h-4" />
+                            administrativa@aspekt.sk
+                        </a>
+                        <a href="mailto:aspekt@aspekt.sk" class="flex items-center text-gray-700 hover:text-gray-800">
+                            <envelope-icon class="mr-1 w-4 h-4" />
+                            aspekt@aspekt.sk
+                        </a>
+                        <p class="mt-2 font-bold">Knižnica</p>
+                        <a href="mailto:kniznica@aspekt.sk" class="flex items-center text-gray-700 hover:text-gray-800">
+                            <envelope-icon class="mr-1 w-4 h-4" />
+                            kniznica@aspekt.sk
+                        </a>
                     </section>
-                    <section>
-                        <h1 class="font-bold text-sm mb-2 text-red-500">Knižnica</h1>
-                        <a href="mailto:kniznica@aspekt.sk" class="block text-gray-700 hover:text-gray-800">kniznica@aspekt.sk</a>
+                    <section class="text-sm">
+                        <h1 class="font-bold mb-1 text-red-500 uppercase">Zostaňte v kontakte</h1>
+                        <div class="text-gray-800">
+                            <social-links />
+                        </div>
                     </section>
                 </div>
                 <div class="w-full lg:w-9/12">
