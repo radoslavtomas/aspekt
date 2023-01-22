@@ -2,11 +2,11 @@
     <section>
         <Head :title="title" />
 
-        <Breadcrumbs id="books"/>
-
-        <h1 class="text-3xl md:text-2xl text-red-600 font-bold my-8 text-center">
+        <h1 v-if="category.url !== 'vsetko'" class="text-3xl md:text-2xl text-red-600 font-bold my-4 text-center">
             <span class="px-4">{{categoryString}}</span>
         </h1>
+
+        <Breadcrumbs id="books"/>
 
         <div class="bg-books sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
             <MasonryWall :items="items.data" :column-width="230" :gap="16">

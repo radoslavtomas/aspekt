@@ -1,6 +1,6 @@
 <template>
 <li class="mb-0.5">
-    <a :href="props.file.filepath" download class="flex justify-start items-center">
+    <a :href="`/storage${props.file.filepath}`" download class="flex justify-start items-center">
         <document-pdf-icon v-if="isPdf" class="h-4 w-4 mr-1 text-red-600" />
         <photo-icon v-if="isImage" class="h-4 w-4 mr-1 text-blue-700" />
         <paper-clip-icon v-if="isOther" class="h-4 w-4 mr-1 text-gray-500" />
@@ -13,7 +13,7 @@
 import DocumentPdfIcon from '../Icons/DocumentPdfIcon.vue';
 import { PhotoIcon } from '@heroicons/vue/24/outline';
 import { PaperClipIcon } from '@heroicons/vue/24/outline';
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 
 const props = defineProps({
     file: Object

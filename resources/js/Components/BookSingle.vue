@@ -4,7 +4,7 @@
 
         <Breadcrumbs id="books" :article="book.title"/>
 
-        <article class="mt-10">
+        <article>
             <header class="relative flex flex-col md:flex-row justify-between items-center md:items-start mb-6 md:mb-12">
                 <div class="text-center md:text-left w-full h-full flex-1 flex flex-col justify-items-stretch">
                     <div class="">
@@ -88,9 +88,6 @@ const navigation = computed(() => usePage().props.value.navigation);
 const store = useStore()
 const lang = computed(() => store.getters.lang);
 
-const title = computed(() => {
-    const navigationString = computed(() => navigation.value.find(el => el.route === 'books')[`name_${locale.value}`]);
-    const articleString = book.value.title
-    return `${navigationString.value} | ${articleString}`
-})
+const navigationString = computed(() => navigation.value.find(el => el.route === 'books')[`name_${locale.value}`]);
+const title = computed(() => `${navigationString.value} | ${book.value.title}`);
 </script>
