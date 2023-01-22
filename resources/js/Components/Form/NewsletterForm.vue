@@ -1,12 +1,12 @@
 <template>
-    <section class="bg-gray-200 mt-8 px-4 pt-8 pb-10 sm:rounded shadow-lg">
+    <section class="p-4">
         <div class="text-center">
             <h5 class="uppercase font-bold text-pink-600 text-gradient">
                 {{lang[locale].njuvinkyTitle}}
             </h5>
             <p class="text-xs">{{lang[locale].njuvinkySubtitle}}</p>
 
-            <p class="text-xs italic mt-4 w-full sm:w-2/3 mx-auto">
+            <p class="text-xs italic mt-4 w-full mx-auto">
                 {{lang[locale].njuvinkyDescription}}</p>
         </div>
 
@@ -24,8 +24,8 @@
             </button>
         </div>
 
-        <div class="flex items-center justify-center mt-2 text-green-700 max-w-screen-sm mx-auto text-sm text-center">{{lang[locale].njuvinkyRegistrationSuccess}}<CheckIcon class="w-4 h-4 ml-1 inline" /></div>
-        <div class="flex items-center justify-center mt-2 text-red-700 max-w-screen-sm mx-auto text-sm text-center">{{lang[locale].njuvinkyRegistrationError}}</div>
+<!--        <div class="flex items-center justify-center mt-2 text-green-700 max-w-screen-sm mx-auto text-sm text-center">{{lang[locale].njuvinkyRegistrationSuccess}}<CheckIcon class="w-4 h-4 ml-1 inline" /></div>-->
+<!--        <div class="flex items-center justify-center mt-2 text-red-700 max-w-screen-sm mx-auto text-sm text-center">{{lang[locale].njuvinkyRegistrationError}}</div>-->
     </section>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
-<div class="w-full relative h-7 overflow-hidden">
-    <span :class="positionClass" class="absolute border-b border-gray-400 inline-block h-7 overflow-hidden">
-        <img  class="peekaboo h-7 hidden sm:block" src="/assets/img/cats_small.gif" alt="cats_winking">
+<div class="relative w-full h-7 overflow-hidden">
+    <span :class="positionClass" class="absolute border-b border-gray-400">
+        <img  class="peekaboo h-7" src="/assets/img/cats_small.gif" alt="cats_winking">
     </span>
 </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <section class="aspekt-hero flex justify-center items-center flex-col px-2 py-6 sm:py-8 mt-4 sm:mt-8 mb-6 border border-gray-100">
+    <section class="aspekt-hero flex justify-center items-center flex-col px-2 py-6 sm:py-8 mt-4 border border-gray-100">
         <img class="w-36 h-auto" src="/assets/img/logo_clean.png" alt="Aspekt Logo">
         <div class="relative flex justify-center items-center mt-4 px-2 py-0.5 rounded-lg">
             <div class="bg-gray-100 opacity-70 z-0 absolute top-0 right-0 w-full h-full"></div>
