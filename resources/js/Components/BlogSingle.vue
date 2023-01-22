@@ -38,6 +38,10 @@
                     <file-list :files="blog.downloads" />
                 </section>
             </main>
+
+            <footer class="max-w-2xl mx-auto px-1">
+                <CiteThis :blog="blog"/>
+            </footer>
         </article>
     </div>
 </template>
@@ -51,6 +55,7 @@ import FileList from './FileList.vue'
 import Breadcrumbs from '../Components/Breadcrumbs.vue';
 import Separator from "@/Components/Separator.vue";
 import AspektinHero from "@/Components/AspektinHero.vue";
+import CiteThis from "@/Components/CiteThis.vue";
 import {useStore} from "vuex";
 
 // computed

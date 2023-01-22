@@ -25,6 +25,7 @@ class BlogExtResource extends JsonResource
             'files' => FileResource::collection($this->files),
             'downloads' => FileResource::collection($this->downloads),
             'feature_img' => $this->feature_img ? '/storage' . $this->feature_img : null,
+            'created_at' => $this->created_at->format('d/m/y')
         ];
     }
 }
