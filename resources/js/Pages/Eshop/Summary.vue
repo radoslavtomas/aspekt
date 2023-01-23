@@ -166,10 +166,6 @@ const emptyBasket = ref(false);
 const handleOrder = () => {
     if(sendingOrder.value) return;
 
-    // @TODO: check this properly
-    console.log(typeof formData.value.basket)
-    console.log(typeof formData.value.customer)
-
     if(!formData.value.basket.length || !Object.keys(formData.value.customer).length) {
         emptyBasket.value = true;
         return;

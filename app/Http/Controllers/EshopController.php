@@ -7,6 +7,7 @@ use App\Mail\OrderCreatedCustomer;
 use App\Models\Order;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use App\Helpers\Sanitize;
@@ -77,8 +78,12 @@ class EshopController extends Controller
 
         $customerName = $customer['delivery_first_name'] . ' ' . $customer['delivery_last_name'];
 
-        Mail::to($customer['primary_email'])->send(new OrderCreatedCustomer($basket, $customer['order_total']));
-        Mail::to('katka.z.eshopu@aspket.sk')->send(new OrderCreatedAdmin($customer['primary_email'], $customerName, $order['id']));
+        try {
+            Mail::to($customer['primary_email'])->send(new OrderCreatedCustomer($basket, $customer['order_total']));
+            Mail::to('katka.z.eshopu@aspket.sk')->send(new OrderCreatedAdmin($customer['primary_email'], $customerName, $order['id']));
+        } catch (\Exception $exception) {
+            Log::error($exception);
+        }
 
         return Inertia::render('Eshop/ThankYou');
     }
