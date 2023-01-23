@@ -77,12 +77,19 @@
                 </table>
             </div>
 
+            <p v-if="emptyBasket" class="text-sm text-red-500 font-bold"><ExclamationTriangleIcon class="h-5 w-5 inline-block" /> Váš košík je prázdny</p>
+
             <section class="my-6 flex flex-col sm:flex-row flex-col-reverse justify-between items-center text-sm sm:text-base">
                 <Link :href="route('shipping')" class="rounded text-gray-500 text-center px-4 py-3 bg-gray-200 hover:bg-gray-300">
                     <ArrowLeftCircleIcon class="w-5 h-5 inline" /> {{lang[locale].eshopBackButtonShipping}}
                 </Link>
-                <button @click="handleOrder" class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600">
-                    {{lang[locale].eshopOrderConfirmationButton}} <ArrowRightCircleIcon class="w-5 h-5 inline" />
+                <button
+                    @click="handleOrder"
+                    :class="sendingOrder ? 'bg-pink-300' : 'bg-pink-500 hover:bg-pink-600'"
+                    class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md">
+                    {{lang[locale].eshopOrderConfirmationButton}}
+                    <ArrowPathIcon v-if="sendingOrder" class="w-5 h-5 inline animate-spin" />
+                    <ArrowRightCircleIcon v-else class="w-5 h-5 inline" />
                 </button>
             </section>
 
@@ -97,11 +104,16 @@
 import {Head, usePage} from '@inertiajs/inertia-vue3';
 import MainLayout from '../../Layouts/MainLayout.vue'
 import {useStore} from "vuex";
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import { useForm } from '@inertiajs/inertia-vue3'
 
 import {Link} from "@inertiajs/inertia-vue3";
-import {ArrowRightCircleIcon, ArrowLeftCircleIcon} from '@heroicons/vue/24/outline';
+import {
+    ArrowRightCircleIcon,
+    ArrowLeftCircleIcon,
+    ArrowPathIcon,
+    ExclamationTriangleIcon
+} from '@heroicons/vue/24/outline';
 
 const store = useStore();
 
@@ -148,12 +160,26 @@ const formData = computed(() => {
 });
 
 const form = useForm(formData.value);
+const sendingOrder = ref(false);
+const emptyBasket = ref(false);
 
 const handleOrder = () => {
-    console.log('just before POST')
-    console.log(formData.value)
+    if(sendingOrder.value) return;
+
+    // @TODO: check this properly
+    console.log(typeof formData.value.basket)
+    console.log(typeof formData.value.customer)
+
+    if(!formData.value.basket.length || !Object.keys(formData.value.customer).length) {
+        emptyBasket.value = true;
+        return;
+    }
+
+    sendingOrder.value = true;
+
+    // handle if email provider is not available
     form.post('/eshop/create-order', {
-        onSuccess: () => console.log('hey'),
+        onSuccess: () => sendingOrder.value = false,
     })
 }
 </script>

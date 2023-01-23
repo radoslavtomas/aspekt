@@ -10,7 +10,7 @@
         <slot />
 
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 bg-gray-200 rounded shadow-md p-2">
-            <div class="">
+            <div class="p-4 flex flex-col justify-start">
                 <support-us />
             </div>
 
