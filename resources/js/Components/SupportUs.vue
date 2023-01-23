@@ -8,33 +8,34 @@
 <!--            </span>-->
 <!--    </a>-->
 <!--</section>-->
-    <section class="p-4">
-        <div class="text-center">
-            <h5 class="uppercase font-bold text-pink-600 text-gradient mb-8">
-                Podporte nas
-            </h5>
-<!--            <p class="text-xs">{{lang[locale].njuvinkySubtitle}}</p>-->
+    <div class="mt-8 border border-gray-100 rounded shadow-md relative overflow-hidden">
+        <div class="p-4 flex flex-row justify-center">
+            <section class="p-2 flex items-center">
+                <div class="flex justify-center items-center flex-col xl:flex-row mr-36 xl:mr-0">
+                    <div class="text-center mb-1 xl:mr-4 xl:mb-0">
+                        <h5 class="font-bold text-pink-600">
+                            Paci sa Vam nasa praca? Podporte nas!
+                        </h5>
+                    </div>
 
-            <p class="text-xs italic mt-4 w-full mx-auto">
-                Paci sa Vam nasa praca? Aj nam. Navyse, myslime si, ze je dolezita. Nezaplati sa vsak sama a vlada na nas kasle. Vy nemusite :)
-            </p>
+                    <div class="flex justify-center items-center flex-col sm:flex-row max-w-screen-sm mx-auto z-10">
+                        <button type="submit" class="text-sm text-white text-center px-3 py-1.5 shadow-sm border border-pink-500 bg-pink-500 hover:bg-pink-600 rounded">
+                            Prispevok k feministickej buducnosti <ArrowTopRightOnSquareIcon class="w-4 h-4 ml-1 inline" />
+                        </button>
+                    </div>
+                </div>
+
+                <img src="/assets/img/cat_with_eyes.gif" class="absolute w-28 h-auto right-32 md:right-46 lg:right-44 top-4 xl:-top-2" alt="">
+            </section>
         </div>
+    </div>
 
-        <div class="flex justify-center items-center flex-col sm:flex-row max-w-screen-sm mx-auto mt-8">
-            <button type="submit" class="text-sm text-white text-center px-4 py-2.5 shadow-sm border border-pink-500 bg-pink-500 hover:bg-pink-600">
-                Podporte nas <HeartIcon class="w-4 h-4 ml-1 inline" />
-            </button>
-        </div>
-
-        <!--        <div class="flex items-center justify-center mt-2 text-green-700 max-w-screen-sm mx-auto text-sm text-center">{{lang[locale].njuvinkyRegistrationSuccess}}<CheckIcon class="w-4 h-4 ml-1 inline" /></div>-->
-        <!--        <div class="flex items-center justify-center mt-2 text-red-700 max-w-screen-sm mx-auto text-sm text-center">{{lang[locale].njuvinkyRegistrationError}}</div>-->
-    </section>
 </template>
 
 <script setup>
 import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
-import {HeartIcon} from '@heroicons/vue/24/outline';
+import {ArrowTopRightOnSquareIcon} from '@heroicons/vue/24/outline';
 import {useStore} from "vuex";
 
 const store = useStore();

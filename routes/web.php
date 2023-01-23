@@ -45,6 +45,8 @@ Route::get('/mailables', function () {
     return 'done';
 });
 
+Route::get('/mailchimp', ['App\Http\Controllers\HomeController', 'mailchimp']);
+
 Route::get('/mailables/test', function () {
     return view('emails.orders.CreatedCustomer');
 });

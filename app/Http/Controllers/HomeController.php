@@ -10,6 +10,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use MailchimpMarketing;
 
 class HomeController extends Controller
 {
@@ -41,5 +42,19 @@ class HomeController extends Controller
             'blogs' => $featured_blogs,
             'books' => $featured_books,
         ]);
+    }
+
+    public function mailchimp()
+    {
+        $list_id = env('MAILCHIMP_LIST_ID');
+        $mailchimp = new MailchimpMarketing\ApiClient();
+
+        $mailchimp->setConfig([
+            'apiKey' => env('MAILCHIMP_API_KEY'),
+            'server' => env('MAILCHIMP_SERVER_PREFIX')
+        ]);
+
+        $response = $mailchimp->lists->tagSearch($list_id);
+        dd($response);
     }
 }

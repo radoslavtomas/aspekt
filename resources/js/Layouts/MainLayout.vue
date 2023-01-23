@@ -9,15 +9,24 @@
 
         <slot />
 
-        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 bg-gray-200 rounded shadow-md p-2">
-            <div class="p-4 flex flex-col justify-start">
-                <support-us />
-            </div>
+<!--        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 bg-gray-200 rounded shadow-md p-2">-->
+<!--            <div class="p-4 flex flex-col justify-start">-->
+<!--                <support-us />-->
+<!--            </div>-->
 
-            <div class="p-4 flex flex-col justify-start border-t border-gray-300 dark:border-gray-700 md:border-t-0 md:border-l">
+<!--            <div class="p-4 flex flex-col justify-start border-t border-gray-300 dark:border-gray-700 md:border-t-0 md:border-l">-->
+<!--                <NewsletterForm />-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <support-us />
+
+        <div class="mt-8 bg-gray-200 rounded shadow-md p-4">
+            <div class="p-4 flex flex-col justify-start">
                 <NewsletterForm />
             </div>
         </div>
+
         <AspektInfo />
     </main>
 
