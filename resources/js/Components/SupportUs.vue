@@ -8,24 +8,30 @@
 <!--            </span>-->
 <!--    </a>-->
 <!--</section>-->
-    <div class="mt-8 border border-gray-100 rounded shadow-md relative overflow-hidden">
+    <div class="mt-8 border border-pink-200 rounded shadow-md relative overflow-hidden">
         <div class="p-4 flex flex-row justify-center">
             <section class="p-2 flex items-center">
-                <div class="flex justify-center items-center flex-col xl:flex-row mr-36 xl:mr-0">
+                <div class="flex justify-center items-center flex-col xl:flex-row mr-0 xl:mr-0">
                     <div class="text-center mb-1 xl:mr-4 xl:mb-0">
                         <h5 class="font-bold text-pink-600">
-                            Paci sa Vam nasa praca? Podporte nas!
+                            Páči sa Vám naša práca? <span class="hidden sm:inline-block">Podporte nás!</span>
                         </h5>
                     </div>
 
                     <div class="flex justify-center items-center flex-col sm:flex-row max-w-screen-sm mx-auto z-10">
-                        <button type="submit" class="text-sm text-white text-center px-3 py-1.5 shadow-sm border border-pink-500 bg-pink-500 hover:bg-pink-600 rounded">
-                            Prispevok k feministickej buducnosti <ArrowTopRightOnSquareIcon class="w-4 h-4 ml-1 inline" />
-                        </button>
+                        <a
+                            href="https://aspekt.darujme.sk/prispevok-k-feministickej-buducnosti-3470e/"
+                            target="_blank"
+                            class="text-sm text-white text-center px-3 py-1.5 shadow-sm border border-pink-500 bg-pink-500 hover:bg-pink-600 rounded"
+                        >
+                            <span class="hidden sm:inline-block">Príspevok k feministickej budúcnosti</span>
+                            <span class="sm:hidden">Podporte nás!</span>
+                            <ArrowTopRightOnSquareIcon class="w-4 h-4 ml-1 inline" />
+                        </a>
                     </div>
                 </div>
 
-                <img src="/assets/img/cat_with_eyes.gif" class="absolute w-28 h-auto right-32 md:right-46 lg:right-44 top-4 xl:-top-2" alt="">
+                <img src="/assets/img/cat_with_eyes.gif" class="absolute w-20 h-auto right-0 sm:right-16 md:right-46 lg:right-44 top-11 xl:top-4" alt="">
             </section>
         </div>
     </div>

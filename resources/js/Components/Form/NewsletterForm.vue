@@ -16,10 +16,10 @@
                        name="subscribe_email"
                        placeholder="Email"
                        v-model="subscribe_email"
-                       class="text-sm py-2.5 block w-full shadow-sm">
+                       class="text-sm py-2.5 block w-full shadow-sm rounded sm:rounded-r-none sm:rounded-l">
             </label>
 
-            <button type="submit" class="text-sm text-white text-center px-4 py-2.5 shadow-sm border border-pink-500 bg-pink-500 hover:bg-pink-600">
+            <button type="submit" class="text-sm text-white text-center px-4 py-2.5 shadow-sm border border-pink-500 bg-pink-500 hover:bg-pink-600 rounded sm:rounded-l-none  sm:rounded-r">
                 {{lang[locale].njuvinkySubscribeButton}} <HandThumbUpIcon class="w-4 h-4 ml-1 inline" />
             </button>
         </div>
