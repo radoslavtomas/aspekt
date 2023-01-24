@@ -5,10 +5,6 @@
         <Breadcrumbs id="library"/>
 
         <div class="bg-books">
-            <h1 class="text-3xl md:text-2xl text-red-600 font-bold my-8 text-center">
-                <span class="px-4">{{categoryString}}</span>
-            </h1>
-
             <div class="mb-4 border-2 border-purple-100 p-4 bg-transparent">
                 <MasonryWall :items="items.data" :column-width="230" :gap="16">
                     <template #default="{item}">
