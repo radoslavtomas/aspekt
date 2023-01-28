@@ -20,13 +20,7 @@
 <!--        </div>-->
 
         <support-us />
-
-        <div class="mt-8 bg-gray-200 rounded shadow-md p-4">
-            <div class="flex flex-col justify-start">
-                <NewsletterForm />
-            </div>
-        </div>
-
+        <NewsletterForm />
         <AspektInfo />
     </main>
 

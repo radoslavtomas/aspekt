@@ -39,7 +39,8 @@ class OrderCreatedAdmin extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address($this->customerEmail, $this->customerName),
+            // from: new Address($this->customerEmail, $this->customerName),
+            from: new Address('aspekt@aspekt.sk', 'Aspekt'),
             subject: 'Nova objednavka na ASPEKT.sk',
         );
     }

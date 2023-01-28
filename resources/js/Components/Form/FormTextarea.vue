@@ -18,14 +18,15 @@
             rows="3"></textarea>
     </label>
     <span v-if="props.errors">
-            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-maxLength')">{{lang[locale].eshopValidationMaxLength}}</span>
-        </span>
+        <ValidationErrors :error="props.errors.$uid" />
+    </span>
 </template>
 
 <script setup>
 import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 import {useStore} from "vuex";
+import ValidationErrors from "@/Components/Form/ValidationErrors.vue";
 
 const emit = defineEmits(['update:modelValue'])
 

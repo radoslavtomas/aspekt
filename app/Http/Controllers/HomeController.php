@@ -8,6 +8,7 @@ use App\Models\Blog;
 use App\Models\Book;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use MailchimpMarketing;
@@ -54,7 +55,25 @@ class HomeController extends Controller
             'server' => env('MAILCHIMP_SERVER_PREFIX')
         ]);
 
+
+        // Iné kontakty
+        // Knižnica Aspektu
+        // Knižnice v SR
+        // Médiá
+        // MVO
+        // Vysoké školy SR a ČR
+
         $response = $mailchimp->lists->tagSearch($list_id);
+//        $response = $mailchimp->lists->getListMember($list_id, md5('radoslav.tomas@protonmail.com'));
+//        $response = $mailchimp->lists->deleteListMemberPermanent($list_id, md5('radoslav.tomas@hotmail.co.uk'));
+//        $response = $mailchimp->lists->addListMember($list_id, [
+//                "email_address" => "radoslav.tomas@protonmail.com",
+//                "status" => "subscribed",
+//                "tags" => ["Iné kontakty", "Knižnica Aspektu"]
+//            ]);
         dd($response);
+
+
+
     }
 }

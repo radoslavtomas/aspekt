@@ -18,9 +18,7 @@
                'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'"
                :placeholder="props.placeholder">
         <span v-if="props.errors">
-            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-required')">{{lang[locale].eshopValidationRequired}}</span>
-            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-email')">{{lang[locale].eshopValidationEmail}}</span>
-            <span class="text-xs text-red-600" v-if="props.errors.$uid.includes('-maxLength')">{{lang[locale].eshopValidationMaxLength}}</span>
+            <ValidationErrors :error="props.errors.$uid" />
         </span>
     </label>
 </template>
@@ -29,6 +27,7 @@
 import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 import {useStore} from "vuex";
+import ValidationErrors from "@/Components/Form/ValidationErrors.vue";
 
 const emit = defineEmits(['update:modelValue'])
 

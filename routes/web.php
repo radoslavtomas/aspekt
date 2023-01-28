@@ -21,6 +21,7 @@ Route::get('/', ['App\Http\Controllers\HomeController', 'home'])->name('home');
 Route::get('/about/kto-je-kto/{slug?}', ['App\Http\Controllers\PeopleController', 'people'])->name('people');
 Route::get('/books/autorky-redaktorky-prekladatelky/{slug?}', ['App\Http\Controllers\PeopleController', 'authors'])->name('authors');
 Route::get('/about/njuvinky/', ['App\Http\Controllers\NjuvinkyController', 'redirect'])->name('njuvinky.redirect');
+Route::post('/njuvinky/subscribe', ['App\Http\Controllers\NjuvinkyController', 'subscribe'])->name('njuvinky.subscribe');
 
 Route::get('/about/{category?}/{slug?}', ['App\Http\Controllers\AboutController', 'index'])->name('about');
 Route::get('/books/{category?}/{slug?}', ['App\Http\Controllers\BooksController', 'index'])->name('books');

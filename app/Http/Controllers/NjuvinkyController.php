@@ -7,8 +7,10 @@ use App\Http\Resources\BlogResource;
 use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
+use MailchimpMarketing;
 
 class NjuvinkyController extends Controller
 {
@@ -69,6 +71,37 @@ class NjuvinkyController extends Controller
             'category' => $this->category,
             'njuvinkyCategories' => $njuvinkyCategories,
         ]);
+    }
+
+    public function subscribe(Request $request)
+    {
+        $validated = $request->validate([
+            'subscribe_email' => 'required|string|email'
+        ]);
+
+        $list_id = env('MAILCHIMP_LIST_ID');
+        $mailchimp = new MailchimpMarketing\ApiClient();
+
+        $mailchimp->setConfig([
+            'apiKey' => env('MAILCHIMP_API_KEY'),
+            'server' => env('MAILCHIMP_SERVER_PREFIX')
+        ]);
+
+        try {
+            $response = $mailchimp->lists->addListMember($list_id, [
+                "email_address" => $validated['subscribe_email'],
+                "status" => "subscribed",
+                "tags" => ["Knižnica Aspektu"]
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Failed to subscribe ' . $validated['subscribe_email'] . ' to Njuvinky newsletter');
+            Log::error($e->getMessage());
+            $response = null;
+        }
+
+        return [
+            'accepted' => (bool)$response
+        ];
     }
 
 }

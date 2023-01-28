@@ -77,13 +77,10 @@ const rules = computed(() => {
     }
 })
 
-const v$ = useVuelidate(rules, form);
+const v$ = useVuelidate(rules, form, { $scope: false });
 
 const handleForm = async () => {
     const result = await v$.value.$validate();
-
-    console.log(result)
-    console.log(form)
 
     if(!result) {
         const el = document.getElementsByClassName('focus:border-red-300')[0]

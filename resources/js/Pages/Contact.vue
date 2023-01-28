@@ -16,18 +16,14 @@ const locale = computed(() => usePage().props.value.locale);
 <template>
     <Head title="Kontakt" />
     <main-layout>
-        <div class="max-w-5xl mx-auto">
-<!--            <h1 class="border-b border-gray-300 pb-8 text-3xl text-red-600 font-bold my-8 text-center">-->
-<!--                <span class=" pb-2 px-4">Kontakt</span>-->
-<!--            </h1>-->
+        <div class="">
             <div class="my-6 sm:my-4 flex flex-col lg:flex-row">
                 <div class="mr-12 w-full lg:w-3/12 text-center lg:text-left mb-8 lg:mb-0">
                     <section class="mb-4 text-xl font-bold">
                         <h1 class="font-bold mb-1 text-sm text-red-500 uppercase">{{lang[locale].contactPageVisitUs}}</h1>
                         <p>ASPEKT</p>
                         <p>Mýtna 38</p>
-                        <p>Bratislava</p>
-                        <p>811 07</p>
+                        <p>811 07 Bratislava</p>
                     </section>
 
                     <section class="mb-4 text-sm">

@@ -36,7 +36,7 @@ class OrderCreatedCustomer extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('eshop@aspekt.sk', 'Aspekt Eshop'),
+            from: new Address('aspekt@aspekt.sk', 'Aspekt'),
             subject: 'Objednavka z ASPEKT.sk',
         );
     }
