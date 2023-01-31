@@ -81,7 +81,7 @@ class EshopController extends Controller
         try {
             Mail::to($customer['primary_email'])->send(new OrderCreatedCustomer($basket, $customer['order_total']));
             // @TODO: change email to aspekt email
-            Mail::to('radoslav.tomas@gmail.com')->send(new OrderCreatedAdmin($customer['primary_email'], $customerName, $order['id']));
+            // Mail::to('radoslav.tomas@gmail.com')->send(new OrderCreatedAdmin($customer['primary_email'], $customerName, $order['id']));
         } catch (\Exception $exception) {
             Log::error($exception);
         }

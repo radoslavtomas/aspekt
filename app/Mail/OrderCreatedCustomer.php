@@ -49,7 +49,7 @@ class OrderCreatedCustomer extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.orders.CreatedCustomer',
+            html: 'emails.orders.CreatedCustomer',
         );
     }
 

@@ -6,8 +6,9 @@
 
         <title inertia>{{ config('app.name', 'Aspekt') }}</title>
 
-        <!-- Fonts -->
-{{--        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">--}}
+        <!-- Cookie script CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.9/dist/cookieconsent.css">
+        <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.9/dist/cookieconsent.js"></script>
 
         <!-- Scripts -->
         @routes
@@ -16,5 +17,8 @@
     </head>
     <body class="font-treb antialiased">
         @inertia
+        <!-- Cookie script JS -->
+        <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.9/dist/cookieconsent.js"></script>
+        @include('_includes.cookie-script')
     </body>
 </html>

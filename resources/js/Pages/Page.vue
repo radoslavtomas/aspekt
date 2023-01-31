@@ -1,27 +1,19 @@
 <script setup>
-import {computed, onMounted} from "vue";
+import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
 import MainLayout from '../Layouts/MainLayout.vue'
-import Breadcrumbs from '../Components/Breadcrumbs.vue';
 
 const locale = computed(() => usePage().props.value.locale)
 const page = computed(() => usePage().props.value.page)
-const breadcrumbsId = computed(() => usePage().props.value.breadcrumbs_id)
 
 const title = computed(() => page.value[`name_${locale.value}`])
 const body = computed(() => page.value[`body_${locale.value}`])
-
-onMounted(() => console.log(page.value))
 </script>
 
 <template>
     <main-layout>
         <div class="max-w-[48rem] mx-auto">
-<!--            <div class="mb-6">-->
-<!--                <Breadcrumbs :id="breadcrumbsId" />-->
-<!--            </div>-->
-
             <div v-if="page.id === 3" class="mb-6 text-gray-700 aspektin text-center p-4">
                 <h1 class="text-3xl font-bold tracking-widest">A S P E K T i n</h1>
 

@@ -23,6 +23,8 @@ Route::get('/books/autorky-redaktorky-prekladatelky/{slug?}', ['App\Http\Control
 Route::get('/about/njuvinky/', ['App\Http\Controllers\NjuvinkyController', 'redirect'])->name('njuvinky.redirect');
 Route::post('/njuvinky/subscribe', ['App\Http\Controllers\NjuvinkyController', 'subscribe'])->name('njuvinky.subscribe');
 
+Route::get('/ochrana-osobnych-udajov', ['App\Http\Controllers\MiscellaneousController', 'gdpr'])->name('gdpr');
+
 Route::get('/about/{category?}/{slug?}', ['App\Http\Controllers\AboutController', 'index'])->name('about');
 Route::get('/books/{category?}/{slug?}', ['App\Http\Controllers\BooksController', 'index'])->name('books');
 Route::get('/aspektin/{category?}/{slug?}', ['App\Http\Controllers\AspektinController', 'index'])->name('aspektin');
