@@ -6,7 +6,7 @@
                     <h2 :class="featured ? 'text-2xl' : 'text-lg'" class="text-red-600">{{props.item.title}}</h2>
                 </Link>
                 <h3 class="text-sm italic mb-4">{{props.item.authors ?? 'red.'}}</h3>
-                <p class="text-xs" v-html="props.item.teaser"></p>
+                <p class="text-sm" v-html="props.item.teaser"></p>
             </div>
             <div
                 v-if="featured"

@@ -1,21 +1,22 @@
 <template>
     <article class="bg-white border border-gray-300 shadow-md p-4">
-
-            <Link :href="route(routeName, [categoryUrl, props.item.slug])">
-                <div class="relative">
-                    <div class="absolute top-4 left-3 z-20 text-shadow">
-                        <h2 class="text-xl text-red-600 font-bold mb-1 tracking-widest">{{ firstName }}</h2>
-                        <h4 class="text-2xl text-red-600 uppercase font-bold">
-                            <span v-for="name in surnames">{{ name + ' ' }} </span>
-                        </h4>
-                    </div>
-                    <img v-if="props.item.avatar" class="w-60 h-auto mx-auto border border-gray-200 shadow-md mb-2 rounded-md hover:-translate-y-1 transition-transform duration-75 ease-out" :src="`/storage/${props.item.avatar}`" :alt="item.title">
-                    <div v-else class="w-56 h-80 border border-gray-300 empty-avatar mx-auto shadow-md rounded-md"></div>
+        <Link :href="route(routeName, [categoryUrl, props.item.slug])">
+            <div class="relative">
+                <div class="absolute top-4 left-3 z-20 text-shadow">
+                    <h2 class="text-xl text-red-600 font-bold mb-1 tracking-widest">{{ firstName }}</h2>
+                    <h4 class="text-2xl text-red-600 uppercase font-bold">
+                        <span v-for="name in surnames">{{ name + ' ' }} </span>
+                    </h4>
                 </div>
-            </Link>
+                <img v-if="props.item.avatar" class="w-60 h-auto mx-auto border border-gray-200 shadow-md mb-2 rounded-md hover:-translate-y-1 transition-transform duration-75 ease-out" :src="`/storage/${props.item.avatar}`" :alt="item.title">
+                <div v-else class="w-56 h-80 border border-gray-300 empty-avatar mx-auto shadow-md rounded-md"></div>
+            </div>
+        </Link>
 
-            <p class="text-sm px-6 mt-6 mb-2 font-bold">{{props.item.title}}</p>
-            <p class="text-sm px-6 mb-4" v-html="props.item.teaser"></p>
+        <Link :href="route(routeName, [categoryUrl, props.item.slug])">
+            <p class="text-sm px-6 mt-6 mb-2 text-red-600 hover:text-red-700 font-bold">{{props.item.title}}</p>
+        </Link>
+        <p class="text-sm px-6 mb-4" v-html="props.item.teaser"></p>
     </article>
 </template>
 

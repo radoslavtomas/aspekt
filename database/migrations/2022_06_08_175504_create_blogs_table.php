@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('subtitle')->nullable();
             $table->string('authors')->nullable();
             $table->text('teaser')->nullable();
-            $table->mediumText('body');
+            $table->longText('body');
             $table->text('links')->nullable();
             $table->boolean('featured')->default(false);
             $table->boolean('published');

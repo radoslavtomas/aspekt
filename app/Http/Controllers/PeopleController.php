@@ -20,7 +20,7 @@ class PeopleController extends Controller
         $this->getCategoryModel('autorky-redaktorky-prekladatelky');
 
         if($slug) {
-            return $this->handleSinglePersonResource($slug);
+            return $this->handleSinglePersonResource($slug, 0);
         }
 
         return $this->handlePeopleResource(0);
@@ -31,7 +31,7 @@ class PeopleController extends Controller
         $this->getCategoryModel('kto-je-kto');
 
         if($slug) {
-            return $this->handleSinglePersonResource($slug);
+            return $this->handleSinglePersonResource($slug, 1);
         }
 
         return $this->handlePeopleResource(1);
@@ -42,14 +42,15 @@ class PeopleController extends Controller
         $this->category = Category::where('url', $category_url)->firstOrFail();
     }
 
-    private function handleSinglePersonResource(string $slug): Response
+    private function handleSinglePersonResource(string $slug, int $type_id): Response
     {
         $person = PersonResource::make(People::where('slug', $slug)->firstOrFail());
 
         return Inertia::render('Person', [
             'person' => $person,
             'category' => $this->category,
-            'slug' => $slug
+            'slug' => $slug,
+            'route_name' => $type_id ? 'about' : 'books'
         ]);
     }
 

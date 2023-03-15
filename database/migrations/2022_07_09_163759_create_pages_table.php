@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name_sk');
             $table->string('name_en')->nullable();
-            $table->text('body_sk');
-            $table->text('body_en')->nullable();
+            $table->longText('body_sk');
+            $table->longText('body_en')->nullable();
             $table->timestamps();
         });
     }

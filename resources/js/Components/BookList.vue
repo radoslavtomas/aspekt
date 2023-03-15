@@ -23,7 +23,7 @@
 
 <script setup>
 import {Head, usePage} from '@inertiajs/inertia-vue3';
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 
 // 3rd party
 import MasonryWall from '@yeger/vue-masonry-wall';
@@ -40,7 +40,6 @@ const categoryString = computed(() => category.value[`name_${locale.value}`]);
 const items = computed(() => usePage().props.value.books);
 const locale = computed(() => usePage().props.value.locale);
 const navigation = computed(() => usePage().props.value.navigation);
-
 
 const title = computed(() => {
     const navigationString = computed(() => navigation.value.find(el => el.route === 'books')[`name_${locale.value}`]);

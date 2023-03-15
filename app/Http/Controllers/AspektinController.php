@@ -33,7 +33,7 @@ class AspektinController extends Controller
 
     private function getCategoryModel($category_url)
     {
-        $this->category = Category::where('url', $category_url)->firstOrFail();
+        $this->category = Category::where(['url' => $category_url, 'navigation_id' => 5])->firstOrFail();
     }
 
     private function handleStaticResource()

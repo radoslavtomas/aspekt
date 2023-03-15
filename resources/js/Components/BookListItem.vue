@@ -10,7 +10,7 @@
                 <h2 class="text-xl text-red-600">{{props.item.title}}</h2>
             </Link>
             <h3 class="text-sm italic mb-4">{{props.item.authors}}</h3>
-            <p class="text-xs" v-html="props.item.teaser"></p>
+            <p class="text-sm" v-html="props.item.teaser"></p>
         </main>
         <footer v-if="props.item.is_product" class="py-2 my-2 flex justify-between items-center">
             <p class="font-bold">{{props.item.aspekt_price}}</p>

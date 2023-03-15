@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('translation')->nullable();
             $table->string('cover')->nullable();
             $table->text('teaser')->nullable();
-            $table->mediumText('body')->nullable();
+            $table->longText('body')->nullable();
             $table->text('sample')->nullable();
             $table->text('links')->nullable();
             $table->boolean('is_product')->default(false);

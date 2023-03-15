@@ -2,7 +2,7 @@
     <div class="max-w-3xl mx-auto">
         <Head :title="title" />
 
-        <Breadcrumbs id="books" :article="person.title"/>
+        <Breadcrumbs :id="routeName" :article="person.title"/>
 
         <article class="mt-10">
             <header class="relative max-w-sm mx-auto mb-6">
@@ -45,6 +45,7 @@ const locale = computed(() => usePage().props.value.locale);
 const navigation = computed(() => usePage().props.value.navigation);
 const store = useStore()
 const lang = computed(() => store.getters.lang);
+const routeName = computed(() => usePage().props.value.route_name);
 
 const title = computed(() => {
     const navigationString = computed(() => navigation.value.find(el => el.route === 'books')[`name_${locale.value}`]);

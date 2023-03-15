@@ -36,7 +36,7 @@ const props = defineProps({
     id: String,
     article: String
 })
-onMounted(() => console.log(category.value))
+onMounted(() => console.log(props))
 </script>
 
 <style scoped>
