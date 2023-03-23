@@ -136,6 +136,7 @@ class OrderResource extends Resource
     {
         return [
             RelationManagers\ItemsRelationManager::class,
+            RelationManagers\CommentsRelationManager::class,
         ];
     }
 

@@ -65,9 +65,22 @@ class EshopController extends Controller
 
     public function createOrder(Request $request)
     {
+        // handle customer
         $customer = $this->prepareCustomerOrderData($request);
         $order = Order::create($customer);
 
+        // handle comment
+        $comment = $customer['comment'];
+        if($comment) {
+            $order->comments()->create(
+                [
+                    'order_id' => $order->id,
+                    'comment' => $comment
+                ]
+            );
+        }
+
+        // handle basket
         $basket = $request->get('basket');
         $formattedBasket = $this->getFormattedBasket($basket, $order->id);
 
@@ -76,6 +89,7 @@ class EshopController extends Controller
             $order->items()->create($item);
         }
 
+        // send emails
         $customerName = $customer['delivery_first_name'] . ' ' . $customer['delivery_last_name'];
 
         try {

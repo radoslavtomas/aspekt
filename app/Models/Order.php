@@ -61,4 +61,9 @@ class Order extends Model
     {
         return $this->belongsTo(OrderItem::class, 'id', 'order_id');
     }
+
+    public function comments()
+    {
+        return $this->belongsTo(OrderComment::class, 'id', 'order_id');
+    }
 }
