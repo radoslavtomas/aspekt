@@ -5,6 +5,7 @@ namespace App\Filament\Resources\TranslationResource\Pages;
 use App\Filament\Resources\TranslationResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Cache;
 
 class EditTranslation extends EditRecord
 {
@@ -15,5 +16,10 @@ class EditTranslation extends EditRecord
         return [
             Actions\DeleteAction::make(),
         ];
+    }
+
+    protected function afterSave(): void
+    {
+        Cache::forget('translations');
     }
 }

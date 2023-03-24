@@ -30,4 +30,9 @@ class EditBook extends EditRecord
         $data['aspekt_price'] = $data['aspekt_price'] / 100;
         return $data;
     }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

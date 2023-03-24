@@ -5,6 +5,7 @@ namespace App\Filament\Resources\NavigationResource\Pages;
 use App\Filament\Resources\NavigationResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Cache;
 
 class EditNavigation extends EditRecord
 {
@@ -15,5 +16,10 @@ class EditNavigation extends EditRecord
         return [
             Actions\DeleteAction::make(),
         ];
+    }
+
+    protected function afterSave(): void
+    {
+        Cache::forget('navigation');
     }
 }

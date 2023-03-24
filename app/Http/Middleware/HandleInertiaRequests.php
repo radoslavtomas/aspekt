@@ -4,8 +4,10 @@ namespace App\Http\Middleware;
 
 use App\Http\Resources\TranslationResource;
 use App\Models\Navigation;
+use App\Models\Setting;
 use App\Models\Translation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 use App\Models\Category;
@@ -54,25 +56,34 @@ class HandleInertiaRequests extends Middleware
             },
             'navigation' => function () {
                 return $this->getNavigationItems();
+            },
+            'settings' => function () {
+                return $this->getSettings();
             }
         ]);
     }
 
     private function getNavigationItems() {
-        return Navigation::with('categories')->orderBy('position')->get();
-//        return Navigation::with('categories')->orderBy('position')->get()->filter(function($value, $key) {
-//            return $value['id'] != 43;
-//        });
+        return Cache::rememberForever('navigation', function() {
+            return Navigation::with('categories')->orderBy('position')->get();
+        });
+    }
+
+    private function getSettings() {
+        return Cache::rememberForever('settings', function() {
+            return Setting::all();
+        });
     }
 
     private function getTranslations(): array
     {
-        $lang = Translation::all();
-        return [
-            'sk' => $this->getTranslationsByLang('sk', $lang),
-            'en' => $this->getTranslationsByLang('en', $lang),
-        ];
-
+        return Cache::rememberForever('translations', function() {
+            $lang = Translation::all();
+            return [
+                'sk' => $this->getTranslationsByLang('sk', $lang),
+                'en' => $this->getTranslationsByLang('en', $lang),
+            ];
+        });
     }
 
     private function getTranslationsByLang($lang, $translations): array

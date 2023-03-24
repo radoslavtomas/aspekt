@@ -11,6 +11,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -122,7 +123,12 @@ class OrderResource extends Resource
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                Filter::make('Spracovávam')
+                    ->query(fn (Builder $query): Builder => $query->where('order_status_id', 'processing')),
+                Filter::make('In checkout')
+                    ->query(fn (Builder $query): Builder => $query->where('order_status_id', 'in_checkout')),
+                Filter::make('Ukončená a odoslaná')
+                    ->query(fn (Builder $query): Builder => $query->where('order_status_id', 'completed')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
