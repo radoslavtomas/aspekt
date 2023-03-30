@@ -25,7 +25,7 @@ class TranslationResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('key'),
+                Forms\Components\TextInput::make('key')->unique(),
                 Forms\Components\Textarea::make('sk'),
                 Forms\Components\Textarea::make('en'),
             ])->columns(1);
@@ -35,8 +35,12 @@ class TranslationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('key'),
-                Tables\Columns\TextColumn::make('sk')->label('SK')->limit(35),
+                Tables\Columns\TextColumn::make('key')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('sk')
+                    ->label('SK')
+                    ->limit(35)
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('en')->label('EN')->limit(35)
             ])
             ->filters([

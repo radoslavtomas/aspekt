@@ -5,18 +5,18 @@
                 <div class="flex justify-center items-center flex-col xl:flex-row mr-0 xl:mr-0">
                     <div class="text-center mb-1 xl:mr-4 xl:mb-0">
                         <h5 class="font-bold text-pink-600">
-                            Páči sa Vám naša práca? <span class="hidden sm:inline-block">Podporte nás!</span>
+                            {{ lang[locale]['supportUs'] }} <span class="hidden sm:inline-block">{{ lang[locale]['supportUsText2'] }}</span>
                         </h5>
                     </div>
 
                     <div class="flex justify-center items-center flex-col sm:flex-row max-w-screen-sm mx-auto z-10">
                         <a
-                            href="https://aspekt.darujme.sk/prispevok-k-feministickej-buducnosti-3470e/"
+                            :href="settings['linkDarujme']"
                             target="_blank"
                             class="text-sm text-white text-center px-3 py-1.5 shadow-sm border border-pink-500 bg-pink-500 hover:bg-pink-600 rounded"
                         >
-                            <span class="hidden sm:inline-block">Príspevok k feministickej budúcnosti</span>
-                            <span class="sm:hidden">Podporte nás!</span>
+                            <span class="hidden sm:inline-block">{{ lang[locale]['supportUsButtonDesktop'] }}</span>
+                            <span class="sm:hidden">{{ lang[locale]['supportUsText2'] }}</span>
                             <ArrowTopRightOnSquareIcon class="w-4 h-4 ml-1 inline" />
                         </a>
                     </div>
@@ -38,4 +38,5 @@ import {useStore} from "vuex";
 const store = useStore();
 const lang = computed(() => store.getters.lang);
 const locale = computed(() => usePage().props.value.locale);
+const settings = computed(() => usePage().props.value.settings);
 </script>

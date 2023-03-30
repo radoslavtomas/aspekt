@@ -43,7 +43,7 @@ import Separator from "@/Components/Separator.vue";
 const person = computed(() => usePage().props.value.person.data);
 const locale = computed(() => usePage().props.value.locale);
 const navigation = computed(() => usePage().props.value.navigation);
-const store = useStore()
+const store = useStore();
 const lang = computed(() => store.getters.lang);
 const routeName = computed(() => usePage().props.value.route_name);
 

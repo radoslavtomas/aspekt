@@ -29,13 +29,13 @@
 
                     <section class="my-4 flex flex-col items-center w-full">
                         <article class="w-40 mb-4 p-3 shadow-md border border-gray-300 bg-white">
-                            <a href="http://glosar.aspekt.sk/" target="_blank">
+                            <a :href="settings.linkGlosar" target="_blank">
                                 <img class="w-48 mx-auto" src="/assets/img/glosar.png" alt="glosar rodovej terminologie">
                             </a>
                         </article>
 
                         <article class="w-40 p-3 shadow-md border border-gray-300 bg-white">
-                            <a href="http://www.ruzovyamodrysvet.sk/" target="_blank">
+                            <a :href="settings.linkRuzovyAModrySvet" target="_blank">
                                 <img class="w-48 mx-auto" src="/assets/img/ruzovysvet.png" alt="ruzovy a modry svet">
                             </a>
                         </article>
@@ -45,10 +45,10 @@
                 <div class="p-6 flex flex-col gap-1">
                     <h3 class="text-lg mb-4 uppercase">{{lang[locale].footerColumn3Title}}</h3>
 
-                    <p>Mýtna 38</p>
-                    <p class="mb-4">811 07 Bratislava</p>
-                    <a href="tel:+421918479677" class="mb-4">+421 918 479 677</a>
-                    <a class="" href="mailto:aspekt@aspekt.sk">aspekt@aspekt.sk</a>
+                    <p>{{ settings.addressStreet }}</p>
+                    <p class="mb-4">{{ `${settings.addressPostalCode} ${settings.addressTown}` }}</p>
+                    <a :href="`tel:${settings.phoneMobile.replace(/\s/g,'')}`" class="mb-4">{{ settings.phoneMobile }}</a>
+                    <a :href="`mailto:${settings.emailAspekt}`">{{ settings.emailAspekt }}</a>
                     <a class="mb-6" href="/">www.aspekt.sk</a>
                     <social-links />
                 </div>
@@ -69,6 +69,7 @@ const store = useStore();
 
 const lang = computed(() => store.getters.lang);
 const locale = computed(() => usePage().props.value.locale);
+const settings = computed(() => usePage().props.value.settings);
 
 const navigation = computed(() => usePage().props.value.navigation);
 const localLang = {

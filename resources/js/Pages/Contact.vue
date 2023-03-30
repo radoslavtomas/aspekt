@@ -10,6 +10,7 @@ import {useStore} from "vuex";
 const store = useStore()
 const lang = computed(() => store.getters.lang);
 const locale = computed(() => usePage().props.value.locale);
+const settings = computed(() => usePage().props.value.settings);
 
 </script>
 
@@ -22,36 +23,36 @@ const locale = computed(() => usePage().props.value.locale);
                     <section class="mb-4 text-xl font-bold">
                         <h1 class="font-bold mb-1 text-sm text-red-500 uppercase">{{lang[locale].contactPageVisitUs}}</h1>
                         <p>ASPEKT</p>
-                        <p>Mýtna 38</p>
-                        <p>811 07 Bratislava</p>
+                        <p>{{ settings.addressStreet }}</p>
+                        <p>{{ `${settings.addressPostalCode} ${settings.addressTown}` }}</p>
                     </section>
 
                     <section class="mb-4 text-sm">
                         <h1 class="font-bold mb-1 text-red-500 uppercase">{{lang[locale].contactPageCallUs}}</h1>
-                        <a href="tel:+421252491639" class="hover:underline block">
+                        <a :href="`tel:${settings.phoneLandline.replace(/\s/g,'')}`" class="hover:underline block">
                             <phone-icon class="mr-1 w-4 h-4 inline-block" />
-                            + 421 2 5249 1639
+                            {{ settings.phoneLandline }}
                         </a>
-                        <a href="tel:+421918479677" class="hover:underline block">
+                        <a :href="`tel:${settings.phoneMobile.replace(/\s/g,'')}`" class="hover:underline block">
                             <phone-icon class="mr-1 w-4 h-4 inline-block" />
-                            + 421 918 479 677
+                            {{ settings.phoneMobile }}
                         </a>
                     </section>
                     <section class="mb-4 text-sm">
                         <h1 class="font-bold mb-1 text-red-500 uppercase">{{lang[locale].contactPageWriteUs}}</h1>
                         <p class="font-bold">{{lang[locale].contactPageCoordination}}</p>
-                        <a href="mailto:administrativa@aspekt.sk" class="text-gray-700 hover:text-gray-800 block">
+                        <a :href="`mailto:${settings.emailAdministration}`" class="text-gray-700 hover:text-gray-800 block">
                             <envelope-icon class="mr-1 w-4 h-4 inline-block" />
-                            administrativa@aspekt.sk
+                            {{ settings.emailAdministration }}
                         </a>
-                        <a href="mailto:aspekt@aspekt.sk" class="text-gray-700 hover:text-gray-800 block">
+                        <a :href="`mailto:${settings.emailAspekt}`" class="text-gray-700 hover:text-gray-800 block">
                             <envelope-icon class="mr-1 w-4 h-4 inline-block" />
-                            aspekt@aspekt.sk
+                            {{ settings.emailAspekt }}
                         </a>
                         <p class="mt-2 font-bold">{{lang[locale].contactPageLibrary}}</p>
-                        <a href="mailto:kniznica@aspekt.sk" class="text-gray-700 hover:text-gray-800 block">
+                        <a :href="`mailto:${settings.emailLibrary}`" class="text-gray-700 hover:text-gray-800 block">
                             <envelope-icon class="mr-1 w-4 h-4 inline-block" />
-                            kniznica@aspekt.sk
+                            {{ settings.emailLibrary }}
                         </a>
                     </section>
                     <section class="text-sm">

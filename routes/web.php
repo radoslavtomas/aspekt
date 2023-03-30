@@ -54,6 +54,10 @@ Route::get('/mailables/test', function () {
     return view('emails.orders.CreatedCustomer');
 });
 
+Route::get('/clear-cache', function () {
+    \Illuminate\Support\Facades\Cache::flush();
+});
+
 //Route::get('/', function () {
 //    return Inertia::render('Welcome', [
 //        'canLogin' => Route::has('login'),

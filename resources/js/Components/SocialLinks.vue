@@ -12,7 +12,15 @@
     </div>
 </template>
 <script setup>
-import {computed} from "vue";
+import {computed, onMounted, ref} from "vue";
+import {usePage} from "@inertiajs/inertia-vue3";
+
+const settings = computed(() => usePage().props.value.settings);
+
+onMounted(() => {
+    icons.value.facebook.link = settings.value.linkFacebook ? settings.value.linkFacebook : '';
+    icons.value.instagram.link = settings.value.linkInstagram ? settings.value.linkInstagram : '';
+})
 
 const props = defineProps({
     align: {
@@ -25,23 +33,23 @@ const props = defineProps({
     }
 })
 
-const icons = [
-    {
+let icons = ref({
+    'facebook': {
         id: 'facebook',
-        link: 'https://www.facebook.com/feministickaorganizaciaaspekt',
+        link: '',
         icon: 'fa-brands fa-facebook'
     },
-    {
+    'instagram': {
         id: 'instagram',
-        link: 'https://www.instagram.com/aspekt_organizacia/',
+        link: '',
         icon: 'fa-brands fa-instagram'
     },
-    {
-        id: 'link',
+    'web': {
+        id: 'web',
         link: 'https://www.aspekt.sk/',
         icon: 'fa-solid fa-link'
     }
-]
+})
 
 const alignClass = computed(() => {
     switch (props.align) {

@@ -71,7 +71,7 @@ class HandleInertiaRequests extends Middleware
 
     private function getSettings() {
         return Cache::rememberForever('settings', function() {
-            return Setting::all();
+            return $this->getSettingsAsKeyValuePairs(Setting::all('key', 'value'));
         });
     }
 
@@ -92,6 +92,17 @@ class HandleInertiaRequests extends Middleware
 
         foreach ($translations as $value) {
             $data[$value['key']] = $value[$lang];
+        }
+
+        return $data;
+    }
+
+    private function getSettingsAsKeyValuePairs($settings): array
+    {
+        $data = [];
+
+        foreach ($settings as $item) {
+            $data[$item['key']] = $item['value'];
         }
 
         return $data;
