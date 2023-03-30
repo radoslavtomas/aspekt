@@ -10,7 +10,7 @@ const props = defineProps({
 
 const mobileClasses = computed(() => {
     if (props.mobile) {
-        return 'text-left ml-3 text-xs py-1';
+        return 'ml-3 text-xs py-1';
     } else {
         return 'text-center text-sm py-3 uppercase';
     }

@@ -20,65 +20,25 @@
 
             </div>
 
-            <!-- Desktop navigation menu -->
-            <div class="hidden lg:ml-6 lg:block">
-                <div class="flex items-center justify-between space-x-3.5 h-full">
-                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+            <NavigationBarDesktop />
 
-                    <template v-for="menuItem in navigation">
-                        <Link v-if="!menuItem.categories.length" :href="route(menuItem.route)" :class="{ 'border-b-4 border-red-600': $page.component === menuItem.component }" class="inline-block font-bold text-red-600 uppercase hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">{{menuItem[`name_${locale}`]}}</Link>
-
-                        <MenuDropdown v-else align="center" width="52">
-                            <template #trigger>
-                                <button :class="{ 'border-b-4 border-red-600': $page.component === menuItem.component }" class="font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium uppercase">{{menuItem[`name_${locale}`]}}</button>
-                            </template>
-                            <template #content>
-                                <MenuDropdownLink v-for="item in menuItem.categories" :href="route(menuItem.route) + '/' + item.url" as="button">
-                                    {{item[`name_${locale}`]}}
-                                </MenuDropdownLink>
-                            </template>
-                        </MenuDropdown>
-                    </template>
-
-                </div>
-            </div>
-
-            <LanguageSelector></LanguageSelector>
+            <LanguageSelector />
         </div>
 
-
-        <!-- Mobile menu -->
-        <div v-if="openNav" class="lg:hidden absolute w-full z-20 h-full" id="mobile-menu">
-            <div class="relative bg-gradient-to-b from-purple-50 to-fuchsia-50 shadow-xl border-y border-purple-300 opacity-95 space-y-1 px-2 pt-2 pb-3 z-50">
-                <template v-for="menuItem in navigation">
-                    <Link :href="route(menuItem.route)" :class="{ 'border-b-4 border-red-600': $page.component === menuItem.component }" class="block font-bold uppercase text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium" aria-current="page">{{menuItem[`name_${locale}`]}}</Link>
-
-                    <template v-if="menuItem.categories.length">
-                        <MenuDropdownLink v-for="item in menuItem.categories" :href="route(menuItem.route) + '/' + item.url" as="button" :mobile="true">
-                            {{item[`name_${locale}`]}}
-                        </MenuDropdownLink>
-                    </template>
-                </template>
-            </div>
-
-            <div v-show="openNav" class="backdrop-blur-sm z-20 fixed inset-0 top-20" @click="openNav = false"></div>
-        </div>
+        <NavigationBarMobile :openNav="openNav" />
     </nav>
 </template>
 
 <script setup>
-import {computed, onMounted, ref} from 'vue';
-import {Link, usePage} from "@inertiajs/inertia-vue3";
+import {Link} from "@inertiajs/inertia-vue3";
 import LanguageSelector from '../Components/LanguageSelector.vue'
-import MenuDropdown from '../Components/MenuDropdown.vue'
-import MenuDropdownLink from '../Components/MenuDropdownLink.vue'
+import NavigationBarDesktop from "@/Components/NavigationBarDesktop.vue";
+import NavigationBarMobile from "@/Components/NavigationBarMobile.vue";
+
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
+import {ref} from "vue";
 
 const openNav = ref(false);
-const locale = computed(() => usePage().props.value.locale);
-const navigation = computed(() => usePage().props.value.navigation.filter(item => item.id !== 43));
-
-// onMounted(() => console.log(translations))
 
 </script>
 
