@@ -106,6 +106,8 @@ class BookResource extends Resource
                     ->limit(50)
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('cover'),
+                Tables\Columns\CheckboxColumn::make('featured')
+                    ->sortable(),
                 Tables\Columns\CheckboxColumn::make('is_product')
                     ->sortable(),
                 Tables\Columns\CheckboxColumn::make('published')
