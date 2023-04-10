@@ -47,6 +47,7 @@ class BookResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('name_sk')
                             ->multiple()
+                            ->preload()
                             ->relationship('category', 'name_sk', fn (Builder $query) => $query->where('navigation_id', 4))
                             ->required(),
                         Forms\Components\FileUpload::make('cover')

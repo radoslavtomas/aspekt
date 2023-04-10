@@ -78,7 +78,7 @@
 }
 
 .content img {
-    @apply my-2 shadow-xl;
+    @apply my-2 shadow-xl max-w-full;
 }
 
 .content iframe {

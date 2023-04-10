@@ -54,6 +54,7 @@ class BlogResource extends Resource
                         ->schema([
                             Forms\Components\MultiSelect::make('category')
                                 ->relationship('category', 'name_sk')
+                                ->preload()
                         ]),
                     Fieldset::make('Main')
                         ->columns(1)
