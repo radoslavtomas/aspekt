@@ -26,6 +26,7 @@ class OrderStatusResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('status')
+                    ->unique(ignoreRecord: true)
                     ->required(),
                 Forms\Components\TextInput::make('description')
                     ->required(),

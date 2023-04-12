@@ -65,7 +65,9 @@ class BlogResource extends Resource
                                 ->afterStateUpdated(function (Closure $set, $state) {
                                     $set('slug', Str::slug($state));
                                 }),
-                            Forms\Components\TextInput::make('slug')->required(),
+                            Forms\Components\TextInput::make('slug')
+                                ->unique(ignoreRecord: true)
+                                ->required(),
                             Forms\Components\TextInput::make('subtitle'),
                             Forms\Components\TextInput::make('authors')
                                 ->default(Auth::user()->name),

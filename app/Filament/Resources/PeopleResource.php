@@ -50,7 +50,9 @@ class PeopleResource extends Resource
                             ->afterStateUpdated(function (Closure $set, $state) {
                                 $set('slug', Str::slug($state));
                             }),
-                        Forms\Components\TextInput::make('slug')->required(),
+                        Forms\Components\TextInput::make('slug')
+                            ->unique(ignoreRecord: true)
+                            ->required(),
                         TiptapEditor::make('teaser')
                             ->profile('custom')
                             ->required(),

@@ -25,7 +25,7 @@ class SettingsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('key')->unique(),
+                Forms\Components\TextInput::make('key')->unique(ignoreRecord: true),
                 Forms\Components\Textarea::make('value'),
             ])->columns(1);
     }

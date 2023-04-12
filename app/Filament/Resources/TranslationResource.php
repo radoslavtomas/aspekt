@@ -25,7 +25,7 @@ class TranslationResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('key')->unique(),
+                Forms\Components\TextInput::make('key')->unique(ignoreRecord: true),
                 Forms\Components\Textarea::make('sk'),
                 Forms\Components\Textarea::make('en'),
             ])->columns(1);
