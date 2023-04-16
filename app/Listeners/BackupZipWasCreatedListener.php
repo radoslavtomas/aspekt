@@ -28,6 +28,6 @@ class BackupZipWasCreatedListener
      */
     public function handle(BackupZipWasCreated $event)
     {
-        Mail::to('radoslav.tomas@gmail.com')->send(new SendBackup($event->pathToZip));
+        Mail::to(env('BACKUP_EMAIL', 'radoslav.tomas@gmail.com'))->send(new SendBackup($event->pathToZip));
     }
 }

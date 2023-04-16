@@ -34,7 +34,7 @@ class SendBackup extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Send Backup',
+            subject: 'MySql Backup for Aspekt',
         );
     }
 

@@ -1,8 +1,11 @@
 <x-mail::message>
-# This will be potentially backup email
+# MySql database backup
 
+This is an automated message.<br>
+<br>
+Latest backup can be found:<br>
 {{ $pathToFile }}
 
 Thanks,<br>
-{{ config('app.name') }}
+Admin
 </x-mail::message>
