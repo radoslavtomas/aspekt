@@ -4,10 +4,10 @@
             <template v-for="menuItem in navigation">
                 <Link
                     v-if="!menuItem.categories.length"
-                    @click="updatePath"
+                    @click="props.updatePath"
                     :href="route(menuItem.route)"
                     class="inline-block font-bold text-red-600 uppercase hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium"
-                    :class="{ 'border-b-4 border-red-600': path === menuItem.route }"
+                    :class="{ 'border-b-4 border-red-600': props.path === menuItem.route }"
                 >
                     {{menuItem[`name_${locale}`]}}
                 </Link>
@@ -37,38 +37,15 @@ import MenuDropdownLink from '../Components/MenuDropdownLink.vue'
 
 const locale = computed(() => usePage().props.value.locale);
 const navigation = computed(() => usePage().props.value.navigation.filter(item => item.id !== 43));
-const path = ref('');
-onMounted(() => {
-    updatePath()
+
+const props = defineProps({
+    path: String,
+    updatePath: Function
 })
 
-const updatePath = () => {
-    const pathname = window.location.pathname.split('/')[1]
-
-    switch (pathname) {
-        case '':
-            path.value = 'home';
-            break;
-        case 'about':
-        case 'njuvinky':
-            path.value = 'about';
-            break;
-        case 'books':
-            path.value = 'books';
-            break;
-        case 'aspektin':
-            path.value = 'aspektin';
-            break;
-        case 'library':
-            path.value = 'library';
-            break;
-        case 'contact':
-            path.value = 'contact';
-            break;
-        default:
-            path.value = '';
-    }
-}
+onMounted(() => {
+    props.updatePath()
+})
 </script>
 
 <style scoped>

@@ -20,12 +20,19 @@
 
             </div>
 
-            <NavigationBarDesktop />
+            <NavigationBarDesktop
+                :path="path"
+                :updatePath="updatePath"
+            />
 
             <LanguageSelector />
         </div>
 
-        <NavigationBarMobile :openNav="openNav" />
+        <NavigationBarMobile
+            :openNav="openNav"
+            :path="path"
+            :updatePath="updatePath"
+        />
     </nav>
 </template>
 
@@ -39,6 +46,35 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 import {ref} from "vue";
 
 const openNav = ref(false);
+
+const path = ref('');
+const updatePath = () => {
+    const pathname = window.location.pathname.split('/')[1]
+
+    switch (pathname) {
+        case '':
+            path.value = 'home';
+            break;
+        case 'about':
+        case 'njuvinky':
+            path.value = 'about';
+            break;
+        case 'books':
+            path.value = 'books';
+            break;
+        case 'aspektin':
+            path.value = 'aspektin';
+            break;
+        case 'library':
+            path.value = 'library';
+            break;
+        case 'contact':
+            path.value = 'contact';
+            break;
+        default:
+            path.value = '';
+    }
+}
 
 </script>
 
