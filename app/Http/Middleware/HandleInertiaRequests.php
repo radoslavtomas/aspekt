@@ -43,6 +43,9 @@ class HandleInertiaRequests extends Middleware
     {
         $this->str = 'user';
         return array_merge(parent::share($request), [
+            'auth' => [
+                'user' => $request->user(),
+            ],
             'translations' => function () {
                 return $this->getTranslations();
             },
