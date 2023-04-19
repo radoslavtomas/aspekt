@@ -11,7 +11,7 @@
                         </div>
 
                         <div>
-                            <div v-html="blogs[0].teaser" class="mt-2 text-gray-600 dark:text-gray-400 text-sm"></div>
+                            <div v-html="blogs[0].teaser" class="mt-2 text-gray-600 text-sm"></div>
                         </div>
                     </div>
 
@@ -23,14 +23,14 @@
 
                 </div>
 
-                <div class="p-6 flex flex-col justify-start border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+                <div class="p-6 flex flex-col justify-start border-t border-gray-200 md:border-t-0 md:border-l">
                     <div class="mb-4">
                         <div class="flex items-center">
                             <div class="ml-2 text-lg font-bold"><Link :href="route('aspektin', {category: 'vsetko', slug: blogs[1].slug})" class="text-red-600 hover:text-red-700">{{ blogs[1].title }}</Link></div>
                         </div>
 
                         <div class="">
-                            <div v-html="blogs[1].teaser" class="mt-2 text-gray-600 dark:text-gray-400 text-sm"></div>
+                            <div v-html="blogs[1].teaser" class="mt-2 text-gray-600 text-sm"></div>
                         </div>
                     </div>
 
@@ -41,14 +41,14 @@
                     </div>
                 </div>
 
-                <div class="p-6 flex flex-col justify-start border-t border-gray-200 dark:border-gray-700">
+                <div class="p-6 flex flex-col justify-start border-t border-gray-200">
                     <div class="mb-4">
                         <div class="flex items-center">
                             <div class="ml-2 text-lg font-bold"><Link :href="route('aspektin', {category: 'vsetko', slug: blogs[2].slug})" class="text-red-600 hover:text-red-700">{{ blogs[2].title }}</Link></div>
                         </div>
 
                         <div class="">
-                            <div v-html="blogs[2].teaser" class="mt-2 text-gray-600 dark:text-gray-400 text-sm"></div>
+                            <div v-html="blogs[2].teaser" class="mt-2 text-gray-600 text-sm"></div>
                         </div>
                     </div>
 
@@ -59,14 +59,14 @@
                     </div>
                 </div>
 
-                <div class="p-6 flex flex-col justify-start border-t border-gray-200 dark:border-gray-700 md:border-l">
+                <div class="p-6 flex flex-col justify-start border-t border-gray-200 md:border-l">
                     <div class="mb-4">
                         <div class="flex items-center">
                             <div class="ml-2 text-lg font-bold"><Link :href="route('aspektin', {category: 'vsetko', slug: blogs[3].slug})" class="text-red-600 hover:text-red-700">{{ blogs[3].title }}</Link></div>
                         </div>
 
                         <div class="">
-                            <div v-html="blogs[3].teaser" class="mt-2 text-gray-600 dark:text-gray-400 text-sm"></div>
+                            <div v-html="blogs[3].teaser" class="mt-2 text-gray-600 text-sm"></div>
                         </div>
                     </div>
 
