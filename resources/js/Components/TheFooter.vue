@@ -6,15 +6,17 @@
                     <h3 class="text-lg mb-4 uppercase">{{lang[locale].footerColumn1Title}}</h3>
 
                     <p>{{lang[locale].footerDescriptionLine1}}</p>
-                    <p class="">{{lang[locale].footerDescriptionLine2}}</p>
+                    <p class="mb-4">{{lang[locale].footerDescriptionLine2}}</p>
+
+                    <p class="">{{lang[locale].footerDescriptionLine3}}</p>
 
                     <p class="my-4">*</p>
 
                     <section class="mb-4 flex flex-col">
-                        <Link :href="route('home')">{{localLang[locale].aboutLink}}</Link>
-                        <Link :href="route('home')">{{localLang[locale].whoIsWhoLink}}</Link>
-                        <Link :href="route('home')">{{localLang[locale].supportLink}}</Link>
-                        <Link :href="route('home')">{{localLang[locale].legalLink}}</Link>
+                        <Link :href="settings.footerLinkUrl1">{{lang[locale].footerLinkDesc1}}</Link>
+                        <Link :href="settings.footerLinkUrl2">{{lang[locale].footerLinkDesc2}}</Link>
+                        <Link :href="settings.footerLinkUrl3">{{lang[locale].footerLinkDesc3}}</Link>
+                        <Link :href="settings.footerLinkUrl4">{{lang[locale].footerLinkDesc4}}</Link>
                     </section>
                 </div>
 
@@ -22,9 +24,9 @@
                     <h3 class="text-lg mb-4 uppercase">{{lang[locale].footerColumn2Title}}</h3>
 
                     <section class="mb-4 flex flex-col">
-                        <Link :href="route('home')">{{localLang[locale].bookLink}}</Link>
-                        <Link :href="route('home')">{{localLang[locale].webzinLink}}</Link>
-                        <Link :href="route('home')">{{localLang[locale].libraryLink}}</Link>
+                        <Link :href="settings.footerLinkUrlBooks">{{lang[locale].footerLinkDescBooks}}</Link>
+                        <Link :href="settings.footerLinkUrlWebzine">{{lang[locale].footerLinkDescWebzine}}</Link>
+                        <Link :href="settings.footerLinkUrlLibrary">{{lang[locale].footerLinkDescLibrary}}</Link>
                     </section>
 
                     <section class="my-4 flex flex-col items-center w-full">
@@ -59,7 +61,7 @@
 </template>
 
 <script setup>
-import {computed, onMounted} from "vue";
+import {computed} from "vue";
 import {Link, usePage} from "@inertiajs/inertia-vue3";
 import {useStore} from "vuex";
 
@@ -72,27 +74,6 @@ const locale = computed(() => usePage().props.value.locale);
 const settings = computed(() => usePage().props.value.settings);
 
 const navigation = computed(() => usePage().props.value.navigation);
-const localLang = {
-    'sk': {
-        'aboutLink': 'O organizácii',
-        'whoIsWhoLink': 'Kto je kto',
-        'supportLink': 'Kto nás podporuje',
-        'bookLink': 'Knižná edícia',
-        'webzinLink': 'Feministický webzin',
-        'libraryLink': 'Knižnica',
-        'legalLink': 'Ochrana osobných údajov',
-
-    },
-    'en': {
-        'aboutLink': 'About organization',
-        'whoIsWhoLink': 'Who is who',
-        'supportLink': 'Who support us',
-        'bookLink': 'Our books',
-        'webzinLink': 'Feminist webzine',
-        'libraryLink': 'Library',
-        'legalLink': 'Personal detail protection',
-    },
-};
 </script>
 
 <style scoped>
