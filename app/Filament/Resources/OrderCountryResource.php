@@ -6,9 +6,9 @@ use App\Filament\Resources\OrderCountryResource\Pages;
 use App\Filament\Resources\OrderCountryResource\RelationManagers;
 use App\Models\OrderCountry;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -17,7 +17,7 @@ class OrderCountryResource extends Resource
 {
     protected static ?string $model = OrderCountry::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-translate';
+    protected static ?string $navigationIcon = 'heroicon-o-language';
     protected static ?string $navigationGroup = 'Eshop';
 
     public static function form(Form $form): Form

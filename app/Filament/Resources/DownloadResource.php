@@ -6,9 +6,9 @@ use App\Filament\Resources\DownloadResource\Pages;
 use App\Filament\Resources\DownloadResource\RelationManagers;
 use App\Models\Download;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
@@ -18,7 +18,7 @@ class DownloadResource extends Resource
 {
     protected static ?string $model = Download::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-download';
+    protected static ?string $navigationIcon = 'heroicon-o-arrow-down-tray';
     protected static ?string $navigationGroup = 'Content';
 
     public static function form(Form $form): Form

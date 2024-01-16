@@ -12,7 +12,7 @@ class EditFile extends EditRecord
 {
     protected static string $resource = FileResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make(),

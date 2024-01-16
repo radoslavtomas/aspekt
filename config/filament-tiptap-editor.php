@@ -1,18 +1,9 @@
 <?php
 
 return [
-    /*
-    |--------------------------------------------------------------------------
-    | Theme overrides
-    |--------------------------------------------------------------------------
-    |
-    | Theme overrides can be used to style parts of the editor content.
-    | theme_builder : 'mix' | 'vite'
-    | theme_path : css/tiptap-editor-styles.css
-    |
-    */
-    'theme_builder' => 'mix',
-    'theme_path' => null,
+    'direction' => 'ltr',
+    'max_content_width' => '5xl',
+    'disable_stylesheet' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -26,50 +17,40 @@ return [
     */
     'profiles' => [
         'default' => [
-            'bold',
-            'italic',
-            'strike',
-            'underline',
-            'h1',
-            'h2',
-            'h3',
-            'h4',
-            'h5',
-            'h6',
-            'lead',
-            'small',
-            'color',
-            'bulletList',
-            'orderedList',
-            'checkedList',
-            'align',
-            'blockquote',
-            'hr',
-            'link',
-            'superscript',
-            'subscript',
-            'table',
-            'grid',
-            'media',
-            'code',
-            'codeblock',
-            'source',
-            'youtube',
-            'vimeo',
-            'details',
+            'heading', 'bullet-list', 'ordered-list', 'checked-list', 'blockquote', 'hr', '|',
+            'bold', 'italic', 'strike', 'underline', 'superscript', 'subscript', 'lead', 'small', 'color', 'highlight', 'align-left', 'align-center', 'align-right', '|',
+            'link', 'media', 'oembed', 'table', 'grid-builder', 'details', '|', 'code', 'code-block', 'source', 'blocks',
         ],
-        'simple' => ['bold', 'italic', 'h1', 'h2', 'h3', 'lead', 'hr', 'bulletList', 'orderedList', 'checkedList', 'link', 'media'],
-        'custom' => ['bold', 'italic', 'h1', 'h2', 'h3', 'h4', 'bulletList', 'orderedList', 'checkedList', 'color', 'link', 'media', 'youtube', 'vimeo', 'source'],
-        'barebone' => ['bold', 'italic', 'link', 'bulletList', 'orderedList'],
+        'custom' => [
+            'heading', 'bullet-list', 'ordered-list', 'checked-list', 'blockquote', 'hr', '|',
+            'bold', 'italic', 'strike', 'color', 'highlight', 'align-left', 'align-center', 'align-right', '|',
+            'link', 'media', 'oembed', 'table',
+        ],
+        'simple' => ['heading', 'hr', 'bullet-list', 'ordered-list', 'checked-list', '|', 'bold', 'italic', 'lead', 'small', '|', 'link', 'media'],
+        'minimal' => ['bold', 'italic', 'link', 'bullet-list', 'ordered-list'],
+        'none' => [],
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Link Modal
+    | Actions
     |--------------------------------------------------------------------------
     |
     */
-    'link_modal_id' => 'filament-tiptap-editor-link-modal',
+    'media_action' => FilamentTiptapEditor\Actions\MediaAction::class,
+    //    'media_action' => Awcodes\Curator\Actions\MediaAction::class,
+    'link_action' => FilamentTiptapEditor\Actions\LinkAction::class,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Output format
+    |--------------------------------------------------------------------------
+    |
+    | Which output format should be stored in the Database.
+    |
+    | See: https://tiptap.dev/guide/output
+    */
+    'output' => FilamentTiptapEditor\Enums\TiptapOutput::Html,
 
     /*
     |--------------------------------------------------------------------------
@@ -80,18 +61,40 @@ return [
     | inserting media. They follow the same conventions as the
     | Filament Forms FileUpload field.
     |
-    | See https://filamentphp.com/docs/2.x/forms/fields#file-upload
+    | See https://filamentphp.com/docs/3.x/panels/installation#file-upload
     |
     */
     'accepted_file_types' => ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml', 'application/pdf'],
     'disk' => 'public',
-    'directory' => 'wysiwyg',
+    'directory' => 'images',
     'visibility' => 'public',
     'preserve_file_names' => false,
     'max_file_size' => 2042,
+    'image_resize_mode' => null,
     'image_crop_aspect_ratio' => null,
     'image_resize_target_width' => null,
     'image_resize_target_height' => null,
-    'media_uploader_id' => 'filament-tiptap-editor-media-uploader-modal', // Default
-    // 'media_uploader_id' => 'filament-curator-media-picker', // Filament Curator
+    'use_relative_paths' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Menus
+    |--------------------------------------------------------------------------
+    |
+    */
+    'disable_floating_menus' => true,
+    'disable_bubble_menus' => false,
+    'disable_toolbar_menus' => false,
+
+    'floating_menu_tools' => ['media', 'grid-builder', 'details', 'table', 'oembed', 'code-block', 'blocks'],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Extensions
+    |--------------------------------------------------------------------------
+    |
+    */
+    'extensions_script' => null,
+    'extensions_styles' => null,
+    'extensions' => [],
 ];

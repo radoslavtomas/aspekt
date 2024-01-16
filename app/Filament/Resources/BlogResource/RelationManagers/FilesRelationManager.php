@@ -4,9 +4,9 @@ namespace App\Filament\Resources\BlogResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables\Actions\EditAction;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Contracts\HasRelationshipTable;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,7 +21,7 @@ class FilesRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'filepath';
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -31,7 +31,7 @@ class FilesRelationManager extends RelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([

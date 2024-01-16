@@ -11,7 +11,7 @@ class EditNavigation extends EditRecord
 {
     protected static string $resource = NavigationResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make(),
