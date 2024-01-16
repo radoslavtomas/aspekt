@@ -6,9 +6,9 @@ use App\Filament\Resources\OrderStatusResource\Pages;
 use App\Filament\Resources\OrderStatusResource\RelationManagers;
 use App\Models\OrderStatus;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -17,7 +17,7 @@ class OrderStatusResource extends Resource
 {
     protected static ?string $model = OrderStatus::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-lightning-bolt';
+    protected static ?string $navigationIcon = 'heroicon-o-bolt';
 
     protected static ?string $navigationGroup = 'Eshop';
 

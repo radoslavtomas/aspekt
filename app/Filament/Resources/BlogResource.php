@@ -7,9 +7,9 @@ use App\Filament\Resources\BlogResource\Pages;
 use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Card;
@@ -62,7 +62,7 @@ class BlogResource extends Resource
                             Forms\Components\TextInput::make('title')
                                 ->required()
                                 ->reactive()
-                                ->afterStateUpdated(function (Closure $set, $state) {
+                                ->afterStateUpdated(function (\Filament\Forms\Set $set, $state) {
                                     $set('slug', Str::slug($state));
                                 }),
                             Forms\Components\TextInput::make('slug')

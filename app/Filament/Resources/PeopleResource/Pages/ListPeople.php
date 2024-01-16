@@ -10,7 +10,7 @@ class ListPeople extends ListRecords
 {
     protected static string $resource = PeopleResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make(),

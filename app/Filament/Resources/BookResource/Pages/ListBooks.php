@@ -10,7 +10,7 @@ class ListBooks extends ListRecords
 {
     protected static string $resource = BookResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make(),

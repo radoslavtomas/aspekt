@@ -8,9 +8,9 @@ use App\Models\People;
 use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use FilamentTiptapEditor\TiptapEditor;
@@ -22,7 +22,7 @@ class PeopleResource extends Resource
 {
     protected static ?string $model = People::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Content';
 
     public static function form(Form $form): Form
@@ -47,7 +47,7 @@ class PeopleResource extends Resource
                         Forms\Components\TextInput::make('title')
                             ->required()
                             ->reactive()
-                            ->afterStateUpdated(function (Closure $set, $state) {
+                            ->afterStateUpdated(function (\Filament\Forms\Set $set, $state) {
                                 $set('slug', Str::slug($state));
                             }),
                         Forms\Components\TextInput::make('slug')

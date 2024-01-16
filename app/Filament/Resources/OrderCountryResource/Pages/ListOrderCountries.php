@@ -10,7 +10,7 @@ class ListOrderCountries extends ListRecords
 {
     protected static string $resource = OrderCountryResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make(),

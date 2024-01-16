@@ -10,7 +10,7 @@ class ListCategoryGroups extends ListRecords
 {
     protected static string $resource = CategoryGroupResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make(),

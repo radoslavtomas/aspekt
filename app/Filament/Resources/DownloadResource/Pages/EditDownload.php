@@ -12,7 +12,7 @@ class EditDownload extends EditRecord
 {
     protected static string $resource = DownloadResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make(),

@@ -32,7 +32,7 @@
       "resources/js/Pages/Eshop/ThankYou.vue"
     ],
     "css": [
-      "assets/app.dfeb3f0a.css"
+      "assets/app.db794d6b.css"
     ],
     "assets": [
       "assets/trebuc.bd3257df.woff"
@@ -469,5 +469,10 @@
       "_NavigationBar.7978bd1d.js",
       "_plugin-vue_export-helper.21dcd24c.js"
     ]
+  },
+  "resources/css/filament/admin/theme.css": {
+    "file": "assets/theme.915f2f80.css",
+    "src": "resources/css/filament/admin/theme.css",
+    "isEntry": true
   }
 }

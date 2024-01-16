@@ -10,7 +10,7 @@ class ListNavigations extends ListRecords
 {
     protected static string $resource = NavigationResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make(),
