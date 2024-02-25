@@ -14,7 +14,7 @@ class CreateBlog extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['feature_img'] = '/' . $data['feature_img'];
+        $data['feature_img'] = $data['feature_img'] ? '/' . $data['feature_img'] : null;
 
         return parent::mutateFormDataBeforeCreate($data);
     }

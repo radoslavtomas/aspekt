@@ -19,6 +19,7 @@ class EditBlog extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
+        $data['language'] = isset($data['language']) ? $data['language'] : 'sk';
         // dd($data);
         $data['feature_img'] = $data['feature_img'] ? '/' . $data['feature_img'] : null;
 

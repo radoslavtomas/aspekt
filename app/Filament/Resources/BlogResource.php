@@ -71,11 +71,13 @@ class BlogResource extends Resource
                             Forms\Components\TextInput::make('subtitle'),
                             Forms\Components\TextInput::make('authors')
                                 ->default(Auth::user()->name),
+                            Forms\Components\Hidden::make('user_id')
+                                ->default(Auth::id()),
                             TiptapEditor::make('teaser')
                                 ->profile('custom')
                                 ->required(),
                             TiptapEditor::make('body')
-                                ->profile('custom')
+                                //->profile('custom')
                                 ->required(),
                             TiptapEditor::make('links')
                                 ->profile('custom'),
