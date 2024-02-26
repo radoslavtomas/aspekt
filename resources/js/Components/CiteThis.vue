@@ -1,6 +1,6 @@
 <template>
-<div class="border-t border-gray-200 pt-3 mt-8">
-    <h4 class="text-sm uppercase text-red-500 font-bold mb-1">{{localLang[locale].title}}</h4>
+<div class="">
+    <Separator :title="localLang[locale].title" margin />
     <p class="text-sm">
         <span v-if="props.blog.authors">{{authors}}. </span>
         <span class="font-bold">{{props.blog.title}}</span>.
@@ -15,6 +15,7 @@
 import {computed} from "vue";
 import moment from 'moment';
 import {usePage} from "@inertiajs/inertia-vue3";
+import Separator from '@/Components/Separator.vue'
 
 const props = defineProps({
     blog: Object

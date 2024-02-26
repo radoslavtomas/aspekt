@@ -8,6 +8,7 @@ use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
@@ -44,7 +45,7 @@ class BlogResource extends Resource
                                 'en' => 'en'
                             ])
                             ->default('sk')
-                            ->disablePlaceholderSelection(),
+                            ->required(),
                         Forms\Components\Grid::make()->schema([
                             Forms\Components\Checkbox::make('featured'),
                             Forms\Components\Checkbox::make('published'),
@@ -52,7 +53,8 @@ class BlogResource extends Resource
                     ]),
                     Fieldset::make('Categories')
                         ->schema([
-                            Forms\Components\MultiSelect::make('category')
+                            Forms\Components\Select::make('category')
+                                ->multiple()
                                 ->relationship('category', 'name_sk')
                                 ->preload()
                         ]),
@@ -62,9 +64,7 @@ class BlogResource extends Resource
                             Forms\Components\TextInput::make('title')
                                 ->required()
                                 ->reactive()
-                                ->afterStateUpdated(function (\Filament\Forms\Set $set, $state) {
-                                    $set('slug', Str::slug($state));
-                                }),
+                                ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                             Forms\Components\TextInput::make('slug')
                                 ->unique(ignoreRecord: true)
                                 ->required(),
@@ -77,7 +77,7 @@ class BlogResource extends Resource
                                 ->profile('custom')
                                 ->required(),
                             TiptapEditor::make('body')
-                                //->profile('custom')
+                                ->profile('custom')
                                 ->required(),
                             TiptapEditor::make('links')
                                 ->profile('custom'),

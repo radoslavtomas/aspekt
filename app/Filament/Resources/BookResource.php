@@ -85,16 +85,19 @@ class BookResource extends Resource
                                 'en' => 'en'
                             ])
                             ->default('sk')
-                            ->disablePlaceholderSelection(),
+                            ->required(),
                     ])
                 ->columns(1),
                 Fieldset::make('Product settings')
                     ->schema([
                         Forms\Components\TextInput::make('common_price')
-                            ->label('Common price (€)'),
+                            ->label('Common price (€)')
+                            ->numeric(),
                         Forms\Components\TextInput::make('aspekt_price')
-                            ->label('Aspekt price (€)'),
-                        Forms\Components\TextInput::make('pages'),
+                            ->label('Aspekt price (€)')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('pages')
+                            ->numeric(),
                         Forms\Components\TextInput::make('isbn')
                             ->label('ISBN'),
                     ])
