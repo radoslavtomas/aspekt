@@ -6,16 +6,26 @@ use App\Http\Resources\BlogExtResource;
 use App\Http\Resources\BlogResource;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Services\NewsfilterService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
-use MailchimpMarketing;
 
 class NjuvinkyController extends Controller
 {
     public null|object $category = null;
     private int $pagination = 15;
+
+    private $newsfilter;
+
+    /**
+     *
+     */
+    public function __construct(NewsfilterService $newsfilter)
+    {
+        $this->newsfilter = $newsfilter;
+    }
+
 
     public function redirect()
     {
@@ -59,7 +69,8 @@ class NjuvinkyController extends Controller
     private function handleListResource(): Response
     {
         if ($this->category['url'] == 'vsetko') {
-            $blogs = Blog::published()->where('blog_type_id', 43)->orderBy('created_at', 'desc')->paginate($this->pagination);
+            $blogs = Blog::published()->where('blog_type_id', 43)->orderBy('created_at',
+                'desc')->paginate($this->pagination);
         } else { // all other categories
             $blogs = $this->category->blogs()->paginate($this->pagination);
         }
@@ -79,25 +90,7 @@ class NjuvinkyController extends Controller
             'subscribe_email' => 'required|string|email'
         ]);
 
-        $list_id = env('MAILCHIMP_LIST_ID');
-        $mailchimp = new MailchimpMarketing\ApiClient();
-
-        $mailchimp->setConfig([
-            'apiKey' => env('MAILCHIMP_API_KEY'),
-            'server' => env('MAILCHIMP_SERVER_PREFIX')
-        ]);
-
-        try {
-            $response = $mailchimp->lists->addListMember($list_id, [
-                "email_address" => $validated['subscribe_email'],
-                "status" => "subscribed",
-                "tags" => ["Knižnica Aspektu"]
-            ]);
-        } catch (\Exception $e) {
-            Log::error('Failed to subscribe ' . $validated['subscribe_email'] . ' to Njuvinky newsletter');
-            Log::error($e->getMessage());
-            $response = null;
-        }
+        $response = $this->newsfilter->subscribe($validated['subscribe_email']);
 
         return [
             'accepted' => (bool)$response

@@ -2,11 +2,22 @@
 
 namespace App\Providers;
 
+use App\Services\NewsfilterService;
+use App\Services\SenderNewsfilterService;
 use Illuminate\Support\ServiceProvider;
 use Opcodes\LogViewer\Facades\LogViewer;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * All the container bindings that should be registered.
+     *
+     * @var array
+     */
+    public array $bindings = [
+        NewsfilterService::class => SenderNewsfilterService::class,
+    ];
+
     /**
      * Register any application services.
      *

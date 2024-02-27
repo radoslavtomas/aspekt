@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-zinc-600 my-8 p-4 sm:rounded shadow-lg">
+    <section v-if="route().current() === 'home'" class="bg-zinc-600 mt-8 p-4 sm:rounded shadow-lg">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-white">
             <div class="p-6">
                 <Link :href="route('books', 'vsetko')" class="flex  items-center ml-2 text-lg leading-7 hover:text-red-400">

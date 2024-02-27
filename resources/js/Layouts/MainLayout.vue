@@ -3,20 +3,21 @@
         <navigation-bar />
     </header>
 
-    <main class="relative container-aspekt mx-auto">
+    <main class="relative container-aspekt mx-auto pb-8">
 
-        <cats-widget></cats-widget>
+        <cats-widget />
 
         <slot />
 
         <support-us />
+
         <NewsletterForm />
+
         <AspektInfo />
     </main>
 
     <TheFooter />
     <BasketWidget />
-
 </template>
 
 <script setup>
