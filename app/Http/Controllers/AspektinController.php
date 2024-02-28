@@ -6,7 +6,6 @@ use App\Http\Resources\BlogExtResource;
 use App\Http\Resources\BlogResource;
 use App\Models\Blog;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,12 +18,13 @@ class AspektinController extends Controller
     public function index($category = null, $slug = null)
     {
         $this->getCategoryModel($category);
+        // dd($this->category);
 
         if ($this->category->isStatic()) {
             return $this->handleStaticResource();
         }
 
-        if($slug) {
+        if ($slug) {
             return $this->handleSingleResource($slug);
         }
 
@@ -65,23 +65,18 @@ class AspektinController extends Controller
 
     private function handleListResource(): Response
     {
-        if($this->category['url'] == $this->all)
-        { // special category "vsetko"
+        if ($this->category['url'] == $this->all) { // special category "vsetko"
             $featured = Blog::where('featured', 1)->orderBy('created_at', 'desc')->first();
             $blogs = Blog::published()->language('sk')->orderBy('created_at', 'desc')->paginate($this->pagination);
-
-        } else
-        { // all other categories
+        } else { // all other categories
             $featured = $this->category->blogs->sortByDesc('created_at')->where('featured', 1)->first();
             $blogs = $this->category->blogs()->whereIn('language', ['sk', ''])->paginate($this->pagination);
         }
 
-        if ($featured)
-        { // filter out $featured
-            $filtered = $blogs->filter(fn ($blog) => $featured->id !== $blog->id);
+        if ($featured) { // filter out $featured
+            $filtered = $blogs->filter(fn($blog) => $featured->id !== $blog->id);
             $blogs->setCollection(collect($filtered));
-        } else
-        { // if $featured is not set, make first blog $featured
+        } else { // if $featured is not set, make first blog $featured
             $featured = $blogs->shift();
         }
 
