@@ -6,18 +6,18 @@
                     <h3 class="text-lg mb-4 uppercase">
                         {{ lang[locale].footerColumn1Title }}
                     </h3>
-                    <p>
-                        {{ lang[locale].footerDescriptionLine1 }}
-                    </p>
-                    <p class="mb-4">
-                        {{ lang[locale].footerDescriptionLine2 }}
-                    </p>
+                    <!--                    <p>-->
+                    <!--                        {{ lang[locale].footerDescriptionLine1 }}-->
+                    <!--                    </p>-->
+                    <!--                    <p class="mb-4">-->
+                    <!--                        {{ lang[locale].footerDescriptionLine2 }}-->
+                    <!--                    </p>-->
 
-                    <p class="">
-                        {{ lang[locale].footerDescriptionLine3 }}
-                    </p>
+                    <!--                    <p class="">-->
+                    <!--                        {{ lang[locale].footerDescriptionLine3 }}-->
+                    <!--                    </p>-->
 
-                    <p class="my-4">*</p>
+                    <!--                    <p class="my-4">*</p>-->
 
                     <section class="mb-4 flex flex-col">
                         <Link :href="settings.footerLinkUrl1">
@@ -47,6 +47,9 @@
                         </Link>
                         <Link :href="settings.footerLinkUrlLibrary">
                             {{ lang[locale].footerLinkDescLibrary }}
+                        </Link>
+                        <Link :href="settings.footerLinkUrlEvents">
+                            {{ lang[locale].footerLinkDescEvents }}
                         </Link>
                     </section>
 

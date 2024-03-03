@@ -5,17 +5,20 @@
     >
         <section class="flex flex-col justify-start">
             <div class="text-center">
-                <h5 class="uppercase font-bold text-pink-600 text-gradient text-lg">
+                <h5
+                    :class="lang[locale].njuvinkySubtitle ? '' : 'mb-2'"
+                    class="uppercase font-bold text-pink-600 text-gradient text-lg"
+                >
                     <a :href="route('njuvinky', 'vsetko')">{{ lang[locale].njuvinkyTitle }}</a>
                 </h5>
-                <p class="text-xs">{{ lang[locale].njuvinkySubtitle }}</p>
 
-                <p class="text-xs italic mt-4 w-full mx-auto">
-                    {{ lang[locale].njuvinkyDescription }}</p>
+                <p v-if="lang[locale].njuvinkySubtitle" class="text-xs mb-4">
+                    {{ lang[locale].njuvinkySubtitle }}
+                </p>
             </div>
 
             <form action="#"
-                  class="w-full flex justify-center items-center flex-col sm:flex-row mx-auto md:max-w-screen-sm mt-8"
+                  class="w-full flex justify-center items-center flex-col sm:flex-row mx-auto md:max-w-screen-sm"
                   @submit="handleSubscription">
                 <label class="block w-full flex-1 mb-4 sm:mb-0">
                     <input v-model="form.subscribe_email"

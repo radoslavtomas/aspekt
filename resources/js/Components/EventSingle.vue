@@ -1,0 +1,52 @@
+<template>
+    <div class="max-w-3xl mx-auto">
+        <Head :title="title"/>
+
+        <AspektinHero/>
+
+        <Breadcrumbs id="aspektin" :article="blog.title"/>
+
+        <article class="">
+            <header class="relative flex flex-col md:flex-row justify-between items-center md:items-start mb-4">
+                <div class="text-center md:text-left w-full h-full flex-1 flex flex-col justify-items-stretch">
+                    <div class="">
+                        <h1 class="text-2xl md:text-3xl text-red-600 font-bold">{{ blog.title }}</h1>
+                        <h4 class="text-xl text-red-600 my-1">{{ blog.subtitle }}</h4>
+                    </div>
+                </div>
+            </header>
+
+            <main class="max-w-2xl mx-auto px-1">
+                <section class="mb-6">
+                    <div class="content" v-html="blog.body"></div>
+                </section>
+            </main>
+
+            <footer class="max-w-2xl mx-auto px-1">
+                <CiteThis :blog="blog"/>
+            </footer>
+        </article>
+    </div>
+</template>
+
+<script setup>
+import { computed } from 'vue'
+import { Head, usePage } from '@inertiajs/inertia-vue3'
+
+// components
+import Breadcrumbs from '../Components/Breadcrumbs.vue'
+import AspektinHero from '@/Components/AspektinHero.vue'
+import CiteThis from '@/Components/CiteThis.vue'
+import { useStore } from 'vuex'
+
+// computed
+const blog = computed(() => usePage().props.value.blog.data)
+const locale = computed(() => usePage().props.value.locale)
+const navigation = computed(() => usePage().props.value.navigation)
+const store = useStore()
+const lang = computed(() => store.getters.lang)
+const navigationString = computed(() => navigation.value.find(el => el.route === 'aspektin')[`name_${locale.value}`])
+const title = computed(() => `${navigationString.value} | ${blog.value.title}`)
+
+</script>
+

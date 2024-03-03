@@ -8,11 +8,10 @@ use App\Models\Download;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class DownloadResource extends Resource
 {
@@ -20,6 +19,7 @@ class DownloadResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-arrow-down-tray';
     protected static ?string $navigationGroup = 'Content';
+    protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
     {
@@ -48,10 +48,10 @@ class DownloadResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->filters([
                 Filter::make('Pdfs')
-                    ->query(fn (Builder $query): Builder => $query
+                    ->query(fn(Builder $query): Builder => $query
                         ->where('filemime', 'like', '%pdf%')),
                 Filter::make('Word docments')
-                    ->query(fn (Builder $query): Builder => $query
+                    ->query(fn(Builder $query): Builder => $query
                         ->where('filemime', 'like', '%word%')),
             ])
             ->actions([

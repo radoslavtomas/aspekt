@@ -2,26 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use Closure;
 use App\Filament\Resources\BlogResource\Pages;
 use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\Card;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Filament\Forms\Components\Repeater;
-use FilamentTiptapEditor\TiptapEditor;
 
 class BlogResource extends Resource
 {
@@ -34,23 +30,24 @@ class BlogResource extends Resource
     {
         return $form
             ->schema([
-                Fieldset::make('Blog settings')
-                    ->schema([
-                        Forms\Components\Select::make('blog_type_id')
-                            ->relationship('blog_type', 'name_sk', fn (Builder $query) => $query->whereIn('id', [5, 6, 43]))
-                            ->required(),
-                        Forms\Components\Select::make('language')
-                            ->options([
-                                'sk' => 'sk',
-                                'en' => 'en'
-                            ])
-                            ->default('sk')
-                            ->required(),
-                        Forms\Components\Grid::make()->schema([
-                            Forms\Components\Checkbox::make('featured'),
-                            Forms\Components\Checkbox::make('published'),
-                        ])->columns(1),
-                    ]),
+                    Fieldset::make('Blog settings')
+                        ->schema([
+                            Forms\Components\Select::make('blog_type_id')
+                                ->relationship('blog_type', 'name_sk',
+                                    fn(Builder $query) => $query->whereIn('id', [5, 6, 43]))
+                                ->required(),
+                            Forms\Components\Select::make('language')
+                                ->options([
+                                    'sk' => 'sk',
+                                    'en' => 'en'
+                                ])
+                                ->default('sk')
+                                ->required(),
+                            Forms\Components\Grid::make()->schema([
+                                Forms\Components\Checkbox::make('featured'),
+                                Forms\Components\Checkbox::make('published'),
+                            ])->columns(1),
+                        ]),
                     Fieldset::make('Categories')
                         ->schema([
                             Forms\Components\Select::make('category')
@@ -64,7 +61,7 @@ class BlogResource extends Resource
                             Forms\Components\TextInput::make('title')
                                 ->required()
                                 ->reactive()
-                                ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                                ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
                             Forms\Components\TextInput::make('slug')
                                 ->unique(ignoreRecord: true)
                                 ->required(),
@@ -87,7 +84,7 @@ class BlogResource extends Resource
                                 ->directory('featured_images')
                                 ->label('Featured image')
                         ]),
-                    ]
+                ]
             );
     }
 
@@ -110,15 +107,15 @@ class BlogResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->filters([
                 Filter::make('aspekt in')
-                    ->query(fn (Builder $query): Builder => $query->where('blog_type_id', 5)),
+                    ->query(fn(Builder $query): Builder => $query->where('blog_type_id', 5)),
                 Filter::make('kniznica')
-                    ->query(fn (Builder $query): Builder => $query->where('blog_type_id', 6)),
+                    ->query(fn(Builder $query): Builder => $query->where('blog_type_id', 6)),
                 Filter::make('njuvinky')
-                    ->query(fn (Builder $query): Builder => $query->where('blog_type_id', 43)),
+                    ->query(fn(Builder $query): Builder => $query->where('blog_type_id', 43)),
                 Filter::make('featured')
-                    ->query(fn (Builder $query): Builder => $query->where('featured', true)),
+                    ->query(fn(Builder $query): Builder => $query->where('featured', true)),
                 Filter::make('not published')
-                    ->query(fn (Builder $query): Builder => $query->where('published', false))
+                    ->query(fn(Builder $query): Builder => $query->where('published', false))
 
             ])
             ->actions([

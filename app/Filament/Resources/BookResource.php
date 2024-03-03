@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use Closure;
 use App\Filament\Resources\BookResource\Pages;
 use App\Filament\Resources\BookResource\RelationManagers;
 use App\Models\Book;
@@ -10,18 +9,14 @@ use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
-use FilamentTiptapEditor\TiptapEditor;
+use Filament\Tables\Table;
 use FilamentTiptapEditor\Enums\TiptapOutput;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\RichEditor;
 
 class BookResource extends Resource
 {
@@ -30,6 +25,8 @@ class BookResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     protected static ?string $navigationGroup = 'Content';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -50,7 +47,8 @@ class BookResource extends Resource
                         Forms\Components\Select::make('name_sk')
                             ->multiple()
                             ->preload()
-                            ->relationship('category', 'name_sk', fn (Builder $query) => $query->where('navigation_id', 4))
+                            ->relationship('category', 'name_sk',
+                                fn(Builder $query) => $query->where('navigation_id', 4))
                             ->required(),
                         Forms\Components\FileUpload::make('cover')
                             ->preserveFilenames()
@@ -87,7 +85,7 @@ class BookResource extends Resource
                             ->default('sk')
                             ->required(),
                     ])
-                ->columns(1),
+                    ->columns(1),
                 Fieldset::make('Product settings')
                     ->schema([
                         Forms\Components\TextInput::make('common_price')
@@ -125,9 +123,9 @@ class BookResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->filters([
                 Filter::make('featured')
-                    ->query(fn (Builder $query): Builder => $query->where('featured', true)),
+                    ->query(fn(Builder $query): Builder => $query->where('featured', true)),
                 Filter::make('not published')
-                    ->query(fn (Builder $query): Builder => $query->where('published', false))
+                    ->query(fn(Builder $query): Builder => $query->where('published', false))
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
