@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EventExtResource;
+use App\Http\Resources\EventResource;
 use App\Models\Event;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -25,15 +27,15 @@ class EventsController extends Controller
         // dd($event);
 
         return Inertia::render('Event', [
-            'blog' => $event,
+            'event' => EventExtResource::make($event),
             'slug' => $slug
         ]);
     }
 
     private function handleEventList(): Response
     {
-        $featured = Event::where('featured', 1)->sortByDesc('created_at')->first();
-        $events = Event::whereIn('language', ['sk', ''])->paginate($this->pagination);
+        $featured = Event::where('featured', 1)->orderBy('created_at', 'desc')->first();
+        $events = Event::published()->language('sk')->orderBy('created_at', 'desc')->paginate($this->pagination);
 
         // remove featured event from the event list
         if ($featured) {
@@ -45,8 +47,8 @@ class EventsController extends Controller
         }
 
         return Inertia::render('Events', [
-            'events' => $events,
-            'featured' => $featured,
+            'events' => EventResource::collection($events),
+            'featured' => EventResource::make($featured),
         ]);
     }
 }

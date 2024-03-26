@@ -3,16 +3,14 @@
         <Head :title="title"/>
 
         <div class="bg-books">
-            <AspektinHero/>
+            <Breadcrumbs id="events"/>
 
-            <!--            <Breadcrumbs id="aspektin"/>-->
+            <EventListItem :item="featured.data" featured/>
 
-            <BlogListItem :featured="true" :item="featured.data"/>
-
-            <div class="mb-4 border-2 border-purple-100 p-4 bg-transparent">
+            <div class="mb-4 border-2 border-teal-100 p-4 bg-transparent">
                 <MasonryWall :column-width="230" :gap="16" :items="items.data">
                     <template #default="{item}">
-                        <BlogListItem :item="item"/>
+                        <EventListItem :item="item"/>
                     </template>
                 </MasonryWall>
             </div>
@@ -24,23 +22,27 @@
 
 <script setup>
 import { Head, usePage } from '@inertiajs/inertia-vue3'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 
 // 3rd party
 import MasonryWall from '@yeger/vue-masonry-wall'
 
 // components
-import BlogListItem from './BlogListItem.vue'
+import EventListItem from '@/Components/EventListItem.vue'
 import Pagination from '../Components/Pagination.vue'
-import AspektinHero from '@/Components/AspektinHero.vue'
+import Breadcrumbs from '../Components/Breadcrumbs.vue'
 
 // computed
-const items = computed(() => usePage().props.value.blogs)
+const items = computed(() => usePage().props.value.events)
 const featured = computed(() => usePage().props.value.featured)
 const locale = computed(() => usePage().props.value.locale)
 const navigation = computed(() => usePage().props.value.navigation)
 const navigationString = computed(() => navigation.value.find(el => el.route === 'events')[`name_${locale.value}`])
-const title = computed(() => `${navigationString.value} | ${categoryString.value}`)
+const title = computed(() => navigationString.value)
+
+onMounted(() => {
+    console.log(featured.value)
+})
 </script>
 
 <style>

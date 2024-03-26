@@ -8,6 +8,7 @@ use App\Models\Event;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -35,13 +36,22 @@ class EventResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('title')
                             ->required()
-                            ->reactive()
-                            ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                                if (Str::slug($old)) {
+                                    return;
+                                }
+
+                                $set('slug', Str::slug($state));
+                            }),
                         Forms\Components\TextInput::make('slug')
                             ->unique(ignoreRecord: true)
                             ->required(),
                         Forms\Components\TextInput::make('subtitle'),
-                        Forms\Components\DateTimePicker::make('date'),
+                        Forms\Components\DatePicker::make('date_start'),
+                        Forms\Components\TimePicker::make('time_start'),
+                        Forms\Components\DatePicker::make('date_end'),
+                        Forms\Components\TimePicker::make('time_end'),
                         Forms\Components\TextInput::make('place'),
                         TiptapEditor::make('teaser')
                             ->profile('custom')

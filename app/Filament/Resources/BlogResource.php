@@ -8,6 +8,7 @@ use App\Models\Blog;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -60,8 +61,14 @@ class BlogResource extends Resource
                         ->schema([
                             Forms\Components\TextInput::make('title')
                                 ->required()
-                                ->reactive()
-                                ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                                    if (Str::slug($old)) {
+                                        return;
+                                    }
+
+                                    $set('slug', Str::slug($state));
+                                }),
                             Forms\Components\TextInput::make('slug')
                                 ->unique(ignoreRecord: true)
                                 ->required(),

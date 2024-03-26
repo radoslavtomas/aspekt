@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Resources\TranslationResource;
 use App\Models\Navigation;
 use App\Models\Setting;
 use App\Models\Translation;
@@ -10,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
-use App\Models\Category;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -66,21 +64,9 @@ class HandleInertiaRequests extends Middleware
         ]);
     }
 
-    private function getNavigationItems() {
-        return Cache::rememberForever('navigation', function() {
-            return Navigation::with('categories')->orderBy('position')->get();
-        });
-    }
-
-    private function getSettings() {
-        return Cache::rememberForever('settings', function() {
-            return $this->getSettingsAsKeyValuePairs(Setting::all('key', 'value'));
-        });
-    }
-
     private function getTranslations(): array
     {
-        return Cache::rememberForever('translations', function() {
+        return Cache::rememberForever('translations', function () {
             $lang = Translation::all();
             return [
                 'sk' => $this->getTranslationsByLang('sk', $lang),
@@ -98,6 +84,20 @@ class HandleInertiaRequests extends Middleware
         }
 
         return $data;
+    }
+
+    private function getNavigationItems()
+    {
+        return Cache::rememberForever('navigation', function () {
+            return Navigation::with('categories')->orderBy('position')->get();
+        });
+    }
+
+    private function getSettings()
+    {
+        return Cache::rememberForever('settings', function () {
+            return $this->getSettingsAsKeyValuePairs(Setting::where('active', 1)->get());
+        });
     }
 
     private function getSettingsAsKeyValuePairs($settings): array

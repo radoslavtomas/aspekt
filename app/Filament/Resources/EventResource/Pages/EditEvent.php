@@ -10,6 +10,13 @@ class EditEvent extends EditRecord
 {
     protected static string $resource = EventResource::class;
 
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        // dd($data);
+
+        return $data;
+    }
+
     protected function getHeaderActions(): array
     {
         return [

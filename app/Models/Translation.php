@@ -18,5 +18,6 @@ class Translation extends Model
         'key',
         'sk',
         'en',
+        'active',
     ];
 }

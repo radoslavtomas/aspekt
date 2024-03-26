@@ -1,14 +1,21 @@
 <template>
     <article
-        :class="featured ? 'border-4 mb-4 border-purple-300 bg-slate-50 shadow-sm' : 'bg-white shadow-md border-gray-300'"
+        :class="featured ? 'border-4 mb-4 border-teal-200 bg-slate-50 shadow-sm' : 'bg-white shadow-md border-gray-300'"
         class="border p-4">
         <main :class="props.item.feature_img  && props.featured ? 'grid grid-cols-5 gap-4' : ''">
             <div class="col-span-5 sm:col-span-3 lg:col-span-4">
-                <Link :href="route('aspektin', [categoryUrl, props.item.slug])">
+                <Link :href="route('events', [props.item.slug])">
                     <h2 :class="featured ? 'text-2xl' : 'text-lg'" class="text-red-600">{{ props.item.title }}</h2>
                 </Link>
-                <h3 class="text-sm italic mb-0 sm:mb-4">{{ props.item.authors ?? 'red.' }}</h3>
-                <p class="text-sm hidden sm:block" v-html="props.item.teaser"></p>
+                <h3 v-if="props.item.place" class="text-sm my-1">
+                    <map-pin-icon class="mr-1 w-4 h-4 inline-block"/>
+                    {{ props.item.place }}
+                </h3>
+                <h3 v-if="props.item.date_start" class="text-sm mb-0">
+                    <clock-icon class="mr-1 w-4 h-4 inline-block"/>
+                    {{ props.item.date_start }}, {{ props.item.time_start }}
+                </h3>
+                <p class="text-sm mt-4" v-html="props.item.teaser"></p>
             </div>
             <div
                 v-if="props.item.feature_img && props.featured"
@@ -21,13 +28,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { Link, usePage } from '@inertiajs/inertia-vue3'
-
-const categoryUrl = computed(() => {
-    const url = usePage().props.value.category?.url
-    return url ? url : 'vsetko'
-})
+import { ClockIcon, MapPinIcon } from '@heroicons/vue/24/outline'
+import { Link } from '@inertiajs/inertia-vue3'
 
 const props = defineProps({
     item: Object,

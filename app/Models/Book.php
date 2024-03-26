@@ -27,6 +27,8 @@ class Book extends Model
         'body',
         'links',
         'is_product',
+        'is_ebook',
+        'eshop_links',
         'common_price',
         'aspekt_price',
         'pages',
@@ -34,6 +36,15 @@ class Book extends Model
         'featured',
         'published',
         'language',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'eshop_links' => 'array',
     ];
 
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsToMany

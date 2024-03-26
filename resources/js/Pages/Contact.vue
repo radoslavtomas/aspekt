@@ -141,7 +141,7 @@ const title = computed(() => navigation.value.find(el => el.route === 'contact')
                     </section>
                 </div>
 
-                <div class="w-full mb-4">
+                <div class="w-full mb-4 border border-gray-200 shadow-md">
                     <iframe
                         allowfullscreen=""
                         height="450" loading="lazy" referrerpolicy="no-referrer-when-downgrade"

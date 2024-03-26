@@ -20,7 +20,10 @@ class Event extends Model
         'title',
         'slug',
         'subtitle',
-        'date',
+        'date_start',
+        'date_end',
+        'time_start',
+        'time_end',
         'place',
         'teaser',
         'body',
@@ -28,6 +31,18 @@ class Event extends Model
         'featured',
         'published',
         'language',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'date_start' => 'datetime',
+        'time_start' => 'datetime',
+        'date_end' => 'datetime',
+        'time_end' => 'datetime',
     ];
 
     public function scopePublished($query)

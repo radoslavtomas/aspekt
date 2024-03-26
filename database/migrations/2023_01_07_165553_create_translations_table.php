@@ -15,8 +15,9 @@ return new class extends Migration {
         Schema::create('translations', function (Blueprint $table) {
             $table->id();
             $table->string('key');
-            $table->text('sk')->nullable();
-            $table->text('en')->nullable();
+            $table->text('sk');
+            $table->text('en');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

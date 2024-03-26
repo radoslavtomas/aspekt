@@ -17,7 +17,10 @@ return new class extends Migration {
             $table->string('title');
             $table->string('slug')->nullable();
             $table->string('subtitle')->nullable();
-            $table->dateTime('date')->nullable();
+            $table->date('date_start')->nullable();
+            $table->time('time_start')->nullable();
+            $table->date('date_end')->nullable();
+            $table->time('time_end')->nullable();
             $table->string('place')->nullable();
             $table->text('teaser')->nullable();
             $table->longText('body');

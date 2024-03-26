@@ -8,6 +8,8 @@ use App\Models\Book;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
@@ -38,10 +40,11 @@ class BookResource extends Resource
 //                            ->relationship('blog_type', 'name', fn (Builder $query) => $query->whereIn('id', [5, 6, 43]))
 //                            ->required(),
                         Forms\Components\Checkbox::make('is_product'),
+                        Forms\Components\Checkbox::make('is_ebook'),
                         Forms\Components\Checkbox::make('featured'),
                         Forms\Components\Checkbox::make('published'),
                     ])
-                    ->columns(3),
+                    ->columns(4),
                 Fieldset::make('Book settings')
                     ->schema([
                         Forms\Components\Select::make('name_sk')
@@ -55,8 +58,12 @@ class BookResource extends Resource
                             ->directory('covers'),
                         Forms\Components\TextInput::make('title')
                             ->required()
-                            ->reactive()
-                            ->afterStateUpdated(function (\Filament\Forms\Set $set, $state) {
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                                if (Str::slug($old)) {
+                                    return;
+                                }
+
                                 $set('slug', Str::slug($state));
                             }),
                         Forms\Components\TextInput::make('slug')
@@ -98,7 +105,15 @@ class BookResource extends Resource
                             ->numeric(),
                         Forms\Components\TextInput::make('isbn')
                             ->label('ISBN'),
-                    ])
+                    ]),
+                Fieldset::make('Eshop settings')
+                    ->schema([
+                        Forms\Components\Repeater::make('eshop_links')
+                            ->schema([
+                                Forms\Components\TextInput::make('eshop_name')->required(),
+                                Forms\Components\TextInput::make('link')->required(),
+                            ])
+                    ])->columns(1)
             ]);
     }
 
@@ -117,6 +132,8 @@ class BookResource extends Resource
                     ->sortable(),
                 Tables\Columns\CheckboxColumn::make('is_product')
                     ->sortable(),
+                Tables\Columns\CheckboxColumn::make('is_ebook')
+                    ->sortable(),
                 Tables\Columns\CheckboxColumn::make('published')
                     ->sortable(),
             ])
@@ -125,7 +142,11 @@ class BookResource extends Resource
                 Filter::make('featured')
                     ->query(fn(Builder $query): Builder => $query->where('featured', true)),
                 Filter::make('not published')
-                    ->query(fn(Builder $query): Builder => $query->where('published', false))
+                    ->query(fn(Builder $query): Builder => $query->where('published', false)),
+                Filter::make('product')
+                    ->query(fn(Builder $query): Builder => $query->where('is_product', true)),
+                Filter::make('ebook')
+                    ->query(fn(Builder $query): Builder => $query->where('is_ebook', true))
             ])
             ->actions([
                 Tables\Actions\EditAction::make()

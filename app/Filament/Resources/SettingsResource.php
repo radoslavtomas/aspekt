@@ -8,10 +8,8 @@ use App\Models\Setting;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Table;
 
 class SettingsResource extends Resource
 {
@@ -27,6 +25,7 @@ class SettingsResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('key')->unique(ignoreRecord: true),
                 Forms\Components\Textarea::make('value'),
+                Forms\Components\Checkbox::make('active'),
             ])->columns(1);
     }
 

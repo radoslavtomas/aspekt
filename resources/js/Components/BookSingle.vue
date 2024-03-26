@@ -8,7 +8,7 @@
             <header
                 class="relative flex flex-col md:flex-row justify-between items-center md:items-start mb-6 md:mb-12">
                 <div class="text-center md:text-left w-full h-full flex-1 flex flex-col justify-items-stretch">
-                    <div class="">
+                    <div class="mb-2">
                         <h1 class="text-2xl md:text-3xl text-red-600 font-bold">{{ book.title }}</h1>
                         <h4 class="text-xl text-red-600 my-1">{{ book.subtitle }}</h4>
                         <h3 class="md:mb-4 text-xl">{{ book.authors }}</h3>
@@ -32,6 +32,11 @@
                         <div class="mt-4 md:mt-4">
                             <BookSingleCtaButton :book="book"/>
                         </div>
+                    </div>
+
+                    <div v-if="book.is_ebook"
+                         class="text-sm flex flex-col items-center md:items-start mt-4 md:mt-0">
+                        <BookSingleEshopLink v-for="link in book.eshop_links" :link="link"/>
                     </div>
                 </div>
 
@@ -84,13 +89,14 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { Head, usePage } from '@inertiajs/inertia-vue3'
 
 // components
 import FileList from './FileList.vue'
 import BookSingleCtaButton from './BookSingleCtaButton.vue'
+import BookSingleEshopLink from '@/Components/BookSingleEshopLink.vue'
 import Breadcrumbs from '../Components/Breadcrumbs.vue'
 import Separator from '@/Components/Separator.vue'
 
@@ -103,4 +109,8 @@ const lang = computed(() => store.getters.lang)
 
 const navigationString = computed(() => navigation.value.find(el => el.route === 'books')[`name_${locale.value}`])
 const title = computed(() => `${navigationString.value} | ${book.value.title}`)
+
+onMounted(() => {
+    console.log(book)
+})
 </script>

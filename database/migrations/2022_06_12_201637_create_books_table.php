@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -28,6 +27,8 @@ return new class extends Migration
             $table->text('sample')->nullable();
             $table->text('links')->nullable();
             $table->boolean('is_product')->default(false);
+            $table->boolean('is_ebook')->default(false);
+            $table->json('ebook_links')->nullable();
             $table->bigInteger('aspekt_price')->nullable();
             $table->bigInteger('common_price')->nullable();
             $table->integer('pages')->nullable();

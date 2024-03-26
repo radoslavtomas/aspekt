@@ -20,7 +20,7 @@
                     <!--                    <p class="my-4">*</p>-->
 
                     <section class="mb-4 flex flex-col">
-                        <Link :href="settings.footerLinkUrl1">
+                        <Link v-if="settings.footerLinkUrl1" :href="settings.footerLinkUrl1">
                             {{ lang[locale].footerLinkDesc1 }}
                         </Link>
                         <Link :href="settings.footerLinkUrl2">
@@ -108,6 +108,8 @@ const store = useStore()
 const lang = computed(() => store.getters.lang)
 const locale = computed(() => usePage().props.value.locale)
 const settings = computed(() => usePage().props.value.settings)
+
+console.log(settings)
 
 const navigation = computed(() => usePage().props.value.navigation)
 </script>
