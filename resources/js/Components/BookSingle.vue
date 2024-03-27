@@ -26,7 +26,7 @@
 
                     <div v-if="book.is_product"
                          class="text-sm flex flex-col items-center md:items-start mt-4 md:mt-0">
-                        <p class="text-lg text-red-600 font-bold mt-3">{{ lang[locale].booksAspektPrice }}:
+                        <p class="text-base text-red-600 font-bold mt-3">{{ lang[locale].booksAspektPrice }}:
                             {{ book.aspekt_price }}</p>
                         <p>({{ lang[locale].booksCommonPrice }} {{ book.common_price }})</p>
                         <div class="mt-4 md:mt-4">
@@ -35,7 +35,8 @@
                     </div>
 
                     <div v-if="book.is_ebook"
-                         class="text-sm flex flex-col items-center md:items-start mt-4 md:mt-0">
+                         class="text-sm flex flex-col items-center md:items-start">
+                        <p class="mb-2">Dostupne na:</p>
                         <BookSingleEshopLink v-for="link in book.eshop_links" :link="link"/>
                     </div>
                 </div>
