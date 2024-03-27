@@ -35,8 +35,8 @@
                     </div>
 
                     <div v-if="book.is_ebook"
-                         class="text-sm flex flex-col items-center md:items-start">
-                        <p class="mb-2">Dostupne na:</p>
+                         class="text-sm flex flex-col items-center md:items-start mt-4 md:mt-0">
+                        <p class="mb-2">{{ lang[locale].booksAvailableAt }}</p>
                         <BookSingleEshopLink v-for="link in book.eshop_links" :link="link"/>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { Head, usePage } from '@inertiajs/inertia-vue3'
 
@@ -110,8 +110,4 @@ const lang = computed(() => store.getters.lang)
 
 const navigationString = computed(() => navigation.value.find(el => el.route === 'books')[`name_${locale.value}`])
 const title = computed(() => `${navigationString.value} | ${book.value.title}`)
-
-onMounted(() => {
-    console.log(book)
-})
 </script>

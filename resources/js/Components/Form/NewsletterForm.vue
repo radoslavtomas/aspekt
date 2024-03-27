@@ -95,7 +95,6 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, form, { $scope: false })
 
 const handleSubscription = async (event) => {
-    console.log('sending newsfilter')
     event.preventDefault()
 
     // prevent from sending subscription twice
@@ -113,7 +112,6 @@ const handleSubscription = async (event) => {
 
     // attempt to subscribe
     const response = await axios.post('/njuvinky/subscribe', form)
-    console.log(response)
 
     // clean and respond
     sendingSubscription.value = false

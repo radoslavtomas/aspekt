@@ -109,8 +109,6 @@ const lang = computed(() => store.getters.lang)
 const locale = computed(() => usePage().props.value.locale)
 const settings = computed(() => usePage().props.value.settings)
 
-console.log(settings)
-
 const navigation = computed(() => usePage().props.value.navigation)
 </script>
 

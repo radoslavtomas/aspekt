@@ -22,7 +22,7 @@
 
 <script setup>
 import { Head, usePage } from '@inertiajs/inertia-vue3'
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 
 // 3rd party
 import MasonryWall from '@yeger/vue-masonry-wall'
@@ -39,10 +39,6 @@ const locale = computed(() => usePage().props.value.locale)
 const navigation = computed(() => usePage().props.value.navigation)
 const navigationString = computed(() => navigation.value.find(el => el.route === 'events')[`name_${locale.value}`])
 const title = computed(() => navigationString.value)
-
-onMounted(() => {
-    console.log(featured.value)
-})
 </script>
 
 <style>

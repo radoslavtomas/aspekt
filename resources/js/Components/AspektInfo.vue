@@ -51,17 +51,12 @@
 import { Link, usePage } from '@inertiajs/inertia-vue3'
 import { BookOpenIcon, BuildingLibraryIcon, NewspaperIcon } from '@heroicons/vue/24/outline'
 import { useStore } from 'vuex'
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 
 const store = useStore()
 
 const lang = computed(() => store.getters.lang)
 const locale = computed(() => usePage().props.value.locale)
-
-onMounted(() => {
-    console.log(route().current())
-    console.log(route().current() === 'home')
-})
 </script>
 
 <style scoped>
