@@ -1,4 +1,5 @@
 <?php
+
 namespace Deployer;
 
 require 'recipe/laravel.php';
@@ -10,7 +11,7 @@ require 'recipe/laravel.php';
 set('repository', 'git@github.com:radoslavtomas/aspekt.git');
 // set('php_fpm_version', '8.1');
 set('keep_releases', 2);
-set ('ssh_multiplexing', false);
+set('ssh_multiplexing', false);
 set('git_tty', false);
 
 add('shared_files', []);
@@ -26,7 +27,7 @@ host('dev')
     ->set('branch', 'main');
 
 host('prod')
-    ->set('hostname', '80.240.17.7')
+    ->set('hostname', '172.104.238.155')
     ->set('remote_user', 'deployer')
     ->set('deploy_path', '/var/www/html/aspekt-prod')
     ->set('branch', 'main');
