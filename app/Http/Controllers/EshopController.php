@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Sanitize;
 use App\Mail\OrderCreatedAdmin;
 use App\Mail\OrderCreatedCustomer;
 use App\Models\Order;
-use http\Env\Response;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
-use App\Helpers\Sanitize;
 
 class EshopController extends Controller
 {
@@ -65,13 +65,16 @@ class EshopController extends Controller
 
     public function createOrder(Request $request)
     {
+        // settings
+        $eshopEmail = Setting::where('key', 'eshopEmail')->first()->value;
+
         // handle customer
         $customer = $this->prepareCustomerOrderData($request);
         $order = Order::create($customer);
 
         // handle comment
         $comment = $customer['comment'];
-        if($comment) {
+        if ($comment) {
             $order->comments()->create(
                 [
                     'order_id' => $order->id,
@@ -84,18 +87,18 @@ class EshopController extends Controller
         $basket = $request->get('basket');
         $formattedBasket = $this->getFormattedBasket($basket, $order->id);
 
-        foreach ($formattedBasket as $item)
-        {
+        foreach ($formattedBasket as $item) {
             $order->items()->create($item);
         }
 
         // send emails
-        $customerName = $customer['delivery_first_name'] . ' ' . $customer['delivery_last_name'];
+        $customerName = $customer['delivery_first_name'].' '.$customer['delivery_last_name'];
 
         try {
-            Mail::to($customer['primary_email'])->send(new OrderCreatedCustomer($basket, $customer['order_total']));
-            // @TODO: change email to aspekt email
-            // Mail::to('radoslav.tomas@gmail.com')->send(new OrderCreatedAdmin($customer['primary_email'], $customerName, $order['id']));
+            Mail::to($customer['primary_email'])
+                ->send(new OrderCreatedCustomer($basket, $customer['order_total']));
+            Mail::to($eshopEmail)
+                ->send(new OrderCreatedAdmin($customer['primary_email'], $customerName, $order['id']));
         } catch (\Exception $exception) {
             Log::error($exception);
         }

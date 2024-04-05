@@ -5,14 +5,13 @@ namespace App\Filament\Resources\BookResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Contracts\HasRelationshipTable;
-use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class DownloadsRelationManager extends RelationManager
 {
@@ -25,7 +24,12 @@ class DownloadsRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('filepath')
-                    ->preserveFilenames()
+                    ->getUploadedFileNameForStorageUsing(
+                        function (TemporaryUploadedFile $file): string {
+                            $filename = explode('.', $file->getClientOriginalName())[0];
+                            return Str::slug($filename).'.'.$file->getClientOriginalExtension();
+                        },
+                    )
                     ->directory('downloads'),
             ]);
     }
@@ -36,7 +40,7 @@ class DownloadsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('filename'),
                 Tables\Columns\TextColumn::make('filesize')
-                    ->formatStateUsing(fn (string $state): string => (formatFileSizeUnits($state))),
+                    ->formatStateUsing(fn(string $state): string => (formatFileSizeUnits($state))),
             ])
             ->filters([
                 //

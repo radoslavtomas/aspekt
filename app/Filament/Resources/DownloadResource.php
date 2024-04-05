@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class DownloadResource extends Resource
 {
@@ -28,7 +30,12 @@ class DownloadResource extends Resource
                 Forms\Components\FileUpload::make('filepath')
                     ->label('File')
                     ->directory('downloads')
-                    ->preserveFilenames()
+                    ->getUploadedFileNameForStorageUsing(
+                        function (TemporaryUploadedFile $file): string {
+                            $filename = explode('.', $file->getClientOriginalName())[0];
+                            return Str::slug($filename).'.'.$file->getClientOriginalExtension();
+                        },
+                    )
                     ->required()
             ]);
     }

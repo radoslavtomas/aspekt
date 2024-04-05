@@ -18,6 +18,7 @@ use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class EventResource extends Resource
 {
@@ -63,7 +64,12 @@ class EventResource extends Resource
                             ->profile('custom'),
                         Forms\Components\FileUpload::make('feature_img')
                             ->image()
-                            ->preserveFilenames()
+                            ->getUploadedFileNameForStorageUsing(
+                                function (TemporaryUploadedFile $file): string {
+                                    $filename = explode('.', $file->getClientOriginalName())[0];
+                                    return Str::slug($filename).'.'.$file->getClientOriginalExtension();
+                                },
+                            )
                             ->directory('featured_images')
                             ->label('Featured image')
                     ]),

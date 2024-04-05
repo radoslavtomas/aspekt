@@ -9,12 +9,11 @@ use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class OrderResource extends Resource
 {
@@ -36,14 +35,15 @@ class OrderResource extends Resource
                 Fieldset::make('Order status')
                     ->schema([
                         Forms\Components\DateTimePicker::make('created_at')
-                            ->disabled(),
+                            ->readOnly(),
                         // Forms\Components\TextInput::make('order_status_id'),
                         Forms\Components\Select::make('order_status_id')
                             ->relationship('status', 'description'),
                         Forms\Components\TextInput::make('order_total')
                             ->label('Total')
                             ->prefixIcon('heroicon-o-currency-euro')
-                            ->disabled(),
+                            ->numeric()
+                            ->readOnly(),
                         Forms\Components\TextInput::make('product_count')
                             ->label('Total products')
                             ->disabled(),
@@ -106,7 +106,7 @@ class OrderResource extends Resource
                     ->sortable()
                     ->date('d.m.Y H:i'),
                 Tables\Columns\TextColumn::make('order_total')
-                    ->money('eur')
+                    ->money('EUR', divideBy: 100)
                     ->label('Total'),
                 Tables\Columns\TextColumn::make('delivery_first_name')
                     ->searchable()
@@ -119,16 +119,25 @@ class OrderResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status.description')
                     ->label('Status')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'Completed' => 'success',
+                        'Processing' => 'warning',
+                        'Canceled' => 'danger',
+                        'In checkout' => 'gray'
+                    })
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                Filter::make('Spracovávam')
-                    ->query(fn (Builder $query): Builder => $query->where('order_status_id', 'processing')),
+                Filter::make('Processing')
+                    ->query(fn(Builder $query): Builder => $query->where('order_status_id', 'processing')),
+                Filter::make('Completed')
+                    ->query(fn(Builder $query): Builder => $query->where('order_status_id', 'completed')),
                 Filter::make('In checkout')
-                    ->query(fn (Builder $query): Builder => $query->where('order_status_id', 'in_checkout')),
-                Filter::make('Ukončená a odoslaná')
-                    ->query(fn (Builder $query): Builder => $query->where('order_status_id', 'completed')),
+                    ->query(fn(Builder $query): Builder => $query->where('order_status_id', 'in_checkout')),
+                Filter::make('Canceled')
+                    ->query(fn(Builder $query): Builder => $query->where('order_status_id', 'canceled')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

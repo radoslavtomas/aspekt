@@ -19,6 +19,7 @@ use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class BookResource extends Resource
 {
@@ -54,7 +55,12 @@ class BookResource extends Resource
                                 fn(Builder $query) => $query->where('navigation_id', 4))
                             ->required(),
                         Forms\Components\FileUpload::make('cover')
-                            ->preserveFilenames()
+                            ->getUploadedFileNameForStorageUsing(
+                                function (TemporaryUploadedFile $file): string {
+                                    $filename = explode('.', $file->getClientOriginalName())[0];
+                                    return Str::slug($filename).'.'.$file->getClientOriginalExtension();
+                                },
+                            )
                             ->directory('covers'),
                         Forms\Components\TextInput::make('title')
                             ->required()

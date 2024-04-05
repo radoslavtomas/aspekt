@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class BlogResource extends Resource
 {
@@ -87,7 +88,12 @@ class BlogResource extends Resource
                                 ->profile('custom'),
                             Forms\Components\FileUpload::make('feature_img')
                                 ->image()
-                                ->preserveFilenames()
+                                ->getUploadedFileNameForStorageUsing(
+                                    function (TemporaryUploadedFile $file): string {
+                                        $filename = explode('.', $file->getClientOriginalName())[0];
+                                        return Str::slug($filename).'.'.$file->getClientOriginalExtension();
+                                    },
+                                )
                                 ->directory('featured_images')
                                 ->label('Featured image')
                         ]),

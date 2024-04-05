@@ -3,17 +3,15 @@
 namespace App\Filament\Resources\BlogResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Tables\Actions\EditAction;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Contracts\HasRelationshipTable;
-use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class FilesRelationManager extends RelationManager
 {
@@ -26,7 +24,12 @@ class FilesRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('filepath')
-                    ->preserveFilenames()
+                    ->getUploadedFileNameForStorageUsing(
+                        function (TemporaryUploadedFile $file): string {
+                            $filename = explode('.', $file->getClientOriginalName())[0];
+                            return Str::slug($filename).'.'.$file->getClientOriginalExtension();
+                        },
+                    )
                     ->directory('files'),
             ]);
     }
@@ -37,7 +40,7 @@ class FilesRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('filename'),
                 Tables\Columns\TextColumn::make('filesize')
-                    ->formatStateUsing(fn (string $state): string => (formatFileSizeUnits($state))),
+                    ->formatStateUsing(fn(string $state): string => (formatFileSizeUnits($state))),
                 Tables\Columns\ImageColumn::make('filepath')
                     ->extraImgAttributes([
                         "alt" => "&nbsp;No preview"

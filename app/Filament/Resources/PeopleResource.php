@@ -17,6 +17,7 @@ use Filament\Tables\Table;
 use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class PeopleResource extends Resource
 {
@@ -40,10 +41,15 @@ class PeopleResource extends Resource
                         Forms\Components\Checkbox::make('published'),
                     ])
                     ->columns(2),
-                Fieldset::make('Person detalis')
+                Fieldset::make('Person details')
                     ->schema([
                         Forms\Components\FileUpload::make('avatar')
-                            ->preserveFilenames()
+                            ->getUploadedFileNameForStorageUsing(
+                                function (TemporaryUploadedFile $file): string {
+                                    $filename = explode('.', $file->getClientOriginalName())[0];
+                                    return Str::slug($filename).'.'.$file->getClientOriginalExtension();
+                                },
+                            )
                             ->directory('avatars'),
                         Forms\Components\TextInput::make('title')
                             ->required()
