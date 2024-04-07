@@ -7,7 +7,7 @@
                 <Link :href="route('aspektin', [categoryUrl, props.item.slug])">
                     <h2 :class="featured ? 'text-2xl' : 'text-lg'" class="text-red-600">{{ props.item.title }}</h2>
                 </Link>
-                <h3 class="text-sm italic mb-0 sm:mb-4">{{ props.item.authors ?? 'red.' }}</h3>
+                <h3 class="text-sm italic mb-0 sm:mb-4">{{ props.item.subtitle ?? 'red.' }}</h3>
                 <p class="text-sm hidden sm:block" v-html="props.item.teaser"></p>
             </div>
             <div
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { Link, usePage } from '@inertiajs/inertia-vue3'
 
 const categoryUrl = computed(() => {
@@ -33,6 +33,8 @@ const props = defineProps({
     item: Object,
     featured: Boolean
 })
+
+onMounted(() => console.log(props.item))
 </script>
 
 

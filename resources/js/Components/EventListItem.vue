@@ -7,13 +7,19 @@
                 <Link :href="route('events', [props.item.slug])">
                     <h2 :class="featured ? 'text-2xl' : 'text-lg'" class="text-red-600">{{ props.item.title }}</h2>
                 </Link>
-                <h3 v-if="props.item.place" class="text-sm my-1">
+                <h3 v-if="props.item.subtitle" class="text-sm mb-1">{{ props.item.subtitle }}</h3>
+                <h3 v-if="props.item.place" class="text-sm my-1 text-gray-600">
                     <map-pin-icon class="mr-1 w-4 h-4 inline-block"/>
                     {{ props.item.place }}
                 </h3>
-                <h3 v-if="props.item.date_start" class="text-sm mb-0">
+                <h3 v-if="props.item.date_start" class="text-sm mb-0 text-gray-600">
                     <clock-icon class="mr-1 w-4 h-4 inline-block"/>
                     {{ props.item.date_start }}, {{ props.item.time_start }}
+                    <span v-if="props.item.date_end || props.item.time_end">
+                        -
+                        <span v-if="props.item.date_end">{{ props.item.date_end }},</span>
+                        <span v-if="props.item.time_end">{{ props.item.time_end }}</span>
+                    </span>
                 </h3>
                 <p class="text-sm mt-4" v-html="props.item.teaser"></p>
             </div>
