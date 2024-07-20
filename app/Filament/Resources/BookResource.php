@@ -116,8 +116,8 @@ class BookResource extends Resource
                     ->schema([
                         Forms\Components\Repeater::make('eshop_links')
                             ->schema([
-                                Forms\Components\TextInput::make('eshop_name')->required(),
-                                Forms\Components\TextInput::make('link')->required(),
+                                Forms\Components\TextInput::make('eshop_name'),
+                                Forms\Components\TextInput::make('link'),
                             ])->columns(2)
                     ])->columns(1)
             ]);

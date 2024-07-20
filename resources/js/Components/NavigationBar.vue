@@ -3,10 +3,12 @@
         <div class="container-aspekt flex h-16 items-center justify-between">
             <!-- Mobile menu button -->
             <div class="flex items-center lg:hidden">
-                <button type="button" class="inline-flex items-center justify-center rounded-md p-2 text-gray-800 hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500" aria-controls="mobile-menu" aria-expanded="false">
+                <button aria-controls="mobile-menu"
+                        aria-expanded="false"
+                        class="inline-flex items-center justify-center rounded-md p-2 text-gray-800 hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500" type="button">
                     <span class="sr-only">Open main menu</span>
-                    <Bars3Icon v-if="!openNav" @click="openNav = true" class="h-6 w-6" />
-                    <XMarkIcon v-else @click="openNav = false" class="h-6 w-6" />
+                    <Bars3Icon v-if="!openNav" class="h-6 w-6" @click="openNav = true"/>
+                    <XMarkIcon v-else class="h-6 w-6" @click="openNav = false"/>
                 </button>
             </div>
 
@@ -14,7 +16,7 @@
             <div class="flex flex-1 items-center justify-center lg:items-stretch lg:justify-start">
                 <div class="flex flex-shrink-0 items-center">
                     <Link :href="route('home')">
-                        <img class="h-12 w-auto" src="/assets/img/aspekt_logo.png" alt="Aspekt">
+                        <img alt="Aspekt" class="h-12 w-auto" src="/assets/img/aspekt_logo.png">
                     </Link>
                 </div>
 
@@ -25,7 +27,7 @@
                 :updatePath="updatePath"
             />
 
-            <LanguageSelector />
+            <LanguageSelector/>
         </div>
 
         <NavigationBarMobile
@@ -37,42 +39,45 @@
 </template>
 
 <script setup>
-import {Link} from "@inertiajs/inertia-vue3";
+import { Link } from '@inertiajs/inertia-vue3'
 import LanguageSelector from '../Components/LanguageSelector.vue'
-import NavigationBarDesktop from "@/Components/NavigationBarDesktop.vue";
-import NavigationBarMobile from "@/Components/NavigationBarMobile.vue";
+import NavigationBarDesktop from '@/Components/NavigationBarDesktop.vue'
+import NavigationBarMobile from '@/Components/NavigationBarMobile.vue'
 
-import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
-import {ref} from "vue";
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { ref } from 'vue'
 
-const openNav = ref(false);
+const openNav = ref(false)
 
-const path = ref('');
+const path = ref('')
 const updatePath = () => {
     const pathname = window.location.pathname.split('/')[1]
 
     switch (pathname) {
         case '':
-            path.value = 'home';
-            break;
+            path.value = 'home'
+            break
         case 'about':
         case 'njuvinky':
-            path.value = 'about';
-            break;
+            path.value = 'about'
+            break
         case 'books':
-            path.value = 'books';
-            break;
+            path.value = 'books'
+            break
         case 'aspektin':
-            path.value = 'aspektin';
-            break;
+            path.value = 'aspektin'
+            break
         case 'library':
-            path.value = 'library';
-            break;
+            path.value = 'library'
+            break
         case 'contact':
-            path.value = 'contact';
-            break;
+            path.value = 'contact'
+            break
+        case 'events':
+            path.value = 'events'
+            break
         default:
-            path.value = '';
+            path.value = ''
     }
 }
 
