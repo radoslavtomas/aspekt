@@ -1,6 +1,6 @@
 <template>
     <div
-        v-if="['home', 'njuvinky'].includes(route().current())"
+        v-if="['home', 'njuvinky', 'contact'].includes(route().current())"
         class="mt-8 bg-gray-200 rounded shadow-md p-4"
     >
         <section class="flex flex-col justify-start">

@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BookExtResource;
 use App\Http\Resources\BookResource;
-use App\Http\Resources\PeopleResource;
-use App\Http\Resources\PersonResource;
 use App\Models\Book;
 use App\Models\Category;
-use App\Models\People;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -23,11 +19,13 @@ class BooksController extends Controller
     {
         $this->getCategoryModel($category);
 
+        // dd($this->category->books()->get()->pluck('id'));
+
         if ($this->category->isStatic()) {
             return $this->handleStaticResource();
         }
 
-        if($slug) {
+        if ($slug) {
             return $this->handleSingleResource($slug);
         }
 
@@ -67,8 +65,9 @@ class BooksController extends Controller
 
     private function handleListResource(): Response
     {
-        if($this->category['url'] == $this->all) { // special category "vsetko"
-            $books = BookResource::collection(Book::published()->orderBy('created_at', 'desc')->paginate($this->pagination));
+        if ($this->category['url'] == $this->all) { // special category "vsetko"
+            $books = BookResource::collection(Book::published()->where('is_ebook', false)->orderBy('created_at',
+                'desc')->paginate($this->pagination));
         } else { // all other categories
             $books = BookResource::collection($this->category->books()->paginate($this->pagination));
         }

@@ -22,7 +22,8 @@
                     </template>
                     <template #content>
                         <MenuDropdownLink v-for="item in menuItem.categories"
-                                          :href="route(menuItem.route) + '/' + item.url"
+                                          :blank="item.url.startsWith('http')"
+                                          :href="item.url.startsWith('http') ? item.url : route(menuItem.route) + '/' + item.url"
                                           as="button" @click="updatePath">
                             {{ item[`name_${locale}`] }}
                         </MenuDropdownLink>

@@ -9,11 +9,11 @@ use Filament\Forms;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Cache;
 
 class CategoryResource extends Resource
 {
@@ -39,7 +39,8 @@ class CategoryResource extends Resource
                     ])
                     ->columns(1),
                 Forms\Components\Select::make('navigation_id')
-                    ->relationship('navigation', 'name_sk', fn (Builder $query) => $query->whereIn('id', [4, 5, 6, 8, 43]))
+                    ->relationship('navigation', 'name_sk',
+                        fn(Builder $query) => $query->whereIn('id', [4, 5, 6, 8, 43]))
                     ->required(),
                 Forms\Components\Select::make('page_id')
                     ->relationship('page', 'name_sk')
@@ -58,16 +59,20 @@ class CategoryResource extends Resource
             ->defaultSort('navigation.name_sk', 'asc')
             ->filters([
                 Filter::make('AspektIn')
-                    ->query(fn (Builder $query): Builder => $query->where('navigation_id', 5)),
+                    ->query(fn(Builder $query): Builder => $query->where('navigation_id', 5)),
                 Filter::make('Knižná edícia')
-                    ->query(fn (Builder $query): Builder => $query->where('navigation_id', 4)),
+                    ->query(fn(Builder $query): Builder => $query->where('navigation_id', 4)),
                 Filter::make('Knižnica')
-                    ->query(fn (Builder $query): Builder => $query->where('navigation_id', 6)),
+                    ->query(fn(Builder $query): Builder => $query->where('navigation_id', 6)),
                 Filter::make('Ňjúvinky')
-                    ->query(fn (Builder $query): Builder => $query->where('navigation_id', 43)),
+                    ->query(fn(Builder $query): Builder => $query->where('navigation_id', 43)),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->after(function () {
+                        Cache::forget('navigation');
+                    })
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

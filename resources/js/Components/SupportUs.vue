@@ -1,5 +1,5 @@
 <template>
-    <div v-if="route().current() === 'home'"
+    <div v-if="route().current() !== 'njuvinky'"
          class="mt-8 border border-pink-200 rounded shadow-md relative overflow-hidden"
     >
         <div class="p-4 flex flex-row justify-center">
