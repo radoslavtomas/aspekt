@@ -13,7 +13,11 @@
                 <h2 class="text-xl text-red-600">{{ props.item.title }}</h2>
             </Link>
             <h3 v-if="props.item.subtitle" class="text-sm text-gray-500 italic mb-2">{{ props.item.subtitle }}</h3>
-            <h3 class="text-sm italic mb-4">{{ props.item.authors }}</h3>
+            <h3 :class="props.item.subtitle ? '' : 'mt-2'" class="text-sm italic mb-4 text-red-600">
+                <a :href="route('search', {'parameter': 'author', 'query': props.item.authors})">
+                    {{ props.item.authors }}
+                </a>
+            </h3>
             <p class="text-sm" v-html="props.item.teaser"></p>
         </main>
         <footer v-if="props.item.is_product" class="py-2 my-2 flex justify-between items-center">

@@ -42,6 +42,8 @@ Route::get('/eshop/summary', [App\Http\Controllers\EshopController::class, 'summ
 Route::get('/eshop/thank-you', [App\Http\Controllers\EshopController::class, 'thankYou'])->name('thankYou');
 Route::post('/eshop/create-order', [App\Http\Controllers\EshopController::class, 'createOrder'])->name('createOrder');
 
+Route::get('/search/{parameter}', [App\Http\Controllers\SearchController::class, 'search'])->name('search');
+
 Route::get('language/{language}', function ($language) {
     Session()->put('locale', $language);
 
