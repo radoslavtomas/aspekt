@@ -13,7 +13,7 @@
 
             <BlogListItem :featured="true" :item="featured.data"/>
 
-            <div class="mb-4 border-2 border-purple-300 p-4 bg-transparent">
+            <div class="mb-4 border-2 border-purple-500 p-4 bg-transparent">
                 <MasonryWall :column-width="230" :gap="16" :items="items.data">
                     <template #default="{item}">
                         <BlogListItem :item="item"/>

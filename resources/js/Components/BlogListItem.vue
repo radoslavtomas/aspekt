@@ -1,13 +1,18 @@
 <template>
     <article
-        :class="featured ? 'border-4 mb-4 border-purple-300 bg-slate-50 shadow-sm' : 'bg-white shadow-md border-gray-300'"
+        :class="featured ? 'border-4 mb-4 border-purple-500 bg-slate-50 shadow-sm' : 'bg-white shadow-md border-gray-300'"
         class="border p-4">
         <main :class="props.item.feature_img  && props.featured ? 'grid grid-cols-5 gap-4' : ''">
             <div class="col-span-5 sm:col-span-3 lg:col-span-4">
                 <Link :href="route('aspektin', [categoryUrl, props.item.slug])">
                     <h2 :class="featured ? 'text-2xl' : 'text-lg'" class="text-red-600">{{ props.item.title }}</h2>
                 </Link>
-                <h3 class="text-sm italic mb-0 sm:mb-4">{{ props.item.subtitle ?? 'red.' }}</h3>
+                <h3 v-if="props.item.subtitle" class="text-sm italic mb-0 sm:mb-4 mt-1">{{ props.item.subtitle }}</h3>
+                <h3 :class="props.item.subtitle ? '' : 'mt-1'" class="text-sm italic mb-0 sm:mb-4 text-red-600">
+                    <Link :href="route('search', {'parameter': 'author', 'query': props.item.authors})">
+                        {{ props.item.authors ? props.item.authors : 'red.' }}
+                    </Link>
+                </h3>
                 <p class="text-sm hidden sm:block" v-html="props.item.teaser"></p>
             </div>
             <div
@@ -21,7 +26,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { Link, usePage } from '@inertiajs/inertia-vue3'
 
 const categoryUrl = computed(() => {
@@ -34,7 +39,7 @@ const props = defineProps({
     featured: Boolean
 })
 
-onMounted(() => console.log(props.item))
+// onMounted(() => console.log(props.item))
 </script>
 
 

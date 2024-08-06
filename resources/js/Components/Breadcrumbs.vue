@@ -6,24 +6,25 @@
         <li>
             >
         </li>
-        <li>
-            <Link v-if="singleListing && category" :href="route(props.id, [category.url])"
+        <li v-if="!query">
+            <Link v-if="slug && category" :href="route(props.id, [category.url])"
                   class="text-red-600 hover:text-red-700">
                 {{ navigationString[`name_${locale}`] }} <span v-if="categoryString">- {{ categoryString }}</span>
             </Link>
 
-            <Link v-if="singleListing && !category" :href="route(props.id)" class="text-red-600 hover:text-red-700">
+            <Link v-if="slug && !category" :href="route(props.id)" class="text-red-600 hover:text-red-700">
                 {{ navigationString[`name_${locale}`] }}
             </Link>
 
-            <span v-if="!singleListing && category">
+            <span v-if="!slug && category">
                 {{ navigationString[`name_${locale}`] }} <span v-if="categoryString">- {{ categoryString }}</span>
             </span>
         </li>
-        <li v-if="singleListing">
+        <li v-else>{{ searchString[locale] }}</li>
+        <li v-if="slug || query">
             >
         </li>
-        <li v-if="singleListing">{{ props.article ? props.article : query }}</li>
+        <li v-if="slug || query">{{ props.article ? props.article : query }}</li>
     </ul>
 </template>
 
@@ -37,11 +38,15 @@ const navigation = computed(() => usePage().props.value.navigation)
 const slug = computed(() => usePage().props.value.slug)
 const query = computed(() => usePage().props.value.query) // used in searches
 
-const singleListing = computed(() => slug.value || query.value)
-
 const categoryString = computed(() => {
     return category.value ? category.value[`name_${locale.value}`] : ''
 })
+
+const searchString = {
+    'en': 'Search',
+    'sk': 'Vyhľadávanie'
+}
+
 const homeString = computed(() => navigation.value.find(el => el.route === 'home')[`name_${locale.value}`])
 const navigationString = computed(() => navigation.value.find(el => el.route === props.id))
 

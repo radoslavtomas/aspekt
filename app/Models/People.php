@@ -26,4 +26,9 @@ class People extends Model
         'published',
         'language',
     ];
+
+    public function scopePublished($query)
+    {
+        return $query->where('published', 1);
+    }
 }
