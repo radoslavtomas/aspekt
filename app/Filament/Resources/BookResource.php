@@ -61,7 +61,10 @@ class BookResource extends Resource
                                     return Str::slug($filename).'.'.$file->getClientOriginalExtension();
                                 },
                             )
-                            ->directory('covers'),
+                            ->directory('covers')
+                            ->imageResizeMode('contain')
+                            ->imageResizeTargetWidth('1200')
+                            ->imageResizeUpscale(false),
                         Forms\Components\TextInput::make('title')
                             ->required()
                             ->live(onBlur: true)

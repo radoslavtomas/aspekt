@@ -21,7 +21,7 @@ class FileResource extends Resource
     protected static ?string $model = File::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Settings';
     protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
@@ -49,7 +49,7 @@ class FileResource extends Resource
                     ->limit(30),
                 Tables\Columns\ImageColumn::make('filepath')
                     ->extraImgAttributes([
-                        "alt" => "&nbsp;No preview"
+                        "alt" => " No preview"
                     ]),
                 Tables\Columns\TextColumn::make('filemime')
                     ->limit(20),

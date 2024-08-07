@@ -24,7 +24,7 @@ class EventResource extends Resource
 {
     protected static ?string $model = Event::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-cake';
     protected static ?string $navigationGroup = 'Content';
     protected static ?int $navigationSort = 3;
 
@@ -72,6 +72,9 @@ class EventResource extends Resource
                             )
                             ->directory('featured_images')
                             ->label('Featured image')
+                            ->imageResizeMode('contain')
+                            ->imageResizeTargetWidth('1200')
+                            ->imageResizeUpscale(false),
                     ]),
                 Fieldset::make('Event settings')
                     ->schema([

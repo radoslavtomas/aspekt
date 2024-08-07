@@ -23,7 +23,7 @@ class PeopleResource extends Resource
 {
     protected static ?string $model = People::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Content';
     protected static ?int $navigationSort = 4;
 
@@ -50,7 +50,10 @@ class PeopleResource extends Resource
                                     return Str::slug($filename).'.'.$file->getClientOriginalExtension();
                                 },
                             )
-                            ->directory('avatars'),
+                            ->directory('avatars')
+                            ->imageResizeMode('contain')
+                            ->imageResizeTargetWidth('1200')
+                            ->imageResizeUpscale(false),
                         Forms\Components\TextInput::make('title')
                             ->required()
                             ->live(onBlur: true)

@@ -96,6 +96,9 @@ class BlogResource extends Resource
                                 )
                                 ->directory('featured_images')
                                 ->label('Featured image')
+                                ->imageResizeMode('contain')
+                                ->imageResizeTargetWidth('1200')
+                                ->imageResizeUpscale(false),
                         ]),
                 ]
             );
