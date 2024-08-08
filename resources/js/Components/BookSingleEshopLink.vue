@@ -12,13 +12,10 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex'
-import { computed } from 'vue'
-import { usePage } from '@inertiajs/inertia-vue3'
 
-const store = useStore()
-const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
+// const store = useStore()
+// const lang = computed(() => store.getters.lang)
+// const locale = computed(() => usePage().props.value.locale)
 
 const props = defineProps({
     link: Object
