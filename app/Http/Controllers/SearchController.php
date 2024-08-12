@@ -15,7 +15,7 @@ use Inertia\Inertia;
 class SearchController extends Controller
 {
     private array $availableParameters = ['author'];
-    private int $maxRecords = 100;
+    private int $maxRecords = 300;
 
     public function search($parameter)
     {

@@ -1,9 +1,16 @@
 <script setup>
-import { Head, Link } from '@inertiajs/inertia-vue3';
-import MainLayout from '../Layouts/MainLayout.vue';
-import AspektHero from "@/Components/AspektHero.vue";
-import TheFeaturedBooks from "@/Components/TheFeaturedBooks.vue";
-import TheFeaturedBlogs from "@/Components/TheFeaturedBlogs.vue";
+import { Head, usePage } from '@inertiajs/inertia-vue3'
+import MainLayout from '../Layouts/MainLayout.vue'
+import AspektHero from '@/Components/AspektHero.vue'
+import TheFeaturedBooks from '@/Components/TheFeaturedBooks.vue'
+import TheFeaturedBlogs from '@/Components/TheFeaturedBlogs.vue'
+import { computed } from 'vue'
+
+const locale = computed(() => usePage().props.value.locale)
+const homeTitle = {
+    'en': 'Home',
+    'sk': 'Domov'
+}
 
 defineProps({
     blogs: Object,
@@ -14,13 +21,13 @@ defineProps({
 
 <template>
     <MainLayout>
-        <Head title="Home" />
+        <Head :title="homeTitle[locale]"/>
 
-        <AspektHero />
+        <AspektHero/>
 
-        <TheFeaturedBooks :books="books.data" />
+        <TheFeaturedBooks :books="books.data"/>
 
-        <TheFeaturedBlogs :blogs="blogs.data" />
+        <TheFeaturedBlogs :blogs="blogs.data"/>
     </MainLayout>
 </template>
 

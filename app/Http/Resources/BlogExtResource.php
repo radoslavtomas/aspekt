@@ -19,13 +19,15 @@ class BlogExtResource extends JsonResource
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'authors' => $this->authors,
+            'authors_cite' => $this->authors_cite ?? 'red',
             'teaser' => $this->teaser,
             'body' => $this->body,
             'links' => $this->links,
             'files' => FileResource::collection($this->files),
             'downloads' => FileResource::collection($this->downloads),
-            'feature_img' => $this->feature_img ? '/storage' . $this->feature_img : null,
-            'created_at' => $this->created_at->format('d/m/y')
+            'feature_img' => $this->feature_img ? '/storage'.$this->feature_img : null,
+            'created_at' => $this->created_at->format('d/m/y'),
+            'year' => $this->created_at->format('Y')
         ];
     }
 }
