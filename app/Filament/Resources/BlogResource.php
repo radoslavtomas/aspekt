@@ -76,6 +76,8 @@ class BlogResource extends Resource
                             Forms\Components\TextInput::make('subtitle'),
                             Forms\Components\TextInput::make('authors')
                                 ->default(Auth::user()->name),
+                            Forms\Components\TextInput::make('authors_cite')
+                                ->label('Authors citation'),
                             Forms\Components\Hidden::make('user_id')
                                 ->default(Auth::id()),
                             TiptapEditor::make('teaser')
