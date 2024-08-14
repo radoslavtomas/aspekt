@@ -81,8 +81,9 @@ class EventResource extends Resource
                         Forms\Components\Hidden::make('user_id')
                             ->default(Auth::id()),
                         Forms\Components\Grid::make()->schema([
-                            Forms\Components\Checkbox::make('featured'),
                             Forms\Components\Checkbox::make('published'),
+                            Forms\Components\Checkbox::make('featured'),
+                            Forms\Components\Checkbox::make('home_page'),
                         ])->columns(1),
                         Forms\Components\Select::make('language')
                             ->options([
@@ -106,6 +107,8 @@ class EventResource extends Resource
                     ->limit(50)
                     ->searchable(),
                 Tables\Columns\CheckboxColumn::make('featured')
+                    ->sortable(),
+                Tables\Columns\CheckboxColumn::make('home_page')
                     ->sortable(),
                 Tables\Columns\CheckboxColumn::make('published')
                     ->sortable(),

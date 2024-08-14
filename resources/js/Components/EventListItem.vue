@@ -7,7 +7,7 @@
                 <Link :href="route('events', [props.item.slug])">
                     <h2 :class="featured ? 'text-2xl' : 'text-lg'" class="text-red-600">{{ props.item.title }}</h2>
                 </Link>
-                <h3 v-if="props.item.subtitle" class="text-sm mb-1">{{ props.item.subtitle }}</h3>
+                <h3 v-if="props.item.subtitle" class="text-sm mb-2">{{ props.item.subtitle }}</h3>
                 <h3 v-if="props.item.place" class="text-sm my-1 text-gray-600">
                     <map-pin-icon class="mr-1 w-4 h-4 inline-block"/>
                     {{ props.item.place }}
@@ -21,7 +21,7 @@
                         <span v-if="props.item.time_end">{{ props.item.time_end }}</span>
                     </span>
                 </h3>
-                <p class="text-sm mt-4" v-html="props.item.teaser"></p>
+                <p class="text-sm mt-2" v-html="props.item.teaser"></p>
             </div>
             <div
                 v-if="props.item.feature_img && props.featured"

@@ -4,6 +4,7 @@ import MainLayout from '../Layouts/MainLayout.vue'
 import AspektHero from '@/Components/AspektHero.vue'
 import TheFeaturedBooks from '@/Components/TheFeaturedBooks.vue'
 import TheFeaturedBlogs from '@/Components/TheFeaturedBlogs.vue'
+import TheFeaturedEvents from '@/Components/TheFeaturedEvents.vue'
 import { computed } from 'vue'
 
 const locale = computed(() => usePage().props.value.locale)
@@ -15,6 +16,7 @@ const homeTitle = {
 defineProps({
     blogs: Object,
     books: Object,
+    events: Object | null
 })
 
 </script>
@@ -26,6 +28,8 @@ defineProps({
         <AspektHero/>
 
         <TheFeaturedBooks :books="books.data"/>
+
+        <TheFeaturedEvents v-if="events" :events="events.data"/>
 
         <TheFeaturedBlogs :blogs="blogs.data"/>
     </MainLayout>

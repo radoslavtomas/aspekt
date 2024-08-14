@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\BookResource;
+use App\Http\Resources\EventResource;
 use App\Models\Blog;
 use App\Models\Book;
-use Illuminate\Foundation\Application;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Route;
+use App\Models\Event;
 use Inertia\Inertia;
 use MailchimpMarketing;
 
@@ -20,28 +18,38 @@ class HomeController extends Controller
     public function home()
     {
         // blogs
-        $featured_blogs = BlogResource::collection(Blog::where('featured', 1)->orderBy('created_at', 'desc')->get()->take($this->amountToTake));
+        $featured_blogs = BlogResource::collection(Blog::where('featured', 1)->orderBy('created_at',
+            'desc')->get()->take($this->amountToTake));
 
-        if(count($featured_blogs) < $this->amountToTake)
-        {
-            $featured_blogs = BlogResource::collection(Blog::published()->language('sk')->orderBy('created_at', 'desc')->get()->take($this->amountToTake));
+        if (count($featured_blogs) < $this->amountToTake) {
+            $featured_blogs = BlogResource::collection(Blog::published()->language('sk')->orderBy('created_at',
+                'desc')->get()->take($this->amountToTake));
         }
 
         // books
-        $featured_books = BookResource::collection(Book::where('featured', 1)->orderBy('created_at', 'desc')->get()->take($this->amountToTake));
+        $featured_books = BookResource::collection(Book::where('featured', 1)->orderBy('created_at',
+            'desc')->get()->take($this->amountToTake));
 
-        if(count($featured_books) < $this->amountToTake)
-        {
-            $featured_books = BookResource::collection(Book::published()->language('sk')->orderBy('created_at', 'desc')->get()->take($this->amountToTake));
+        if (count($featured_books) < $this->amountToTake) {
+            $featured_books = BookResource::collection(Book::published()->language('sk')->orderBy('created_at',
+                'desc')->get()->take($this->amountToTake));
+        }
+
+        // events
+        $featured_events = EventResource::collection(Event::where('home_page', 1)->orderBy('created_at',
+            'desc')->get()->take($this->amountToTake));
+
+        if (!count($featured_events)) {
+            $featured_events = null;
         }
 
         // dd($featured_books);
 
 
-
         return Inertia::render('Home', [
             'blogs' => $featured_blogs,
             'books' => $featured_books,
+            'events' => $featured_events,
         ]);
     }
 
@@ -72,8 +80,5 @@ class HomeController extends Controller
 //                "tags" => ["Iné kontakty", "Knižnica Aspektu"]
 //            ]);
         dd($response);
-
-
-
     }
 }

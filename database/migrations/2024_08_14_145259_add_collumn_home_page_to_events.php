@@ -10,8 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('blogs', function (Blueprint $table) {
-            $table->string('authors_cite')->nullable()->after('authors');
+        Schema::table('events', function (Blueprint $table) {
+            $table->boolean('home_page')->nullable()->after('featured');
         });
     }
 
@@ -20,8 +20,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('blogs', function (Blueprint $table) {
-            $table->dropColumn('authors_cite');
+        Schema::table('events', function (Blueprint $table) {
+            $table->dropColumn('home_page');
         });
     }
 };
