@@ -10,7 +10,7 @@
                 <h3 v-if="props.item.subtitle" class="text-sm italic mb-1 mt-1">{{ props.item.subtitle }}</h3>
                 <h3 :class="props.item.subtitle ? '' : 'mt-1'" class="text-sm italic mb-0 sm:mb-4 text-red-600">
                     <Link
-                        :href="route('search', {'parameter': 'author', 'query': props.item.authors ? props.item.authors : 'red.'})">
+                        :href="route('search', {'parameter': 'inline', 'query': props.item.authors ? props.item.authors : 'red.'})">
                         {{ props.item.authors ? props.item.authors : 'red.' }}
                     </Link>
                 </h3>

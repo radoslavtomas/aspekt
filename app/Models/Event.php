@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -58,5 +59,12 @@ class Event extends Model
     public function scopeLanguage($query, $lang)
     {
         return $query->where('language', $lang);
+    }
+
+    public function resourceType(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => 'event',
+        );
     }
 }

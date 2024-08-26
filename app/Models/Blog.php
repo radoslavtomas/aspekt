@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
-use PhpParser\Builder;
 
 class Blog extends Model
 {
@@ -61,5 +61,12 @@ class Blog extends Model
     public function scopeLanguage($query, $lang)
     {
         return $query->where('language', $lang);
+    }
+
+    public function resourceType(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => 'blog',
+        );
     }
 }

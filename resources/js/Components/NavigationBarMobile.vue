@@ -2,6 +2,19 @@
     <div v-if="props.openNav" id="mobile-menu" class="lg:hidden abosule w-full z-20 h-full">
         <div
             class="relative bg-white shadow-xl border-y border-purple-400 opacity-95 space-y-1 px-2 pt-2 pb-12 z-50 flex flex-col items-center">
+
+            <Link
+                href="/search"
+            >
+                <svg class="size-5 text-red-600 hover:text-red-700 mt-4 mb-2" fill="none" stroke="currentColor"
+                     stroke-width="1.5"
+                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+            </Link>
+
             <template v-for="menuItem in navigation">
                 <Link
                     v-if="!menuItem.categories.length"

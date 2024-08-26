@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\PersonResource;
+use App\Http\Resources\SearchResultResource;
 use App\Models\Blog;
 use App\Models\Book;
 use App\Models\Category;
@@ -14,8 +15,22 @@ use Inertia\Inertia;
 
 class SearchController extends Controller
 {
-    private array $availableParameters = ['author'];
+    private array $availableParameters = [
+        'inline',
+        'blogs',
+        'books',
+        'authors',
+        'events',
+        'pages',
+        'njuvinky',
+    ];
     private int $maxRecords = 300;
+    private int $paginate = 35;
+
+    public function index()
+    {
+        return Inertia::render('Search');
+    }
 
     public function search($parameter)
     {
@@ -24,6 +39,7 @@ class SearchController extends Controller
         if (!$query) {
             abort(404);
         }
+        // dd('here');
 
         if (!in_array($parameter, $this->availableParameters)) {
             abort(404);
@@ -32,7 +48,30 @@ class SearchController extends Controller
         return $this->$parameter($query);
     }
 
-    private function author($query)
+    private function blogs($query)
+    {
+        $blogs = Blog::published()
+            ->whereAny([
+                'title',
+                'subtitle',
+                'authors',
+                'authors_cite',
+                'teaser',
+                'body'
+            ], 'like', '%'.$query.'%')
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->paginate)->withQueryString();
+
+        // dd($blogs);
+
+        return Inertia::render('SearchResult', [
+            'blogs' => $blogs->isEmpty() ? null : SearchResultResource::collection($blogs),
+            'category' => Category::where(['url' => 'vsetko', 'navigation_id' => 4])->firstOrFail(),
+            'query' => $query,
+        ]);
+    }
+
+    private function inline($query)
     {
         $blogs = Blog::published()
             ->where('authors', 'like', '%'.$query.'%')
@@ -61,7 +100,7 @@ class SearchController extends Controller
             abort(404);
         }
 
-        return Inertia::render('Search', [
+        return Inertia::render('SearchInline', [
             'blogs' => $blogs->isEmpty() ? null : BlogResource::collection($blogs),
             'books' => $books->isEmpty() ? null : BookResource::collection($books),
             'people' => $people->isEmpty() ? null : PersonResource::collection($people),

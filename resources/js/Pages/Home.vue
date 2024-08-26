@@ -26,7 +26,7 @@ defineProps({
         <Head :title="homeTitle[locale]"/>
 
         <AspektHero/>
-
+        
         <TheFeaturedBooks :books="books.data"/>
 
         <TheFeaturedEvents v-if="events" :events="events.data"/>

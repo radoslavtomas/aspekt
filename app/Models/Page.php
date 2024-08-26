@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,4 +21,11 @@ class Page extends Model
         'body_sk',
         'body_en',
     ];
+
+    public function resourceType(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => 'page',
+        );
+    }
 }
