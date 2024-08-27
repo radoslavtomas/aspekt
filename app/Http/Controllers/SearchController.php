@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\BookResource;
+use App\Http\Resources\PageSearchResultResource;
 use App\Http\Resources\PersonResource;
 use App\Http\Resources\SearchResultResource;
 use App\Models\Blog;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Event;
+use App\Models\Page;
 use App\Models\People;
 use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 
 class SearchController extends Controller
 {
-    private array $availableParameters = [
+    private array $parameters = [
         'inline',
         'blogs',
         'books',
@@ -26,6 +29,8 @@ class SearchController extends Controller
     ];
     private int $maxRecords = 300;
     private int $paginate = 35;
+    private string $parameter;
+    private string $query;
 
     public function index()
     {
@@ -39,16 +44,113 @@ class SearchController extends Controller
         if (!$query) {
             abort(404);
         }
-        // dd('here');
 
-        if (!in_array($parameter, $this->availableParameters)) {
+        if (!isset($parameter, $this->parameters)) {
             abort(404);
         }
 
-        return $this->$parameter($query);
+        $this->parameter = $parameter;
+        $this->query = $query;
+
+        return $this->$parameter();
     }
 
-    private function blogs($query)
+    private function blogs()
+    {
+        $blogs = Blog::published()
+            ->where('blog_type_id', '<>', 43) // don't include njuvinky
+            ->whereAny([
+                'title',
+                'subtitle',
+                'authors',
+                'authors_cite',
+                'teaser',
+                'body'
+            ], 'like', '%'.$this->query.'%')
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->paginate)->withQueryString();
+
+        return $this->displaySearchResults($blogs);
+    }
+
+    private function displaySearchResults($items)
+    {
+        return Inertia::render('SearchResult', [
+            'items' => $items->isEmpty() ? null : SearchResultResource::collection($items),
+            'query' => $this->query,
+            'parameter' => $this->parameter,
+        ]);
+    }
+
+    private function books()
+    {
+        $books = Book::published()
+            ->whereAny([
+                'title',
+                'subtitle',
+                'authors',
+                'editors',
+                'translation',
+                'teaser',
+                'body',
+                'links'
+            ], 'like', '%'.$this->query.'%')
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->paginate)->withQueryString();
+
+        return $this->displaySearchResults($books);
+    }
+
+    private function authors()
+    {
+        $people = People::published()
+            ->whereAny([
+                'title',
+                'teaser',
+                'body',
+                'links'
+            ], 'like', '%'.$this->query.'%')
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->paginate)->withQueryString();
+
+        return $this->displaySearchResults($people);
+    }
+
+    private function events()
+    {
+        $events = Event::published()
+            ->whereAny([
+                'title',
+                'teaser',
+                'body',
+                'links'
+            ], 'like', '%'.$this->query.'%')
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->paginate)->withQueryString();
+
+        return $this->displaySearchResults($events);
+    }
+
+    private function pages()
+    {
+        $pages = Page::with('category', 'category.navigation')
+            ->whereAny([
+                'name_sk',
+                'body_sk'
+            ], 'like', '%'.$this->query.'%')
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->paginate)->withQueryString();
+
+        // dd($pages);
+
+        return Inertia::render('SearchResult', [
+            'items' => $pages->isEmpty() ? null : PageSearchResultResource::collection($pages),
+            'query' => $this->query,
+            'parameter' => $this->parameter,
+        ]);
+    }
+
+    private function inline()
     {
         $blogs = Blog::published()
             ->whereAny([
@@ -58,38 +160,33 @@ class SearchController extends Controller
                 'authors_cite',
                 'teaser',
                 'body'
-            ], 'like', '%'.$query.'%')
+            ], 'like', '%'.$this->query.'%')
             ->orderBy('created_at', 'desc')
-            ->paginate($this->paginate)->withQueryString();
-
-        // dd($blogs);
-
-        return Inertia::render('SearchResult', [
-            'blogs' => $blogs->isEmpty() ? null : SearchResultResource::collection($blogs),
-            'category' => Category::where(['url' => 'vsetko', 'navigation_id' => 4])->firstOrFail(),
-            'query' => $query,
-        ]);
-    }
-
-    private function inline($query)
-    {
-        $blogs = Blog::published()
-            ->where('authors', 'like', '%'.$query.'%')
-            ->orWhere('title', 'like', '%'.$query.'%')
-            ->orderBy('created_at', 'desc')
-//            ->paginate(5, ['*'], 'booksPage');
             ->take($this->maxRecords)
             ->get();
 
         $books = Book::published()
-            ->where('authors', 'like', '%'.$query.'%')
+            ->whereAny([
+                'title',
+                'subtitle',
+                'authors',
+                'editors',
+                'translation',
+                'teaser',
+                'body',
+                'links'
+            ], 'like', '%'.$this->query.'%')
             ->orderBy('created_at', 'desc')
-//            ->paginate(5, ['*'], 'blogsPage');
             ->take($this->maxRecords)
             ->get();
 
         $people = People::published()
-            ->where('title', 'like', '%'.$query.'%')
+            ->whereAny([
+                'title',
+                'teaser',
+                'body',
+                'links'
+            ], 'like', '%'.$this->query.'%')
             ->get();
 
         if ($people->count() > 1) {
@@ -105,8 +202,26 @@ class SearchController extends Controller
             'books' => $books->isEmpty() ? null : BookResource::collection($books),
             'people' => $people->isEmpty() ? null : PersonResource::collection($people),
             'category' => Category::where(['url' => 'vsetko', 'navigation_id' => 4])->firstOrFail(),
-            'query' => $query,
+            'query' => $this->query,
             'route_name' => $people->isEmpty() ? null : ($people->first()->type_id ? 'about' : 'books')
         ]);
+    }
+
+    private function njuvinky()
+    {
+        $blogs = Blog::published()
+            ->where('blog_type_id', 43) // search only for njuvinky
+            ->whereAny([
+                'title',
+                'subtitle',
+                'authors',
+                'authors_cite',
+                'teaser',
+                'body'
+            ], 'like', '%'.$this->query.'%')
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->paginate)->withQueryString();
+
+        return $this->displaySearchResults($blogs);
     }
 }

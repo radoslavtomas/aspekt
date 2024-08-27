@@ -20,7 +20,10 @@
                 {{ navigationString[`name_${locale}`] }} <span v-if="categoryString">- {{ categoryString }}</span>
             </span>
         </li>
-        <li v-else>{{ searchString[locale] }}</li>
+        <li v-else>
+            {{ searchString[locale] }}
+            <span v-if="parameter">| {{ language[locale].options[parameter] }}</span>
+        </li>
         <li v-if="slug || query">
             >
         </li>
@@ -37,6 +40,7 @@ const locale = computed(() => usePage().props.value.locale)
 const navigation = computed(() => usePage().props.value.navigation)
 const slug = computed(() => usePage().props.value.slug)
 const query = computed(() => usePage().props.value.query) // used in searches
+const parameter = computed(() => usePage().props.value.parameter)
 
 const categoryString = computed(() => {
     return category.value ? category.value[`name_${locale.value}`] : ''
@@ -45,6 +49,29 @@ const categoryString = computed(() => {
 const searchString = {
     'en': 'Search',
     'sk': 'Vyhľadávanie'
+}
+
+const language = {
+    en: {
+        options: {
+            authors: 'Authors',
+            blogs: 'AspektIn',
+            books: 'Books',
+            events: 'Events',
+            pages: 'Pages',
+            njuvinky: 'Njuvinky',
+        },
+    },
+    sk: {
+        options: {
+            authors: 'Autorky / Autori',
+            blogs: 'AspektIn',
+            books: 'Knihy',
+            events: 'Podujatia',
+            pages: 'Stránky',
+            njuvinky: 'Ňjúvinky',
+        },
+    }
 }
 
 const homeString = computed(() => navigation.value.find(el => el.route === 'home')[`name_${locale.value}`])

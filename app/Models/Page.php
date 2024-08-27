@@ -28,4 +28,9 @@ class Page extends Model
             get: fn() => 'page',
         );
     }
+
+    public function category()
+    {
+        return $this->hasOne(Category::class);
+    }
 }

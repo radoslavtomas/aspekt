@@ -21,6 +21,7 @@ class SearchResultResource extends JsonResource
             'teaser' => empty($this->teaser) ? $this->subtitle : $this->teaser,
             'link' => $this->getResourceUri($this['resourceType']).$this['slug'],
             'type' => $this['resourceType'],
+            'created_at' => $this['created_at']->format('d.m.Y'),
         ];
     }
 
