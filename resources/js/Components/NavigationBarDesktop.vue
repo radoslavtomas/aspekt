@@ -63,8 +63,8 @@ const props = defineProps({
 
 onMounted(() => {
     props.updatePath()
-    console.log(props.path)
-    console.log(navigation.value)
+    // console.log(props.path)
+    // console.log(navigation.value)
 })
 </script>
 

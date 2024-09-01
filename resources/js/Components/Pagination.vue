@@ -42,7 +42,7 @@ const prev = computed(() => props.links[0])
 const next = computed(() => props.links.at(-1))
 
 onMounted(() => {
-    console.log(next)
+    // console.log(next)
 })
 </script>
 

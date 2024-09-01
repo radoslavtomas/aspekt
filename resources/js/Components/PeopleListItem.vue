@@ -48,8 +48,8 @@ const firstName = computed(() => props.item.title.split(' ')[0])
 const surnames = computed(() => props.item.title.split(' ').slice(1))
 
 onMounted(() => {
-    console.log(categoryUrl.value)
-    console.log(query.value)
+    // console.log(categoryUrl.value)
+    // console.log(query.value)
 })
 
 </script>

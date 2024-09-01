@@ -24,7 +24,7 @@ const blogs = computed(() => usePage().props.value.blogs)
 const people = computed(() => usePage().props.value.people)
 
 onMounted(() => {
-    console.log(people.value)
+    // console.log(people.value)
 })
 </script>
 

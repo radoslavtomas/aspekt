@@ -64,6 +64,6 @@ class Order extends Model
 
     public function comments()
     {
-        return $this->belongsTo(OrderComment::class, 'id', 'order_id');
+        return $this->hasMany(OrderComment::class, 'order_id', 'id');
     }
 }
