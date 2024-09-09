@@ -38,9 +38,10 @@ class PeopleResource extends Resource
                                 '0' => 'Autorky',
                                 '1' => 'Kto je kto',
                             ]),
+                        Forms\Components\DatePicker::make('created_at'),
                         Forms\Components\Checkbox::make('published'),
                     ])
-                    ->columns(2),
+                    ->columns(3),
                 Fieldset::make('Person details')
                     ->schema([
                         Forms\Components\FileUpload::make('avatar')
@@ -106,6 +107,7 @@ class PeopleResource extends Resource
                 Tables\Columns\CheckboxColumn::make('published')
                     ->sortable(),
             ])
+            ->defaultSort('created_at', 'asc')
             ->filters([
                 Filter::make('Autorky')
                     ->query(fn(Builder $query): Builder => $query->where('type_id', 0)),

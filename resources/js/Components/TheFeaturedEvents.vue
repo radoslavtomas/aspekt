@@ -2,12 +2,12 @@
     <section class="my-4">
         <Separator :title="lang[locale].homePageFeaturedEventsTitle" margin/>
 
-        <!--        <div class="mt-8 border-4 border-teal-200 p-3">-->
-        <div v-for="item in events" class="mb-2 last:mb-0">
-            <EventListItem :item="item"/>
-        </div>
+        <div class="flex gap-2 flex-col md:flex-row">
+            <div v-for="item in events" class="mb-2 last:mb-0 md:mb-0 grow basis-0">
+                <EventListItem :fullHeight="true" :item="item"/>
+            </div>
 
-        <!--        </div>-->
+        </div>
     </section>
 </template>
 

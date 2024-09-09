@@ -17,6 +17,13 @@ class EditPeople extends EditRecord
         ];
     }
 
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['language'] = isset($data['language']) ? $data['language'] : 'sk';
+
+        return $data;
+    }
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

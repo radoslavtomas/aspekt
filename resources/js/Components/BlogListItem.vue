@@ -1,6 +1,10 @@
 <template>
     <article
-        :class="featured ? 'border-4 mb-4 border-purple-500 bg-slate-50 shadow-sm' : 'bg-white shadow-md border-gray-300'"
+        :class="{
+            'border-4 mb-4 border-purple-500 bg-slate-50 shadow-sm': featured,
+            'bg-white shadow-md border-gray-300': !featured,
+            'h-full border-1 border-purple-400': fullHeight,
+        }"
         class="border p-4">
         <main :class="props.item.feature_img  && props.featured ? 'grid grid-cols-5 gap-4' : ''">
             <div class="col-span-5 sm:col-span-3 lg:col-span-4">
@@ -37,7 +41,11 @@ const categoryUrl = computed(() => {
 
 const props = defineProps({
     item: Object,
-    featured: Boolean
+    featured: Boolean,
+    fullHeight: {
+        type: Boolean,
+        default: false
+    }
 })
 
 // onMounted(() => console.log(props.item))

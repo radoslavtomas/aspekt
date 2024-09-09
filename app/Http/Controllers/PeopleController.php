@@ -6,7 +6,6 @@ use App\Http\Resources\PeopleResource;
 use App\Http\Resources\PersonResource;
 use App\Models\Category;
 use App\Models\People;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,22 +18,11 @@ class PeopleController extends Controller
     {
         $this->getCategoryModel('autorky-redaktorky-prekladatelky');
 
-        if($slug) {
+        if ($slug) {
             return $this->handleSinglePersonResource($slug, 0);
         }
 
         return $this->handlePeopleResource(0);
-    }
-
-    public function people($slug = null)
-    {
-        $this->getCategoryModel('kto-je-kto');
-
-        if($slug) {
-            return $this->handleSinglePersonResource($slug, 1);
-        }
-
-        return $this->handlePeopleResource(1);
     }
 
     private function getCategoryModel($category_url)
@@ -56,7 +44,10 @@ class PeopleController extends Controller
 
     private function handlePeopleResource($type_id): Response
     {
-        $people = PeopleResource::collection(People::where(['published' => 1, 'type_id' => $type_id])->orderBy('created_at', 'desc')->paginate($this->pagination));
+        $people = PeopleResource::collection(People::where([
+            'published' => 1,
+            'type_id' => $type_id
+        ])->orderBy('created_at', 'asc')->paginate($this->pagination));
 
 
         return Inertia::render('People', [
@@ -64,5 +55,16 @@ class PeopleController extends Controller
             'category' => $this->category,
             'route_name' => $type_id ? 'about' : 'books'
         ]);
+    }
+
+    public function people($slug = null)
+    {
+        $this->getCategoryModel('kto-je-kto');
+
+        if ($slug) {
+            return $this->handleSinglePersonResource($slug, 1);
+        }
+
+        return $this->handlePeopleResource(1);
     }
 }

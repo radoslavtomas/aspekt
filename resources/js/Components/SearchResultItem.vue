@@ -12,7 +12,7 @@ const props = defineProps({
         <header class="text-lg text-red-600 hover:text-red-700">
             <Link :href="props.item.link"><strong>{{ props.item.title }}</strong></Link>
         </header>
-        <main class="text-sm italic my-1" v-html="props.item.teaser">
+        <main class="text-sm my-1" v-html="props.item.teaser">
         </main>
         <footer>
             <small>{{ props.item.created_at }}</small>

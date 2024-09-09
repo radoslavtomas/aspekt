@@ -26,6 +26,7 @@ class People extends Model
         'avatar',
         'published',
         'language',
+        'created_at'
     ];
 
     public function scopePublished($query)
