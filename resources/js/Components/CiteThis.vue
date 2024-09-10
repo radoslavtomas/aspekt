@@ -2,8 +2,8 @@
     <div class="">
         <Separator :title="localLang[locale].title" margin/>
         <p class="text-sm">
-            <span>{{ authors }}. </span>
-            <span>({{ props.blog.year }}). </span>
+            <span>{{ authors }}</span>
+            <span>&nbsp;({{ props.blog.year }}). </span>
             <span class="font-bold">{{ props.blog.title }}</span>.
             <span v-if="props.blog.subtitle" class="">{{ props.blog.subtitle }}. </span>
             <span class="italic">ASPEKTin - {{ localLang[locale].webzine }}. </span>

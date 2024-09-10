@@ -8,7 +8,7 @@
 
         <Breadcrumbs :id="routeName"/>
 
-        <div class="bg-books sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
+        <div class="bg-wave sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
             <MasonryWall :column-width="330" :gap="16" :items="people.data">
                 <template #default="{item}">
                     <PeopleListItem :item="item"/>

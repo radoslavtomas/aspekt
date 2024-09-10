@@ -2,7 +2,7 @@
     <section>
         <Head :title="title"/>
 
-        <div class="bg-books">
+        <div class="bg-wave">
             <Breadcrumbs id="events"/>
 
             <EventListItem :item="featured.data" featured/>

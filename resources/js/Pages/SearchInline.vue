@@ -38,7 +38,7 @@ onMounted(() => {
 
             <Separator :title="lang[locale].searchPageBooksTitle" margin/>
 
-            <div class="bg-books sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
+            <div class="bg-wave sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
 
 
                 <MasonryWall :column-width="230" :gap="16" :items="books.data">
@@ -55,7 +55,7 @@ onMounted(() => {
 
             <Separator :title="lang[locale].searchPageBlogsTitle" margin/>
 
-            <div class="bg-books sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
+            <div class="bg-wave sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
 
                 <MasonryWall :column-width="230" :gap="16" :items="blogs.data">
                     <template #default="{item}">
@@ -71,7 +71,7 @@ onMounted(() => {
 
             <Separator :title="lang[locale].searchPageAuthorsTitle" margin/>
 
-            <div class="bg-books sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
+            <div class="bg-wave sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
 
                 <MasonryWall :column-width="330" :gap="16" :items="people.data">
                     <template #default="{item}">

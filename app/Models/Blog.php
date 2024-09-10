@@ -20,6 +20,7 @@ class Blog extends Model
         'slug',
         'subtitle',
         'authors',
+        'authors_cite',
         'teaser',
         'body',
         'links',

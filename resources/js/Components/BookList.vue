@@ -8,7 +8,7 @@
 
         <Breadcrumbs id="books"/>
 
-        <div class="bg-books sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
+        <div class="bg-bwave sm:border sm:border-gray-200 sm:p-4 sm:shadow-md sm:rounded">
             <MasonryWall :column-width="230" :gap="16" :items="items.data">
                 <template #default="{item}">
                     <BookListItem :item="item"/>

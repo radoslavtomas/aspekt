@@ -2,7 +2,7 @@
     <section>
         <Head :title="title"/>
 
-        <div class="bg-books">
+        <div class="bg-wave">
             <AspektinHero/>
 
             <h1 v-if="category.url !== 'vsetko'" class="text-3xl md:text-2xl text-red-600 font-bold my-4 text-center">
