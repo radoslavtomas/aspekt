@@ -35,6 +35,7 @@ class Book extends Model
         'pages',
         'isbn',
         'featured',
+        'home_page',
         'published',
         'language',
     ];

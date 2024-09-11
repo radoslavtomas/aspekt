@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function home()
     {
         // blogs
-        $featured_blogs = BlogResource::collection(Blog::where('featured', 1)->orderBy('created_at',
+        $featured_blogs = BlogResource::collection(Blog::published()->where('home_page', 1)->orderBy('created_at',
             'desc')->get()->take($this->amountToTake));
 
         if (count($featured_blogs) < $this->amountToTake) {
@@ -27,7 +27,7 @@ class HomeController extends Controller
         }
 
         // books
-        $featured_books = BookResource::collection(Book::where('featured', 1)->orderBy('created_at',
+        $featured_books = BookResource::collection(Book::published()->where('home_page', 1)->orderBy('created_at',
             'desc')->get()->take($this->amountToTake));
 
         if (count($featured_books) < $this->amountToTake) {

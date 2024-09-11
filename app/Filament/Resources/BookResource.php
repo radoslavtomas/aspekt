@@ -42,7 +42,7 @@ class BookResource extends Resource
 //                            ->required(),
                         Forms\Components\Checkbox::make('is_product'),
                         Forms\Components\Checkbox::make('is_ebook'),
-                        Forms\Components\Checkbox::make('featured'),
+                        Forms\Components\Checkbox::make('home_page'),
                         Forms\Components\Checkbox::make('published'),
                     ])
                     ->columns(4),
@@ -132,12 +132,12 @@ class BookResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('created_at')
                     ->sortable()
-                    ->date('d.m.Y H:i:s'),
+                    ->date('d.m.Y'),
                 Tables\Columns\TextColumn::make('title')
                     ->limit(50)
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('cover'),
-                Tables\Columns\CheckboxColumn::make('featured')
+                Tables\Columns\CheckboxColumn::make('home_page')
                     ->sortable(),
                 Tables\Columns\CheckboxColumn::make('is_product')
                     ->sortable(),

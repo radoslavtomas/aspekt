@@ -47,6 +47,7 @@ class BlogResource extends Resource
                                 ->required(),
                             Forms\Components\Grid::make()->schema([
                                 Forms\Components\Checkbox::make('featured'),
+                                Forms\Components\Checkbox::make('home_page'),
                                 Forms\Components\Checkbox::make('published'),
                             ])->columns(1),
                         ]),
@@ -112,12 +113,14 @@ class BlogResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('created_at')
                     ->sortable()
-                    ->date('d.m.Y H:i:s'),
+                    ->date('d.m.Y'),
                 Tables\Columns\TextColumn::make('blog_type.name_sk'),
                 Tables\Columns\TextColumn::make('title')
                     ->limit(50)
                     ->searchable(),
                 Tables\Columns\CheckboxColumn::make('featured')
+                    ->sortable(),
+                Tables\Columns\CheckboxColumn::make('home_page')
                     ->sortable(),
                 Tables\Columns\CheckboxColumn::make('published')
                     ->sortable(),

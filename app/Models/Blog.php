@@ -25,8 +25,10 @@ class Blog extends Model
         'body',
         'links',
         'featured',
+        'home_page',
         'published',
         'language',
+        'publish_at',
     ];
 
     public function blog_type()
