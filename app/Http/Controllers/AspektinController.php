@@ -53,8 +53,12 @@ class AspektinController extends Controller
 
     private function handleSingleResource(string $slug): Response
     {
-        $blog = BlogExtResource::make(Blog::with('files', 'downloads')->where('slug', $slug)->firstOrFail());
-        // dd($blog);
+        $blog = BlogExtResource::make(Blog::published()->with('files', 'downloads')->where('slug',
+            $slug)->firstOrFail());
+
+        if (!$blog) {
+            abort(404);
+        }
 
         return Inertia::render('Blog', [
             'blog' => $blog,

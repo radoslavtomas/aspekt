@@ -53,7 +53,10 @@ class Blog extends Model
 
     public function scopePublished($query)
     {
-        return $query->where('published', 1);
+        return $query->where([
+            ['published', 1],
+            ['publish_at', '<', now()]
+        ]);
     }
 
     public function scopeFeatured($query)

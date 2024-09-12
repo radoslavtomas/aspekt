@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BlogResource\Pages;
 use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
@@ -48,7 +49,17 @@ class BlogResource extends Resource
                             Forms\Components\Grid::make()->schema([
                                 Forms\Components\Checkbox::make('featured'),
                                 Forms\Components\Checkbox::make('home_page'),
-                                Forms\Components\Checkbox::make('published'),
+                                Forms\Components\Checkbox::make('published')
+                                    ->live()
+                                    ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?bool $state) {
+                                        if ($state) {
+                                            $set('publish_at', Carbon::now()->toDateTimeString());
+                                        } else {
+                                            $set('publish_at', null);
+                                        }
+                                    }),
+                                Forms\Components\DateTimePicker::make('publish_at')
+                                    ->hidden(fn(Get $get): bool => !$get('published'))
                             ])->columns(1),
                         ]),
                     Fieldset::make('Categories')
@@ -122,7 +133,15 @@ class BlogResource extends Resource
                     ->sortable(),
                 Tables\Columns\CheckboxColumn::make('home_page')
                     ->sortable(),
-                Tables\Columns\CheckboxColumn::make('published')
+                Tables\Columns\IconColumn::make('published')
+                    ->icon(fn(string $state): string => match ($state) {
+                        '0' => 'heroicon-o-x-circle',
+                        '1' => 'heroicon-o-check-circle',
+                    })
+                    ->color(fn(string $state): string => match ($state) {
+                        '0' => 'danger',
+                        '1' => 'success',
+                    })
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
