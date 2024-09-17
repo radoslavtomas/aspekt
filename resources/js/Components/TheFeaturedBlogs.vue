@@ -2,7 +2,7 @@
     <section class="my-4">
         <Separator :title="lang[locale].homePageFeaturedBlogsTitle" margin/>
 
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
             <BlogListItem v-for="blog in blogs" :key="blog.id" :fullHeight="true" :item="blog"/>
         </div>
 
