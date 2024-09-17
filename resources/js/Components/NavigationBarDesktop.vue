@@ -16,7 +16,7 @@
                     <template #trigger>
                         <button
                             :class="{ 'border-b-4 border-red-600': path === menuItem.route }"
-                            class="font-bold text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium uppercase">
+                            class="text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium uppercase">
                             {{ menuItem[`name_${locale}`] }}
                         </button>
                     </template>

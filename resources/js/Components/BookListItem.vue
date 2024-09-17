@@ -1,5 +1,5 @@
 <template>
-    <article class="bg-white border border-gray-300 shadow-md p-4">
+    <article class="rounded bg-white border border-gray-300 shadow-md p-4">
         <header>
             <Link :href="route('books', [categoryUrl, props.item.slug])">
                 <img v-if="props.item.cover"
@@ -12,8 +12,8 @@
             <Link :href="route('books', [categoryUrl, props.item.slug])">
                 <h2 class="text-xl text-red-600">{{ props.item.title }}</h2>
             </Link>
-            <h3 v-if="props.item.subtitle" class="text-sm text-gray-500 italic mb-2">{{ props.item.subtitle }}</h3>
-            <h3 :class="props.item.subtitle ? '' : 'mt-2'" class="text-sm italic mb-4 text-red-600">
+            <h3 v-if="props.item.subtitle" class="text-sm text-gray-500 mb-2">{{ props.item.subtitle }}</h3>
+            <h3 :class="props.item.subtitle ? '' : 'mt-2'" class="text-sm mb-4 text-red-600">
                 <Link :href="route('search', {'parameter': 'inline', 'query': props.item.authors})">
                     {{ props.item.authors }}
                 </Link>

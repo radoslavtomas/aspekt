@@ -6,7 +6,7 @@
             <span>&nbsp;({{ props.blog.year }}). </span>
             <span class="font-bold">{{ props.blog.title }}</span>.
             <span v-if="props.blog.subtitle" class="">{{ props.blog.subtitle }}. </span>
-            <span class="italic">ASPEKTin - {{ localLang[locale].webzine }}. </span>
+            <span class="">ASPEKTin - {{ localLang[locale].webzine }}. </span>
             <Link :href="url" class="text-red-700 hover:text-red-900">{{ url }}.</Link>
         </p>
     </div>

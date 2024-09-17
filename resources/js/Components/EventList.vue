@@ -2,12 +2,12 @@
     <section>
         <Head :title="title"/>
 
-        <div class="bg-wave">
+        <div class="bg-wave rounded">
             <Breadcrumbs id="events"/>
 
             <EventListItem :item="featured.data" featured/>
 
-            <div class="mb-4 border-2 border-teal-100 p-4 bg-transparent">
+            <div class="rounded mb-4 border-2 border-teal-100 p-4 bg-transparent">
                 <MasonryWall :column-width="230" :gap="16" :items="items.data">
                     <template #default="{item}">
                         <EventListItem :item="item"/>
