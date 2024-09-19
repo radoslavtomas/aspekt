@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
 use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Hash;
@@ -37,10 +37,7 @@ class EditUser extends EditRecord
                     $this->record->update([
                         'password' => Hash::make($data['new_password'])
                     ]);
-                    Notification::make()
-                        ->title('Password updated successfully!')
-                        ->success()
-                        ->send();
+                    Filament::notify('success', 'Password updated successfully');
                 })
 
         ];
