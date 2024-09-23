@@ -1,20 +1,21 @@
+{{--@formatter:off--}}
 <x-email-layout>
-    <x-email-header />
+<x-email-header />
 
-    <main style="background: #ffffff;border-radius: 3px;width: 100%;">
+<main style="background: #ffffff;border-radius: 3px;width: 100%;">
 
-        <section style="box-sizing: border-box;margin: 0 auto;min-width: 200px;max-width: 580px;text-align: center;padding: 1rem 0;">
-            <h4 style="font-weight: 700;">Vaša objednávka bola odoslaná.</h4>
-            <p style="margin: 0;">Prajeme príjemné čítanie.</p>
-            <hr style="border: 0;border-bottom: 1px solid #d4d4d4;margin: 20px 0;">
-        </section>
+<section style="box-sizing: border-box;margin: 0 auto;min-width: 200px;max-width: 580px;text-align: center;padding: 1rem 0;">
+<h4 style="font-weight: 700;">Vaša objednávka bola odoslaná.</h4>
+<p style="margin: 0;">Prajeme príjemné čítanie.</p>
+<hr style="border: 0;border-bottom: 1px solid #d4d4d4;margin: 20px 0;">
+</section>
 
-        <x-email-order-summary
-            :basket="$basket"
-            :orderTotal="$orderTotal"
-        />
+<x-email-order-summary
+:basket="$basket"
+:orderTotal="$orderTotal"
+/>
 
-    </main>
+</main>
 
-    <x-email-footer />
+<x-email-footer />
 </x-email-layout>

@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
@@ -14,10 +13,12 @@ class OrderCreatedAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $customerEmail;
+    public string $customerEmail;
 
-    public $customerName;
+    public string $customerName;
     public $orderId;
+
+    public string $editUrl;
 
     /**
      * Create a new message instance.
@@ -29,6 +30,8 @@ class OrderCreatedAdmin extends Mailable
         $this->customerEmail = $customerEmail;
         $this->customerName = $customerName;
         $this->orderId = $orderId;
+        $format = '%s/admin/orders/%s/edit';
+        $this->editUrl = sprintf($format, env('APP_URL'), $orderId);
     }
 
     /**
@@ -39,7 +42,7 @@ class OrderCreatedAdmin extends Mailable
     public function envelope()
     {
         return new Envelope(
-            // from: new Address($this->customerEmail, $this->customerName),
+        // from: new Address($this->customerEmail, $this->customerName),
             from: new Address('aspekt@aspekt.sk', 'Aspekt'),
             subject: 'Nova objednavka na ASPEKT.sk',
         );

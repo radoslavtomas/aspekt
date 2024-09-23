@@ -103,7 +103,7 @@ class EshopController extends Controller
             Log::error($exception);
         }
 
-        return Inertia::render('Eshop/ThankYou');
+        return redirect()->route('thankYou', ['email' => $customer['primary_email']]);
     }
 
     private function prepareCustomerOrderData($request)
