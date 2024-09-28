@@ -24,7 +24,6 @@
                     v-if="props.item.feature_img && props.featured"
                     class="col-span-5 sm:col-span-2 lg:col-span-1">
                     <img :src="props.item.feature_img" alt="featured_image" class="w-full rounded">
-                    <p class="text-sm mt-4" v-html="props.item.teaser"></p>
                 </div>
             </main>
         </article>

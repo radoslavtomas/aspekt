@@ -13,15 +13,15 @@ class SenderNewsfilterService implements NewsfilterService
     {
         $senderData = [
             'email' => $email,
-            'groups' => [env('SENDER_GROUP_ID')]
+            'groups' => [config('newsletter.services.sender.group')],
         ];
 
         try {
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer '.env('SENDER_API_TOKEN'),
+                'Authorization' => 'Bearer '.config('newsletter.services.sender.api_token'),
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-            ])->post(env('SENDER_SUBSCRIBE_URL'), $senderData);
+            ])->post(config('newsletter.services.sender.url'), $senderData);
         } catch (Exception $e) {
             Log::error('Failed to subscribe '.$email.' to Njuvinky newsletter');
             Log::error($e->getMessage());
