@@ -30,8 +30,8 @@ class OrderCreatedAdmin extends Mailable
         $this->customerEmail = $customerEmail;
         $this->customerName = $customerName;
         $this->orderId = $orderId;
-        $format = '%s/admin/orders/%s/edit';
-        $this->editUrl = sprintf($format, env('APP_URL'), $orderId);
+    
+        $this->editUrl = env('APP_URL')."/admin/orders/".$orderId."/edit";
     }
 
     /**

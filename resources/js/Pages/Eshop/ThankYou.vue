@@ -1,5 +1,5 @@
 <template>
-    <Head title="Thank you"/>
+    <Head :title="lang[locale].eshopThankYouTitle"/>
     <main-layout>
         <div class="max-w-xl mx-auto pt-8">
             <h1 class="text-2xl text-center text-pink-600 font-semibold mb-4">{{ lang[locale].eshopThankYouTitle }}</h1>

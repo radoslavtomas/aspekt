@@ -3,8 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -25,7 +23,7 @@ class OrderCompletedCustomer extends Mailable
     public function __construct($basket, $orderTotal)
     {
         $this->basket = $basket;
-        $this->orderTotal = number_format($orderTotal / 100, 2) . ' €';
+        $this->orderTotal = number_format($orderTotal / 100, 2).' €';
     }
 
     /**
@@ -36,7 +34,7 @@ class OrderCompletedCustomer extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Order Sent Customer',
+            subject: 'Objednavka z ASPEKT.sk',
         );
     }
 

@@ -1,34 +1,33 @@
 <script setup>
-import {Head, usePage} from '@inertiajs/inertia-vue3';
-import {Inertia} from '@inertiajs/inertia';
+import { Head, Link, usePage } from '@inertiajs/inertia-vue3'
+import { Inertia } from '@inertiajs/inertia'
 import MainLayout from '../../Layouts/MainLayout.vue'
-import {Link} from "@inertiajs/inertia-vue3";
-import {ArrowRightCircleIcon, ArrowLeftCircleIcon} from '@heroicons/vue/24/outline';
+import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
 import useVuelidate from '@vuelidate/core'
-import { required, email, maxLength, requiredIf } from '@vuelidate/validators'
-import {reactive, computed, onMounted} from "vue";
-import { useStore } from 'vuex';
+import { email, maxLength, required, requiredIf } from '@vuelidate/validators'
+import { computed, onMounted, reactive } from 'vue'
+import { useStore } from 'vuex'
 
-import FormInput from '../../Components/Form/FormInput.vue';
-import FormSelect from '../../Components/Form/FormSelect.vue';
-import FormCheckbox from '../../Components/Form/FormCheckbox.vue';
-import FormTextarea from '../../Components/Form/FormTextarea.vue';
-import Card from '../../Components/Card.vue';
+import FormInput from '../../Components/Form/FormInput.vue'
+import FormSelect from '../../Components/Form/FormSelect.vue'
+import FormCheckbox from '../../Components/Form/FormCheckbox.vue'
+import FormTextarea from '../../Components/Form/FormTextarea.vue'
+import Card from '../../Components/Card.vue'
 
-const store = useStore();
-const lang = computed(() => store.getters.lang);
-const locale = computed(() => usePage().props.value.locale);
-const customer = computed(() => store.getters.customer);
+const store = useStore()
+const lang = computed(() => store.getters.lang)
+const locale = computed(() => usePage().props.value.locale)
+const customer = computed(() => store.getters.customer)
 
 const options = [
-    {value: '703', description: 'Slovensko'},
-    {value: '203', description: 'Česká republika'},
-    {value: '276', description: 'Nemecko'},
-    {value: '616', description: 'Poľsko'},
-    {value: '826', description: 'Veľká Británia'},
-    {value: '40', description: 'Rakúsko'},
-    {value: '840', description: 'Spojené štáty'},
-    {value: '124', description: 'Kanada'},
+    { value: '703', description: 'Slovensko' },
+    { value: '203', description: 'Česká republika' },
+    { value: '276', description: 'Nemecko' },
+    { value: '616', description: 'Poľsko' },
+    { value: '826', description: 'Veľká Británia' },
+    { value: '40', description: 'Rakúsko' },
+    { value: '840', description: 'Spojené štáty' },
+    { value: '124', description: 'Kanada' },
 ]
 
 let form = reactive({
@@ -77,20 +76,20 @@ const rules = computed(() => {
     }
 })
 
-const v$ = useVuelidate(rules, form, { $scope: false });
+const v$ = useVuelidate(rules, form, { $scope: false })
 
 const handleForm = async () => {
-    const result = await v$.value.$validate();
+    const result = await v$.value.$validate()
 
-    if(!result) {
+    if (!result) {
         const el = document.getElementsByClassName('focus:border-red-300')[0]
         setTimeout(() => {
-            el.scrollIntoView({behavior: "smooth"})
+            el.scrollIntoView({ behavior: 'smooth' })
         }, 100)
-        return;
+        return
     }
 
-    await store.dispatch('setCustomer', form);
+    await store.dispatch('setCustomer', form)
 
     Inertia.visit('/eshop/summary', {
         method: 'get'
@@ -98,7 +97,7 @@ const handleForm = async () => {
 }
 
 onMounted(() => {
-    if(customer.value.hasOwnProperty('primary_email')) {
+    if (customer.value.hasOwnProperty('primary_email')) {
         for (const prop in customer.value) {
             form[prop] = customer.value[prop]
         }
@@ -107,150 +106,157 @@ onMounted(() => {
 
 defineProps({
     category: String,
-    slug: String|null,
+    slug: String | null,
 })
 
 </script>
 
 <template>
-<!--    @TODO: titles to lang-->
-    <Head title="Shipping" />
+    <!--    @TODO: titles to lang-->
+    <Head :title="lang[locale].eshopShippingTitle"/>
     <main-layout>
         <div class="max-w-xl mx-auto pt-8">
-            <h1 class="text-2xl text-center text-pink-600 font-semibold mb-4">{{lang[locale].eshopShippingTitle}}</h1>
+            <h1 class="text-2xl text-center text-pink-600 font-semibold mb-4">{{ lang[locale].eshopShippingTitle }}</h1>
 
             <form @submit.prevent="handleForm">
                 <Card :title="lang[locale].eshopInfoPanel">
                     <FormInput
                         v-model.trim="form.primary_email"
-                        name="primary_email"
-                        title="Email *" type="email"
-                        :placeholder="lang[locale].eshopOrderConfirmation"
-                        :errors="v$.primary_email.$errors.length ? v$.primary_email.$errors[0] : null" />
+                        :errors="v$.primary_email.$errors.length ? v$.primary_email.$errors[0] : null"
+                        :placeholder="lang[locale].eshopOrderConfirmation" name="primary_email"
+                        title="Email *"
+                        type="email"/>
 
                     <FormInput
                         v-model.trim="form.delivery_phone"
-                        name="delivery_phone"
-                        :title="lang[locale].eshopPhone"
                         :errors="v$.delivery_phone.$errors.length ? v$.delivery_phone.$errors[0] : null"
+                        :title="lang[locale].eshopPhone"
+                        name="delivery_phone"
                     />
                 </Card>
 
                 <Card :title="lang[locale].eshopDeliveryPanel">
                     <FormInput
                         v-model.trim="form.delivery_first_name"
-                        name="delivery_first_name"
-                        :title="lang[locale].eshopName" type="text"
-                        :errors="v$.delivery_first_name.$errors.length ? v$.delivery_first_name.$errors[0] : null" />
+                        :errors="v$.delivery_first_name.$errors.length ? v$.delivery_first_name.$errors[0] : null"
+                        :title="lang[locale].eshopName" name="delivery_first_name"
+                        type="text"/>
 
                     <FormInput
                         v-model.trim="form.delivery_last_name"
-                        name="delivery_last_name"
-                        :title="lang[locale].eshopSurname" type="text"
-                        :errors="v$.delivery_last_name.$errors.length ? v$.delivery_last_name.$errors[0] : null" />
+                        :errors="v$.delivery_last_name.$errors.length ? v$.delivery_last_name.$errors[0] : null"
+                        :title="lang[locale].eshopSurname" name="delivery_last_name"
+                        type="text"/>
 
                     <FormInput
                         v-model.trim="form.delivery_company"
-                        name="delivery_company"
-                        :title="lang[locale].eshopCompany" type="text"
-                        :errors="v$.delivery_company.$errors.length ? v$.delivery_company.$errors[0] : null" />
+                        :errors="v$.delivery_company.$errors.length ? v$.delivery_company.$errors[0] : null"
+                        :title="lang[locale].eshopCompany" name="delivery_company"
+                        type="text"/>
 
                     <FormInput
                         v-model.trim="form.delivery_street1"
-                        name="delivery_street1"
-                        :title="lang[locale].eshopStreet" type="text"
-                        :errors="v$.delivery_street1.$errors.length ? v$.delivery_street1.$errors[0] : null" />
+                        :errors="v$.delivery_street1.$errors.length ? v$.delivery_street1.$errors[0] : null"
+                        :title="lang[locale].eshopStreet" name="delivery_street1"
+                        type="text"/>
 
                     <FormInput
                         v-model.trim="form.delivery_city"
-                        name="delivery_city"
-                        :title="lang[locale].eshopCity" type="text"
-                        :errors="v$.delivery_city.$errors.length ? v$.delivery_city.$errors[0] : null" />
+                        :errors="v$.delivery_city.$errors.length ? v$.delivery_city.$errors[0] : null"
+                        :title="lang[locale].eshopCity" name="delivery_city"
+                        type="text"/>
 
                     <FormInput
                         v-model.trim="form.delivery_postal_code"
-                        name="delivery_postal_code"
-                        :title="lang[locale].eshopPostcode" type="text"
-                        :errors="v$.delivery_postal_code.$errors.length ? v$.delivery_postal_code.$errors[0] : null" />
+                        :errors="v$.delivery_postal_code.$errors.length ? v$.delivery_postal_code.$errors[0] : null"
+                        :title="lang[locale].eshopPostcode" name="delivery_postal_code"
+                        type="text"/>
 
                     <FormSelect
                         v-model="form.delivery_country"
-                        name="delivery_country"
-                        :title="lang[locale].eshopCountry"
                         :errors="v$.delivery_country.$errors.length ? v$.delivery_country.$errors[0] : null"
-                        :options="options" />
+                        :options="options"
+                        :title="lang[locale].eshopCountry"
+                        name="delivery_country"/>
 
                     <br>
 
-                    <FormCheckbox v-model="form.show_billing_panel" name="delivery_company" :title="lang[locale].eshopBillingCheckbox" />
+                    <FormCheckbox v-model="form.show_billing_panel" :title="lang[locale].eshopBillingCheckbox"
+                                  name="delivery_company"/>
                 </Card>
 
                 <Card v-if="form.show_billing_panel" :title="lang[locale].eshopBillingPanel">
                     <FormInput
                         v-model.trim="form.billing_first_name"
-                        name="billing_first_name"
-                        :title="lang[locale].eshopName" type="text"
-                        :errors="v$.billing_first_name.$errors.length ? v$.billing_first_name.$errors[0] : null" />
+                        :errors="v$.billing_first_name.$errors.length ? v$.billing_first_name.$errors[0] : null"
+                        :title="lang[locale].eshopName" name="billing_first_name"
+                        type="text"/>
 
                     <FormInput
                         v-model.trim="form.billing_last_name"
-                        name="billing_last_name"
-                        :title="lang[locale].eshopSurname" type="text"
-                        :errors="v$.billing_last_name.$errors.length ? v$.billing_last_name.$errors[0] : null" />
+                        :errors="v$.billing_last_name.$errors.length ? v$.billing_last_name.$errors[0] : null"
+                        :title="lang[locale].eshopSurname" name="billing_last_name"
+                        type="text"/>
 
                     <FormInput
                         v-model.trim="form.billing_company"
-                        name="billing_company"
-                        :title="lang[locale].eshopCompany" type="text"
-                        :errors="v$.billing_company.$errors.length ? v$.billing_company.$errors[0] : null" />
+                        :errors="v$.billing_company.$errors.length ? v$.billing_company.$errors[0] : null"
+                        :title="lang[locale].eshopCompany" name="billing_company"
+                        type="text"/>
 
                     <FormInput
                         v-model.trim="form.billing_street1"
-                        name="billing_street1"
-                        :title="lang[locale].eshopStreet" type="text"
-                        :errors="v$.billing_street1.$errors.length ? v$.billing_street1.$errors[0] : null" />
+                        :errors="v$.billing_street1.$errors.length ? v$.billing_street1.$errors[0] : null"
+                        :title="lang[locale].eshopStreet" name="billing_street1"
+                        type="text"/>
 
                     <FormInput
                         v-model.trim="form.billing_city"
-                        name="billing_city"
-                        :title="lang[locale].eshopCity" type="text"
-                        :errors="v$.billing_city.$errors.length ? v$.billing_city.$errors[0] : null" />
+                        :errors="v$.billing_city.$errors.length ? v$.billing_city.$errors[0] : null"
+                        :title="lang[locale].eshopCity" name="billing_city"
+                        type="text"/>
 
                     <FormInput
                         v-model.trim="form.billing_postal_code"
-                        name="billing_postal_code"
-                        :title="lang[locale].eshopPostcode" type="text"
-                        :errors="v$.billing_postal_code.$errors.length ? v$.billing_postal_code.$errors[0] : null" />
+                        :errors="v$.billing_postal_code.$errors.length ? v$.billing_postal_code.$errors[0] : null"
+                        :title="lang[locale].eshopPostcode" name="billing_postal_code"
+                        type="text"/>
 
                     <FormSelect
                         v-model="form.billing_country"
-                        name="billing_country"
-                        :title="lang[locale].eshopCountry"
                         :errors="v$.billing_country.$errors.length ? v$.billing_country.$errors[0] : null"
-                        :options="options" />
+                        :options="options"
+                        :title="lang[locale].eshopCountry"
+                        name="billing_country"/>
                     <br>
                 </Card>
 
                 <Card :title="lang[locale].eshopNotePanel">
                     <FormTextarea
                         v-model="form.comment"
-                        name="comment"
-                        :errors="v$.comment.$errors.length ? v$.comment.$errors[0] : null"/>
+                        :errors="v$.comment.$errors.length ? v$.comment.$errors[0] : null"
+                        name="comment"/>
                 </Card>
 
-                <section class="my-8 flex flex-col sm:flex-row flex-col-reverse justify-between items-center text-sm sm:text-base">
-                    <Link :href="route('basket')" class="rounded text-gray-500 text-center px-4 py-3 bg-gray-200 hover:bg-gray-300">
-                        <ArrowLeftCircleIcon class="w-5 h-5 inline" /> {{lang[locale].eshopBackButtonShipping}}
+                <section
+                    class="my-8 flex flex-col sm:flex-row flex-col-reverse justify-between items-center text-sm sm:text-base">
+                    <Link :href="route('basket')"
+                          class="rounded text-gray-500 text-center px-4 py-3 bg-gray-200 hover:bg-gray-300">
+                        <ArrowLeftCircleIcon class="w-5 h-5 inline"/>
+                        {{ lang[locale].eshopBackButtonShipping }}
                     </Link>
-                    <button type="submit" class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600">
-                        {{lang[locale].eshopForwardButtonShipping}} <ArrowRightCircleIcon class="w-5 h-5 inline" />
+                    <button
+                        class="rounded text-white text-center px-4 py-3 mb-3 sm:mb-0 w-full sm:w-auto shadow-md bg-pink-500 hover:bg-pink-600"
+                        type="submit">
+                        {{ lang[locale].eshopForwardButtonShipping }}
+                        <ArrowRightCircleIcon class="w-5 h-5 inline"/>
                     </button>
                 </section>
             </form>
 
 
             <section class="">
-                <p class="text-xs">{{lang[locale].postageNote}}</p>
+                <p class="text-xs">{{ lang[locale].postageNote }}</p>
             </section>
         </div>
     </main-layout>
