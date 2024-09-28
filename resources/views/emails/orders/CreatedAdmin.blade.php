@@ -6,7 +6,11 @@ Nová objednávka od {{$customerName}}.
 
 Objednávku môžete spravovať tu:
 
-<x-mail::button url="{{$editUrl}}">
+<x-mail::button url="{{env('APP_URL')."/admin/orders/".$orderId."/edit"}}">
+
+Debug: {{env('APP_URL')."/admin/orders/".$orderId."/edit"}}
+
+Debug2: {{$editUrl}}
 
 Objednávka
 
