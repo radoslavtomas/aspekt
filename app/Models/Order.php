@@ -17,6 +17,7 @@ class Order extends Model
     protected $fillable = [
         'order_status_id',
         'order_total',
+        'postage',
         'product_count',
         'primary_email',
         'delivery_first_name',

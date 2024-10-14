@@ -44,6 +44,10 @@ class OrderResource extends Resource
                             ->prefixIcon('heroicon-o-currency-euro')
                             ->numeric()
                             ->readOnly(),
+                        Forms\Components\TextInput::make('postage')
+                            ->label('Postage')
+                            ->prefixIcon('heroicon-o-currency-euro')
+                            ->numeric(),
                         Forms\Components\TextInput::make('product_count')
                             ->label('Total products')
                             ->disabled(),

@@ -3,11 +3,10 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
 class OrderCreatedCustomer extends Mailable
@@ -25,7 +24,7 @@ class OrderCreatedCustomer extends Mailable
     public function __construct($basket, $orderTotal)
     {
         $this->basket = $basket;
-        $this->orderTotal = number_format($orderTotal / 100, 2) . ' €';
+        $this->orderTotal = number_format($orderTotal / 100, 2).' €';
     }
 
     /**
@@ -36,8 +35,8 @@ class OrderCreatedCustomer extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('aspekt@aspekt.sk', 'Aspekt'),
-            subject: 'Objednavka z ASPEKT.sk',
+            from: new Address('aspekt@aspekt.sk', 'ASPEKT'),
+            subject: 'Potvrdenie objednávky',
         );
     }
 

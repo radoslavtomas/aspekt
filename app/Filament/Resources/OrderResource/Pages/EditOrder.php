@@ -15,12 +15,14 @@ class EditOrder extends EditRecord
     protected function mutateFormDataBeforeSave(array $data): array
     {
         $data['order_total'] = $data['order_total'] * 100;
+        $data['postage'] = $data['postage'] * 100;
         return $data;
     }
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
         $data['order_total'] = $data['order_total'] / 100;
+        $data['postage'] = $data['postage'] / 100;
         return $data;
     }
 
@@ -47,7 +49,8 @@ class EditOrder extends EditRecord
             Mail::to($data['primary_email'])->send(
                 new OrderCompletedCustomer(
                     $basket,
-                    $record['order_total']
+                    $record['order_total'],
+                    $data['postage']
                 )
             );
         }

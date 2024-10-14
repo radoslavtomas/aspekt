@@ -102,7 +102,11 @@
             </section>
 
             <section class="mb-4">
-                <p class="text-sm">{{ lang[locale].postageNote }}</p>
+                <p class="text-xs">{{ lang[locale].eshopPostageNote }}</p>
+            </section>
+
+            <section class="mb-4">
+                <p class="text-xs">{{ lang[locale].eshopDataProtection }}</p>
             </section>
         </div>
     </main-layout>

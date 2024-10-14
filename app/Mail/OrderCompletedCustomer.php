@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -14,16 +15,21 @@ class OrderCompletedCustomer extends Mailable
 
     public array $basket;
     public string $orderTotal;
+    public $postage;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($basket, $orderTotal)
+    public function __construct($basket, $orderTotal, $postage)
     {
         $this->basket = $basket;
         $this->orderTotal = number_format($orderTotal / 100, 2).' €';
+
+        $this->postage = $postage ?
+            number_format($postage / 100, 2).' €' :
+            '3,10 € – 5,40 €';
     }
 
     /**
@@ -34,7 +40,8 @@ class OrderCompletedCustomer extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Objednavka z ASPEKT.sk',
+            from: new Address('aspekt@aspekt.sk', 'ASPEKT'),
+            subject: 'Objednávka vybavená: Aspektovské knihy sú na ceste k vám',
         );
     }
 
