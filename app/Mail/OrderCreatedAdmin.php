@@ -9,13 +9,14 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OrderCreatedAdmin extends Mailable
-{
+class OrderCreatedAdmin extends Mailable {
+
     use Queueable, SerializesModels;
 
     public string $customerEmail;
 
     public string $customerName;
+
     public $orderId;
 
     public string $editUrl;
@@ -25,8 +26,7 @@ class OrderCreatedAdmin extends Mailable
      *
      * @return void
      */
-    public function __construct($customerEmail, $customerName, $orderId)
-    {
+    public function __construct($customerEmail, $customerName, $orderId) {
         $this->customerEmail = $customerEmail;
         $this->customerName = $customerName;
         $this->orderId = $orderId;
@@ -39,11 +39,10 @@ class OrderCreatedAdmin extends Mailable
      *
      * @return \Illuminate\Mail\Mailables\Envelope
      */
-    public function envelope()
-    {
+    public function envelope() {
         return new Envelope(
         // from: new Address($this->customerEmail, $this->customerName),
-            from: new Address('aspekt@aspekt.sk', 'Aspekt'),
+            from: new Address('aspekt@aspekt.sk', 'ASPEKT'),
             subject: 'Nova objednavka na ASPEKT.sk',
         );
     }
@@ -53,8 +52,7 @@ class OrderCreatedAdmin extends Mailable
      *
      * @return \Illuminate\Mail\Mailables\Content
      */
-    public function content()
-    {
+    public function content() {
         return new Content(
             markdown: 'emails.orders.CreatedAdmin',
         );
@@ -65,8 +63,8 @@ class OrderCreatedAdmin extends Mailable
      *
      * @return array
      */
-    public function attachments()
-    {
+    public function attachments() {
         return [];
     }
+
 }

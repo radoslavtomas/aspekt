@@ -9,12 +9,14 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OrderCompletedCustomer extends Mailable
-{
+class OrderCompletedCustomer extends Mailable {
+
     use Queueable, SerializesModels;
 
     public array $basket;
+
     public string $orderTotal;
+
     public $postage;
 
     /**
@@ -22,8 +24,7 @@ class OrderCompletedCustomer extends Mailable
      *
      * @return void
      */
-    public function __construct($basket, $orderTotal, $postage)
-    {
+    public function __construct($basket, $orderTotal, $postage) {
         $this->basket = $basket;
         $this->orderTotal = number_format($orderTotal / 100, 2).' €';
 
@@ -37,11 +38,10 @@ class OrderCompletedCustomer extends Mailable
      *
      * @return \Illuminate\Mail\Mailables\Envelope
      */
-    public function envelope()
-    {
+    public function envelope() {
         return new Envelope(
             from: new Address('aspekt@aspekt.sk', 'ASPEKT'),
-            subject: 'Objednávka vybavená: Aspektovské knihy sú na ceste k vám',
+            subject: 'Objednávka vybavená: Aspektovské knihy sú na ceste k Vám',
         );
     }
 
@@ -50,8 +50,7 @@ class OrderCompletedCustomer extends Mailable
      *
      * @return \Illuminate\Mail\Mailables\Content
      */
-    public function content()
-    {
+    public function content() {
         return new Content(
             view: 'emails.orders.Completed',
         );
@@ -62,8 +61,8 @@ class OrderCompletedCustomer extends Mailable
      *
      * @return array
      */
-    public function attachments()
-    {
+    public function attachments() {
         return [];
     }
+
 }
