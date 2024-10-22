@@ -15,8 +15,9 @@
 :orderTotal="$orderTotal"
 />
 
-<br/>
+<div style="box-sizing: border-box;margin: 0 auto;min-width: 200px;max-width: 580px;text-align: center;padding: 1rem 0;">
 <p>Objednané publikácie Vám zašleme na dobierku. K cene objednaných kníh je potrebné pripočítať cenu poštovného, ktorá sa pohybuje v rozmedzí 3,10 € – 5,40 € v závislosti od hmotnosti posielaného balíka. (Za samotné knihy však platíte len 75 percent ich predajnej ceny.)</p>
+</div>
 
 </div>
 

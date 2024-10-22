@@ -2,7 +2,7 @@
 <section>
 <div style="padding: 1rem;border: 1px solid #d4d4d4;margin: 0 auto 1rem auto;border-radius: 0.25rem;width: 300px;">
 <div style="width: 100%;text-align: center;">
-<img style="width: 128px;height: auto;border-radius: 0.25rem;border: 1px solid #e9e9e9" src="https://aspekt-dev.rdslv.com/storage/{{ $item['cover'] }}" alt="book">
+<img style="width: 128px;height: auto;border-radius: 0.25rem;border: 1px solid #e9e9e9" src="{{ config('app.app_url') . '/storage/' . $item['cover'] }}" alt="book">
 </div>
 
 <div style="margin-bottom: 0.5rem;text-align: center;">
