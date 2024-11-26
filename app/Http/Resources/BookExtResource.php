@@ -4,16 +4,16 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BookExtResource extends JsonResource
-{
+class BookExtResource extends JsonResource {
+
     /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray($request)
-    {
+    public function toArray($request) {
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -31,12 +31,15 @@ class BookExtResource extends JsonResource
             'is_ebook' => $this->is_ebook,
             'eshop_links' => $this->eshop_links,
             'aspekt_price_raw' => $this->aspekt_price,
-            'aspekt_price' => number_format($this->aspekt_price ? $this->aspekt_price / 100 : 0, 2, ',', '.')." €",
-            'common_price' => number_format($this->common_price ? $this->common_price / 100 : 0, 2, ',', '.')." €",
+            'aspekt_price' => number_format($this->aspekt_price ? $this->aspekt_price / 100 : 0,
+                    2, ',', '.')." €",
+            'common_price' => number_format($this->common_price ? $this->common_price / 100 : 0,
+                    2, ',', '.')." €",
             'pages' => $this->pages,
-            'isbn' => $this->ISBN,
+            'isbn' => $this->isbn,
             'files' => FileResource::collection($this->files),
             'downloads' => FileResource::collection($this->downloads),
         ];
     }
+
 }

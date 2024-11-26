@@ -90,7 +90,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { Head, usePage } from '@inertiajs/inertia-vue3'
 
@@ -110,4 +110,8 @@ const lang = computed(() => store.getters.lang)
 
 const navigationString = computed(() => navigation.value.find(el => el.route === 'books')[`name_${locale.value}`])
 const title = computed(() => `${navigationString.value} | ${book.value.title}`)
+
+onMounted(() => {
+    console.log(book)
+})
 </script>

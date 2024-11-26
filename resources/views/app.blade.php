@@ -6,6 +6,18 @@
 
     <title inertia>{{ config('app.name', 'Aspekt') }}</title>
 
+    @if(config('config.app.env') == 'production')
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-568MGTRLYW"></script>
+        <script> window.dataLayer = window.dataLayer || []
+
+            function gtag () {dataLayer.push(arguments)}
+
+            gtag('js', new Date())
+            gtag('config', 'G-568MGTRLYW')
+        </script>
+    @endif
+
     <!-- Cookie script CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.9/dist/cookieconsent.css">
     <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.9/dist/cookieconsent.js"></script>
