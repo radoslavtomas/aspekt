@@ -6,7 +6,7 @@
 
     <title inertia>{{ config('app.name', 'Aspekt') }}</title>
 
-    @if(config('config.app.env') == 'production')
+    @if(config('app.env') == 'production')
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-568MGTRLYW"></script>
         <script> window.dataLayer = window.dataLayer || []
