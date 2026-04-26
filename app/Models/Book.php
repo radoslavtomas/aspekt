@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -49,17 +50,17 @@ class Book extends Model
         'eshop_links' => 'array',
     ];
 
-    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function category(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
 
-    public function files(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function files(): BelongsToMany
     {
         return $this->belongsToMany(File::class);
     }
 
-    public function downloads(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function downloads(): BelongsToMany
     {
         return $this->belongsToMany(Download::class);
     }

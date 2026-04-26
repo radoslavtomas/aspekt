@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use MailchimpMarketing\ApiClient;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\EventResource;
@@ -56,7 +57,7 @@ class HomeController extends Controller
     public function mailchimp()
     {
         $list_id = env('MAILCHIMP_LIST_ID');
-        $mailchimp = new MailchimpMarketing\ApiClient();
+        $mailchimp = new ApiClient();
 
         $mailchimp->setConfig([
             'apiKey' => env('MAILCHIMP_API_KEY'),

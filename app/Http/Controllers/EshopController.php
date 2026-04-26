@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Helpers\Sanitize;
 use App\Mail\OrderCreatedAdmin;
 use App\Mail\OrderCreatedCustomer;
@@ -99,7 +100,7 @@ class EshopController extends Controller
                 ->send(new OrderCreatedCustomer($basket, $customer['order_total']));
             Mail::to($eshopEmail)
                 ->send(new OrderCreatedAdmin($customer['primary_email'], $customerName, $order['id']));
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             Log::error($exception);
         }
 

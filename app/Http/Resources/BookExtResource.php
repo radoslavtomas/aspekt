@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Arrayable;
+use JsonSerializable;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BookExtResource extends JsonResource {
@@ -9,9 +12,9 @@ class BookExtResource extends JsonResource {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      *
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @return array|Arrayable|JsonSerializable
      */
     public function toArray($request) {
         return [

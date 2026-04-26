@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Filament\Resources\Users\Pages;
+
+use App\Filament\Resources\Users\UserResource;
+use Filament\Pages\Actions;
+use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Str;
+
+class CreateUser extends CreateRecord
+{
+    protected static string $resource = UserResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['password'] = Hash::make($data['password']);
+        return parent::mutateFormDataBeforeCreate($data);
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+}
