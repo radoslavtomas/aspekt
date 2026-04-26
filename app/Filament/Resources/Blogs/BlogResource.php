@@ -112,12 +112,15 @@ class BlogResource extends Resource
                                 ->default(Auth::id()),
                             RichEditor::make('teaser')
                                 ->toolbarButtons(self::richContentToolbar())
+                                ->plugins(self::richContentPlugins())
                                 ->required(),
                             RichEditor::make('body')
                                 ->toolbarButtons(self::richContentToolbar())
+                                ->plugins(self::richContentPlugins())
                                 ->required(),
                             RichEditor::make('links')
-                                ->toolbarButtons(self::richContentToolbar()),
+                                ->toolbarButtons(self::richContentToolbar())
+                                ->plugins(self::richContentPlugins()),
                             FileUpload::make('feature_img')
                                 ->image()
                                 ->getUploadedFileNameForStorageUsing(

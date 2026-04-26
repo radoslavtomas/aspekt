@@ -9,6 +9,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\EditAction;
 use Filament\Actions\DeleteBulkAction;
+use App\Filament\Concerns\HasRichContentToolbar;
 use App\Filament\Resources\Pages\Pages\ListPages;
 use App\Filament\Resources\Pages\Pages\CreatePage;
 use App\Filament\Resources\Pages\Pages\EditPage;
@@ -22,6 +23,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PageResource extends Resource
 {
+    use HasRichContentToolbar;
+
     protected static ?string $model = Page::class;
 
     protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -37,24 +40,12 @@ class PageResource extends Resource
                     ->required(),
                 Grid::make()->schema([
                     RichEditor::make('body_sk')
-                        ->toolbarButtons([
-                            ['bold', 'italic', 'underline', 'strike'],
-                            ['h1', 'h2', 'h3'],
-                            ['alignStart', 'alignCenter', 'alignEnd'],
-                            ['blockquote', 'bulletList', 'orderedList'],
-                            ['table', 'link', 'attachFiles'],
-                            ['undo', 'redo'],
-                        ])
+                        ->toolbarButtons(self::richContentToolbar())
+                        ->plugins(self::richContentPlugins())
                         ->required(),
                     RichEditor::make('body_en')
-                        ->toolbarButtons([
-                            ['bold', 'italic', 'underline', 'strike'],
-                            ['h1', 'h2', 'h3'],
-                            ['alignStart', 'alignCenter', 'alignEnd'],
-                            ['blockquote', 'bulletList', 'orderedList'],
-                            ['table', 'link', 'attachFiles'],
-                            ['undo', 'redo'],
-                        ])
+                        ->toolbarButtons(self::richContentToolbar())
+                        ->plugins(self::richContentPlugins())
                         ->required(),
                 ])
                 ->columns(1),

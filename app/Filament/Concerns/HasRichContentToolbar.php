@@ -2,15 +2,23 @@
 
 namespace App\Filament\Concerns;
 
+use App\Filament\RichContent\LegacyTiptapRichContentPlugin;
+use Filament\Forms\Components\RichEditor\Plugins\Contracts\RichContentPlugin;
+
 /**
- * Shared toolbar configuration for content-style RichEditor fields used across
- * Blog, Book, Event, People (and any future content resource).
+ * Shared RichEditor configuration for content-style fields used across the
+ * Blog, Book, Event, People (and Page) resources.
  *
- * Mirrors as much of the historical Tiptap "custom" profile as Filament's
- * native RichEditor supports out of the box. Tools that have no v4 built-in
- * equivalent (lead, small, color, highlight, oembed, grid-builder, details,
- * checked-list, hr) are intentionally omitted; they would require a custom
- * RichContentPlugin to reintroduce.
+ * Restores the historical Tiptap "custom" profile from the deprecated
+ * `awcodes/filament-tiptap-editor` plugin as faithfully as possible by
+ * combining Filament v5's built-in tools (heading levels, alignment,
+ * highlight, lead, small, horizontalRule, details, grid, textColor,
+ * clearFormatting, ...) with a small custom plugin that adds checked
+ * task lists.
+ *
+ * The only original tool genuinely not restored is `oembed`, which would
+ * require shipping a custom Tiptap JS extension; see
+ * App\Filament\RichContent\LegacyTiptapRichContentPlugin for hooks.
  */
 trait HasRichContentToolbar
 {
@@ -20,12 +28,23 @@ trait HasRichContentToolbar
     protected static function richContentToolbar(): array
     {
         return [
-            ['bold', 'italic', 'underline', 'strike'],
-            ['h1', 'h2', 'h3'],
-            ['alignStart', 'alignCenter', 'alignEnd'],
-            ['blockquote', 'bulletList', 'orderedList'],
-            ['table', 'link', 'attachFiles'],
+            ['bold', 'italic', 'underline', 'strike', 'highlight'],
+            ['h1', 'h2', 'h3', 'lead', 'small'],
+            ['alignStart', 'alignCenter', 'alignEnd', 'alignJustify'],
+            ['textColor', 'clearFormatting'],
+            ['blockquote', 'bulletList', 'orderedList', 'taskList', 'horizontalRule'],
+            ['link', 'table', 'grid', 'details', 'attachFiles'],
             ['undo', 'redo'],
+        ];
+    }
+
+    /**
+     * @return array<RichContentPlugin>
+     */
+    protected static function richContentPlugins(): array
+    {
+        return [
+            LegacyTiptapRichContentPlugin::make(),
         ];
     }
 }

@@ -85,12 +85,15 @@ class PeopleResource extends Resource
                             ->required(),
                         RichEditor::make('teaser')
                             ->toolbarButtons(self::richContentToolbar())
+                            ->plugins(self::richContentPlugins())
                             ->required(),
                         RichEditor::make('body')
                             ->toolbarButtons(self::richContentToolbar())
+                            ->plugins(self::richContentPlugins())
                             ->required(),
                         RichEditor::make('links')
-                            ->toolbarButtons(self::richContentToolbar()),
+                            ->toolbarButtons(self::richContentToolbar())
+                            ->plugins(self::richContentPlugins()),
                         Select::make('language')
                             ->options([
                                 'sk' => 'sk',

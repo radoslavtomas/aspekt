@@ -99,14 +99,18 @@ class BookResource extends Resource
                         TextInput::make('translation'),
                         RichEditor::make('teaser')
                             ->toolbarButtons(self::richContentToolbar())
+                            ->plugins(self::richContentPlugins())
                             ->required(),
                         RichEditor::make('body')
                             ->toolbarButtons(self::richContentToolbar())
+                            ->plugins(self::richContentPlugins())
                             ->required(),
                         RichEditor::make('sample')
-                            ->toolbarButtons(self::richContentToolbar()),
+                            ->toolbarButtons(self::richContentToolbar())
+                            ->plugins(self::richContentPlugins()),
                         RichEditor::make('links')
-                            ->toolbarButtons(self::richContentToolbar()),
+                            ->toolbarButtons(self::richContentToolbar())
+                            ->plugins(self::richContentPlugins()),
                         Select::make('language')
                             ->options([
                                 'sk' => 'sk',
