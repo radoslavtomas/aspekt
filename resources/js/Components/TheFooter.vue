@@ -72,16 +72,16 @@
                 <div class="p-6 flex flex-col gap-1">
                     <h3 class="text-lg mb-4 uppercase">{{ lang[locale].footerColumn3Title }}</h3>
 
-                    <p>
+                    <p v-if="settings.addressStreet">
                         {{ settings.addressStreet }}
                     </p>
-                    <p class="mb-4">
-                        {{ `${settings.addressPostalCode} ${settings.addressTown}` }}
+                    <p v-if="settings.addressPostalCode || settings.addressTown" class="mb-4">
+                        {{ `${settings.addressPostalCode ?? ''} ${settings.addressTown ?? ''}`.trim() }}
                     </p>
-                    <a :href="`tel:${settings.phoneMobile.replace(/\s/g,'')}`" class="mb-4">
+                    <a v-if="settings.phoneMobile" :href="`tel:${settings.phoneMobile.replace(/\s/g,'')}`" class="mb-4">
                         {{ settings.phoneMobile }}
                     </a>
-                    <a :href="`mailto:${settings.emailAspekt}`">
+                    <a v-if="settings.emailAspekt" :href="`mailto:${settings.emailAspekt}`">
                         {{ settings.emailAspekt }}
                     </a>
                     <a class="mb-6" href="/">
