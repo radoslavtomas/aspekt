@@ -14,8 +14,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
-use FilamentTiptapEditor\Enums\TiptapOutput;
-use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -82,17 +80,12 @@ class BookResource extends Resource
                         Forms\Components\TextInput::make('authors'),
                         Forms\Components\TextInput::make('editors'),
                         Forms\Components\TextInput::make('translation'),
-                        TiptapEditor::make('teaser')
-                            ->profile('custom')
+                        Forms\Components\RichEditor::make('teaser')
                             ->required(),
-                        TiptapEditor::make('body')
-                            ->profile('custom')
+                        Forms\Components\RichEditor::make('body')
                             ->required(),
-                        TiptapEditor::make('sample')
-                            ->profile('custom'),
-                        TiptapEditor::make('links')
-                            ->profile('custom')
-                            ->output(TiptapOutput::Html),
+                        Forms\Components\RichEditor::make('sample'),
+                        Forms\Components\RichEditor::make('links'),
                         Forms\Components\Select::make('language')
                             ->options([
                                 'sk' => 'sk',

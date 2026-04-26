@@ -9,7 +9,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.2.0",
-        "awcodes/filament-tiptap-editor": "^3.5.16",
         "deployer/deployer": "^7.5.12",
         "filament/filament": "^3.3.48",
         "filament/notifications": "^3.3.48",

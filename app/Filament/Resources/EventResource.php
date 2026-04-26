@@ -14,7 +14,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
-use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -54,14 +53,11 @@ class EventResource extends Resource
                         Forms\Components\DatePicker::make('date_end'),
                         Forms\Components\TimePicker::make('time_end'),
                         Forms\Components\TextInput::make('place'),
-                        TiptapEditor::make('teaser')
-                            ->profile('custom')
+                        Forms\Components\RichEditor::make('teaser')
                             ->required(),
-                        TiptapEditor::make('body')
-                            ->profile('custom')
+                        Forms\Components\RichEditor::make('body')
                             ->required(),
-                        TiptapEditor::make('links')
-                            ->profile('custom'),
+                        Forms\Components\RichEditor::make('links'),
                         Forms\Components\FileUpload::make('feature_img')
                             ->image()
                             ->getUploadedFileNameForStorageUsing(

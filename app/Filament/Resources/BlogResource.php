@@ -15,7 +15,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
-use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -92,14 +91,11 @@ class BlogResource extends Resource
                                 ->label('Authors citation'),
                             Forms\Components\Hidden::make('user_id')
                                 ->default(Auth::id()),
-                            TiptapEditor::make('teaser')
-                                ->profile('custom')
+                            Forms\Components\RichEditor::make('teaser')
                                 ->required(),
-                            TiptapEditor::make('body')
-                                ->profile('custom')
+                            Forms\Components\RichEditor::make('body')
                                 ->required(),
-                            TiptapEditor::make('links')
-                                ->profile('custom'),
+                            Forms\Components\RichEditor::make('links'),
                             Forms\Components\FileUpload::make('feature_img')
                                 ->image()
                                 ->getUploadedFileNameForStorageUsing(

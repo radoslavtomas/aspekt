@@ -10,7 +10,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
-use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -30,11 +29,9 @@ class PageResource extends Resource
                 Forms\Components\TextInput::make('name_en')
                     ->required(),
                 Forms\Components\Grid::make()->schema([
-                    TiptapEditor::make('body_sk')
-                        ->profile('custom')
+                    Forms\Components\RichEditor::make('body_sk')
                         ->required(),
-                    TiptapEditor::make('body_en')
-                        ->profile('custom')
+                    Forms\Components\RichEditor::make('body_en')
                         ->required(),
                 ])
                 ->columns(1),

@@ -14,7 +14,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
-use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -68,14 +67,11 @@ class PeopleResource extends Resource
                         Forms\Components\TextInput::make('slug')
                             ->unique(ignoreRecord: true)
                             ->required(),
-                        TiptapEditor::make('teaser')
-                            ->profile('custom')
+                        Forms\Components\RichEditor::make('teaser')
                             ->required(),
-                        TiptapEditor::make('body')
-                            ->profile('custom')
+                        Forms\Components\RichEditor::make('body')
                             ->required(),
-                        TiptapEditor::make('links')
-                            ->profile('custom'),
+                        Forms\Components\RichEditor::make('links'),
                         Forms\Components\Select::make('language')
                             ->options([
                                 'sk' => 'sk',
