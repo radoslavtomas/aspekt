@@ -5,21 +5,19 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@inertiajs/inertia": "^0.11.0",
-        "@inertiajs/inertia-vue3": "^0.6.0",
-        "@inertiajs/progress": "^0.2.7",
+        "@inertiajs/vue3": "^2.0.0",
         "@tailwindcss/forms": "^0.5.10",
-        "@tailwindcss/typography": "^0.5.16",
-        "@tailwindcss/vite": "^4.1.13",
-        "@vitejs/plugin-vue": "^5.2.4",
-        "autoprefixer": "^10.4.20",
-        "axios": "^1.7.7",
-        "laravel-vite-plugin": "^1.2.0",
-        "lodash": "^4.17.21",
+        "@tailwindcss/typography": "^0.5.19",
+        "@tailwindcss/vite": "^4.2.4",
+        "@vitejs/plugin-vue": "^6.0.6",
+        "autoprefixer": "^10.5.0",
+        "axios": "^1.15.2",
+        "laravel-vite-plugin": "^3.0.1",
+        "lodash": "^4.18.1",
         "postcss": "^8.4.49",
         "tailwindcss": "^4.1.13",
-        "vite": "^6.0.0",
-        "vue": "^3.5.13"
+        "vite": "^8.0.10",
+        "vue": "^3.5.33"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.2.1",

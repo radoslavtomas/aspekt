@@ -11,13 +11,13 @@
 <script setup>
 import { useStore } from 'vuex'
 import {computed, onMounted} from "vue";
-import {usePage} from "@inertiajs/inertia-vue3";
+import {usePage} from "@inertiajs/vue3";
 
 const store = useStore();
 const lang = computed(() => store.getters.lang);
-const locale = computed(() => usePage().props.value.locale);
+const locale = computed(() => usePage().props.locale);
 const categoryUrl = computed(() => {
-    const url = usePage().props.value.category?.url;
+    const url = usePage().props.category?.url;
     return url ? url : 'vsetko';
 });
 

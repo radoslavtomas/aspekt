@@ -1,5 +1,5 @@
 <script setup>
-import { Head, usePage } from '@inertiajs/inertia-vue3'
+import { Head, usePage } from '@inertiajs/vue3'
 import MainLayout from '../Layouts/MainLayout.vue'
 import { computed } from 'vue'
 
@@ -9,9 +9,9 @@ import { useStore } from 'vuex'
 
 const store = useStore()
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
-const settings = computed(() => usePage().props.value.settings)
-const navigation = computed(() => usePage().props.value.navigation)
+const locale = computed(() => usePage().props.locale)
+const settings = computed(() => usePage().props.settings)
+const navigation = computed(() => usePage().props.navigation)
 const title = computed(() => navigation.value.find(el => el.route === 'contact')[`name_${locale.value}`])
 
 </script>

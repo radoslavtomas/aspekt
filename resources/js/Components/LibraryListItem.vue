@@ -12,9 +12,9 @@
 
 <script setup>
 import {computed} from "vue";
-import {Link, usePage} from "@inertiajs/inertia-vue3";
+import {Link, usePage} from "@inertiajs/vue3";
 
-const categoryUrl = computed(() => usePage().props.value.category?.url);
+const categoryUrl = computed(() => usePage().props.category?.url);
 
 const props = defineProps({
     item: Object,

@@ -29,11 +29,11 @@ import TheFooter from "@/Components/TheFooter.vue";
 import BasketWidget from "../Components/BasketWidget.vue";
 import CatsWidget from "@/Components/CatsWidget.vue";
 import {computed, onMounted} from "vue";
-import {usePage} from "@inertiajs/inertia-vue3";
+import {usePage} from "@inertiajs/vue3";
 import {useStore} from "vuex";
 
 const store = useStore();
-const translations = computed(() => usePage().props.value.translations);
+const translations = computed(() => usePage().props.translations);
 
 onMounted(() => {
     store.dispatch('setTranslations', translations.value)

@@ -92,7 +92,7 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import { Head, usePage } from '@inertiajs/inertia-vue3'
+import { Head, usePage } from '@inertiajs/vue3'
 
 // components
 import FileList from './FileList.vue'
@@ -102,9 +102,9 @@ import Breadcrumbs from '../Components/Breadcrumbs.vue'
 import Separator from '@/Components/Separator.vue'
 
 // computed
-const book = computed(() => usePage().props.value.book.data)
-const locale = computed(() => usePage().props.value.locale)
-const navigation = computed(() => usePage().props.value.navigation)
+const book = computed(() => usePage().props.book.data)
+const locale = computed(() => usePage().props.locale)
+const navigation = computed(() => usePage().props.navigation)
 const store = useStore()
 const lang = computed(() => store.getters.lang)
 

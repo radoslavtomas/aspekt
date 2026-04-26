@@ -24,19 +24,19 @@
 </template>
 
 <script setup>
-import { Head, usePage } from '@inertiajs/inertia-vue3'
+import { Head, usePage } from '@inertiajs/vue3'
 import MainLayout from '../../Layouts/MainLayout.vue'
 import { useStore } from 'vuex'
 import { computed, onMounted, ref } from 'vue'
 
-import { Link } from '@inertiajs/inertia-vue3'
+import { Link } from '@inertiajs/vue3'
 import { HomeIcon } from '@heroicons/vue/24/outline'
 
 const store = useStore()
 const customerEmail = ref('')
 
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 
 onMounted(() => {
     let queryString = window.location.search

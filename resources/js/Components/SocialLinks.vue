@@ -13,9 +13,9 @@
 </template>
 <script setup>
 import {computed, onMounted, ref} from "vue";
-import {usePage} from "@inertiajs/inertia-vue3";
+import {usePage} from "@inertiajs/vue3";
 
-const settings = computed(() => usePage().props.value.settings);
+const settings = computed(() => usePage().props.settings);
 
 onMounted(() => {
     icons.value.facebook.link = settings.value.linkFacebook ? settings.value.linkFacebook : '';

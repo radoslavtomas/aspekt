@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link, usePage } from '@inertiajs/inertia-vue3'
+import { Head, Link, usePage } from '@inertiajs/vue3'
 import MainLayout from '../../Layouts/MainLayout.vue'
 import BasketProductCount from '../../Components/Form/BasketProductCount.vue'
 
@@ -9,7 +9,7 @@ import { useStore } from 'vuex'
 
 const store = useStore()
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 
 const subtotal = computed(() => store.getters.subtotal)
 const basket = computed(() => store.getters.basket)

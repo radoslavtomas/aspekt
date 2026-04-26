@@ -25,11 +25,11 @@
 
 <script setup>
 import { computed, onMounted } from 'vue'
-import { Link, usePage } from '@inertiajs/inertia-vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 
-const categoryUrl = computed(() => usePage().props.value.category.url)
-const routeName = computed(() => usePage().props.value.route_name)
-const query = computed(() => usePage().props.value.query)
+const categoryUrl = computed(() => usePage().props.category.url)
+const routeName = computed(() => usePage().props.route_name)
+const query = computed(() => usePage().props.query)
 
 const props = defineProps({
     item: Object

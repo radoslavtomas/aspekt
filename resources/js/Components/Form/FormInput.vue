@@ -25,7 +25,7 @@
 
 <script setup>
 import {computed} from "vue";
-import {usePage} from "@inertiajs/inertia-vue3";
+import {usePage} from "@inertiajs/vue3";
 import {useStore} from "vuex";
 import ValidationErrors from "@/Components/Form/ValidationErrors.vue";
 
@@ -33,7 +33,7 @@ const emit = defineEmits(['update:modelValue'])
 
 const store = useStore()
 const lang = computed(() => store.getters.lang);
-const locale = computed(() => usePage().props.value.locale);
+const locale = computed(() => usePage().props.locale);
 
 const updateValue = (event) => {
     emit('update:modelValue', event.target.value)

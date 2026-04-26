@@ -1,15 +1,15 @@
 <script setup>
 import { computed, reactive } from 'vue'
-import { Head, usePage } from '@inertiajs/inertia-vue3'
+import { Head, usePage } from '@inertiajs/vue3'
 import MainLayout from '../Layouts/MainLayout.vue'
 import FormInput from '@/Components/Form/FormInput.vue'
 import FormSelect from '@/Components/Form/FormSelect.vue'
 import { maxLength, required } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
 import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
 
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 
 const searchString = {
     'en': 'Search',
@@ -83,7 +83,7 @@ const handleForm = async () => {
         return
     }
 
-    Inertia.visit('/search/' + form.category, {
+    router.visit('/search/' + form.category, {
         method: 'get',
         data: {
             query: form.query

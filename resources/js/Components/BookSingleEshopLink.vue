@@ -15,7 +15,7 @@
 
 // const store = useStore()
 // const lang = computed(() => store.getters.lang)
-// const locale = computed(() => usePage().props.value.locale)
+// const locale = computed(() => usePage().props.locale)
 
 const props = defineProps({
     link: Object

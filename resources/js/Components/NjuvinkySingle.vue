@@ -42,7 +42,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { Head, usePage } from '@inertiajs/inertia-vue3'
+import { Head, usePage } from '@inertiajs/vue3'
 
 // components
 import FileList from './FileList.vue'
@@ -51,9 +51,9 @@ import Separator from '@/Components/Separator.vue'
 import { useStore } from 'vuex'
 
 // computed
-const blog = computed(() => usePage().props.value.blog.data)
-const locale = computed(() => usePage().props.value.locale)
-const navigation = computed(() => usePage().props.value.navigation)
+const blog = computed(() => usePage().props.blog.data)
+const locale = computed(() => usePage().props.locale)
+const navigation = computed(() => usePage().props.navigation)
 
 const store = useStore()
 const lang = computed(() => store.getters.lang)

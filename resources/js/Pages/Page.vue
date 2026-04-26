@@ -1,11 +1,11 @@
 <script setup>
 import { computed } from 'vue'
-import { Head, usePage } from '@inertiajs/inertia-vue3'
+import { Head, usePage } from '@inertiajs/vue3'
 
 import MainLayout from '../Layouts/MainLayout.vue'
 
-const locale = computed(() => usePage().props.value.locale)
-const page = computed(() => usePage().props.value.page)
+const locale = computed(() => usePage().props.locale)
+const page = computed(() => usePage().props.page)
 
 const title = computed(() => page.value[`name_${locale.value}`])
 const body = computed(() => page.value[`body_${locale.value}`])

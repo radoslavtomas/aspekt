@@ -27,12 +27,12 @@
 
 <script setup>
 import { computed } from 'vue'
-import { Link, usePage } from '@inertiajs/inertia-vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 
 import BookSingleCtaButton from './BookSingleCtaButton.vue'
 
 const categoryUrl = computed(() => {
-    const url = usePage().props.value.category?.url
+    const url = usePage().props.category?.url
     return url ? url : 'vsetko'
 })
 

@@ -98,7 +98,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { Link, usePage } from '@inertiajs/inertia-vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 import { useStore } from 'vuex'
 
 import SocialLinks from '@/Components/SocialLinks.vue'
@@ -106,10 +106,10 @@ import SocialLinks from '@/Components/SocialLinks.vue'
 const store = useStore()
 
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
-const settings = computed(() => usePage().props.value.settings)
+const locale = computed(() => usePage().props.locale)
+const settings = computed(() => usePage().props.settings)
 
-const navigation = computed(() => usePage().props.value.navigation)
+const navigation = computed(() => usePage().props.navigation)
 </script>
 
 <style scoped>

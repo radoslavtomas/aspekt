@@ -34,12 +34,12 @@
 
 <script setup>
 import { computed } from 'vue'
-import { usePage } from '@inertiajs/inertia-vue3'
+import { usePage } from '@inertiajs/vue3'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/outline'
 import { useStore } from 'vuex'
 
 const store = useStore()
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
-const settings = computed(() => usePage().props.value.settings)
+const locale = computed(() => usePage().props.locale)
+const settings = computed(() => usePage().props.settings)
 </script>

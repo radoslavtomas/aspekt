@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/inertia-vue3'
+import { Link } from '@inertiajs/vue3'
 import LanguageSelector from '../Components/LanguageSelector.vue'
 import NavigationBarDesktop from '@/Components/NavigationBarDesktop.vue'
 import NavigationBarMobile from '@/Components/NavigationBarMobile.vue'

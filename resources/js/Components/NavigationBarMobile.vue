@@ -72,7 +72,7 @@
 
 <script setup>
 import { computed, onMounted } from 'vue'
-import { Link, usePage } from '@inertiajs/inertia-vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 
 const props = defineProps({
     openNav: Boolean,
@@ -80,8 +80,8 @@ const props = defineProps({
     updatePath: Function
 })
 
-const locale = computed(() => usePage().props.value.locale)
-const navigation = computed(() => usePage().props.value.navigation.filter(item => item.id !== 43))
+const locale = computed(() => usePage().props.locale)
+const navigation = computed(() => usePage().props.navigation.filter(item => item.id !== 43))
 
 onMounted(() => {
     props.updatePath()

@@ -1,6 +1,6 @@
 <script setup>
-import { Head, Link, usePage } from '@inertiajs/inertia-vue3'
-import { Inertia } from '@inertiajs/inertia'
+import { Head, Link, usePage } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3'
 import MainLayout from '../../Layouts/MainLayout.vue'
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
 import useVuelidate from '@vuelidate/core'
@@ -16,7 +16,7 @@ import Card from '../../Components/Card.vue'
 
 const store = useStore()
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 const customer = computed(() => store.getters.customer)
 
 const options = [
@@ -91,7 +91,7 @@ const handleForm = async () => {
 
     await store.dispatch('setCustomer', form)
 
-    Inertia.visit('/eshop/summary', {
+    router.visit('/eshop/summary', {
         method: 'get'
     })
 }

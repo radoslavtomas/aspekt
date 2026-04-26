@@ -113,13 +113,13 @@
 </template>
 
 <script setup>
-import { Head, usePage } from '@inertiajs/inertia-vue3'
+import { Head, usePage } from '@inertiajs/vue3'
 import MainLayout from '../../Layouts/MainLayout.vue'
 import { useStore } from 'vuex'
 import { computed, ref } from 'vue'
-import { useForm } from '@inertiajs/inertia-vue3'
+import { useForm } from '@inertiajs/vue3'
 
-import { Link } from '@inertiajs/inertia-vue3'
+import { Link } from '@inertiajs/vue3'
 import {
     ArrowRightCircleIcon,
     ArrowLeftCircleIcon,
@@ -132,7 +132,7 @@ const store = useStore()
 const basket = computed(() => store.getters.basket)
 const customer = computed(() => store.getters.customer)
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 const subtotal = computed(() => store.getters.subtotal)
 
 const options = [

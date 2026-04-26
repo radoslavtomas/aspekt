@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { Head, usePage } from '@inertiajs/inertia-vue3'
+import { Head, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
 
 // 3rd party
@@ -33,10 +33,10 @@ import Pagination from '../Components/Pagination.vue'
 import Breadcrumbs from '../Components/Breadcrumbs.vue'
 
 // computed
-const items = computed(() => usePage().props.value.events)
-const featured = computed(() => usePage().props.value.featured)
-const locale = computed(() => usePage().props.value.locale)
-const navigation = computed(() => usePage().props.value.navigation)
+const items = computed(() => usePage().props.events)
+const featured = computed(() => usePage().props.featured)
+const locale = computed(() => usePage().props.locale)
+const navigation = computed(() => usePage().props.navigation)
 const navigationString = computed(() => navigation.value.find(el => el.route === 'events')[`name_${locale.value}`])
 const title = computed(() => navigationString.value)
 </script>
