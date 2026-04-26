@@ -15,6 +15,7 @@ use App\Filament\Resources\Orders\Pages\ListOrders;
 use App\Filament\Resources\Orders\Pages\CreateOrder;
 use App\Filament\Resources\Orders\Pages\EditOrder;
 use App\Models\Order;
+use Filament\Support\Icons\Heroicon;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -27,7 +28,7 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-currency-euro';
+    protected static string | \BackedEnum | null $navigationIcon = Heroicon::OutlinedCurrencyEuro;
 
     protected static string | \UnitEnum | null $navigationGroup = 'Eshop';
 
