@@ -2,8 +2,15 @@
 
 namespace App\Filament\RichContent;
 
+use App\Filament\RichContent\Tiptap\OembedNode;
+use App\Support\Oembed\OembedUrl;
+use Filament\Actions\Action;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\RichEditor\EditorCommand;
 use Filament\Forms\Components\RichEditor\Plugins\Contracts\RichContentPlugin;
 use Filament\Forms\Components\RichEditor\RichEditorTool;
+use Filament\Forms\Components\TextInput;
+use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
 use Tiptap\Nodes\TaskItem;
 use Tiptap\Nodes\TaskList;
@@ -18,14 +25,10 @@ use Tiptap\Nodes\TaskList;
  *   TaskItem nodes, so a simple jsHandler tool is enough on the front end.
  *   The matching PHP TipTap extensions are registered so server-side
  *   rendering of stored content (via RichContentRenderer) keeps working.
- *
- * Not restored (intentional — they require a bundled Tiptap JS extension
- * that goes beyond a single PHP plugin class):
- * - `oembed` — embedding remote video / iframe content. Filament's bundled
- *   editor schema does not allow `<iframe>` nodes, so re-introducing this
- *   would mean shipping a custom Tiptap JS extension via FilamentAsset and
- *   wiring up an URL modal action. The hooks for that are documented in
- *   getTipTapJsExtensions() below.
+ * - `oembed` — YouTube/Vimeo iframe embeds. Provided by `OembedNode` on
+ *   the PHP side and `public/js/filament/rich-content/oembed.js` on the
+ *   front end. A modal action collects the URL, validates it via
+ *   `OembedUrl::isSupported()`, and dispatches the JS `setOembed` command.
  */
 class LegacyTiptapRichContentPlugin implements RichContentPlugin
 {
@@ -39,12 +42,13 @@ class LegacyTiptapRichContentPlugin implements RichContentPlugin
      */
     public function getTipTapPhpExtensions(): array
     {
-        // PHP-side TipTap nodes required so that content saved with task lists
-        // (either by this plugin's toolbar tool or by the legacy editor)
-        // round-trips correctly through RichContentRenderer.
+        // PHP-side TipTap nodes required so that content saved with task
+        // lists or oembed iframes round-trips correctly through
+        // RichContentRenderer.
         return [
             app(TaskList::class),
             app(TaskItem::class),
+            app(OembedNode::class),
         ];
     }
 
@@ -53,18 +57,9 @@ class LegacyTiptapRichContentPlugin implements RichContentPlugin
      */
     public function getTipTapJsExtensions(): array
     {
-        // Return URLs to JS files that should be loaded into the editor.
-        //
-        // Example for adding an oembed/iframe Tiptap node in future:
-        //
-        //     return [
-        //         FilamentAsset::getScriptSrc('rich-content-plugins/oembed'),
-        //     ];
-        //
-        // The script needs to be registered via FilamentAsset::register() in a
-        // service provider, and the file itself must define a Tiptap Node and
-        // attach it to the editor instance Filament exposes on window.
-        return [];
+        return [
+            $this->oembedScriptUrl(),
+        ];
     }
 
     /**
@@ -80,6 +75,11 @@ class LegacyTiptapRichContentPlugin implements RichContentPlugin
                 ->label('Task list')
                 ->icon(Heroicon::OutlinedClipboardDocumentList)
                 ->jsHandler('$getEditor()?.chain().focus().toggleTaskList().run()'),
+
+            RichEditorTool::make('oembed')
+                ->label('Embed video')
+                ->icon(Heroicon::OutlinedFilm)
+                ->action('oembed'),
         ];
     }
 
@@ -88,6 +88,56 @@ class LegacyTiptapRichContentPlugin implements RichContentPlugin
      */
     public function getEditorActions(): array
     {
-        return [];
+        return [
+            $this->oembedAction(),
+        ];
+    }
+
+    private function oembedAction(): Action
+    {
+        return Action::make('oembed')
+            ->label('Embed video')
+            ->modalHeading('Embed video')
+            ->modalDescription('Only YouTube and Vimeo URLs are supported.')
+            ->modalWidth(Width::Large)
+            ->fillForm(fn (array $arguments): array => [
+                'url' => $arguments['url'] ?? null,
+            ])
+            ->schema([
+                TextInput::make('url')
+                    ->label('Video URL')
+                    ->required()
+                    ->inputMode('url')
+                    ->placeholder('https://www.youtube.com/watch?v=…')
+                    ->rule(static function () {
+                        return static function (string $attribute, mixed $value, \Closure $fail): void {
+                            if (! is_string($value) || ! OembedUrl::isSupported($value)) {
+                                $fail('Only YouTube or Vimeo URLs are supported.');
+                            }
+                        };
+                    }),
+            ])
+            ->action(function (array $arguments, array $data, RichEditor $component): void {
+                $component->runCommands(
+                    [
+                        EditorCommand::make(
+                            'setOembed',
+                            arguments: [[
+                                'url' => $data['url'],
+                            ]],
+                        ),
+                    ],
+                    editorSelection: $arguments['editorSelection'] ?? null,
+                );
+            });
+    }
+
+    private function oembedScriptUrl(): string
+    {
+        $relative = 'js/filament/rich-content/oembed.js';
+        $absolute = public_path($relative);
+        $version = is_file($absolute) ? (string) filemtime($absolute) : '0';
+
+        return asset($relative) . '?v=' . $version;
     }
 }

@@ -3,3 +3,15 @@
 @source '../../../../app/Filament';
 @source '../../../../resources/views/filament';
 @source '../../../../vendor/filament/**/*.blade.php';
+
+/* RichEditor oembed preview: keep iframe blocks visible inside the panel. */
+.fi-fo-rich-editor iframe {
+    display: block;
+    max-width: 100%;
+}
+
+.fi-fo-rich-editor div[data-youtube-video],
+.fi-fo-rich-editor div[data-vimeo-video] {
+    display: block;
+    margin: 1rem 0;
+}

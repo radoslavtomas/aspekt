@@ -14,11 +14,7 @@ use Filament\Forms\Components\RichEditor\Plugins\Contracts\RichContentPlugin;
  * combining Filament v5's built-in tools (heading levels, alignment,
  * highlight, lead, small, horizontalRule, details, grid, textColor,
  * clearFormatting, ...) with a small custom plugin that adds checked
- * task lists.
- *
- * The only original tool genuinely not restored is `oembed`, which would
- * require shipping a custom Tiptap JS extension; see
- * App\Filament\RichContent\LegacyTiptapRichContentPlugin for hooks.
+ * task lists and YouTube/Vimeo embeds (`oembed`).
  */
 trait HasRichContentToolbar
 {
@@ -33,7 +29,7 @@ trait HasRichContentToolbar
             ['alignStart', 'alignCenter', 'alignEnd', 'alignJustify'],
             ['textColor', 'clearFormatting'],
             ['blockquote', 'bulletList', 'orderedList', 'taskList', 'horizontalRule'],
-            ['link', 'table', 'grid', 'details', 'attachFiles'],
+            ['link', 'table', 'grid', 'details', 'attachFiles', 'oembed'],
             ['undo', 'redo'],
         ];
     }

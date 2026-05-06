@@ -130,6 +130,14 @@
         width: 100%;
     }
 
+    /* Defensive responsive fallback for any oembed iframe that lacks an
+       inline aspect-ratio style (legacy rows already inline it). */
+    div[data-youtube-video] iframe,
+    div[data-vimeo-video] iframe {
+        aspect-ratio: 16 / 9;
+        height: auto;
+    }
+
     ul,
     ol {
         @apply space-y-0.5;
