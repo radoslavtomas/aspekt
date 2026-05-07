@@ -2,65 +2,71 @@
 
 namespace App\Filament\Resources\Files;
 
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\FileUpload;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\Files\Pages\ListFiles;
 use App\Filament\Resources\Files\Pages\CreateFile;
 use App\Filament\Resources\Files\Pages\EditFile;
+use App\Filament\Resources\Files\Pages\ListFiles;
 use App\Models\File;
-use Filament\Forms;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
+class FileResource extends Resource {
 
-class FileResource extends Resource
-{
     protected static ?string $model = File::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static string | \UnitEnum | null $navigationGroup = 'Settings';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Settings';
+
     protected static ?int $navigationSort = 5;
 
-    public static function form(Schema $schema): Schema
-    {
+    public static function form(Schema $schema): Schema {
         return $schema
             ->components([
                 FileUpload::make('filepath')
                     ->label('File')
                     ->directory('files')
                     ->getUploadedFileNameForStorageUsing(
-                        function (TemporaryUploadedFile $file): string {
-                            $filename = explode('.', $file->getClientOriginalName())[0];
+                        function(TemporaryUploadedFile $file): string {
+                            $filename = explode('.',
+                                $file->getClientOriginalName())[0];
                             return Str::slug($filename).'.'.$file->getClientOriginalExtension();
                         },
                     )
-                    ->required()
+                    ->required(),
             ]);
     }
 
-    public static function table(Table $table): Table
-    {
+    public static function table(Table $table): Table {
         return $table
             ->columns([
                 TextColumn::make('filename')
                     ->limit(30),
-                ImageColumn::make('filepath')
-                    ->extraImgAttributes([
-                        "alt" => " No preview"
-                    ]),
+                TextColumn::make('filepath')
+                    ->label('Preview')
+                    ->formatStateUsing(function($state, $record) {
+                        if (str_starts_with($record->filemime, 'image/')) {
+                            return '<img src="'.Storage::url($state).'" alt="preview" style="max-width: 50px; height: auto;">';
+                        }
+                        else {
+                            return '<span class="text-sm text-gray-500">No preview</span>';
+                        }
+                    })
+                    ->html(),
                 TextColumn::make('filemime')
                     ->limit(20),
                 TextColumn::make('filesize')
-                    ->formatStateUsing(fn(string $state): string => (formatFileSizeUnits($state))),
+                    ->formatStateUsing(fn(string $state
+                    ): string => (formatFileSizeUnits($state))),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -82,19 +88,18 @@ class FileResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
+    public static function getRelations(): array {
         return [
             //
         ];
     }
 
-    public static function getPages(): array
-    {
+    public static function getPages(): array {
         return [
             'index' => ListFiles::route('/'),
             'create' => CreateFile::route('/create'),
             'edit' => EditFile::route('/{record}/edit'),
         ];
     }
+
 }

@@ -2,31 +2,29 @@
 
 namespace App\Filament\Resources\Books;
 
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Fieldset;
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Repeater;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\CheckboxColumn;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\Books\RelationManagers\FilesRelationManager;
-use App\Filament\Resources\Books\RelationManagers\DownloadsRelationManager;
 use App\Filament\Concerns\HasRichContentToolbar;
-use App\Filament\Resources\Books\Pages\ListBooks;
 use App\Filament\Resources\Books\Pages\CreateBook;
 use App\Filament\Resources\Books\Pages\EditBook;
+use App\Filament\Resources\Books\Pages\ListBooks;
+use App\Filament\Resources\Books\RelationManagers\DownloadsRelationManager;
+use App\Filament\Resources\Books\RelationManagers\FilesRelationManager;
 use App\Models\Book;
-use Filament\Forms;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Fieldset;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\CheckboxColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -34,27 +32,27 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
-class BookResource extends Resource
-{
+class BookResource extends Resource {
+
     use HasRichContentToolbar;
 
     protected static ?string $model = Book::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-book-open';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-book-open';
 
-    protected static string | \UnitEnum | null $navigationGroup = 'Content';
+    protected static string|\UnitEnum|null $navigationGroup = 'Content';
 
     protected static ?int $navigationSort = 2;
 
-    public static function form(Schema $schema): Schema
-    {
+    public static function form(Schema $schema): Schema {
         return $schema
+            ->columns(1)
             ->components([
                 Fieldset::make('Quick settings')
                     ->schema([
-//                        Forms\Components\Select::make('blog_type_id')
-//                            ->relationship('blog_type', 'name', fn (Builder $query) => $query->whereIn('id', [5, 6, 43]))
-//                            ->required(),
+                        //                        Forms\Components\Select::make('blog_type_id')
+                        //                            ->relationship('blog_type', 'name', fn (Builder $query) => $query->whereIn('id', [5, 6, 43]))
+                        //                            ->required(),
                         Checkbox::make('is_product'),
                         Checkbox::make('is_ebook'),
                         Checkbox::make('home_page'),
@@ -67,23 +65,30 @@ class BookResource extends Resource
                             ->multiple()
                             ->preload()
                             ->relationship('category', 'name_sk',
-                                fn(Builder $query) => $query->where('navigation_id', 4))
+                                fn(Builder $query
+                                ) => $query->where('navigation_id', 4))
                             ->required(),
                         FileUpload::make('cover')
                             ->getUploadedFileNameForStorageUsing(
-                                function (TemporaryUploadedFile $file): string {
-                                    $filename = explode('.', $file->getClientOriginalName())[0];
+                                function(TemporaryUploadedFile $file): string {
+                                    $filename = explode('.',
+                                        $file->getClientOriginalName())[0];
                                     return Str::slug($filename).'.'.$file->getClientOriginalExtension();
                                 },
                             )
                             ->directory('covers')
-                            ->imageResizeMode('contain')
-                            ->imageResizeTargetWidth('1200')
-                            ->imageResizeUpscale(false),
+                            ->automaticallyResizeImagesMode('contain')
+                            ->automaticallyResizeImagesToWidth('1200')
+                            ->automaticallyUpscaleImagesWhenResizing(FALSE),
                         TextInput::make('title')
                             ->required()
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                            ->live(onBlur: TRUE)
+                            ->afterStateUpdated(function(
+                                Get $get,
+                                Set $set,
+                                ?string $old,
+                                ?string $state
+                            ) {
                                 if (Str::slug($old)) {
                                     return;
                                 }
@@ -91,7 +96,7 @@ class BookResource extends Resource
                                 $set('slug', Str::slug($state));
                             }),
                         TextInput::make('slug')
-                            ->unique(ignoreRecord: true)
+                            ->unique(ignoreRecord: TRUE)
                             ->required(),
                         TextInput::make('subtitle'),
                         TextInput::make('authors'),
@@ -114,7 +119,7 @@ class BookResource extends Resource
                         Select::make('language')
                             ->options([
                                 'sk' => 'sk',
-                                'en' => 'en'
+                                'en' => 'en',
                             ])
                             ->default('sk')
                             ->required(),
@@ -139,13 +144,12 @@ class BookResource extends Resource
                             ->schema([
                                 TextInput::make('eshop_name'),
                                 TextInput::make('link'),
-                            ])->columns(2)
-                    ])->columns(1)
+                            ])->columns(2),
+                    ])->columns(1),
             ]);
     }
 
-    public static function table(Table $table): Table
-    {
+    public static function table(Table $table): Table {
         return $table
             ->columns([
                 TextColumn::make('created_at')
@@ -167,17 +171,21 @@ class BookResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->filters([
                 Filter::make('featured')
-                    ->query(fn(Builder $query): Builder => $query->where('featured', true)),
+                    ->query(fn(Builder $query
+                    ): Builder => $query->where('featured', TRUE)),
                 Filter::make('not published')
-                    ->query(fn(Builder $query): Builder => $query->where('published', false)),
+                    ->query(fn(Builder $query
+                    ): Builder => $query->where('published', FALSE)),
                 Filter::make('product')
-                    ->query(fn(Builder $query): Builder => $query->where('is_product', true)),
+                    ->query(fn(Builder $query
+                    ): Builder => $query->where('is_product', TRUE)),
                 Filter::make('ebook')
-                    ->query(fn(Builder $query): Builder => $query->where('is_ebook', true))
+                    ->query(fn(Builder $query
+                    ): Builder => $query->where('is_ebook', TRUE)),
             ])
             ->recordActions([
                 EditAction::make()
-                    ->mutateRecordDataUsing(function (array $data): array {
+                    ->mutateRecordDataUsing(function(array $data): array {
                         $file = $data['filepath'];
                         $data['filepath'] = '/'.$file;
                         $data['filemime'] = Storage::mimeType('/public/'.$file);
@@ -192,20 +200,19 @@ class BookResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
+    public static function getRelations(): array {
         return [
             FilesRelationManager::class,
             DownloadsRelationManager::class,
         ];
     }
 
-    public static function getPages(): array
-    {
+    public static function getPages(): array {
         return [
             'index' => ListBooks::route('/'),
             'create' => CreateBook::route('/create'),
             'edit' => EditBook::route('/{record}/edit'),
         ];
     }
+
 }

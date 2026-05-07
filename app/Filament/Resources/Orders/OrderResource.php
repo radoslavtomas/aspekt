@@ -2,44 +2,42 @@
 
 namespace App\Filament\Resources\Orders;
 
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Fieldset;
+use App\Filament\Resources\Orders\Pages\CreateOrder;
+use App\Filament\Resources\Orders\Pages\EditOrder;
+use App\Filament\Resources\Orders\Pages\ListOrders;
+use App\Filament\Resources\Orders\RelationManagers\CommentsRelationManager;
+use App\Filament\Resources\Orders\RelationManagers\ItemsRelationManager;
+use App\Models\Order;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\EditAction;
-use App\Filament\Resources\Orders\RelationManagers\ItemsRelationManager;
-use App\Filament\Resources\Orders\RelationManagers\CommentsRelationManager;
-use App\Filament\Resources\Orders\Pages\ListOrders;
-use App\Filament\Resources\Orders\Pages\CreateOrder;
-use App\Filament\Resources\Orders\Pages\EditOrder;
-use App\Models\Order;
-use Filament\Support\Icons\Heroicon;
-use Filament\Forms;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Fieldset;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderResource extends Resource
-{
+class OrderResource extends Resource {
+
     protected static ?string $model = Order::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::OutlinedCurrencyEuro;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedCurrencyEuro;
 
-    protected static string | \UnitEnum | null $navigationGroup = 'Eshop';
+    protected static string|\UnitEnum|null $navigationGroup = 'Eshop';
 
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::where('order_status_id', 'processing')->count();
+    public static function getNavigationBadge(): ?string {
+        return static::getModel()::where('order_status_id', 'processing')
+            ->count();
     }
 
-    public static function form(Schema $schema): Schema
-    {
+    public static function form(Schema $schema): Schema {
         return $schema
+            ->columns(1)
             ->components([
                 Fieldset::make('Order status')
                     ->schema([
@@ -79,7 +77,8 @@ class OrderResource extends Resource
                             ->label('Postal code'),
                         Select::make('delivery_country')
                             ->label('Country')
-                            ->relationship('deliveryCountry', 'country_name_sk'),
+                            ->relationship('deliveryCountry',
+                                'country_name_sk'),
                         TextInput::make('delivery_company')
                             ->label('Company'),
                     ]),
@@ -108,8 +107,7 @@ class OrderResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
-    {
+    public static function table(Table $table): Table {
         return $table
             ->columns([
                 TextColumn::make('id')
@@ -144,13 +142,20 @@ class OrderResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->filters([
                 Filter::make('Processing')
-                    ->query(fn(Builder $query): Builder => $query->where('order_status_id', 'processing')),
+                    ->query(fn(Builder $query
+                    ): Builder => $query->where('order_status_id',
+                        'processing')),
                 Filter::make('Completed')
-                    ->query(fn(Builder $query): Builder => $query->where('order_status_id', 'completed')),
+                    ->query(fn(Builder $query
+                    ): Builder => $query->where('order_status_id',
+                        'completed')),
                 Filter::make('In checkout')
-                    ->query(fn(Builder $query): Builder => $query->where('order_status_id', 'in_checkout')),
+                    ->query(fn(Builder $query
+                    ): Builder => $query->where('order_status_id',
+                        'in_checkout')),
                 Filter::make('Canceled')
-                    ->query(fn(Builder $query): Builder => $query->where('order_status_id', 'canceled')),
+                    ->query(fn(Builder $query
+                    ): Builder => $query->where('order_status_id', 'canceled')),
             ])
             ->recordActions([
                 EditAction::make(),
@@ -160,16 +165,14 @@ class OrderResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
+    public static function getRelations(): array {
         return [
             ItemsRelationManager::class,
             CommentsRelationManager::class,
         ];
     }
 
-    public static function getPages(): array
-    {
+    public static function getPages(): array {
         return [
             'index' => ListOrders::route('/'),
             'create' => CreateOrder::route('/create'),
@@ -177,8 +180,8 @@ class OrderResource extends Resource
         ];
     }
 
-    public static function canDelete(Model $record): bool
-    {
-        return false;
+    public static function canDelete(Model $record): bool {
+        return FALSE;
     }
+
 }

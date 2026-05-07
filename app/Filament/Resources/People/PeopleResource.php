@@ -2,49 +2,49 @@
 
 namespace App\Filament\Resources\People;
 
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Fieldset;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
-use Filament\Forms\Components\RichEditor;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\SelectColumn;
-use Filament\Tables\Columns\CheckboxColumn;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
 use App\Filament\Concerns\HasRichContentToolbar;
-use App\Filament\Resources\People\Pages\ListPeople;
 use App\Filament\Resources\People\Pages\CreatePeople;
 use App\Filament\Resources\People\Pages\EditPeople;
+use App\Filament\Resources\People\Pages\ListPeople;
 use App\Models\People;
-use Filament\Forms;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Fieldset;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\CheckboxColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\SelectColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
-class PeopleResource extends Resource
-{
+class PeopleResource extends Resource {
+
     use HasRichContentToolbar;
 
     protected static ?string $model = People::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-users';
-    protected static string | \UnitEnum | null $navigationGroup = 'Content';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-users';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Content';
+
     protected static ?int $navigationSort = 4;
 
-    public static function form(Schema $schema): Schema
-    {
+    public static function form(Schema $schema): Schema {
         return $schema
+            ->columns(1)
             ->components([
                 Fieldset::make('Quick settings')
                     ->schema([
@@ -61,19 +61,25 @@ class PeopleResource extends Resource
                     ->schema([
                         FileUpload::make('avatar')
                             ->getUploadedFileNameForStorageUsing(
-                                function (TemporaryUploadedFile $file): string {
-                                    $filename = explode('.', $file->getClientOriginalName())[0];
+                                function(TemporaryUploadedFile $file): string {
+                                    $filename = explode('.',
+                                        $file->getClientOriginalName())[0];
                                     return Str::slug($filename).'.'.$file->getClientOriginalExtension();
                                 },
                             )
                             ->directory('avatars')
-                            ->imageResizeMode('contain')
-                            ->imageResizeTargetWidth('1200')
-                            ->imageResizeUpscale(false),
+                            ->automaticallyResizeImagesMode('contain')
+                            ->automaticallyResizeImagesToWidth('1200')
+                            ->automaticallyUpscaleImagesWhenResizing(FALSE),
                         TextInput::make('title')
                             ->required()
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                            ->live(onBlur: TRUE)
+                            ->afterStateUpdated(function(
+                                Get $get,
+                                Set $set,
+                                ?string $old,
+                                ?string $state
+                            ) {
                                 if (Str::slug($old)) {
                                     return;
                                 }
@@ -81,7 +87,7 @@ class PeopleResource extends Resource
                                 $set('slug', Str::slug($state));
                             }),
                         TextInput::make('slug')
-                            ->unique(ignoreRecord: true)
+                            ->unique(ignoreRecord: TRUE)
                             ->required(),
                         RichEditor::make('teaser')
                             ->toolbarButtons(self::richContentToolbar())
@@ -97,17 +103,16 @@ class PeopleResource extends Resource
                         Select::make('language')
                             ->options([
                                 'sk' => 'sk',
-                                'en' => 'en'
+                                'en' => 'en',
                             ])
                             ->default('sk')
                             ->disablePlaceholderSelection(),
                     ])
-                    ->columns(1)
+                    ->columns(1),
             ]);
     }
 
-    public static function table(Table $table): Table
-    {
+    public static function table(Table $table): Table {
         return $table
             ->columns([
                 TextColumn::make('created_at')
@@ -128,9 +133,11 @@ class PeopleResource extends Resource
             ->defaultSort('created_at', 'asc')
             ->filters([
                 Filter::make('Autorky')
-                    ->query(fn(Builder $query): Builder => $query->where('type_id', 0)),
+                    ->query(fn(Builder $query
+                    ): Builder => $query->where('type_id', 0)),
                 Filter::make('Kto je kto')
-                    ->query(fn(Builder $query): Builder => $query->where('type_id', 1))
+                    ->query(fn(Builder $query
+                    ): Builder => $query->where('type_id', 1)),
             ])
             ->recordActions([
                 EditAction::make(),
@@ -140,19 +147,18 @@ class PeopleResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
+    public static function getRelations(): array {
         return [
             //
         ];
     }
 
-    public static function getPages(): array
-    {
+    public static function getPages(): array {
         return [
             'index' => ListPeople::route('/'),
             'create' => CreatePeople::route('/create'),
             'edit' => EditPeople::route('/{record}/edit'),
         ];
     }
+
 }
