@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
-{
+class Blog extends Model {
+
     /**
      * The attributes that are mass assignable.
      *
@@ -31,48 +31,41 @@ class Blog extends Model
         'publish_at',
     ];
 
-    public function blog_type()
-    {
+    public function blog_type() {
         return $this->belongsTo(Navigation::class);
     }
 
-    public function category()
-    {
+    public function category() {
         return $this->belongsToMany(Category::class);
     }
 
-    public function files()
-    {
+    public function files() {
         return $this->belongsToMany(File::class);
     }
 
-    public function downloads()
-    {
+    public function downloads() {
         return $this->belongsToMany(Download::class);
     }
-
-    public function scopePublished($query)
-    {
+    
+    public function scopePublished($query) {
         return $query->where([
             ['published', 1],
-            ['publish_at', '<', now()]
+            ['publish_at', '<', now()],
         ]);
     }
 
-    public function scopeFeatured($query)
-    {
+    public function scopeFeatured($query) {
         return $query->where('featured', 1);
     }
 
-    public function scopeLanguage($query, $lang)
-    {
+    public function scopeLanguage($query, $lang) {
         return $query->where('language', $lang);
     }
 
-    public function resourceType(): Attribute
-    {
+    public function resourceType(): Attribute {
         return Attribute::make(
             get: fn() => 'blog',
         );
     }
+
 }

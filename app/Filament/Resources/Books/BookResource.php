@@ -9,9 +9,11 @@ use App\Filament\Resources\Books\Pages\ListBooks;
 use App\Filament\Resources\Books\RelationManagers\DownloadsRelationManager;
 use App\Filament\Resources\Books\RelationManagers\FilesRelationManager;
 use App\Models\Book;
+use Carbon\Carbon;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
@@ -19,6 +21,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Fieldset;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
@@ -49,16 +52,37 @@ class BookResource extends Resource {
             ->columns(1)
             ->components([
                 Fieldset::make('Quick settings')
+                    ->columns(2)
                     ->schema([
                         //                        Forms\Components\Select::make('blog_type_id')
                         //                            ->relationship('blog_type', 'name', fn (Builder $query) => $query->whereIn('id', [5, 6, 43]))
                         //                            ->required(),
-                        Checkbox::make('is_product'),
-                        Checkbox::make('is_ebook'),
-                        Checkbox::make('home_page'),
-                        Checkbox::make('published'),
-                    ])
-                    ->columns(4),
+                        Grid::make()
+                            ->schema([
+                                Checkbox::make('is_product'),
+                                Checkbox::make('is_ebook'),
+                                Checkbox::make('home_page'),
+                                Checkbox::make('published')
+                                    ->live()
+                                    ->afterStateUpdated(function(
+                                        Get $get,
+                                        Set $set,
+                                        ?string $old,
+                                        ?bool $state
+                                    ) {
+                                        if ($state) {
+                                            $set('published_at', Carbon::now()
+                                                ->toDateTimeString());
+                                        }
+                                        else {
+                                            $set('published_at', NULL);
+                                        }
+                                    }),
+                            ]),
+                        DateTimePicker::make('published_at')
+                            ->hidden(fn(Get $get
+                            ): bool => !$get('published')),
+                    ]),
                 Fieldset::make('Book settings')
                     ->schema([
                         Select::make('name_sk')
@@ -152,11 +176,15 @@ class BookResource extends Resource {
     public static function table(Table $table): Table {
         return $table
             ->columns([
+                TextColumn::make('published_at')
+                    ->sortable()
+                    ->date('d.m.Y H:i'),
                 TextColumn::make('created_at')
                     ->sortable()
+                    ->limit(20)
                     ->date('d.m.Y'),
                 TextColumn::make('title')
-                    ->limit(50)
+                    ->limit(25)
                     ->searchable(),
                 ImageColumn::make('cover'),
                 CheckboxColumn::make('home_page')
@@ -168,7 +196,7 @@ class BookResource extends Resource {
                 CheckboxColumn::make('published')
                     ->sortable(),
             ])
-            ->defaultSort('created_at', 'desc')
+            ->defaultSort('published_at', 'desc')
             ->filters([
                 Filter::make('featured')
                     ->query(fn(Builder $query
