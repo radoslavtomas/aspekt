@@ -112,6 +112,6 @@ const navigationString = computed(() => navigation.value.find(el => el.route ===
 const title = computed(() => `${navigationString.value} | ${book.value.title}`)
 
 onMounted(() => {
-    console.log(book)
+    // console.log(book)
 })
 </script>

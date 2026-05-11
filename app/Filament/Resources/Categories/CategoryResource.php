@@ -67,7 +67,11 @@ class CategoryResource extends Resource {
             ])
             ->defaultSort('navigation.name_sk', 'asc')
             ->filters([
-                Filter::make('AspektIn')
+                Filter::make('O Aspekte')
+                    ->label('O Aspekte')
+                    ->query(fn(Builder $query
+                    ): Builder => $query->where('navigation_id', 8)),
+                Filter::make('Aspekt In')
                     ->query(fn(Builder $query
                     ): Builder => $query->where('navigation_id', 5)),
                 Filter::make('Knižná edícia')

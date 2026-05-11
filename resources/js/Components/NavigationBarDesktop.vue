@@ -1,5 +1,5 @@
 <template>
-    <div class="hidden lg:ml-6 lg:block">
+    <div class="hidden xl:ml-6 lgg:block">
         <div class="flex items-center justify-between space-x-3.5 h-full">
             <template v-for="menuItem in navigation">
                 <Link
@@ -16,7 +16,7 @@
                     <template #trigger>
                         <button
                             :class="{ 'border-b-4 border-red-600': path === menuItem.route }"
-                            class="text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium uppercase">
+                            class="text-red-600 hover:bg-red-100 hover:text-red-700 px-3 py-2 text-sm font-medium uppercase cursor-pointer">
                             {{ menuItem[`name_${locale}`] }}
                         </button>
                     </template>
@@ -31,16 +31,16 @@
                 </MenuDropdown>
             </template>
 
-            <Link
-                href="/search"
-            >
-                <svg class="size-5 text-red-600 hover:text-red-700" fill="none" stroke="currentColor" stroke-width="1.5"
-                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"/>
-                </svg>
-            </Link>
+            <!--            <Link-->
+            <!--                href="/search"-->
+            <!--            >-->
+            <!--                <svg class="size-5 text-red-600 hover:text-red-700" fill="none" stroke="currentColor" stroke-width="1.5"-->
+            <!--                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">-->
+            <!--                    <path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"-->
+            <!--                          stroke-linecap="round"-->
+            <!--                          stroke-linejoin="round"/>-->
+            <!--                </svg>-->
+            <!--            </Link>-->
 
         </div>
     </div>
@@ -58,7 +58,7 @@ const navigation = computed(() => usePage().props.navigation.filter(item => item
 
 const props = defineProps({
     path: String,
-    updatePath: Function
+    updatePath: Function,
 })
 
 onMounted(() => {

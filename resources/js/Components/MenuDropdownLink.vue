@@ -5,15 +5,15 @@ import { computed } from 'vue'
 const props = defineProps({
     mobile: {
         type: Boolean,
-        default: false
+        default: false,
     },
     blank: {
         type: Boolean,
-        default: false
+        default: false,
     },
     href: {
-        type: String
-    }
+        type: String,
+    },
 })
 
 const mobileClasses = computed(() => {
@@ -41,7 +41,7 @@ const mobileClasses = computed(() => {
         :class="mobileClasses"
         :href="href"
         class="block w-full px-4 leading-5 font-bold focus:outline-none focus:bg-red-100 transition duration-150
-        ease-in-out">
+        ease-in-out cursor-pointer">
         <span
             class="text-red-600 border-b-4 border-transparent hover:border-red-600 hover:text-red-700 transition duration-50 ease-in-out">
             <slot/>

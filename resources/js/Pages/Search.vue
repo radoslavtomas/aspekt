@@ -1,19 +1,18 @@
 <script setup>
 import { computed, reactive } from 'vue'
-import { Head, usePage } from '@inertiajs/vue3'
+import { Head, router, usePage } from '@inertiajs/vue3'
 import MainLayout from '../Layouts/MainLayout.vue'
 import FormInput from '@/Components/Form/FormInput.vue'
 import FormSelect from '@/Components/Form/FormSelect.vue'
 import { maxLength, required } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
-import { router } from '@inertiajs/vue3'
 import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
 
 const locale = computed(() => usePage().props.locale)
 
 const searchString = {
     'en': 'Search',
-    'sk': 'Vyhľadávanie'
+    'sk': 'Vyhľadávanie',
 }
 
 const lang = {
@@ -29,8 +28,8 @@ const lang = {
                 pages: 'Pages',
                 njuvinky: 'Njuvinky',
             },
-            submit: 'Search'
-        }
+            submit: 'Search',
+        },
     },
     sk: {
         form: {
@@ -44,9 +43,9 @@ const lang = {
                 pages: 'Stránky',
                 njuvinky: 'Ňjúvinky',
             },
-            submit: 'Hľadaj'
-        }
-    }
+            submit: 'Hľadaj',
+        },
+    },
 }
 
 const options = [
@@ -83,10 +82,10 @@ const handleForm = async () => {
         return
     }
 
-    router.visit('/search/' + form.category, {
+    router.visit('/about/search/' + form.category, {
         method: 'get',
         data: {
-            query: form.query
+            query: form.query,
         },
     })
 }

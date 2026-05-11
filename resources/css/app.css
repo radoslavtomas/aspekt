@@ -13,6 +13,10 @@
     src: local('Trebuchet MS'), url('/public/assets/fonts/trebuc.woff') format('woff');
 }
 
+@theme {
+    --breakpoint-lgg: 74rem;
+}
+
 .container-aspekt {
     @apply max-w-7xl mx-auto px-5 md:px-6 lg:px-8;
 }
