@@ -135,6 +135,22 @@ class BlogResource extends Resource {
                         RichEditor::make('body')
                             ->toolbarButtons(self::richContentToolbar())
                             ->plugins(self::richContentPlugins())
+                            ->textColors([
+                                '#e7000b' => 'Aspekt Red',
+                                '#000000' => 'Black',
+                                '#333333' => 'Dark gray',
+                                '#666666' => 'Gray',
+                                '#999999' => 'Light gray',
+                                '#cccccc' => 'Lighter gray',
+                                '#ffffff' => 'White',
+                                '#ff0000' => 'Red',
+                                '#ff9900' => 'Orange',
+                                '#ffff00' => 'Yellow',
+                                '#00ff00' => 'Green',
+                                '#00ffff' => 'Cyan',
+                                '#0000ff' => 'Blue',
+                                '#9900ff' => 'Purple',
+                            ])
                             ->required(),
                         RichEditor::make('links')
                             ->toolbarButtons(self::richContentToolbar())

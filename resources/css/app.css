@@ -117,17 +117,65 @@
         border-left: 8px #ffa0a0 solid;
     }
 
-    tr {
-        @apply flex flex-col sm:flex-row items-center;
+    table {
+        @apply w-full border-collapse mb-2;
     }
 
-    tr td {
-        @apply flex-1;
+    table th {
+        @apply bg-gray-100 px-4 py-2 text-left font-semibold text-gray-700 border border-gray-300;
     }
 
-    tr img {
-        padding: 0 10px;
-        /* box-shadow: none; */
+    table td {
+        @apply px-4 py-2 border border-gray-300;
+    }
+
+    table tbody tr {
+        @apply hover:bg-gray-50;
+    }
+
+    table tbody tr:nth-child(even) {
+        @apply bg-gray-50;
+    }
+
+    table tbody tr:hover {
+        @apply bg-gray-100;
+    }
+
+    details {
+        @apply mb-4;
+    }
+
+    summary {
+        @apply cursor-pointer py-2 px-3 bg-gray-100 rounded font-semibold text-gray-700 hover:bg-gray-200 transition-colors;
+        user-select: none;
+    }
+
+    summary::-webkit-details-marker {
+        @apply mr-2;
+    }
+
+    details[open] summary {
+        @apply mb-2;
+    }
+
+    details > *:not(summary) {
+        @apply pl-4;
+    }
+
+    .grid-layout {
+        display: grid;
+        grid-template-columns: var(--cols, 1fr);
+        gap: 1.5rem;
+        @apply my-4;
+    }
+
+    .grid-layout-col {
+        grid-column: var(--col-span, span 1);
+        @apply min-w-0;
+    }
+
+    .grid-layout-col > * + * {
+        margin-block-start: 1rem;
     }
 
     iframe {
