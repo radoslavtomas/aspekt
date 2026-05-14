@@ -1,12 +1,21 @@
-@tailwind base;
-@tailwind components;
+@import 'tailwindcss';
+
+/*
+ * Load the legacy v3 JS config so existing custom colors (aspektin),
+ * fontFamily (treb), and the @tailwindcss/forms plugin keep working
+ * unchanged. Once the front-end is fully migrated to v4 we can move
+ * this into a @theme {} block and drop tailwind.config.mjs.
+ */
+@config '../../tailwind.config.mjs';
 
 @font-face {
     font-family: 'Trebuchet MS';
     src: local('Trebuchet MS'), url('/public/assets/fonts/trebuc.woff') format('woff');
 }
 
-@tailwind utilities;
+@theme {
+    --breakpoint-lgg: 74rem;
+}
 
 .container-aspekt {
     @apply max-w-7xl mx-auto px-5 md:px-6 lg:px-8;
@@ -108,21 +117,77 @@
         border-left: 8px #ffa0a0 solid;
     }
 
-    tr {
-        @apply flex flex-col sm:flex-row items-center;
+    table {
+        @apply w-full border-collapse mb-2;
     }
 
-    tr td {
-        @apply flex-1;
+    table th {
+        @apply bg-gray-100 px-4 py-2 text-left font-semibold text-gray-700 border border-gray-300;
     }
 
-    tr img {
-        padding: 0 10px;
-        /* box-shadow: none; */
+    table td {
+        @apply px-4 py-2 border border-gray-300;
+    }
+
+    table tbody tr {
+        @apply hover:bg-gray-50;
+    }
+
+    table tbody tr:nth-child(even) {
+        @apply bg-gray-50;
+    }
+
+    table tbody tr:hover {
+        @apply bg-gray-100;
+    }
+
+    details {
+        @apply mb-4;
+    }
+
+    summary {
+        @apply cursor-pointer py-2 px-3 bg-gray-100 rounded font-semibold text-gray-700 hover:bg-gray-200 transition-colors;
+        user-select: none;
+    }
+
+    summary::-webkit-details-marker {
+        @apply mr-2;
+    }
+
+    details[open] summary {
+        @apply mb-2;
+    }
+
+    details > *:not(summary) {
+        @apply pl-4;
+    }
+
+    .grid-layout {
+        display: grid;
+        grid-template-columns: var(--cols, 1fr);
+        gap: 1.5rem;
+        @apply my-4;
+    }
+
+    .grid-layout-col {
+        grid-column: var(--col-span, span 1);
+        @apply min-w-0;
+    }
+
+    .grid-layout-col > * + * {
+        margin-block-start: 1rem;
     }
 
     iframe {
         width: 100%;
+    }
+
+    /* Defensive responsive fallback for any oembed iframe that lacks an
+       inline aspect-ratio style (legacy rows already inline it). */
+    div[data-youtube-video] iframe,
+    div[data-vimeo-video] iframe {
+        aspect-ratio: 16 / 9;
+        height: auto;
     }
 
     ul,
@@ -198,7 +263,7 @@
     .filament-tiptap-grid-builder__column {
         box-sizing: border-box;
         padding: 0.5rem;
-        border-radius: theme("borderRadius.DEFAULT");
+        border-radius: var(--radius, 0.25rem);
 
         > * + * {
             margin-block-start: 1rem;
@@ -210,9 +275,9 @@
     }
 
     &.ProseMirror-selectednode {
-        border-radius: theme("borderRadius.DEFAULT");
+        border-radius: var(--radius, 0.25rem);
         outline-offset: 2px;
-        outline: theme("colors.gray.900") dashed 2px;
+        outline: var(--color-gray-900) dashed 2px;
     }
 }
 
@@ -221,7 +286,7 @@
     grid-template-rows: auto;
 }
 
-@media (max-width: theme('screens.sm')) {
+@media (width < 40rem) {
     .filament-tiptap-grid-builder[data-stack-at="sm"] {
         grid-template-columns: 1fr !important;
 
@@ -231,7 +296,7 @@
     }
 }
 
-@media (max-width: theme('screens.md')) {
+@media (width < 48rem) {
     .filament-tiptap-grid-builder[data-stack-at="md"] {
         grid-template-columns: 1fr !important;
 
@@ -241,7 +306,7 @@
     }
 }
 
-@media (max-width: theme('screens.lg')) {
+@media (width < 64rem) {
     .filament-tiptap-grid-builder[data-stack-at="lg"] {
         grid-template-columns: 1fr !important;
 
@@ -252,25 +317,25 @@
 }
 
 .filament-tiptap-grid[type="asymetric-right-thirds"] {
-    @screen md {
+    @media (width >= 48rem) {
         grid-template-columns: 1fr 2fr;
     }
 }
 
 .filament-tiptap-grid[type="asymetric-left-thirds"] {
-    @screen md {
+    @media (width >= 48rem) {
         grid-template-columns: 2fr 1fr;
     }
 }
 
 .filament-tiptap-grid[type="asymetric-right-fourths"] {
-    @screen md {
+    @media (width >= 48rem) {
         grid-template-columns: 1fr 3fr;
     }
 }
 
 .filament-tiptap-grid[type="asymetric-left-fourths"] {
-    @screen md {
+    @media (width >= 48rem) {
         grid-template-columns: 3fr 1fr;
     }
 }
@@ -280,29 +345,29 @@
     grid-template-rows: auto;
 
     &[cols="2"] {
-        @screen md {
+        @media (width >= 48rem) {
             grid-template-columns: repeat(2, 1fr);
         }
     }
 
     &[cols="3"] {
-        @screen md {
+        @media (width >= 48rem) {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 
     &[cols="4"] {
-        @screen md {
+        @media (width >= 48rem) {
             grid-template-columns: repeat(2, 1fr);
         }
 
-        @screen lg {
+        @media (width >= 64rem) {
             grid-template-columns: repeat(4, 1fr);
         }
     }
 
     &[cols="5"] {
-        @screen md {
+        @media (width >= 48rem) {
             grid-template-columns: repeat(5, 1fr);
         }
     }

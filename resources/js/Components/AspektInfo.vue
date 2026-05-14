@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import { Link, usePage } from '@inertiajs/inertia-vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 import { BookOpenIcon, BuildingLibraryIcon, NewspaperIcon } from '@heroicons/vue/24/outline'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
@@ -56,7 +56,7 @@ import { computed } from 'vue'
 const store = useStore()
 
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 </script>
 
 <style scoped>

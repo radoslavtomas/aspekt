@@ -15,7 +15,7 @@
 import { useStore } from 'vuex'
 import {computed, onBeforeUnmount, onMounted, ref} from "vue";
 
-import {Link} from "@inertiajs/inertia-vue3";
+import {Link} from "@inertiajs/vue3";
 
 const store = useStore()
 const animated = ref(false);

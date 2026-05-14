@@ -41,12 +41,12 @@
 <script setup>
 
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { Link, usePage } from '@inertiajs/inertia-vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 
 const openLang = ref(false)
 const langDiv = ref(null)
 const langButton = ref(null)
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 
 const toggleLangOptions = () => {
     openLang.value = !openLang.value

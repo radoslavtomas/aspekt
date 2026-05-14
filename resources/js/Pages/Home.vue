@@ -1,5 +1,5 @@
 <script setup>
-import { Head, usePage } from '@inertiajs/inertia-vue3'
+import { Head, usePage } from '@inertiajs/vue3'
 import MainLayout from '../Layouts/MainLayout.vue'
 import AspektHero from '@/Components/AspektHero.vue'
 import TheFeaturedBooks from '@/Components/TheFeaturedBooks.vue'
@@ -7,7 +7,7 @@ import TheFeaturedBlogs from '@/Components/TheFeaturedBlogs.vue'
 import TheFeaturedEvents from '@/Components/TheFeaturedEvents.vue'
 import { computed } from 'vue'
 
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 const homeTitle = {
     'en': 'Home',
     'sk': 'Domov'

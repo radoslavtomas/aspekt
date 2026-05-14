@@ -67,7 +67,7 @@
 import axios from 'axios'
 import { ArrowPathIcon, CheckIcon, HandThumbUpIcon } from '@heroicons/vue/24/outline'
 import { computed, reactive, ref } from 'vue'
-import { usePage } from '@inertiajs/inertia-vue3'
+import { usePage } from '@inertiajs/vue3'
 import { useStore } from 'vuex'
 import useVuelidate from '@vuelidate/core'
 import { email, maxLength, required } from '@vuelidate/validators'
@@ -76,7 +76,7 @@ import ValidationErrors from '@/Components/Form/ValidationErrors.vue'
 const store = useStore()
 
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 const sendingSubscription = ref(false)
 const subscription = ref({
     attempted: false,

@@ -18,51 +18,79 @@ use Inertia\Inertia;
 
 Route::get('/', ['App\Http\Controllers\HomeController', 'home'])->name('home');
 
-Route::get('/about/kto-je-kto/{slug?}', [App\Http\Controllers\PeopleController::class, 'people'])->name('people');
+Route::get('/about/kto-je-kto/{slug?}',
+    [App\Http\Controllers\PeopleController::class, 'people'])->name('people');
 Route::get('/books/autorky-redaktorky-prekladatelky/{slug?}',
     [App\Http\Controllers\PeopleController::class, 'authors'])->name('authors');
-Route::get('/about/njuvinky/', [App\Http\Controllers\NjuvinkyController::class, 'redirect'])->name('njuvinky.redirect');
+Route::get('/about/njuvinky/',
+    [App\Http\Controllers\NjuvinkyController::class, 'redirect'])
+    ->name('njuvinky.redirect');
+Route::get('/about/search',
+    [App\Http\Controllers\SearchController::class, 'index'])
+    ->name('search.index');
+Route::get('/about/search/{parameter}',
+    [App\Http\Controllers\SearchController::class, 'search'])->name('search');
+Route::get('/about/language',
+    [App\Http\Controllers\MiscellaneousController::class, 'language'])
+    ->name('language.index');
 Route::post('/njuvinky/subscribe',
-    [App\Http\Controllers\NjuvinkyController::class, 'subscribe'])->name('njuvinky.subscribe');
+    [App\Http\Controllers\NjuvinkyController::class, 'subscribe'])
+    ->name('njuvinky.subscribe');
 
-Route::get('/ochrana-osobnych-udajov', [App\Http\Controllers\MiscellaneousController::class, 'gdpr'])->name('gdpr');
+Route::get('/ochrana-osobnych-udajov',
+    [App\Http\Controllers\MiscellaneousController::class, 'gdpr'])
+    ->name('gdpr');
 
-Route::get('/about/{category?}/{slug?}', [App\Http\Controllers\AboutController::class, 'index'])->name('about');
-Route::get('/books/{category?}/{slug?}', [App\Http\Controllers\BooksController::class, 'index'])->name('books');
+Route::get('/about/{category?}/{slug?}',
+    [App\Http\Controllers\AboutController::class, 'index'])->name('about');
+Route::get('/books/{category?}/{slug?}',
+    [App\Http\Controllers\BooksController::class, 'index'])->name('books');
 Route::get('/aspektin/{category?}/{slug?}',
-    [App\Http\Controllers\AspektinController::class, 'index'])->name('aspektin');
-Route::get('/library/{category?}/{slug?}', [App\Http\Controllers\LibraryController::class, 'index'])->name('library');
-Route::get('/events/{slug?}', [App\Http\Controllers\EventsController::class, 'index'])->name('events');
-Route::get('/contact', [App\Http\Controllers\ContactController::class, 'contact'])->name('contact');
+    [App\Http\Controllers\AspektinController::class, 'index'])
+    ->name('aspektin');
+Route::get('/library/{category?}/{slug?}',
+    [App\Http\Controllers\LibraryController::class, 'index'])->name('library');
+Route::get('/events/{slug?}',
+    [App\Http\Controllers\EventsController::class, 'index'])->name('events');
+Route::get('/contact',
+    [App\Http\Controllers\ContactController::class, 'contact'])
+    ->name('contact');
 Route::get('/njuvinky/{category?}/{slug?}',
-    [App\Http\Controllers\NjuvinkyController::class, 'index'])->name('njuvinky');
-Route::get('/eshop/basket', [App\Http\Controllers\EshopController::class, 'basket'])->name('basket');
-Route::get('/eshop/shipping', [App\Http\Controllers\EshopController::class, 'shipping'])->name('shipping');
-Route::get('/eshop/summary', [App\Http\Controllers\EshopController::class, 'summary'])->name('summary');
-Route::get('/eshop/thank-you', [App\Http\Controllers\EshopController::class, 'thankYou'])->name('thankYou');
-Route::post('/eshop/create-order', [App\Http\Controllers\EshopController::class, 'createOrder'])->name('createOrder');
+    [App\Http\Controllers\NjuvinkyController::class, 'index'])
+    ->name('njuvinky');
+Route::get('/eshop/basket',
+    [App\Http\Controllers\EshopController::class, 'basket'])->name('basket');
+Route::get('/eshop/shipping',
+    [App\Http\Controllers\EshopController::class, 'shipping'])
+    ->name('shipping');
+Route::get('/eshop/summary',
+    [App\Http\Controllers\EshopController::class, 'summary'])->name('summary');
+Route::get('/eshop/thank-you',
+    [App\Http\Controllers\EshopController::class, 'thankYou'])
+    ->name('thankYou');
+Route::post('/eshop/create-order',
+    [App\Http\Controllers\EshopController::class, 'createOrder'])
+    ->name('createOrder');
 
-Route::get('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search.index');
-Route::get('/search/{parameter}', [App\Http\Controllers\SearchController::class, 'search'])->name('search');
-
-Route::get('language/{language}', function ($language) {
+Route::get('language/{language}', function($language) {
     Session()->put('locale', $language);
 
     return redirect()->back();
 })->name('language');
 
-Route::get('/mailables', function () {
+Route::get('/mailables', function() {
     Mail::to('radoslav.tomas@gmail.com')->send(new OrderCreatedCustomer());
     return 'done';
 });
 
-Route::get('/mailchimp', [App\Http\Controllers\HomeController::class, 'mailchimp']);
+Route::get('/mailchimp',
+    [App\Http\Controllers\HomeController::class, 'mailchimp']);
 
-Route::get('/mailables/test', function () {
+Route::get('/mailables/test', function() {
     return view('emails.orders.CreatedCustomer');
 });
 
-Route::get('/clear-cache', function () {
+Route::get('/clear-cache', function() {
     \Illuminate\Support\Facades\Cache::flush();
 });
 
@@ -75,7 +103,7 @@ Route::get('/clear-cache', function () {
 //    ]);
 //});
 
-Route::get('/dashboard', function () {
+Route::get('/dashboard', function() {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 

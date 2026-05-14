@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Book extends Model
-{
+class Book extends Model {
+
     use HasFactory;
 
     /**
@@ -37,6 +38,7 @@ class Book extends Model
         'featured',
         'home_page',
         'published',
+        'published_at',
         'language',
     ];
 
@@ -49,35 +51,33 @@ class Book extends Model
         'eshop_links' => 'array',
     ];
 
-    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
+    public function category(): BelongsToMany {
         return $this->belongsToMany(Category::class);
     }
 
-    public function files(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
+    public function files(): BelongsToMany {
         return $this->belongsToMany(File::class);
     }
 
-    public function downloads(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
+    public function downloads(): BelongsToMany {
         return $this->belongsToMany(Download::class);
     }
-
-    public function scopePublished($query)
-    {
-        return $query->where('published', 1);
+    
+    public function scopePublished($query) {
+        return $query->where([
+            ['published', 1],
+            ['published_at', '<', now()],
+        ]);
     }
 
-    public function scopeLanguage($query, $lang)
-    {
+    public function scopeLanguage($query, $lang) {
         return $query->where('language', $lang);
     }
 
-    public function resourceType(): Attribute
-    {
+    public function resourceType(): Attribute {
         return Attribute::make(
             get: fn() => 'book',
         );
     }
+
 }

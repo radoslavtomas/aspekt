@@ -1,5 +1,5 @@
 <template>
-    <div v-if="props.openNav" id="mobile-menu" class="lg:hidden abosule w-full z-20 h-full">
+    <div v-if="props.openNav" id="mobile-menu" class="lgg:hidden abosule w-full z-20 h-full">
         <div
             class="relative bg-white shadow-xl border-y border-purple-400 opacity-95 space-y-1 px-2 pt-2 pb-12 z-50 flex flex-col items-center">
 
@@ -72,16 +72,16 @@
 
 <script setup>
 import { computed, onMounted } from 'vue'
-import { Link, usePage } from '@inertiajs/inertia-vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 
 const props = defineProps({
     openNav: Boolean,
     path: String,
-    updatePath: Function
+    updatePath: Function,
 })
 
-const locale = computed(() => usePage().props.value.locale)
-const navigation = computed(() => usePage().props.value.navigation.filter(item => item.id !== 43))
+const locale = computed(() => usePage().props.locale)
+const navigation = computed(() => usePage().props.navigation.filter(item => item.id !== 43))
 
 onMounted(() => {
     props.updatePath()

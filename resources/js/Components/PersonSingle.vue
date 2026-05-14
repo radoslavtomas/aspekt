@@ -33,19 +33,19 @@
 <script setup>
 import {computed} from "vue";
 import { useStore } from 'vuex';
-import {Head, usePage} from "@inertiajs/inertia-vue3";
+import {Head, usePage} from "@inertiajs/vue3";
 
 // components
 import Breadcrumbs from '../Components/Breadcrumbs.vue';
 import Separator from "@/Components/Separator.vue";
 
 // computed
-const person = computed(() => usePage().props.value.person.data);
-const locale = computed(() => usePage().props.value.locale);
-const navigation = computed(() => usePage().props.value.navigation);
+const person = computed(() => usePage().props.person.data);
+const locale = computed(() => usePage().props.locale);
+const navigation = computed(() => usePage().props.navigation);
 const store = useStore();
 const lang = computed(() => store.getters.lang);
-const routeName = computed(() => usePage().props.value.route_name);
+const routeName = computed(() => usePage().props.route_name);
 
 const title = computed(() => {
     const navigationString = computed(() => navigation.value.find(el => el.route === 'books')[`name_${locale.value}`]);

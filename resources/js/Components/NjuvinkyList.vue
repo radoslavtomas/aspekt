@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { Head, usePage } from '@inertiajs/inertia-vue3'
+import { Head, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
 
 // 3rd party
@@ -34,11 +34,11 @@ import Breadcrumbs from '../Components/Breadcrumbs.vue'
 import Pagination from '../Components/Pagination.vue'
 
 // computed
-const category = computed(() => usePage().props.value.category)
+const category = computed(() => usePage().props.category)
 const categoryString = computed(() => category.value[`name_${locale.value}`])
-const items = computed(() => usePage().props.value.blogs)
-const locale = computed(() => usePage().props.value.locale)
-const navigation = computed(() => usePage().props.value.navigation)
+const items = computed(() => usePage().props.blogs)
+const locale = computed(() => usePage().props.locale)
+const navigation = computed(() => usePage().props.navigation)
 
 const title = computed(() => {
     const navigationString = computed(() => navigation.value.find(el => el.route === 'njuvinky')[`name_${locale.value}`])

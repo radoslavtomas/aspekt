@@ -19,11 +19,11 @@
 <script setup>
 import {useStore} from "vuex";
 import {computed} from "vue";
-import {usePage} from "@inertiajs/inertia-vue3";
+import {usePage} from "@inertiajs/vue3";
 
 const store = useStore()
 const lang = computed(() => store.getters.lang);
-const locale = computed(() => usePage().props.value.locale);
+const locale = computed(() => usePage().props.locale);
 
 const props = defineProps({
     error: String

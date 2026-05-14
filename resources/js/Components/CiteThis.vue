@@ -15,7 +15,7 @@
 <script setup>
 import { computed } from 'vue'
 import moment from 'moment'
-import { Link, usePage } from '@inertiajs/inertia-vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 import Separator from '@/Components/Separator.vue'
 
 const props = defineProps({
@@ -24,7 +24,7 @@ const props = defineProps({
 
 const url = window.location.href
 const now = moment().format('DD/MM/YYYY - HH:mm')
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 const authors = computed(() => props.blog.authors_cite)
 
 const localLang = {

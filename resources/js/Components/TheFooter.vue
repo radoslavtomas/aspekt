@@ -72,16 +72,16 @@
                 <div class="p-6 flex flex-col gap-1">
                     <h3 class="text-lg mb-4 uppercase">{{ lang[locale].footerColumn3Title }}</h3>
 
-                    <p>
+                    <p v-if="settings.addressStreet">
                         {{ settings.addressStreet }}
                     </p>
-                    <p class="mb-4">
-                        {{ `${settings.addressPostalCode} ${settings.addressTown}` }}
+                    <p v-if="settings.addressPostalCode || settings.addressTown" class="mb-4">
+                        {{ `${settings.addressPostalCode ?? ''} ${settings.addressTown ?? ''}`.trim() }}
                     </p>
-                    <a :href="`tel:${settings.phoneMobile.replace(/\s/g,'')}`" class="mb-4">
+                    <a v-if="settings.phoneMobile" :href="`tel:${settings.phoneMobile.replace(/\s/g,'')}`" class="mb-4">
                         {{ settings.phoneMobile }}
                     </a>
-                    <a :href="`mailto:${settings.emailAspekt}`">
+                    <a v-if="settings.emailAspekt" :href="`mailto:${settings.emailAspekt}`">
                         {{ settings.emailAspekt }}
                     </a>
                     <a class="mb-6" href="/">
@@ -98,7 +98,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { Link, usePage } from '@inertiajs/inertia-vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 import { useStore } from 'vuex'
 
 import SocialLinks from '@/Components/SocialLinks.vue'
@@ -106,10 +106,10 @@ import SocialLinks from '@/Components/SocialLinks.vue'
 const store = useStore()
 
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
-const settings = computed(() => usePage().props.value.settings)
+const locale = computed(() => usePage().props.locale)
+const settings = computed(() => usePage().props.settings)
 
-const navigation = computed(() => usePage().props.value.navigation)
+const navigation = computed(() => usePage().props.navigation)
 </script>
 
 <style scoped>

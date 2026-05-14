@@ -33,14 +33,14 @@
 
 <script setup>
 import { computed } from 'vue'
-import { Link, usePage } from '@inertiajs/inertia-vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 
-const category = computed(() => usePage().props.value.category)
-const locale = computed(() => usePage().props.value.locale)
-const navigation = computed(() => usePage().props.value.navigation)
-const slug = computed(() => usePage().props.value.slug)
-const query = computed(() => usePage().props.value.query) // used in searches
-const parameter = computed(() => usePage().props.value.parameter)
+const category = computed(() => usePage().props.category)
+const locale = computed(() => usePage().props.locale)
+const navigation = computed(() => usePage().props.navigation)
+const slug = computed(() => usePage().props.slug)
+const query = computed(() => usePage().props.query) // used in searches
+const parameter = computed(() => usePage().props.parameter)
 
 const categoryString = computed(() => {
     return category.value ? category.value[`name_${locale.value}`] : ''

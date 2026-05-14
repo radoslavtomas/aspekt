@@ -14,14 +14,14 @@
 <script setup>
 import EventListItem from '@/Components/EventListItem.vue'
 import Separator from '@/Components/Separator.vue'
-import { usePage } from '@inertiajs/inertia-vue3'
+import { usePage } from '@inertiajs/vue3'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
 
 const store = useStore()
 
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 
 defineProps({
     events: Array,

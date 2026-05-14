@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Download extends Model
@@ -18,12 +19,12 @@ class Download extends Model
         'filesize',
     ];
 
-    public function blogs(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function blogs(): BelongsToMany
     {
         return $this->belongsToMany(Blog::class);
     }
 
-    public function books(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function books(): BelongsToMany
     {
         return $this->belongsToMany(Book::class);
     }

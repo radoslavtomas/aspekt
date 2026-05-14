@@ -1,9 +1,9 @@
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue'
-import Head from '@inertiajs/inertia-vue3/src/head'
+import { Head } from '@inertiajs/vue3'
 import MasonryWall from '@yeger/vue-masonry-wall'
 import { computed, onMounted } from 'vue'
-import { usePage } from '@inertiajs/inertia-vue3'
+import { usePage } from '@inertiajs/vue3'
 import BlogListItem from '@/Components/BlogListItem.vue'
 import BookListItem from '@/Components/BookListItem.vue'
 import Separator from '@/Components/Separator.vue'
@@ -17,11 +17,11 @@ window.scrollTo({ top: 0, behavior: 'smooth' })
 const store = useStore()
 
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 
-const books = computed(() => usePage().props.value.books)
-const blogs = computed(() => usePage().props.value.blogs)
-const people = computed(() => usePage().props.value.people)
+const books = computed(() => usePage().props.books)
+const blogs = computed(() => usePage().props.blogs)
+const people = computed(() => usePage().props.people)
 
 onMounted(() => {
     // console.log(people.value)

@@ -8,9 +8,9 @@
 
 <script setup>
 import { computed } from 'vue'
-import { usePage } from '@inertiajs/inertia-vue3'
+import { usePage } from '@inertiajs/vue3'
 
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 const lang = {
     sk: {
         subtitle: 'f e m i n i s t i c k ý&nbsp;&nbsp;&nbsp;w e b z i n'

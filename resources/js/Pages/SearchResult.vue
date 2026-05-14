@@ -1,8 +1,8 @@
 <script setup>
 import MainLayout from '../Layouts/MainLayout.vue'
-import Head from '@inertiajs/inertia-vue3/src/head'
+import { Head } from '@inertiajs/vue3'
 import { computed, onMounted } from 'vue'
-import { usePage } from '@inertiajs/inertia-vue3'
+import { usePage } from '@inertiajs/vue3'
 import Breadcrumbs from '@/Components/Breadcrumbs.vue'
 import { useStore } from 'vuex'
 import Pagination from '@/Components/Pagination.vue'
@@ -13,12 +13,12 @@ window.scrollTo({ top: 0, behavior: 'smooth' })
 const store = useStore()
 
 const lang = computed(() => store.getters.lang)
-const locale = computed(() => usePage().props.value.locale)
+const locale = computed(() => usePage().props.locale)
 
-const parameter = computed(() => usePage().props.value.parameter)
-const items = computed(() => usePage().props.value.items)
-const books = computed(() => usePage().props.value.books)
-const people = computed(() => usePage().props.value.people)
+const parameter = computed(() => usePage().props.parameter)
+const items = computed(() => usePage().props.items)
+const books = computed(() => usePage().props.books)
+const people = computed(() => usePage().props.people)
 
 const language = {
     en: {
