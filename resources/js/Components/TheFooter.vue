@@ -32,6 +32,9 @@
                         <Link :href="settings.footerLinkUrl4">
                             {{ lang[locale].footerLinkDesc4 }}
                         </Link>
+                        <Link :href="settings.footerLinkUrl5">
+                            {{ lang[locale].footerLinkDesc5 }}
+                        </Link>
                     </section>
                 </div>
 

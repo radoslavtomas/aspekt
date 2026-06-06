@@ -19,7 +19,7 @@ const lang = {
 </script>
 
 <template>
-    <div class="flex mr-1 ml-2 lgg:ml-4 lgg:pr-0">
+    <div class="flex mr-1 ml-2 lgg:ml-6 lgg:pr-0">
         <a
             :href="settings['linkDarujme']"
             class="text-xs sm:text-sm text-white text-center px-2 lgg:px-3 py-1.5 shadow-sm border border-red-600 bg-red-600 hover:bg-red-700 rounded"
