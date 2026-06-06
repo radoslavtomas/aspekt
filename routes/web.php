@@ -25,7 +25,7 @@ Route::get('/books/autorky-redaktorky-prekladatelky/{slug?}',
 Route::get('/about/njuvinky/',
     [App\Http\Controllers\NjuvinkyController::class, 'redirect'])
     ->name('njuvinky.redirect');
-Route::get('/about/search',
+Route::get('/search',
     [App\Http\Controllers\SearchController::class, 'index'])
     ->name('search.index');
 Route::get('/about/search/{parameter}',
