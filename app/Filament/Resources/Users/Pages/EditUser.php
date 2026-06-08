@@ -2,24 +2,31 @@
 
 namespace App\Filament\Resources\Users\Pages;
 
-use Filament\Actions\Action;
+use App\Enums\Role;
 use App\Filament\Resources\Users\UserResource;
-use Filament\Facades\Filament;
+use App\Models\User;
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
+class EditUser extends EditRecord {
 
-class EditUser extends EditRecord
-{
     protected static string $resource = UserResource::class;
 
-    protected function getHeaderActions(): array
-    {
+    protected function getHeaderActions(): array {
         return [
-            // Actions\DeleteAction::make(),
+            DeleteAction::make()
+                ->visible(fn(?User $record) => auth()->check() &&
+                    (auth()->id() === $record->id || auth()->user()->role_id === Role::Admin)
+                ),
             Action::make('changePassword')
+                ->visible(fn(?User $record) => auth()->check() &&
+                    (auth()->id() === $record->id || auth()->user()->role_id === Role::Admin)
+                )
                 ->schema([
                     TextInput::make('new_password')
                         ->password()
@@ -31,20 +38,24 @@ class EditUser extends EditRecord
                         ->label('Confirm new password')
                         ->required()
                         ->same('new_password')
-                        ->rule(Password::default())
+                        ->rule(Password::default()),
                 ])
-                ->action(function (array $data) {
+                ->action(function(array $data) {
                     $this->record->update([
-                        'password' => Hash::make($data['new_password'])
+                        'password' => Hash::make($data['new_password']),
                     ]);
-                    Filament::notify('success', 'Password updated successfully');
-                })
+                    Notification::make()
+                        ->title('Password Changed')
+                        ->success()
+                        ->body('Password has been updated.')
+                        ->send();
+                }),
 
         ];
     }
 
-    protected function getRedirectUrl(): string
-    {
+    protected function getRedirectUrl(): string {
         return $this->getResource()::getUrl('index');
     }
+
 }
