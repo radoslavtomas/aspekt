@@ -2,105 +2,38 @@
 
 namespace App\Filament\Resources\Users;
 
-use App\Enums\Role;
 use App\Filament\Resources\Users\Pages\CreateUser;
 use App\Filament\Resources\Users\Pages\EditUser;
 use App\Filament\Resources\Users\Pages\ListUsers;
+use App\Filament\Resources\Users\Pages\ViewUser;
+use App\Filament\Resources\Users\Schemas\UserForm;
+use App\Filament\Resources\Users\Schemas\UserInfolist;
+use App\Filament\Resources\Users\Tables\UsersTable;
 use App\Models\User;
-use Filament\Actions\Action;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 
 class UserResource extends Resource {
 
     protected static ?string $model = User::class;
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-users';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
     protected static string|\UnitEnum|null $navigationGroup = 'Settings';
 
     public static function form(Schema $schema): Schema {
-        return $schema
-            ->components([
-                TextInput::make('name')
-                    ->required()
-                    ->disabled(fn(?User $record
-                    ) => // Disable on edit for users who are neither the record owner nor an admin
-                        $record && !(auth()->check() && (auth()->id() === $record->id || auth()->user()->role_id === Role::Admin))
-                    ),
-                TextInput::make('email')
-                    ->required()
-                    ->email()
-                    ->unique(ignoreRecord: TRUE)
-                    ->disabled(fn(?User $record
-                    ) => // Disable on edit for users who are neither the record owner nor an admin
-                        $record && !(auth()->check() && (auth()->id() === $record->id || auth()->user()->role_id === Role::Admin))
-                    ),
-                TextInput::make('password')
-                    ->password()
-                    ->required()
-                    ->visibleOn(CreateUser::class),
-            ]);
+        return UserForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema {
+        return UserInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table {
-        return $table
-            ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('email')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->sortable()
-                    ->date('d.m.Y H:i:s'),
-            ])
-            ->defaultSort('created_at', 'desc')
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                EditAction::make(),
-                Action::make('changePassword')
-                    ->visible(fn(?User $record) => auth()->check() &&
-                        (auth()->id() === $record->id || auth()->user()->role_id === Role::Admin)
-                    )
-                    ->schema([
-                        TextInput::make('new_password')
-                            ->password()
-                            ->label('New password')
-                            ->required()
-                            ->rule(Password::default()),
-                        TextInput::make('new_password_confirmation')
-                            ->password()
-                            ->label('Confirm new password')
-                            ->required()
-                            ->same('new_password')
-                            ->rule(Password::default()),
-                    ])
-                    ->action(function(User $record, array $data) {
-                        $record->update([
-                            'password' => Hash::make($data['new_password']),
-                        ]);
-                        Notification::make()
-                            ->title('Password Changed')
-                            ->success()
-                            ->body('Password has been updated.')
-                            ->send();
-                    }),
-            ])
-            ->toolbarActions([
-                DeleteBulkAction::make(),
-            ]);
+        return UsersTable::configure($table);
     }
 
     public static function getRelations(): array {
@@ -113,6 +46,7 @@ class UserResource extends Resource {
         return [
             'index' => ListUsers::route('/'),
             'create' => CreateUser::route('/create'),
+            'view' => ViewUser::route('/{record}'),
             'edit' => EditUser::route('/{record}/edit'),
         ];
     }
