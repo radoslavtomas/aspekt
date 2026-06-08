@@ -4,7 +4,6 @@ namespace App\Filament\Resources\OrderStatuses\Pages;
 
 use Filament\Actions\DeleteAction;
 use App\Filament\Resources\OrderStatuses\OrderStatusResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 
 class EditOrderStatus extends EditRecord

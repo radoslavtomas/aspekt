@@ -2,18 +2,14 @@
 
 namespace App\Filament\Resources\Navigations;
 
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\Navigations\Pages\ListNavigations;
 use App\Filament\Resources\Navigations\Pages\CreateNavigation;
 use App\Filament\Resources\Navigations\Pages\EditNavigation;
+use App\Filament\Resources\Navigations\Pages\ListNavigations;
+use App\Filament\Resources\Navigations\Schemas\NavigationForm;
+use App\Filament\Resources\Navigations\Tables\NavigationsTable;
 use App\Models\Navigation;
-use Filament\Forms;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 
 class NavigationResource extends Resource
@@ -26,51 +22,12 @@ class NavigationResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                TextInput::make('name_sk')
-                    ->label('Menu name (SK)')
-                    ->required(),
-                TextInput::make('name_en')
-                    ->label('Menu name (EN)')
-                    ->required(),
-                TextInput::make('component')
-                    ->required(),
-                TextInput::make('route')
-                    ->required(),
-                TextInput::make('position')
-                    ->required(),
-            ]);
+        return NavigationForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('id')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('name_sk')
-                    ->sortable()
-                    ->searchable()
-                    ->label('Name SK'),
-                TextColumn::make('name_en')
-                    ->sortable()
-                    ->searchable()
-                    ->label('Name EN'),
-                TextColumn::make('position')
-                    ->sortable()
-            ])
-            ->defaultSort('position')
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                DeleteBulkAction::make(),
-            ]);
+        return NavigationsTable::configure($table);
     }
 
     public static function getRelations(): array

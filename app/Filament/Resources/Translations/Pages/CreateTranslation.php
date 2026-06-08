@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Translations\Pages;
 
 use App\Filament\Resources\Translations\TranslationResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Cache;
 

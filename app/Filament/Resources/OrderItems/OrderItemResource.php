@@ -2,20 +2,15 @@
 
 namespace App\Filament\Resources\OrderItems;
 
-use Filament\Schemas\Schema;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\OrderItems\Pages\ListOrderItems;
 use App\Filament\Resources\OrderItems\Pages\CreateOrderItem;
 use App\Filament\Resources\OrderItems\Pages\EditOrderItem;
+use App\Filament\Resources\OrderItems\Pages\ListOrderItems;
+use App\Filament\Resources\OrderItems\Schemas\OrderItemForm;
+use App\Filament\Resources\OrderItems\Tables\OrderItemsTable;
 use App\Models\OrderItem;
-use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class OrderItemResource extends Resource
 {
@@ -27,40 +22,12 @@ class OrderItemResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                //
-            ]);
+        return OrderItemForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('id')
-                    ->sortable(),
-                TextColumn::make('title')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('qty')
-                    ->label('Quantity'),
-                TextColumn::make('order_id')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('book_id')
-                    ->sortable()
-                    ->searchable(),
-            ])
-            ->defaultSort('id', 'desc')
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                DeleteBulkAction::make(),
-            ]);
+        return OrderItemsTable::configure($table);
     }
 
     public static function getRelations(): array

@@ -2,24 +2,17 @@
 
 namespace App\Filament\Resources\Pages;
 
-use App\Filament\Concerns\HasRichContentToolbar;
 use App\Filament\Resources\Pages\Pages\CreatePage;
 use App\Filament\Resources\Pages\Pages\EditPage;
 use App\Filament\Resources\Pages\Pages\ListPages;
+use App\Filament\Resources\Pages\Schemas\PageForm;
+use App\Filament\Resources\Pages\Tables\PagesTable;
 use App\Models\Page;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class PageResource extends Resource {
-
-    use HasRichContentToolbar;
 
     protected static ?string $model = Page::class;
 
@@ -28,49 +21,11 @@ class PageResource extends Resource {
     protected static string|\UnitEnum|null $navigationGroup = 'Pages';
 
     public static function form(Schema $schema): Schema {
-        return $schema
-            ->components([
-                TextInput::make('name_sk')
-                    ->required(),
-                TextInput::make('name_en')
-                    ->required(),
-                Grid::make()->schema([
-                    RichEditor::make('body_sk')
-                        ->toolbarButtons(self::richContentToolbar())
-                        ->plugins(self::richContentPlugins())
-                        ->required(),
-                    RichEditor::make('body_en')
-                        ->toolbarButtons(self::richContentToolbar())
-                        ->plugins(self::richContentPlugins())
-                        ->required(),
-                ])
-                    ->columns(1),
-            ])->columns(1);
+        return PageForm::configure($schema);
     }
 
     public static function table(Table $table): Table {
-        return $table
-            ->columns([
-                TextColumn::make('name_sk')
-                    ->limit(50)
-                    ->sortable()
-                    ->searchable()
-                    ->label('Name SK'),
-                TextColumn::make('name_en')
-                    ->limit(50)
-                    ->sortable()
-                    ->searchable()
-                    ->label('Name EN'),
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                DeleteBulkAction::make(),
-            ]);
+        return PagesTable::configure($table);
     }
 
     public static function getRelations(): array {

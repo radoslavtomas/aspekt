@@ -2,20 +2,14 @@
 
 namespace App\Filament\Resources\Settings;
 
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Checkbox;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\Settings\Pages\ListSettings;
 use App\Filament\Resources\Settings\Pages\CreateSettings;
 use App\Filament\Resources\Settings\Pages\EditSettings;
+use App\Filament\Resources\Settings\Pages\ListSettings;
+use App\Filament\Resources\Settings\Schemas\SettingsForm;
+use App\Filament\Resources\Settings\Tables\SettingsTable;
 use App\Models\Setting;
-use Filament\Forms;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 
 class SettingsResource extends Resource
@@ -28,30 +22,12 @@ class SettingsResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                TextInput::make('key')->unique(ignoreRecord: true),
-                Textarea::make('value'),
-                Checkbox::make('active'),
-            ])->columns(1);
+        return SettingsForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('key'),
-                TextColumn::make('value')->limit(35),
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                DeleteBulkAction::make(),
-            ]);
+        return SettingsTable::configure($table);
     }
 
     public static function getRelations(): array

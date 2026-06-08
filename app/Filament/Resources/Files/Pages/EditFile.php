@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Files\Pages;
 
 use Filament\Actions\DeleteAction;
 use App\Filament\Resources\Files\FileResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;

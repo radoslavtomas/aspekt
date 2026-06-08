@@ -4,7 +4,6 @@ namespace App\Filament\Resources\People\Pages;
 
 use Filament\Actions\DeleteAction;
 use App\Filament\Resources\People\PeopleResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 
 class EditPeople extends EditRecord

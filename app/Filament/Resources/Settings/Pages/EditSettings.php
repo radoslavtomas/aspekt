@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Settings\Pages;
 
 use Filament\Actions\DeleteAction;
 use App\Filament\Resources\Settings\SettingsResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Cache;
 

@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Categories\Pages;
 
 use Filament\Actions\DeleteAction;
 use App\Filament\Resources\Categories\CategoryResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Cache;
 
