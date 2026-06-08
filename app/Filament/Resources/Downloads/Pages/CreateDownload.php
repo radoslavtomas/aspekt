@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Downloads\Pages;
 
 use App\Filament\Resources\Downloads\DownloadResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;

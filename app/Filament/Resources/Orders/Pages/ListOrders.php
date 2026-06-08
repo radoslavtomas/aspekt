@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Orders\Pages;
 
 use Filament\Actions\CreateAction;
 use App\Filament\Resources\Orders\OrderResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListOrders extends ListRecords

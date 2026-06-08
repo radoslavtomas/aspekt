@@ -4,7 +4,6 @@ namespace App\Filament\Resources\OrderItems\Pages;
 
 use Filament\Actions\DeleteAction;
 use App\Filament\Resources\OrderItems\OrderItemResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 
 class EditOrderItem extends EditRecord

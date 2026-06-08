@@ -2,21 +2,15 @@
 
 namespace App\Filament\Resources\OrderStatuses;
 
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\OrderStatuses\Pages\ListOrderStatuses;
 use App\Filament\Resources\OrderStatuses\Pages\CreateOrderStatus;
 use App\Filament\Resources\OrderStatuses\Pages\EditOrderStatus;
+use App\Filament\Resources\OrderStatuses\Pages\ListOrderStatuses;
+use App\Filament\Resources\OrderStatuses\Schemas\OrderStatusForm;
+use App\Filament\Resources\OrderStatuses\Tables\OrderStatusesTable;
 use App\Models\OrderStatus;
-use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class OrderStatusResource extends Resource
 {
@@ -28,33 +22,12 @@ class OrderStatusResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                TextInput::make('status')
-                    ->unique(ignoreRecord: true)
-                    ->required(),
-                TextInput::make('description')
-                    ->required(),
-            ]);
+        return OrderStatusForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('status')
-                    ->sortable(),
-                TextColumn::make('description')
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                DeleteBulkAction::make(),
-            ]);
+        return OrderStatusesTable::configure($table);
     }
 
     public static function getRelations(): array

@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Blogs\Pages;
 
 use Filament\Actions\CreateAction;
 use App\Filament\Resources\Blogs\BlogResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListBlogs extends ListRecords

@@ -2,29 +2,17 @@
 
 namespace App\Models;
 
+use App\Enums\Role;
 use Filament\Models\Contracts\FilamentUser;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Filament\Panel;
 
-class User extends Authenticatable implements FilamentUser
-{
+class User extends Authenticatable implements FilamentUser {
+
     use HasApiTokens, HasFactory, Notifiable;
-
-    /**
-     * Can access Filament
-     *
-     * @param Panel $panel
-     * @return bool
-     */
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return true;
-//        return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
-    }
 
     /**
      * The attributes that are mass assignable.
@@ -54,5 +42,29 @@ class User extends Authenticatable implements FilamentUser
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'role_id' => Role::class,
     ];
+
+    /**
+     * Can access Filament
+     *
+     * @param  Panel  $panel
+     *
+     * @return bool
+     */
+    public function canAccessPanel(Panel $panel): bool {
+        // Only allow admins to access Filament
+        return TRUE;
+        //        return ($this->role_id ?? null) === Role::Admin->value;
+    }
+
+    /**
+     * Check if user is admin
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool {
+        return ($this->role_id ?? NULL) === Role::Admin->value;
+    }
+
 }

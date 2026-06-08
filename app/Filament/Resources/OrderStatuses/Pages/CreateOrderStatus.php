@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\OrderStatuses\Pages;
 
 use App\Filament\Resources\OrderStatuses\OrderStatusResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateOrderStatus extends CreateRecord

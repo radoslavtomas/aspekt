@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Files\Pages;
 
 use App\Filament\Resources\Files\FileResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
